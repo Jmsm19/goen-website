@@ -59,7 +59,7 @@ Deployment is done automatically, both for backend and frontend, by pushing mast
 
 Backend is deployed to a Heroku App.
 
-Backend is deployed to Netlify.
+Frontkend is deployed to Netlify.
 
 ### Backend initial config
 
