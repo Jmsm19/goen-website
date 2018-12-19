@@ -1,0 +1,65 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.html",
+  "author": "Jorge Soto <Jorgemsm19@gmail.com>",
+  "license": "MIT",
+  "description": "Frontend boilerplate",
+  "scripts": {
+    "start": "next dev",
+    "build": "yarn install && next build",
+    "export": "next export",
+    "buildex": "yarn build && yarn export",
+    "lint": "eslint .",
+    "test": "NODE_ENV=test jest --watch",
+    "test-win": "SET NODE_ENV=test&& jest --watch"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "dotenv": "^6.2.0",
+    "i18next": "^13.0.0",
+    "i18next-browser-languagedetector": "^2.2.4",
+    "isomorphic-fetch": "^2.2.1",
+    "js-cookie": "^2.2.0",
+    "netlify-cli": "^2.5.0",
+    "next": "^7.0.2",
+    "next-i18next": "^0.11.2",
+    "nprogress": "^0.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.15.3",
+    "react-testing-library": "^5.3.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      ".*": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    }
+  }
+}
