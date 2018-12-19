@@ -16,11 +16,15 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
+            'birth_date' => 'required|string',
+            'phone_number' => 'required|string',
         ]);
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'birth_date' => $request->birth_date,
+            'phone_number' => $request->phone_number,
             'activation_token' => str_random(60),
         ]);
         $user->save();
@@ -28,7 +32,8 @@ class AuthController extends Controller
         $user->notify(new SignupActivate($user));
 
         return response()->json([
-            'message' => 'Successfully created user!', ], 201);
+            'message' => 'Successfully created user!',
+        ], 201);
     }
 
     public function signupActivate($token)
@@ -60,7 +65,8 @@ class AuthController extends Controller
         $credentials['deleted_at'] = null;
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized', ], 401);
+                'message' => 'Unauthorized',
+            ], 401);
         }
 
         $user = $request->user();
@@ -76,8 +82,7 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
-            )
-                ->toDateTimeString(),
+            )->toDateTimeString(),
         ]);
     }
 

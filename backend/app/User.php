@@ -13,7 +13,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, Notifiable, SoftDeletes;
 
     protected $dates = [
-        'deleted_at',
+        'deleted_at', 'birth_date'
     ];
 
     /**
@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'active', 'activation_token',
+        'name', 'email', 'password', 'active', 'activation_token', 'phone_number', 'birth_date'
     ];
 
     /**
