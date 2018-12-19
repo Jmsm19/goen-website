@@ -14,6 +14,14 @@ Route::get('/', function () {
     return response()->json($data, 200);
 });
 
+
+Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
+    // Attach new role to User
+    Route::put('/users/{id}/{role}', 'RolesController@addRole');
+    // Delete new role to User
+    Route::delete('/users/{id}/{role}', 'RolesController@removeRole');
+});
+
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
