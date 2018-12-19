@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\SignupActivate;
+use App\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\SignupActivate;
 
 class AuthController extends Controller
 {
@@ -27,6 +28,7 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'activation_token' => str_random(60),
         ]);
+        $user->roles()->attach(Role::where('name', 'student')->first());
         $user->save();
 
         $user->notify(new SignupActivate($user));
