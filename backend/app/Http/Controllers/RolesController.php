@@ -34,8 +34,13 @@ class RolesController extends Controller
         }
 
         $user = User::where('id', $id)->first();
-        $role_to_delete = Role::where('name', $role)->first();
+        if (count($user->roles()->get()) == 1) {
+            return response()->json([
+                'message' => 'User must have at least one role',
+            ], 200);
+        }
 
+        $role_to_delete = Role::where('name', $role)->first();
         if (!$user->hasRole($role)) {
             return response()->json([
                 'message' => 'The user is not ' . $role,
