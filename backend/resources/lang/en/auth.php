@@ -15,5 +15,9 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'login_first' => 'You must login first.',
+    'successful_signup' => 'Successfully created user!',
+    'invalid_active_token' => 'Invalid activation token.',
+    'unauthorized' => 'Invalid credentials.',
+    'logout' => 'Successfully logged out',
 ];
