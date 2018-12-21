@@ -2,24 +2,12 @@
 
 use Illuminate\Http\Request;
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::get('/', function () {
     $data = [
         'greeting' => 'Hello from the API',
     ];
 
     return response()->json($data, 200);
-});
-
-
-Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
-    // Attach new role to User
-    Route::put('/users/{id}/{role}', 'RolesController@addRole');
-    // Delete new role to User
-    Route::delete('/users/{id}/{role}', 'RolesController@removeRole');
 });
 
 Route::group(['prefix' => 'auth'], function () {
@@ -33,4 +21,19 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
     });
+});
+
+Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
+    // Attach new role to User
+    Route::put('/users/{id}/{role}', 'RolesController@addRole');
+    // Delete new role to User
+    Route::delete('/users/{id}/{role}', 'RolesController@removeRole');
+
+    Route::apiResource('module', 'ModuleController');
+
+    // Get current active period
+    Route::get('/period/current', 'PeriodController@current');
+    // Get specified (or current) year's periods
+    Route::get('/period/year/{year?}', 'PeriodController@year');
+    Route::apiResource('period', 'PeriodController');
 });
