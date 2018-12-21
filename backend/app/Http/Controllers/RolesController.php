@@ -8,48 +8,68 @@ use Illuminate\Http\Request;
 
 class RolesController extends Controller
 {
+    /**
+     * Add Role to specified user (id)
+     *
+     * @param  int $id
+     * @return string $role
+     */
     public function addRole($id, $role)
     {
+        // Get user
         $user = User::where('id', $id)->first();
-        $new_role = Role::where('name', $role)->first();
 
+        // Prevent addition of role if user already has it
         if ($user->hasRole($role)) {
             return response()->json([
-               'message' => 'User already has role',
+                'message' => trans('messages.has_role', ['role' => $role]),
             ], 200);
         }
 
+        // Add Role
+        $new_role = Role::where('name', $role)->first();
         $user->roles()->attach($new_role);
         return response()->json([
-            'message' => 'User is now ' . $role,
+            'message' => trans('messages.role_added', ['role' => $role]),
          ], 200);
     }
 
+    /**
+     * Remove Role from specified user (id)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id
+     * @return string $role
+     */
     public function removeRole(Request $request, $id, $role)
     {
+        // Admins can't remove own roles
         if ($id == $request->user()->id) {
             return response()->json([
-                'message' => 'Admins cannot remove their own roles',
+                'message' => trans('messages.admin_forbid_self_role_change'),
              ], 200);
         }
 
+        // Do not allow removal of role if user only has one
         $user = User::where('id', $id)->first();
         if (count($user->roles()->get()) == 1) {
             return response()->json([
-                'message' => 'User must have at least one role',
+                'message' => 'messages.at_least_one_role',
             ], 200);
         }
 
-        $role_to_delete = Role::where('name', $role)->first();
+        // Send response if user doesn't have specified role
         if (!$user->hasRole($role)) {
             return response()->json([
-                'message' => 'The user is not ' . $role,
-             ], 200);
+                'message' => trans('messages.not_has_role', ['role' => $role]),
+            ], 200);
         }
 
+        // Remove Role from user
+        $role_to_delete = Role::where('name', $role)->first();
         $user->roles()->detach($role_to_delete);
         return response()->json([
-            'message' => 'User is no longer ' . $role,
+            'message' => trans('messages.role_removed', ['role' => $role]),
          ], 200);
     }
 }
