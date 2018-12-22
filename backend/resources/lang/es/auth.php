@@ -13,11 +13,10 @@ return [
     |
     */
 
-    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+    'failed' => 'Credenciales inválidas.',
     'throttle' => 'Demasiados intentos fallidos en muy poco tiempo. Por favor intente de nuevo en :seconds segundos.',
     'login_first' => 'Debes iniciar sesión primero.',
     'successful_signup' => 'Usuario creado exitosamente.',
     'invalid_active_token' => 'Código de activación inválido.',
-    'unauthorized' => 'Credenciales inválidas.',
     'logout' => 'Sesión cerrada exitosamente.',
 ];

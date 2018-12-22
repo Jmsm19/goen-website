@@ -77,7 +77,7 @@ class AuthController extends Controller
         $credentials['deleted_at'] = null;
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => trans('auth.unauthorized'),
+                'message' => trans('auth.failed'),
             ], 401);
         }
 
@@ -108,7 +108,7 @@ class AuthController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json(['message' => trans('auth.logout')]);
+        return response()->json(['message' => trans('auth.logout')], 200);
     }
 
     /**
