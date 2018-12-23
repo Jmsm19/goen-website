@@ -1,5 +1,9 @@
 # GOEN Website (Front & Back)
 
+| **Backend Testing**                                             | **Frontend Testing** |
+| --------------------------------------------------------------- | -------------------- |
+| ![alt text](./backend/public/img/coverage.svg "Coverage badge") | None yet             |
+
 Any configuration must be done within the respective folder (backend or frontend) unless otherwhise specified.
 
 ## Backend
