@@ -35,8 +35,10 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::apiResource('module', 'ModuleController');
 
     // Get current active period
-    Route::get('/period/current', 'PeriodController@current');
+    Route::get('/period/current', 'PeriodController@current')
+        ->name(('period.current'));
     // Get specified (or current) year's periods
-    Route::get('/period/year/{year?}', 'PeriodController@year');
+    Route::get('/period/year/{year?}', 'PeriodController@year')
+        ->name('period.year');
     Route::apiResource('period', 'PeriodController');
 });
