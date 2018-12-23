@@ -2,7 +2,7 @@
 
 return [
     'resource_not_found' => 'Resource not found',
-    'section_limit_reached' => 'You hhave reached the limit of sections per module.',
+    'section_limit_reached' => 'You have reached the limit of sections per module.',
     'period_limit_reached' => 'You have reached the limit of periods per year.',
     'has_role' => 'User already is :role.',
     'not_has_role' => 'The user is not :role.',

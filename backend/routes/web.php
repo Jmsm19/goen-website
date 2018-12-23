@@ -2,7 +2,7 @@
 
 Route::any('/{anything?}', function () {
     $data = [
-        'error' => 'Invalid route',
+        'error' => trans('auth.login_first'),
     ];
 
     return response()->json($data, 404);

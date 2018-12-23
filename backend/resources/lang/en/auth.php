@@ -19,4 +19,5 @@ return [
     'successful_signup' => 'Successfully created user!',
     'invalid_active_token' => 'Invalid activation token.',
     'logout' => 'Successfully logged out',
+    'no_privilages' => 'Not enough privilages.',
 ];

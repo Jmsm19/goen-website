@@ -19,4 +19,5 @@ return [
     'successful_signup' => 'Usuario creado exitosamente.',
     'invalid_active_token' => 'Código de activación inválido.',
     'logout' => 'Sesión cerrada exitosamente.',
+    'no_privilages' => 'No tiene suficientes privilegios.',
 ];
