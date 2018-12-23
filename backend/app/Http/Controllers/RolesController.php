@@ -50,18 +50,19 @@ class RolesController extends Controller
              ], 200);
         }
 
-        // Do not allow removal of role if user only has one
         $user = User::where('id', $id)->first();
-        if (count($user->roles()->get()) == 1) {
-            return response()->json([
-                'message' => 'messages.at_least_one_role',
-            ], 200);
-        }
 
         // Send response if user doesn't have specified role
         if (!$user->hasRole($role)) {
             return response()->json([
                 'message' => trans('messages.not_has_role', ['role' => $role]),
+            ], 200);
+        }
+
+        // Do not allow removal of role if user only has one
+        if (count($user->roles()->get()) == 1) {
+            return response()->json([
+                'message' => trans('messages.at_least_one_role'),
             ], 200);
         }
 

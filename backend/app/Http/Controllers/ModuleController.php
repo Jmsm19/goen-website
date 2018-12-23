@@ -37,7 +37,7 @@ class ModuleController extends Controller
         $next_section_index = count($same_level_modules) + 1;
         if ($next_section_index > count($module_sections)) {
             return response()->json([
-                'message' => trans('messages.section_limit_reached')
+                'error' => trans('messages.section_limit_reached')
             ], 400);
         }
 

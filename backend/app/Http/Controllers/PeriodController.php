@@ -45,9 +45,9 @@ class PeriodController extends Controller
         }
 
         // Current period(s) will be marked as inactive (false)
-        $previous_active_period = Period::where('current', 1);
+        $previous_active_period = Period::where('active', 1);
         if (!empty($previous_active_period)) {
-            $previous_active_period->update(['current' => false]);
+            $previous_active_period->update(['active' => false]);
         }
 
         // Create period with correct name based on period order
@@ -56,7 +56,7 @@ class PeriodController extends Controller
             'name' => $name,
             'year' => $year,
             // The new period is now the current period (active period)
-            'current' => true
+            'active' => true
         ]);
 
         return new PeriodResource($period);

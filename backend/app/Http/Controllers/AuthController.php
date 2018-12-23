@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function signup(SignupRequest $request)
     {
-        $user = new User([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -30,10 +30,16 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'activation_token' => str_random(60),
         ]);
-        $user->roles()->attach(Role::where('name', 'student')->first());
+
+        // Default role is student
+        $student_role = Role::where('name', 'student')->first();
+        $user->roles()->attach($student_role);
+        // Save updated User model
         $user->save();
 
-        $user->notify(new SignupActivate($user));
+        if (env('APP_ENV') !== 'testing') {
+            $user->notify(new SignupActivate($user));
+        }
 
         return response()->json([
             'message' => trans('auth.successful_signup'),
@@ -61,7 +67,7 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
 
-        return $user;
+        return new UserResource($user);
     }
 
     /**
