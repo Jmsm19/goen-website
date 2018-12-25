@@ -1,8 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/docs
 /storage/*.key
 /vendor
+/tests/report
 .env
 .phpunit.result.cache
 Homestead.json

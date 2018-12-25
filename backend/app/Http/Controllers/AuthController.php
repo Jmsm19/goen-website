@@ -6,21 +6,23 @@ use App\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\SignupRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\SignupActivate;
 
 class AuthController extends Controller
 {
-    public function signup(Request $request)
+    /**
+     * Create user and send notification to validate email and user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function signup(SignupRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
-            'birth_date' => 'required|string',
-            'phone_number' => 'required|string',
-        ]);
-        $user = new User([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -28,22 +30,34 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'activation_token' => str_random(60),
         ]);
-        $user->roles()->attach(Role::where('name', 'student')->first());
+
+        // Default role is student
+        $student_role = Role::where('name', 'student')->first();
+        $user->roles()->attach($student_role);
+        // Save updated User model
         $user->save();
 
         $user->notify(new SignupActivate($user));
 
         return response()->json([
-            'message' => 'Successfully created user!',
+            'message' => trans('auth.successful_signup'),
         ], 201);
     }
 
+    /**
+     * Activate user based on activation token
+     *
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
+     */
     public function signupActivate($token)
     {
         $user = User::where('activation_token', $token)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'Invalid activation token'], 404);
+            return response()->json([
+                'message' => trans('auth.invalid_active_token')
+            ], 404);
         }
 
         $user->active = true;
@@ -51,23 +65,23 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
 
-        return $user;
+        return new UserResource($user);
     }
 
-    public function login(Request $request)
+    /**
+     * Login user and send API Token
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean',
-        ]);
-
         $credentials = request(['email', 'password']);
         $credentials['active'] = 1;
         $credentials['deleted_at'] = null;
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => trans('auth.failed'),
             ], 401);
         }
 
@@ -88,15 +102,39 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Logout user and invalidate API Token
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => trans('auth.logout')], 200);
     }
 
+    /**
+     * Get logged in user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return new UserResource($request->user());
+    }
+
+    /**
+     * Response when accessing area without being logged in
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unauthorized()
+    {
+        return response()->json([
+            'message' => trans('auth.login_first'),
+        ], 401);
     }
 }

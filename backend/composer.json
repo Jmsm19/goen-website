@@ -11,14 +11,17 @@
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.2",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.8",
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "mpociot/laravel-apidoc-generator": "^3.2",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
+        "jaschilz/php-coverage-badger": "^2.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"
@@ -61,7 +64,11 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "vendor/bin/phpunit"
+            "vendor/bin/phpunit --no-coverage"
+        ],
+        "test-cov": [
+            "vendor/bin/phpunit",
+            "vendor/bin/php-coverage-badger ./tests/report/clover.xml ./public/img/coverage.svg"
         ]
     }
 }

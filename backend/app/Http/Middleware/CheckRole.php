@@ -17,7 +17,7 @@ class CheckRole
     {
         if (!$request->user()->hasRole($role)) {
             return response()->json([
-                'error' => 'Not enough privilages.'
+                'error' => trans('auth.no_privilages')
             ], 403);
         }
         return $next($request);

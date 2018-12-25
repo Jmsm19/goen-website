@@ -13,11 +13,11 @@ return [
     |
     */
 
-    'failed' => 'Invalid credentials.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'login_first' => 'You must login first.',
-    'successful_signup' => 'Successfully created user!',
-    'invalid_active_token' => 'Invalid activation token.',
-    'logout' => 'Successfully logged out',
-    'no_privilages' => 'Not enough privilages.',
+    'failed' => 'Credenciales inválidas.',
+    'throttle' => 'Demasiados intentos fallidos en muy poco tiempo. Por favor intente de nuevo en :seconds segundos.',
+    'login_first' => 'Debes iniciar sesión primero.',
+    'successful_signup' => 'Usuario creado exitosamente.',
+    'invalid_active_token' => 'Código de activación inválido.',
+    'logout' => 'Sesión cerrada exitosamente.',
+    'no_privilages' => 'No tiene suficientes privilegios.',
 ];

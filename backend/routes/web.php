@@ -2,7 +2,7 @@
 
 Route::any('/{anything?}', function () {
     $data = [
-        'error' => 'Invalid route',
+        'error' => trans('messages.route_not_found'),
     ];
 
     return response()->json($data, 404);
