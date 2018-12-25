@@ -1,0 +1,16 @@
+{
+  "name": "GOEN Maracaibo",
+  "short_name": "GOEN",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f0f0",
+  "theme_color": "#ff0000",
+  "description": "GOEN Maracaibo website.",
+  "icons": [
+    {
+      "src": "/static/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
