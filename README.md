@@ -41,6 +41,14 @@ Any configuration must be done within the respective folder (backend or frontend
    php artisan serve
    ```
 
+7. **Optional**: You can generate a Postman collection for the API by running the following command:
+
+   ```bash
+   php artisan apidoc:generate
+   ```
+
+   The **collection.json** file will be generated in **./backend/public/docs/**.
+
 ## Frontend
 
 ### Initial config
