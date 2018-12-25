@@ -37,9 +37,7 @@ class AuthController extends Controller
         // Save updated User model
         $user->save();
 
-        if (env('APP_ENV') !== 'testing') {
-            $user->notify(new SignupActivate($user));
-        }
+        $user->notify(new SignupActivate($user));
 
         return response()->json([
             'message' => trans('auth.successful_signup'),
