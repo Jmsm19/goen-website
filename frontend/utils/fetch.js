@@ -4,19 +4,24 @@ import Cookies from 'js-cookie';
 
 const { publicRuntimeConfig } = getConfig();
 const ROOT_API = publicRuntimeConfig.API_URL;
-const HEADERS = new Headers({
-  'Content-Type': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest'
-});
+
+const setLocalizationHeader = () => Cookies.get('i18next') || 'es';
 
 const setAuthorizationHeader = () => {
   const TOKEN = Cookies.get('token'); // undefined if not present
   return !TOKEN ? '' : `Bearer ${TOKEN}`;
 }
 
-const GET = (endpoint = '') =>fetch(`${ROOT_API}${endpoint}`, {
-  headers: HEADERS,
+const setHeaders = () => new Headers({
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
   'Authorization': setAuthorizationHeader(),
+  'X-Localization': setLocalizationHeader()
+})
+
+const GET = (endpoint = '') =>fetch(`${ROOT_API}${endpoint}`, {
+  headers: setHeaders()
 });
 
 export default GET;
