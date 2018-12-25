@@ -10,4 +10,5 @@ return [
     'at_least_one_role' => 'El usuario debe tener por lo menos un rol asignado.',
     'role_added' => 'El usuario ahora es :role',
     'role_removed' => 'El usuario ya no es :role.',
+    'route_not_found' => 'Ruta no encontrada.',
 ];
