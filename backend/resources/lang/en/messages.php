@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'greeting' => 'Hello from the API',
     'resource_not_found' => 'Resource not found',
     'section_limit_reached' => 'You have reached the limit of sections per module.',
     'period_limit_reached' => 'You have reached the limit of periods per year.',
