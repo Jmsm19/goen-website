@@ -8,6 +8,7 @@ Route::get('/', function () {
     return response()->json($data, 200);
 });
 
+// Authentication related routes
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login')->name('login');
     Route::post('signup', 'AuthController@signup')->name('signup');
@@ -22,6 +23,7 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
+// Routes that require Authentication and Admin role
 Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     // Attach new role to User
     Route::put('/users/{id}/{role}', 'RolesController@addRole')
@@ -39,4 +41,13 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::get('/period/year/{year?}', 'PeriodController@year')
         ->name('period.year');
     Route::apiResource('period', 'PeriodController');
+
+    Route::get('/user', 'UserController@index')->name('user.index');
+    Route::get('/user/{user}', 'UserController@show')->name('user.show');
+    Route::delete('/user/{user}', 'UserController@destroy')->name('user.destroy');
+});
+
+// Routes that only require Authentication
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::put('/user/{user}', 'UserController@update')->name('user.update');
 });
