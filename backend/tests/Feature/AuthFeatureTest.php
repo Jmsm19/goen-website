@@ -52,7 +52,10 @@ class AuthFeatureTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'name', 'email', 'phone_number', 'birth_date','roles'
+                    'id', 'name', 'email',
+                    'phone_number', 'birth_date', 'clan',
+                    'is_admin', 'is_instructor',
+                    'is_student', 'is_assistant'
                 ]
             ]);
     }
@@ -130,7 +133,10 @@ class AuthFeatureTest extends TestCase
         $this->get(route('get_auth_user'))
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'name', 'email', 'phone_number', 'birth_date','roles'
+                    'id', 'name', 'email',
+                    'phone_number', 'birth_date', 'clan',
+                    'is_admin', 'is_instructor',
+                    'is_student', 'is_assistant'
                 ]
             ]);
     }

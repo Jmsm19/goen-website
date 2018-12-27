@@ -27,9 +27,9 @@ class UserTableSeeder extends Seeder
             'birth_date' => '1992-01-09',
             'activation_token' => '',
             'active' => 1,
-            'email_verified_at' => Carbon::now()
+            'email_verified_at' => Carbon::now(),
+            'clan_id' => 1
         ])->roles()->attach($role_admin);
-        ;
 
         User::create([
             'name' => 'Gabriel Flores',

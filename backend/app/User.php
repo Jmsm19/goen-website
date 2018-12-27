@@ -63,4 +63,10 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
+
+
+    public function clan()
+    {
+        return $this->belongsTo('App\Clan');
+    }
 }

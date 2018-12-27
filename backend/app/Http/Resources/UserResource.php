@@ -14,13 +14,18 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $has_clan = !is_null($this->clan);
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'birth_date' => (string) $this->birth_date,
-            'roles' => RoleResource::collection($this->roles)
+            'clan' => $has_clan ? $this->clan->name : null,
+            'is_admin' => $this->hasRole('admin'),
+            'is_instructor' => $this->hasRole('instructor'),
+            'is_assistant' => $this->hasRole('assistant'),
+            'is_student' => $this->hasRole('student'),
         ];
     }
 }

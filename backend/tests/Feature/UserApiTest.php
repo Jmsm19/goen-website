@@ -27,7 +27,9 @@ class UserApitest extends TestCase
                 'data' => [
                     [
                         'id', 'name', 'email',
-                        'phone_number', 'birth_date', 'roles'
+                        'phone_number', 'birth_date',
+                        'is_admin', 'is_instructor',
+                        'is_student', 'is_assistant'
                     ]
                 ]
             ]);
@@ -53,7 +55,10 @@ class UserApitest extends TestCase
                     'email' => $user->email,
                     'phone_number' => $user->phone_number,
                     'birth_date' => (string) $user->birth_date,
-                    'roles' => []
+                    'is_admin' => $user->hasRole('admin'),
+                    'is_instructor' => $user->hasRole('instructor'),
+                    'is_student' => $user->hasRole('student'),
+                    'is_assistant' => $user->hasRole('assistant')
                 ]
             ]);
     }

@@ -23,6 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'activation_token' => '',
         'birth_date' => $faker->dateTime('1990-01-01 00:00:00'),
         'phone_number' => $faker->phoneNumber(),
-        'active' => true
+        'active' => true,
+        'clan_id' => null,
     ];
 });

@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::get('/user', 'UserController@index')->name('user.index');
     Route::get('/user/{user}', 'UserController@show')->name('user.show');
     Route::delete('/user/{user}', 'UserController@destroy')->name('user.destroy');
+    // Clan related routes
+    Route::apiResource('clan', 'ClanController', [
+        'except' => ['store']
+    ]);
 });
 
 // Routes that only require Authentication
