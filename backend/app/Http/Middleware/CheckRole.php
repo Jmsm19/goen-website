@@ -15,7 +15,8 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (!$request->user()->hasRole($role)) {
+        $roles = explode(' ', $role);
+        if (!$request->user()->hasAnyRole($roles)) {
             return response()->json([
                 'error' => trans('auth.no_privilages')
             ], 403);
