@@ -35,13 +35,25 @@ Any configuration must be done within the respective folder (backend or frontend
    php artisan passport:install
    ```
 
-6. Start up the local development server
+6. Start a redis server
+
+   ```bash
+   redis-server --port 6379
+   ```
+
+7. Start the queue worker
+
+   ```bash
+   php artisan queue:work redis
+   ```
+
+8. Start up the local development server
 
    ```bash
    php artisan serve
    ```
 
-7. **Optional**: You can generate a Postman collection for the API by running the following command:
+9. **Optional**: You can generate a Postman collection for the API by running the following command:
 
    ```bash
    php artisan apidoc:generate
