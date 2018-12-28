@@ -10,7 +10,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\SignupActivate;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -31,13 +31,7 @@ class AuthController extends Controller
             'activation_token' => str_random(60),
         ]);
 
-        // Default role is student
-        $student_role = Role::where('name', 'student')->first();
-        $user->roles()->attach($student_role);
-        // Save updated User model
-        $user->save();
-
-        $user->notify(new SignupActivate($user));
+        event(new Registered($user));
 
         return response()->json([
             'message' => trans('auth.successful_signup'),
