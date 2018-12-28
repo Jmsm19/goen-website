@@ -51,6 +51,12 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     ]);
 });
 
+// Routes that require Authentication and Instructor Role
+Route::group(['middleware' => ['auth:api', 'role:instructor admin']], function () {
+    // Grades related routes
+    Route::apiResource('grade', 'GradeController');
+});
+
 // Routes that only require Authentication
 Route::group(['middleware' => ['auth:api']], function () {
     Route::put('/user/{user}', 'UserController@update')->name('user.update');

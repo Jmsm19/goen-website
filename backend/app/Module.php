@@ -14,4 +14,9 @@ class Module extends Model
     {
         return $this->belongsTo('App\Period');
     }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Grade');
+    }
 }

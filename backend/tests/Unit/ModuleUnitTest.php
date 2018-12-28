@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Grade;
 use App\Module;
 use App\Period;
 use Tests\TestCase;
@@ -24,23 +25,29 @@ class ModuleUnitTest extends TestCase
         $period = Period::create([
             'name' => $period_name,
             'year' => $period_year
-        ]);
+            ]);
 
         $module = Module::create([
             'name' => $module_name,
             'period_id' => $period->id
         ]);
 
+        $grade = factory(Grade::class)->create([
+            'module_id' => $module->id
+        ]);
+
         $expected = [
             $module_name,
             $period_name,
-            $period_year
+            $period_year,
+            $grade->score
         ];
 
         $this->assertEquals($expected, [
             $module->name,
             $module->period->name,
-            $module->period->year
+            $module->period->year,
+            $module->grades[0]->score
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Role;
 use App\User;
+use App\Grade;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,9 +25,20 @@ class UserUnitTest extends TestCase
             'email' => $email,
         ]);
 
-        $expected = [$name, $email];
+        $grade = factory(Grade::class)->create([
+            'user_id' => $user->id
+        ]);
 
-        $this->assertEquals($expected, [$user->name, $user->email]);
+        $expected = [$name, $email, $grade->score];
+
+        $this->assertEquals(
+            $expected,
+        [
+            $user->name,
+            $user->email,
+            $user->grades[0]->score
+        ]
+        );
     }
 
     /**
