@@ -18,6 +18,10 @@ class CreateModulesTable extends Migration
             $table->string('name');
             $table->integer('period_id')->unsigned();
             $table->timestamps();
+
+            if (env('APP_ENV') !== 'testing') {
+                $table->foreign('period_id')->references('id')->on('periods')->onDelete('cascade');
+            }
         });
     }
 
