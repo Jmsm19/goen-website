@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
-import GET from '../utils/fetch';
+import { GetData } from '../utils/fetch';
 import { withNamespaces } from '../i18n';
 
 export class IndexPage extends Component {
@@ -17,7 +17,7 @@ export class IndexPage extends Component {
 
   getData = () => {
     NProgress.start();
-    GET()
+    GetData()
       .then(data => data.json())
       .then(json => {
         this.setState({
