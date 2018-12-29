@@ -1,17 +1,11 @@
 import React from 'react';
-import NextHead from 'next/head';
-import NProgress from 'nprogress';
-import Router from 'next/router'
+import Head from 'next/head';
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
-
-const Head = () => (
-  <NextHead>
+const Meta = () => (
+  <Head>
     {/* Common metas */}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charSet="utf-8" />
@@ -31,7 +25,7 @@ const Head = () => (
     <link rel="manifest" href="/static/manifest.webmanifest" />
     {/* Title */}
     <title>{publicRuntimeConfig.SITE_NAME}</title>
-  </NextHead>
-)
+  </Head>
+);
 
-export default Head;
+export default Meta;

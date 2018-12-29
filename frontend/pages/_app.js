@@ -1,6 +1,6 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import Head from '../components/Head';
+import Page from '../components/Page';
 import { appWithTranslation } from '../i18n';
 
 class MyApp extends App {
@@ -18,8 +18,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Container>
-        <Head />
-        <Component {...pageProps} />
+        <Page>
+          <Component {...pageProps} />
+        </Page>
       </Container>
     )
   }
