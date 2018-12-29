@@ -1,3 +1,13 @@
 {
-  "getData": "Buscar datos"
+  "Home": "Inicio",
+  "Login": "Iniciar sesión",
+  "Register": "Registrarse",
+  "Enter": "Entrar",
+  "getData": "Buscar datos",
+  "Name": "Nombre",
+  "BirthDate": "Fecha de nacimiento",
+  "PhoneNumber": "Número telefónico",
+  "Email": "Correo electrónico",
+  "Password": "Contraseña",
+  "PasswordConfirmation": "Confirmar contraseña"
 }

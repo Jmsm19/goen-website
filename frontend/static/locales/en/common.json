@@ -1,3 +1,13 @@
 {
-  "getData": "Get Data"
+  "Home": "Home",
+  "Login": "Login",
+  "Register": "Register",
+  "Enter": "Enter",
+  "getData": "Get Data",
+  "Name": "Name",
+  "BirthDate": "Birth date",
+  "PhoneNumber": "Phone number",
+  "Email": "Email address",
+  "Password": "Password",
+  "PasswordConfirmation": "Confirm password"
 }
