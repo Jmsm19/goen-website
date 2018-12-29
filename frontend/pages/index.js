@@ -16,11 +16,9 @@ export class IndexPage extends Component {
   }
 
   getData = () => {
+    NProgress.start();
     GET()
-      .then(data => {
-        NProgress.start();
-        return data.json();
-      })
+      .then(data => data.json())
       .then(json => {
         this.setState({
           greeting: json.greeting
