@@ -28,4 +28,7 @@ const options = {
     wait: true,
   },
 }
-export default new NextI18Next(options);
+
+const I18Next = new NextI18Next(options);
+export default options;
+export const {appWithTranslation, config, withNamespaces, Link, i18n} = I18Next;

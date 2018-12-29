@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import GET from '../utils/fetch';
-import i18n from '../i18n';
+import { withNamespaces } from '../i18n';
 
-class IndexPage extends Component {
+export class IndexPage extends Component {
   state = {
     greeting: '',
   }
@@ -46,4 +46,4 @@ IndexPage.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default i18n.withNamespaces('')(IndexPage);
+export default withNamespaces('common')(IndexPage);

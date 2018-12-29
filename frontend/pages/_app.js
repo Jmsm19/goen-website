@@ -1,7 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import Head from '../components/Head';
-import i18n from '../i18n';
+import { appWithTranslation } from '../i18n';
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -25,4 +25,4 @@ class MyApp extends App {
   }
 }
 
-export default i18n.appWithTranslation(MyApp);
+export default appWithTranslation(MyApp);
