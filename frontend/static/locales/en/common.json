@@ -9,5 +9,8 @@
   "PhoneNumber": "Phone number",
   "Email": "Email address",
   "Password": "Password",
-  "PasswordConfirmation": "Confirm password"
+  "PasswordConfirmation": "Confirm password",
+  "InvalidEmail": "Invalid email address",
+  "Required": "The field cannot be blank",
+  "TooShort": "The field must have at least {{minimum}} characteres"
 }

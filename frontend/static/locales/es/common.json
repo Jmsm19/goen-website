@@ -9,5 +9,8 @@
   "PhoneNumber": "Número telefónico",
   "Email": "Correo electrónico",
   "Password": "Contraseña",
-  "PasswordConfirmation": "Confirmar contraseña"
+  "PasswordConfirmation": "Confirmar contraseña",
+  "InvalidEmail": "Correo inválido",
+  "Required": "El campo no puede estar en blanco",
+  "TooShort": "El campo debe tener mínimo {{minimum}} caracteres"
 }
