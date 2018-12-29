@@ -24,7 +24,7 @@ export const GetData = (endpoint = '') =>fetch(`${ROOT_API}${endpoint}`, {
   headers: setHeaders()
 });
 
-export const SendData = (method, endpoint = '', data = {}) =>fetch(`${ROOT_API}${endpoint}/`, {
+export const SendData = (method, endpoint = '', data = {}) =>fetch(`${ROOT_API}${endpoint}`, {
   method: method.toUpperCase(),
   body: JSON.stringify(data),
   headers: setHeaders(),
