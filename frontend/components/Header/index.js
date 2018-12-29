@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
+import Link from 'next/link';
 import Router from 'next/router';
-import { withNamespaces, Link } from '../../i18n';
+import { withNamespaces } from '../../i18n';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();

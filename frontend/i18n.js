@@ -10,7 +10,7 @@ const options = {
     'jp'
   ],
   fallbackLng: 'es',
-  localeSubpaths: true,
+  localeSubpaths: false,
   use: [
     LanguageDetector
   ],
