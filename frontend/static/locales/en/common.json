@@ -12,5 +12,8 @@
   "PasswordConfirmation": "Confirm password",
   "InvalidEmail": "Invalid email address",
   "Required": "The field cannot be blank",
-  "TooShort": "The field must have at least {{minimum}} characteres"
+  "TooShort": "The field must have at least {{minimum}} characters",
+  "PasswordNotEqual": "Passwords are not equal",
+  "Underage": "You must be over {{age}} years old",
+  "CheckConfirmationEmail": "We have sent you a confirmation email"
 }

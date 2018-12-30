@@ -12,5 +12,8 @@
   "PasswordConfirmation": "Confirmar contraseña",
   "InvalidEmail": "Correo inválido",
   "Required": "El campo no puede estar en blanco",
-  "TooShort": "El campo debe tener mínimo {{minimum}} caracteres"
+  "TooShort": "El campo debe tener mínimo {{minimum}} caracteres",
+  "PasswordNotEqual": "Las contraseñas no son iguales",
+  "Underage": "Debes ser mayor de {{age}} años",
+  "CheckConfirmationEmail": "Le hemos enviado un correo de confirmación"
 }

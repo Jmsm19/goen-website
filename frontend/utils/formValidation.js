@@ -19,3 +19,32 @@ export const validatePassword = (value) => {
   }
   return error;
 }
+
+export const validateTextField = (value) => {
+  let error;
+  if (!value) {
+    error = i18n.t('common:Required');;
+  }
+  return error;
+}
+
+export const validateBirthDateField = (value) => {
+  let error;
+
+  if (!value) {
+    return i18n.t('common:Required');;
+  }
+  // Minimum Age
+  const minimumAge = 14;
+  // Age Calulation
+  const date = new Date(value);
+  const ageDifMs = Date.now() - date.getTime();
+  const ageDate = new Date(ageDifMs); // miliseconds from epoch
+  const age =  Math.abs(ageDate.getUTCFullYear() - 1970);
+
+  if (age < minimumAge) {
+    error = i18n.t('common:Underage', {age: minimumAge})
+  }
+
+  return error;
+}
