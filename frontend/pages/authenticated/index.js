@@ -6,7 +6,7 @@ import { GetData } from '../../utils/fetch';
 
 export class Authenticated extends Component {
   state = {
-    isLoggedIn: !!Cookies.get('token'),
+    isLoggedIn: !!Cookies.get('token') && Cookies.get('token') !== 'undefined',
     message: '',
   }
 
