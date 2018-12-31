@@ -18,5 +18,6 @@
         ]
       ]
     }
-  }
+  },
+  "plugins": [["import", { "libraryName": "antd", "styles": false }]]
 }

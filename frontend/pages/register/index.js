@@ -12,7 +12,11 @@ export class RegisterPage extends Component {
 
   render() {
     return (
-      <div className="registerPage">
+      <div className="registerPage" style={{
+        maxWidth: '900px',
+        width: '100%',
+        margin: '0 auto'
+      }}>
         <RegisterForm {...this.props} />
       </div>
     )

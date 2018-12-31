@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import { notification } from 'antd';
 import { SendData } from '../../utils/fetch';
 import { i18n } from '../../i18n';
 
@@ -12,6 +13,7 @@ class WithAuthentication extends Component {
   state = {
     registerSuccess: false,
     message: '',
+    fieldErrors: []
   }
 
   handlePasswordConfirmation = ({password, password_confirmation}) => {
@@ -29,16 +31,23 @@ class WithAuthentication extends Component {
     NProgress.start();
     SendData('POST', '/auth/login', values)
       .then(data => data.json())
-      .then(({access_token}) => {
-        NProgress.done();
-        Cookies.set('token', access_token);
-        setSubmitting(false);
-        Router.push('/authenticated')
+      .then(({access_token, message}) => {
+        if (message) {
+          throw Error(message)
+        } else {
+          NProgress.done();
+          Cookies.set('token', access_token);
+          setSubmitting(false);
+          Router.push('/authenticated')
+        }
       })
       .catch(error => {
         NProgress.done();
         setSubmitting(false);
-        console.error(error);
+        notification.error({
+          message: 'Error',
+          description: error.message,
+        });
       });
   }
 
@@ -46,25 +55,46 @@ class WithAuthentication extends Component {
     NProgress.start();
     SendData('POST', '/auth/signup', values)
       .then(data => data.json())
-      .then(({ message }) => {
-        NProgress.done();
-        this.setState(() => ({
-          registerSuccess: true,
-          message
-        }), () => {
-          setSubmitting(false);
-        })
+      .then((data) => {
+        if (data.errors) {
+          throw data;
+        } else {
+          NProgress.done();
+          this.setState(() => ({
+            registerSuccess: true,
+            message: data.message
+          }), () => {
+            setSubmitting(false);
+          })
+        }
       })
-      .catch(error => {
+      .catch(({_, errors}) => {
         NProgress.done();
         setSubmitting(false);
-        console.error(error);
+
+        let description = '';
+        let fields = [];
+
+        if (errors) {
+          description = Object.values(errors).join(' ');
+          fields = Object.keys(errors);
+        }
+
+        this.setState(() => ({
+          fieldErrors: fields
+        }), () => {
+          notification.error({
+            message: 'Error',
+            description,
+          });
+        })
+
       });
   }
 
   render() {
     const { children } = this.props;
-    const { registerSuccess, message } = this.state;
+    const { registerSuccess, message, fieldErrors } = this.state;
 
     if (registerSuccess) {
       return (
@@ -76,6 +106,7 @@ class WithAuthentication extends Component {
     }
 
     return children({
+      fieldErrors,
       handleLogin: this.handleLogin,
       handleRegister: this.handleRegister,
       handlePasswordConfirmation: this.handlePasswordConfirmation,

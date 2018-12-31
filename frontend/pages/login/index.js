@@ -12,7 +12,11 @@ export class LoginPage extends Component {
 
   render() {
     return (
-      <div className="loginPage">
+      <div className="loginPage" style={{
+        maxWidth: '900px',
+        width: '100%',
+        margin: '0 auto'
+      }}>
         <LoginForm {...this.props }/>
       </div>
     )

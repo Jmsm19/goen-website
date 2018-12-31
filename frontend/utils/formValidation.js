@@ -1,5 +1,10 @@
 import { i18n } from '../i18n';
 
+// To be used with Formik validation
+export const hasErrors = (fieldName, errors, touched, fieldErrors = []) =>
+  (touched[fieldName] && errors[fieldName]) || fieldErrors.includes(fieldName);
+
+// Field specific validations
 export const validateEmail = (value) => {
   let error;
   if (!value) {
@@ -24,6 +29,16 @@ export const validateTextField = (value) => {
   let error;
   if (!value) {
     error = i18n.t('common:Required');;
+  }
+  return error;
+}
+
+export const validatePhoneNumber = (value) => {
+  let error;
+  if (!value) {
+    error = i18n.t('common:Required');;
+  } else if (!/^[0-9]{3,4}-[0-9]{7}$/i.test(value)) {
+    error = i18n.t('common:WrongPhoneFormat');
   }
   return error;
 }

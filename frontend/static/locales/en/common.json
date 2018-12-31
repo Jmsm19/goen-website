@@ -15,5 +15,8 @@
   "TooShort": "The field must have at least {{minimum}} characters",
   "PasswordNotEqual": "Passwords are not equal",
   "Underage": "You must be over {{age}} years old",
-  "CheckConfirmationEmail": "We have sent you a confirmation email"
+  "CheckConfirmationEmail": "We have sent you a confirmation email",
+  "WrongPhoneFormat": "Invalid format. (0424-1234567)",
+  "Spanish": "Spanish",
+  "English": "English"
 }
