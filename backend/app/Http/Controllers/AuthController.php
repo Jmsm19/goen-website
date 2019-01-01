@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Auth;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     /**
-     * Create user and send notification to validate email and user
+     * Create user and send notification to validate email and user.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function signup(SignupRequest $request)
@@ -39,9 +40,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Activate user based on activation token
+     * Activate user based on activation token.
      *
-     * @param  string  $token
+     * @param string $token
+     *
      * @return \Illuminate\Http\Response
      */
     public function signupActivate($token)
@@ -50,7 +52,7 @@ class AuthController extends Controller
 
         if (!$user) {
             return response()->json([
-                'message' => trans('auth.invalid_active_token')
+                'message' => trans('auth.invalid_active_token'),
             ], 404);
         }
 
@@ -59,13 +61,16 @@ class AuthController extends Controller
         $user->activation_token = '';
         $user->save();
 
+        event(new Verified($user));
+
         return new UserResource($user);
     }
 
     /**
-     * Login user and send API Token
+     * Login user and send API Token.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function login(LoginRequest $request)
@@ -97,9 +102,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout user and invalidate API Token
+     * Logout user and invalidate API Token.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -110,9 +116,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Get logged in user
+     * Get logged in user.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function user(Request $request)
@@ -121,7 +128,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Response when accessing area without being logged in
+     * Response when accessing area without being logged in.
      *
      * @return \Illuminate\Http\Response
      */
