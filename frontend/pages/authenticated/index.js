@@ -3,7 +3,6 @@ import NProgress from 'nprogress';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import { Alert, Button, notification } from 'antd';
-import { Link } from 'next-i18next/dist/components';
 import { GetData } from '../../utils/fetch';
 
 export class Authenticated extends Component {
