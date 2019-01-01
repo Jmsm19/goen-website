@@ -6,8 +6,9 @@
   "license": "MIT",
   "description": "Frontend boilerplate",
   "scripts": {
-    "start": "next dev",
-    "build": "yarn install && next build",
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
     "export": "next export",
     "buildex": "yarn build && yarn export && yarn copy-bconfig",
     "copy-bconfig": "mv ./out/static/browserconfig.xml ./out/",
@@ -60,9 +61,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.15.3",
     "raw-loader": "^1.0.0",
-    "react-testing-library": "^5.3.1",
-    "styled-components": "^4.1.3",
-    "styled-jsx": "^3.1.3"
+    "react-testing-library": "^5.3.1"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
