@@ -3,9 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class SignupActivate extends Notification implements ShouldQueue
 {
@@ -39,7 +39,7 @@ class SignupActivate extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/auth/signup/activate/'.$notifiable->activation_token);
+        $url = url(env('APP_FRONTEND_URL').'/activate?tk='.$notifiable->activation_token);
 
         return (new MailMessage())
             ->subject('Confirma tu cuenta')
