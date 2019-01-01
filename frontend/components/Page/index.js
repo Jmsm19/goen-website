@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 import Header from '../Header';
 import Footer from '../Footer';
 import Meta from '../Meta';
+import { appWithTranslation } from '../../i18n';
 
 class Page extends Component {
   state = {};
@@ -32,4 +33,4 @@ Page.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-export default Page;
+export default appWithTranslation(Page);
