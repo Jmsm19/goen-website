@@ -1,6 +1,12 @@
 import NextI18Next from 'next-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+const langDetector = new LanguageDetector(
+  null, {
+    cookieMinutes: 10080, // 7 days
+  }
+);
+
 const options = {
   defaultNS: 'common',
   defaultLanguage: 'es',
@@ -12,7 +18,7 @@ const options = {
   fallbackLng: 'es',
   localeSubpaths: false,
   use: [
-    LanguageDetector
+    langDetector
   ],
 
   // Common namespace used around site
