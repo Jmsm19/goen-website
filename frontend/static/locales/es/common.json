@@ -18,5 +18,7 @@
   "CheckConfirmationEmail": "Le hemos enviado un correo de confirmación",
   "WrongPhoneFormat": "Format inválido. (0424-1234567)",
   "Spanish": "Español",
-  "English": "Ingles"
+  "English": "Ingles",
+  "Unauthorized": "No autorizado",
+  "LoginFirst": "Por favor, inicie sesión primero"
 }
