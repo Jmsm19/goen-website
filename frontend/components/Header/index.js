@@ -28,7 +28,7 @@ class Header extends Component {
       logout();
     } else {
       this.setState({
-        currentPage: pageKey
+        currentPage: pageKey === '' ? 'home' : pageKey
       })
     }
   }
@@ -48,19 +48,11 @@ class Header extends Component {
               onClick={({key}) => this.handlePageChange(key, {
                 logout: handleLogout
               })}>
-              <Menu.Item key="home">
+              {/* <Menu.Item key="home">
                 <Link href="/">
                   <a>{t('Home')}</a>
                 </Link>
-              </Menu.Item>
-              {
-                !isAuth &&
-                  <Menu.Item key="login">
-                    <Link href="/login">
-                      <a>{t('Login')}</a>
-                    </Link>
-                  </Menu.Item>
-              }
+              </Menu.Item> */}
               {
                 isAuth && authUser && (
                   <SubMenu key="user"
