@@ -10,8 +10,8 @@
     "start": "next start",
     "build": "next build",
     "export": "next export",
-    "buildex": "yarn build && yarn export && yarn copy-bconfig",
-    "copy-bconfig": "mv ./out/static/browserconfig.xml ./out/",
+    "buildex": "yarn build && yarn export && yarn copy-root-statics",
+    "copy-root-statics": "mv ./out/static/root/* ./out/",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --watch",
     "test-win": "SET NODE_ENV=test&& jest --watch"
