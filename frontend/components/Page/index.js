@@ -10,17 +10,25 @@ class Page extends Component {
   state = {};
 
   render() {
-    const { children } = this.props;
+    const { children , isAuth } = this.props;
 
     return (
       <Layout className="layout" style={{
         display: 'grid',
         minHeight: '100vh',
-        gridTemplateRows: 'auto 1fr auto'
+        gridTemplateRows: isAuth ? 'auto 1fr auto' : '1fr auto',
       }}>
         <Meta />
-        <Header />
-        <Layout.Content style={{ padding: '40px 50px' }}>
+        {
+          isAuth && (
+            <Header/>
+          )
+        }
+        <Layout.Content style={{
+          padding: '40px 50px',
+          display: !isAuth ? 'grid' : null,
+          alignItems: !isAuth ? 'center' : null
+        }}>
           {children}
         </Layout.Content>
         <Footer />
@@ -30,7 +38,8 @@ class Page extends Component {
 }
 
 Page.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  isAuth: PropTypes.bool.isRequired,
 }
 
 export default appWithTranslation(Page);
