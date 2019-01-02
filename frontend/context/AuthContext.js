@@ -71,15 +71,13 @@ class AuthContextProvider extends Component {
       .then(data => data.json())
       .then(({message}) => {
         NProgress.done();
-        Router.push('/login');
+        Router.push('/');
         Cookies.remove('token');
-        setTimeout(() => {
-          this.setState({
-            isAuth: false,
-            authUser: null,
-            message
-          })
-        }, 200)
+        this.setState({
+          isAuth: false,
+          authUser: null,
+          message
+        })
       })
       .catch(error => {
         NProgress.done();
