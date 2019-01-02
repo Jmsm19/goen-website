@@ -1,80 +1,41 @@
 import React, { Component } from 'react';
-import NProgress from 'nprogress';
-import Cookies from 'js-cookie';
-import Router from 'next/router';
-import { Alert, Button, notification } from 'antd';
-import { GetData } from '../../utils/fetch';
+import PropTypes from 'prop-types';
+import { Alert } from 'antd';
+import { withNamespaces } from '../../i18n';
+import RequireAuthentication from '../../components/RequireAuthentication';
 
 export class Authenticated extends Component {
-  state = {
-    isLoggedIn: !!Cookies.get('token') && Cookies.get('token') !== 'undefined',
-    message: '',
-  }
-
-  componentDidMount() {
-    const { isLoggedIn } = this.state;
-    if (!isLoggedIn) {
-      Router.push('/login');
+  static async getInitialProps() {
+    return {
+      namespacesRequired: ['common']
     }
   }
 
-  goToLogin = () => {
-    Router.push('/login');
-  }
-
-  logout = () => {
-    NProgress.start();
-    GetData('/auth/logout')
-      .then(data => data.json())
-      .then(({message}) => {
-        NProgress.done();
-        Cookies.remove('token');
-        this.setState({
-          isLoggedIn: false,
-          message
-        })
-      })
-      .catch(error => {
-        NProgress.done();
-        notification.error({
-          message: 'Error',
-          description: error.message,
-        });
-      });
-  }
-
   render() {
-    const { isLoggedIn, message } = this.state;
-    return (
-      <div>
-        {isLoggedIn ? (
-          <>
-          <Alert
-            type="success"
-            message="You are logged in... Sort of."
-            description="Page under construction"
-          />
+    const { t, isAuth } = this.props;
 
-          <div style={{ marginTop: '30px' }}>
-            <Button type="default" onClick={this.logout}>Logout</Button>
-          </div>
-          </>
-        ) : (
-          message && (
+    return (
+      <RequireAuthentication t={t} isAuth={isAuth}>
+        {() => (
+          isAuth && (
             <>
-            <Alert
-              closable
-              type="success"
-              message={message}
-              description="Close to go to login"
-              afterClose={this.goToLogin} />
+              <Alert
+                type="success"
+                message={t('You are logged in... Sort of.')}
+                description={t('Page under construction ')}
+              />
             </>
           )
         )}
-      </div>
+      </RequireAuthentication>
     )
   }
 }
 
+Authenticated.propTypes = {
+  t: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+}
 
-export default Authenticated;
+
+export default withNamespaces('common')(Authenticated);
