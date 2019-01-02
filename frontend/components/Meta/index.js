@@ -9,6 +9,7 @@ const Meta = () => (
     {/* Common metas */}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charSet="utf-8" />
+    <meta description="GOEN Maracaibo" />
     {/* Icons */}
     <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png" />
@@ -20,7 +21,7 @@ const Meta = () => (
     <meta name="msapplication-TileColor" content="#bf1a21" />
     <meta name="theme-color" content="#bf1a21" />
     {/* Manifest */}
-    <link rel="manifest" href="/static/manifest.webmanifest" />
+    <link rel="manifest" href="/static/manifest.json" />
     {/* Title */}
     <title>{publicRuntimeConfig.SITE_NAME}</title>
   </Head>
