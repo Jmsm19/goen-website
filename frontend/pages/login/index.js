@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from '../../i18n';
+import { AuthContextConsumer } from '../../context/AuthContext';
 import LoginForm from '../../components/LoginForm';
 
 export class LoginPage extends Component {
@@ -17,7 +18,13 @@ export class LoginPage extends Component {
         width: '100%',
         margin: '0 auto'
       }}>
-        <LoginForm {...this.props }/>
+        <AuthContextConsumer>
+          {({ handleLogin, isAuth }) => (
+            !isAuth && (
+              <LoginForm {...this.props } handleLogin={handleLogin} />
+            )
+          )}
+        </AuthContextConsumer>
       </div>
     )
   }

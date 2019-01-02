@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { i18n } from '../i18n';
 
 // To be used with Formik validation
@@ -23,6 +24,17 @@ export const validatePassword = (value) => {
     error = i18n.t('common:TooShort', { minimum: 6 });
   }
   return error;
+}
+
+export const validatePasswordConfirmation = ({password, password_confirmation}) => {
+  const bothPasswordHaveContent = password.length > 0 && password_confirmation.length > 0;
+
+  if (bothPasswordHaveContent && password !== password_confirmation) {
+    return {
+      password_confirmation: i18n.t('common:PasswordNotEqual')
+    }
+  }
+  return {};
 }
 
 export const validateTextField = (value) => {
