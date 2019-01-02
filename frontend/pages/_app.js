@@ -2,6 +2,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import Page from '../components/Page';
+import { AuthContextProvider, AuthContextConsumer } from '../context/AuthContext';
 import '../styles/nprogress.css';
 import '../styles/antd.css';
 import '../styles/styles.css';
@@ -20,9 +21,15 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Container style={{ height: '100%' }}>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
+        <AuthContextProvider>
+          <AuthContextConsumer>
+            {({ isAuth }) => (
+              <Page isAuth={isAuth}>
+                <Component {...pageProps} isAuth={isAuth} />
+              </Page>
+            )}
+          </AuthContextConsumer>
+        </AuthContextProvider>
       </Container>
     )
   }
