@@ -15,9 +15,9 @@ return [
 
     'failed' => 'Credenciales inválidas.',
     'throttle' => 'Demasiados intentos fallidos en muy poco tiempo. Por favor intente de nuevo en :seconds segundos.',
-    'login_first' => 'Debes iniciar sesión primero.',
     'successful_signup' => 'Usuario creado exitosamente.',
     'invalid_active_token' => 'Código de activación inválido.',
     'logout' => 'Sesión cerrada exitosamente.',
     'no_privilages' => 'No tiene suficientes privilegios.',
+    'unauthenticated' => 'Debes iniciar sesión primero'
 ];

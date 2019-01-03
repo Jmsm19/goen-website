@@ -151,7 +151,7 @@ class AuthFeatureTest extends TestCase
         $this->followingRedirects()
             ->get(route('get_auth_user'))
             ->assertJson([
-                'message' => trans('auth.login_first')
+                'message' => trans('auth.unauthenticated')
             ]);
     }
 
@@ -183,7 +183,7 @@ class AuthFeatureTest extends TestCase
             // redirected to route('unauthorized')
             ->assertStatus(401)
             ->assertJson([
-                'message' => trans('auth.login_first'),
+                'message' => trans('auth.unauthenticated'),
             ]);
     }
 }

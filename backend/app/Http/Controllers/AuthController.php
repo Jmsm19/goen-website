@@ -135,7 +135,7 @@ class AuthController extends Controller
     public function unauthorized()
     {
         return response()->json([
-            'message' => trans('auth.login_first'),
+            'message' => trans('auth.unauthenticated'),
         ], 401);
     }
 }

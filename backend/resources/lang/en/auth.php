@@ -15,9 +15,9 @@ return [
 
     'failed' => 'Invalid credentials.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'login_first' => 'You must login first.',
     'successful_signup' => 'Successfully created user!',
     'invalid_active_token' => 'Invalid activation token.',
     'logout' => 'Successfully logged out',
     'no_privilages' => 'Not enough privilages.',
+    'unauthenticated' => 'You must login first',
 ];
