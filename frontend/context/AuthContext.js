@@ -5,12 +5,25 @@ import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import getConfig from 'next/config';
 import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
+import { Loading } from '../components/Loading';
 
+const { publicRuntimeConfig } = getConfig();
 const AuthContext = createContext({});
 
 class AuthContextProvider extends Component {
+  componentDidMount() {
+    if (Cookies.get('token') && Cookies.get('token') !== 'undefiend') {
+      this.getAuthUser();
+    } else {
+      this.setState({
+        mounted: true,
+      })
+    }
+  }
+
   getAuthUser = () => {
     NProgress.start();
     GetData('/auth/user')
@@ -21,17 +34,26 @@ class AuthContextProvider extends Component {
           throw Error(message)
         } else {
           NProgress.done();
-          this.setState({
-            authUser: data
-          })
+          this.setState((prevState) => ({
+            authUser: data,
+            isAuth: !prevState.isAuth ? true : prevState.isAuth,
+            mounted: prevState.mounted ? true : !prevState.mounted,
+          }))
         }
       })
       .catch(error => {
         NProgress.done();
-        notification.error({
-          message: 'Error',
-          description: error.message,
-        });
+        this.setState((prevState) => ({
+          authUser: null,
+          isAuth: false,
+          mounted: prevState.mounted ? true : !prevState.mounted,
+        }), () => {
+          notification.error({
+            message: 'Error',
+            description: error.message,
+          });
+          Router.push('/login')
+        })
       });
   }
 
@@ -39,12 +61,15 @@ class AuthContextProvider extends Component {
     NProgress.start();
     SendData('POST', '/auth/login', values)
       .then(data => data.json())
-      .then(({access_token, message}) => {
+      .then(({access_token, expires_at, message}) => {
         if (message) {
           throw Error(message)
         } else {
           NProgress.done();
-          Cookies.set('token', access_token);
+          Cookies.set('token', access_token, {
+            secure: publicRuntimeConfig.NODE_ENV !== 'development',
+            expires: expires_at ? 7 : null,
+          });
           setSubmitting(false);
           this.setState(() => ({
             isAuth: true,
@@ -129,6 +154,7 @@ class AuthContextProvider extends Component {
   }
 
   state = {
+    mounted: false,
     isAuth: false,
     handleLogin: this.handleLogin,
     handleLogout: this.handleLogout,
@@ -141,11 +167,16 @@ class AuthContextProvider extends Component {
 
   render() {
     const { children } = this.props;
+    const { mounted, ...state } = this.state;
 
     return (
-      <AuthContext.Provider value={{...this.state}}>
-        { children }
-      </AuthContext.Provider>
+      mounted ? (
+        <AuthContext.Provider value={{...state}}>
+          { children }
+        </AuthContext.Provider>
+      ) : (
+        <Loading />
+      )
     );
   }
 }

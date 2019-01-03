@@ -39,3 +39,11 @@
   --normal-color: #f0f0f0;
   --primary-color-shadow: hsla(209, 100%, 55%, 0.2);
 }
+
+.page-loading {
+  min-height: 100vh;
+  width: 100vw;
+  align-items: center;
+  display: grid;
+  justify-content: center;
+}

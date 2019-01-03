@@ -5,7 +5,7 @@ import Router from 'next/router';
 import { notification } from 'antd';
 import { AuthContextConsumer } from '../../context/AuthContext';
 
-export class RequireAuthentication extends Component {
+class RequireAuthentication extends Component {
   componentDidMount() {
     this.redirectIfNotAuth();
   }
