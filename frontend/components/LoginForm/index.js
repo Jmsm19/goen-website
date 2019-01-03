@@ -5,7 +5,7 @@ import { Formik, Field } from 'formik';
 import {  Form, Icon, Input, Button } from 'antd';
 import { hasErrors } from '../../utils/formValidation';
 
-const LoginForm = ({ t, handleLogin }) => {
+export const LoginForm = ({ t, handleLogin }) => {
   const initialState = {
     email: '',
     password: ''

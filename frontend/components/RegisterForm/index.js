@@ -12,7 +12,7 @@ import { validateEmail,
   hasErrors
 } from '../../utils/formValidation';
 
-const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
+export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
   const initialState = {
     name: '',
     birth_date: '',

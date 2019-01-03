@@ -11,7 +11,7 @@ Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-class Header extends Component {
+export class Header extends Component {
   constructor(props) {
     super(props);
     const { router } = props;

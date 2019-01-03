@@ -6,7 +6,7 @@ import { withNamespaces } from '../../i18n';
 
 const { publicRuntimeConfig } = getConfig();
 
-class Footer extends Component {
+export class Footer extends Component {
   changeLocale = ({ target: { value } }) => {
     const { i18n } = this.props;
 
@@ -24,7 +24,7 @@ class Footer extends Component {
       <Layout.Footer style={{ textAlign: 'center', height: '100%', padding: '0 50px 30px' }}>
         <p>&copy; 2018 - {publicRuntimeConfig.SITE_NAME}</p>
 
-        <RadioGroup onChange={this.changeLocale} defaultValue={i18n.language}>
+        <RadioGroup onChange={this.changeLocale} defaultValue={i18n.language || 'es'}>
           <RadioButton value="es">{t('Spanish')}</RadioButton>
           <RadioButton value="en">{t('English')}</RadioButton>
         </RadioGroup>
@@ -37,7 +37,7 @@ class Footer extends Component {
 Footer.propTypes = {
   t: PropTypes.func.isRequired,
   i18n: PropTypes.shape({
-    language: PropTypes.string.isRequired,
+    language: PropTypes.string,
     changeLanguage: PropTypes.func.isRequired,
   }).isRequired,
 }

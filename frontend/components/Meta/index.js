@@ -4,7 +4,7 @@ import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-const Meta = () => (
+export const Meta = () => (
   <Head>
     {/* Common metas */}
     <meta name="viewport" content="width=device-width, initial-scale=1" />

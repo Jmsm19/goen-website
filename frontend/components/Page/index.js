@@ -6,7 +6,7 @@ import Footer from '../Footer';
 import Meta from '../Meta';
 import { appWithTranslation } from '../../i18n';
 
-class Page extends Component {
+export class Page extends Component {
   state = {};
 
   render() {
