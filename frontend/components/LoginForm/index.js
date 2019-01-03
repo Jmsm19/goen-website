@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Formik, Field } from 'formik';
-import {  Form, Icon, Input, Button } from 'antd';
+import {  Form, Icon, Input, Checkbox, Button } from 'antd';
 import { hasErrors } from '../../utils/formValidation';
 
 export const LoginForm = ({ t, handleLogin }) => {
   const initialState = {
     email: '',
-    password: ''
+    password: '',
+    remember_me: false
   };
   const Label = Form.Item;
 
@@ -41,6 +42,10 @@ export const LoginForm = ({ t, handleLogin }) => {
                   />} />
               )} />
           </Label>
+
+          <div style={{ marginBottom: '20px' }}>
+            <Checkbox name="remember_me">{t('RememberMe')}</Checkbox>
+          </div>
 
           <Button type="primary" htmlType="submit" loading={isSubmitting}>
             {t('Login')}
