@@ -32,7 +32,7 @@ export const LoginForm = ({ t, handleLogin }) => {
           </Label>
 
           <Label htmlFor="login_password" label={t('Password')}
-            validateStatus={hasErrors('password', errors, touched) && 'error'}
+            validateStatus={hasErrors('password', errors, touched) ? 'error' : 'success'}
             help={hasErrors('password', errors, touched) ? errors.password : ''}>
             <Field name="password"
               render={({ field }) => (

@@ -8,7 +8,9 @@ describe('Test Page component', () => {
   test('renders basic layout', () => {
     const { getByText } = render(
       <I18nextProvider i18n={i18n}>
-        <Page />
+        <Page isAuth={false}>
+          <div />
+        </Page>
       </I18nextProvider>
     );
     expect(getByText('© 2018 - GOEN Maracaibo'))

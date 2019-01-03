@@ -108,7 +108,8 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             }>
             <Field name="password_confirmation" validate={validatePassword}
               render={({ field }) => (
-                <Input {...field} type="password" id="register_password_confirmation"
+                <Input {...field} type="password" autoComplete="off"
+                  id="register_password_confirmation"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
               )} />

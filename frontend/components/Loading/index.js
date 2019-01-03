@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Spin, Icon } from 'antd';
 import { withNamespaces } from '../../i18n';
 
-export const Loading = ({ iconType = 'loading', spinnerFontSize = '80px', text = '' }) => {
+export const Loading = ({ iconType, spinnerFontSize, text = '' }) => {
   const LoadingIcon = <Icon type={iconType} spin style={{ fontSize: spinnerFontSize }} />
 
   return (
@@ -16,10 +16,16 @@ export const Loading = ({ iconType = 'loading', spinnerFontSize = '80px', text =
   )
 }
 
+Loading.defaultProps = {
+  text: '',
+  iconType: 'loading',
+  spinnerFontSize: '80px'
+}
+
 Loading.propTypes = {
-  iconType: PropTypes.string.isRequired,
-  spinnerFontSize: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  iconType: PropTypes.string,
+  spinnerFontSize: PropTypes.string,
+  text: PropTypes.string
 }
 
 export default withNamespaces('common')(Loading )
