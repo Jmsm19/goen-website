@@ -3,12 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {  Form, Icon, Input, Button } from 'antd';
 import { Formik, Field } from 'formik';
-import { validateEmail,
-  validatePassword,
-  validatePasswordConfirmation,
-  validateTextField,
-  validatePhoneNumber,
-  validateBirthDateField,
+import * as Yup from 'yup';
+import moment from 'moment';
+import {
   hasErrors
 } from '../../utils/formValidation';
 
@@ -22,12 +19,36 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
     password_confirmation: ''
   }
 
+  const PASSWORD_MIN_LENGTH = 6;
+  const MINIMUM_AGE = 14;
+  const MINIMUM_DATE = new Date(moment().subtract(MINIMUM_AGE, 'y').format('YYYY-MM-DD'));
+
+  const ValidationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required(t('Required')),
+    phone_number: Yup.string()
+      .matches(/^[0-9]{3,4}-[0-9]{7}$/i, { message: t('WrongPhoneFormat') })
+      .required(t('Required')),
+    birth_date: Yup.date()
+      .max(MINIMUM_DATE, t('Underage', {age: MINIMUM_AGE}))
+      .required(t('Required')),
+    email: Yup.string()
+      .email(t('InvalidEmail'))
+      .required(t('Required')),
+    password: Yup.string()
+      .min(PASSWORD_MIN_LENGTH, t('common:TooShort', { minimum: PASSWORD_MIN_LENGTH }))
+      .required(t('Required')),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref('password'), null], t('PasswordNotEqual'))
+      .required(t('Required'))
+  });
+
   const Label = Form.Item;
 
   return (
     <Formik
       initialValues={initialState}
-      validate={validatePasswordConfirmation}
+      validationSchema={ValidationSchema}
       onSubmit={handleRegister}>
       {({ handleSubmit, isSubmitting, errors, touched }) => (
         <Form onSubmit={handleSubmit}>
@@ -35,7 +56,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
           <Label htmlFor="register_name" label={t('Name')}
             validateStatus={hasErrors('name', errors, touched) ? 'error' : 'success'}
             help={hasErrors('name', errors, touched) ? errors.name : ''}>
-            <Field name="name" validate={validateTextField}
+            <Field name="name"
               render={({ field }) => (
                 <Input {...field} type="text" id="register_name"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}
@@ -47,7 +68,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
           <Label htmlFor="register_birth_date" label={t('BirthDate')}
             validateStatus={hasErrors('birth_date', errors, touched) ?  'error' : 'success'}
             help={hasErrors('birth_date', errors, touched) ? errors.birth_date : ''}>
-            <Field name="birth_date" validate={validateBirthDateField}
+            <Field name="birth_date"
               render={({ field }) => (
                 <Input {...field} type="date" id="register_birth_date"
                   prefix={<Icon type="calendar" style={{ color: 'rgba(0,0,0,.25)' }}
@@ -59,7 +80,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
           <Label htmlFor="register_phone_number" label={t('PhoneNumber')}
             validateStatus={hasErrors('phone_number', errors, touched) ?  'error' : 'success'}
             help={hasErrors('phone_number', errors, touched) ? errors.phone_number : ''}>
-            <Field name="phone_number" validate={validatePhoneNumber}
+            <Field name="phone_number"
               render={({ field }) => (
                 <Input {...field} type="tel" id="register_phone_number"
                   placeholder="0424-1234567"
@@ -74,7 +95,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
               hasErrors('email', errors, touched, fieldErrors) ?  'error' : 'success'
             }
             help={hasErrors('email', errors, touched) ? errors.email : ''}>
-            <Field name="email" validate={validateEmail}
+            <Field name="email"
               render={({ field }) => (
                 <Input {...field} type="email" id="register_email"
                   autoComplete="username"
@@ -87,7 +108,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
           <Label htmlFor="register_password" label={t('Password')}
             validateStatus={hasErrors('password', errors, touched) ?  'error' : 'success'}
             help={hasErrors('password', errors, touched) ? errors.password : ''}>
-            <Field name="password" validate={validatePassword}
+            <Field name="password"
               render={({ field }) => (
                 <Input {...field} type="password" id="register_password"
                   autoComplete="new-password"
@@ -106,7 +127,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
               hasErrors('password_confirmation', errors, touched) ?
                 errors.password_confirmation : ''
             }>
-            <Field name="password_confirmation" validate={validatePassword}
+            <Field name="password_confirmation"
               render={({ field }) => (
                 <Input {...field} type="password" autoComplete="off"
                   id="register_password_confirmation"

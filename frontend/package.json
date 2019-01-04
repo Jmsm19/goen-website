@@ -38,7 +38,8 @@
     "nprogress": "^0.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.3",
