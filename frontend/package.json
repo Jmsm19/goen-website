@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "goen_maracaibo_website",
   "version": "1.0.0",
   "main": "index.html",
   "author": "Jorge Soto <Jorgemsm19@gmail.com>",
@@ -10,7 +10,8 @@
     "start": "next start",
     "build": "next build",
     "export": "next export",
-    "buildex": "yarn build && yarn export && yarn copy-root-statics",
+    "create-netlify-redirect": "echo '/* /index.html 200' >> out/_redirects",
+    "buildex": "yarn build && yarn export && yarn create-netlify-redirect && yarn copy-root-statics",
     "copy-root-statics": "mv ./out/static/root/* ./out/",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --watch",
