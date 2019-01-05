@@ -23,6 +23,5 @@ describe('Test Header component', () => {
     const { getByText } = render(
       <Header t={tFunction} router={router} />
     );
-    expect(getByText('Tester'))
   })
 });

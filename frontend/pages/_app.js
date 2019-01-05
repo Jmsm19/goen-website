@@ -23,7 +23,7 @@ class MyApp extends App {
       <Container style={{ height: '100%' }}>
         <AuthContextProvider>
           <AuthContextConsumer>
-            {({ isAuth }) => (
+            {({ isAuth, authUser }) => (
               <Page isAuth={isAuth}>
                 <Component {...pageProps} isAuth={isAuth} />
               </Page>

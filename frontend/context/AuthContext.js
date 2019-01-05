@@ -57,6 +57,39 @@ class AuthContextProvider extends Component {
       });
   }
 
+  updateAuthUser = (values, {toggleEdition, setSubmitting}) => {
+    const { authUser: { id } } = this.state;
+
+    NProgress.start();
+    SendData('PUT', `/user/${id}`, values)
+      .then(response => response.json())
+      .then(({ data, error }) => {
+        NProgress.done();
+        if (error) {
+          throw Error(error)
+        } else {
+          NProgress.done();
+          this.setState(() => ({
+            authUser: data,
+          }), () => {
+            toggleEdition();
+            setSubmitting(false);
+            notification.success({
+              message: 'Usuario actualizado',
+            });
+          })
+        }
+      })
+      .catch(({ message, error }) => {
+        NProgress.done();
+        notification.error({
+          message: 'Error',
+          description: message || error,
+        });
+        setSubmitting(false);
+      });
+  }
+
   handleLogin = (values, { setSubmitting }) => {
     NProgress.start();
     SendData('POST', '/auth/login', values)
@@ -73,10 +106,11 @@ class AuthContextProvider extends Component {
           setSubmitting(false);
           this.setState(() => ({
             isAuth: true,
+            mounted: false,
           }), () => {
             this.getAuthUser();
+            Router.push('/profile')
           })
-          Router.push('/authenticated')
         }
       })
       .catch(error => {
@@ -159,6 +193,7 @@ class AuthContextProvider extends Component {
     handleLogin: this.handleLogin,
     handleLogout: this.handleLogout,
     handleRegister: this.handleRegister,
+    handleUserUpdate: this.updateAuthUser,
     registerSuccess: false,
     message: '',
     fieldErrors: [],

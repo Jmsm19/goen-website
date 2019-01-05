@@ -8,7 +8,7 @@ describe('Test Register Page', () => {
     const { getByText } = render(
       <RegisterPage t={tFunction} />
     );
-    expect(getByText('Nombre'))
+    expect(getByText('Nombre completo'))
     expect(getByText('Fecha de nacimiento'))
     expect(getByText('Número telefónico'))
     expect(getByText('Correo electrónico'))

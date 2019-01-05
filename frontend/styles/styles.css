@@ -38,6 +38,9 @@
 
   --normal-color: #f0f0f0;
   --primary-color-shadow: hsla(209, 100%, 55%, 0.2);
+
+  --tablet-size: 768px;
+  --phone-size: 576px;
 }
 
 .page-loading {
@@ -46,4 +49,10 @@
   align-items: center;
   display: grid;
   justify-content: center;
+}
+
+@media screen and (max-width: 576px) {
+  .ant-notification {
+    margin-right: 9px;
+  }
 }

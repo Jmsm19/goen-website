@@ -4,7 +4,7 @@
   "Register": "Register",
   "Enter": "Enter",
   "getData": "Get Data",
-  "Name": "Name",
+  "Name": "Full name",
   "BirthDate": "Birth date",
   "PhoneNumber": "Phone number",
   "Email": "Email address",
@@ -21,5 +21,11 @@
   "English": "English",
   "Unauthorized": "Unauthorized",
   "LoginFirst": "Please login in first",
-  "RememberMe": "Remember me"
+  "RememberMe": "Remember me",
+  "EditProfile": "Edit profile",
+  "SaveChanges": "Save changes",
+  "Cancel": "Cancel",
+  "AcademicInfo": "Academic Information",
+  "CurrentModule": "Current module",
+  "NameUsedInCertificateWarning": "This name will be used in your certificate"
 }

@@ -8,7 +8,7 @@ describe('Test Register Form component', () => {
     const { getByText } = render(
       <RegisterForm t={tFunction} />
     );
-    expect(getByText('Nombre'))
+    expect(getByText('Nombre completo'))
     expect(getByText('Fecha de nacimiento'))
     expect(getByText('Número telefónico'))
     expect(getByText('Correo electrónico'))
