@@ -29,5 +29,8 @@
   "Cancel": "Cancel",
   "AcademicInfo": "Academic Information",
   "CurrentModule": "Current module",
-  "NameUsedInCertificateWarning": "This name will be used in your certificate"
+  "NameUsedInCertificateWarning": "This name will be used in your certificate",
+  "VerifyingAccount": "Verifying...",
+  "AccountActivated": "Email confirmed",
+  "AccountActivationFailed": "Activation error"
 }

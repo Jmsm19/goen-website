@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import Router, { withRouter } from 'next/router';
 import NProgress from 'nprogress';
-import { notification } from 'antd';
+import { notification, Icon } from 'antd';
 import { GetData } from '../../utils/fetch';
 import { withNamespaces } from '../../i18n';
+import { StyledPage } from '../../styles/pages/ActivatePage';
 
 export class AccountActivationPage extends Component {
   state = {
@@ -60,23 +61,31 @@ export class AccountActivationPage extends Component {
     const { t } = this.props;
 
     return (
-      // eslint-disable-next-line no-nested-ternary
-      isActivating ? (
-        <>
-          <h1>{t('VerifyingAccount')}</h1>
-        </>
-      ) : (
-        activationSuccess ? (
+      <StyledPage>
+        {
+          // eslint-disable-next-line no-nested-ternary
+          isActivating ? (
             <>
-              <h1>{t('AccountActivated')}</h1>
-              <p>{t('Wait a moment you will be redirected to the Login page')}</p>
+              <h1>
+                <Icon type="loading" spin
+                  style={{ color: 'var(--primary-color)', paddingRight: '30px' }} />
+                {t('VerifyingAccount')}
+              </h1>
             </>
-        ) : (
-          <>
-            <h1>{t('ActivationFailed')}</h1>
-          </>
-        )
-      )
+          ) : (
+            activationSuccess ? (
+              <>
+                <h1>{t('AccountActivated')}</h1>
+                <p>{t('Wait a moment you will be redirected to the Login page')}</p>
+              </>
+            ) : (
+              <>
+                <h1>{t('ActivationActivationFailed')}</h1>
+              </>
+            )
+          )
+        }
+      </StyledPage>
     )
   }
 }

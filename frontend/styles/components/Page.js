@@ -21,5 +21,5 @@ export const StyledLayout = styled(({ isAuth, ...rest }) => <Layout {...rest} />
 // remove isAuth from props
 export const StyledContent = styled(({ isAuth, ...rest }) => <Layout.Content {...rest} />)`
   display: ${({ isAuth }) => (!isAuth ? 'grid' : 'block')};
-  align-items: ${({ isAuth }) => (!isAuth ? 'center' : undefined)};
+  align-items: ${({ isAuth }) => (isAuth ? 'center' : undefined)};
 `;
