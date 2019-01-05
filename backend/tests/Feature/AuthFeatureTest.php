@@ -20,6 +20,7 @@ class AuthFeatureTest extends TestCase
     {
         $new_user_data = [
             'name' => $this->faker->name,
+            'national_id' => $this->faker->ean8,
             'email' => $this->faker->unique()->safeEmail,
             'password' => '1234567',
             'password_confirmation' => '1234567',
@@ -52,7 +53,7 @@ class AuthFeatureTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'name', 'email',
+                    'id', 'name', 'email', 'national_id',
                     'phone_number', 'birth_date', 'clan',
                     'is_admin', 'is_instructor',
                     'is_student', 'is_assistant'
@@ -133,7 +134,7 @@ class AuthFeatureTest extends TestCase
         $this->get(route('get_auth_user'))
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'name', 'email',
+                    'id', 'name', 'email', 'national_id',
                     'phone_number', 'birth_date', 'clan',
                     'is_admin', 'is_instructor',
                     'is_student', 'is_assistant'
@@ -180,7 +181,6 @@ class AuthFeatureTest extends TestCase
     {
         $this->followingRedirects()
             ->get(route('get_auth_user'))
-            // redirected to route('unauthorized')
             ->assertStatus(401)
             ->assertJson([
                 'message' => trans('auth.unauthenticated'),

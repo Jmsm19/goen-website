@@ -26,6 +26,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'national_id' => $request->national_id,
             'password' => bcrypt($request->password),
             'birth_date' => $request->birth_date,
             'phone_number' => $request->phone_number,
@@ -125,17 +126,5 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return new UserResource($request->user());
-    }
-
-    /**
-     * Response when accessing area without being logged in.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function unauthorized()
-    {
-        return response()->json([
-            'message' => trans('auth.unauthenticated'),
-        ], 401);
     }
 }

@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder
 
         User::create([
             'name' => 'Jorge Soto',
+            'national_id' => '20689293',
             'email' => 'jorgemsm19@gmail.com',
             'password' => bcrypt('20689293'),
             'phone_number' => '0424-1234567',
@@ -33,17 +34,20 @@ class UserTableSeeder extends Seeder
 
         User::create([
             'name' => 'Gabriel Flores',
-            'email' => 'gabrielflores@gmail.com',
-            'password' => bcrypt('1234567'),
+            'national_id' => '20580431',
+            'email' => 'gflores92@gmail.com',
+            'password' => bcrypt('20580431'),
             'phone_number' => '0424-1234567',
-            'birth_date' => '1992-10-09',
+            'birth_date' => '1945-20-04',
             'activation_token' => '',
             'active' => 1,
             'email_verified_at' => Carbon::now(),
+            'clan_id' => 1
         ])->roles()->attach($role_instructor);
 
         User::create([
             'name' => 'Simón Inferior',
+            'national_id' => (string) round(rand(11111111, 99999999)),
             'email' => 'emailtonto@gmail.com',
             'password' => bcrypt('1234567'),
             'phone_number' => '0424-1234567',
@@ -55,6 +59,7 @@ class UserTableSeeder extends Seeder
 
         User::create([
             'name' => 'Asistente Apellido',
+            'national_id' => (string) round(rand(11111111, 99999999)),
             'email' => 'asistente@gmail.com',
             'password' => bcrypt('1234567'),
             'phone_number' => '0424-1234567',

@@ -14,8 +14,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', 'AuthController@signup')->name('signup');
     Route::get('signup/activate/{token}', 'AuthController@signupActivate')
         ->name('signup_activate');
-    Route::get('/unauthorized', 'AuthController@unauthorized')
-        ->name('unauthorized');
 
     Route::group(['middleware' => ['auth:api']], function () {
         Route::get('logout', 'AuthController@logout')->name('logout');

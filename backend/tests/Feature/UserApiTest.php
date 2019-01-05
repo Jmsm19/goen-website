@@ -26,7 +26,7 @@ class UserApitest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     [
-                        'id', 'name', 'email',
+                        'id', 'name', 'email', 'national_id',
                         'phone_number', 'birth_date',
                         'is_admin', 'is_instructor',
                         'is_student', 'is_assistant'
@@ -51,6 +51,7 @@ class UserApitest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $user->id,
+                    'national_id' => $user->national_id,
                     'name' => $user->name,
                     'email' => $user->email,
                     'phone_number' => $user->phone_number,

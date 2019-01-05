@@ -17,6 +17,7 @@ class UserResource extends JsonResource
         $has_clan = !is_null($this->clan);
         return [
             'id' => $this->id,
+            'national_id' => $this->national_id,
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
