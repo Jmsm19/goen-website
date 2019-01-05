@@ -5,6 +5,8 @@
   "Enter": "Enter",
   "getData": "Get Data",
   "Name": "Full name",
+  "NationalId": "National identification number",
+  "WrongNationalIdFormat": "Invalid format, type numbers only",
   "BirthDate": "Birth date",
   "PhoneNumber": "Phone number",
   "Email": "Email address",

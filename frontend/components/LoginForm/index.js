@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import {  Form, Icon, Input, Checkbox, Button } from 'antd';
+import {  Form, Icon, Checkbox, Button } from 'antd';
 import { hasErrors } from '../../utils/formValidation';
+import { StyledButtonArea } from '../../styles/components/LoginForm';
+import { StyledInput } from '../../styles/components/Forms';
 
-export const LoginForm = ({ t, handleLogin }) => {
+const LoginForm = ({ t, handleLogin }) => {
   const initialState = {
     email: '',
     password: '',
@@ -35,7 +37,7 @@ export const LoginForm = ({ t, handleLogin }) => {
             help={hasErrors('email', errors, touched) ? errors.email : ''}>
             <Field name="email"
               render={({ field }) => (
-                <Input {...field} type="email"
+                <StyledInput {...field} type="email"
                   autoComplete="username" id="login_email"
                   placeholder="ejemplo@email.com"
                   prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }}
@@ -48,26 +50,26 @@ export const LoginForm = ({ t, handleLogin }) => {
             help={errors.password && touched.password ? errors.password : ''}>
             <Field name="password"
               render={({ field }) => (
-                <Input {...field} type="password"
+                <StyledInput {...field} type="password"
                   autoComplete="current-password" id="login_password"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
               )} />
           </Label>
 
-          <div style={{ marginBottom: '20px' }}>
-            <Checkbox name="remember_me">{t('RememberMe')}</Checkbox>
-          </div>
+          <Checkbox name="remember_me">{t('RememberMe')}</Checkbox>
 
-          <Button type="primary" htmlType="submit" loading={isSubmitting}>
-            {t('Login')}
-          </Button>
+          <StyledButtonArea>
+            <Button type="primary" htmlType="submit" loading={isSubmitting}>
+              {t('Login')}
+            </Button>
 
-          <div style={{ marginTop: '20px' }}>
             <Link href="/register">
-              <a>{t('Register')}</a>
+              <Button type="ghost" style={{ border: 'none', color: 'var(--light-primary-color)' }}>
+                {t('Register')}
+              </Button>
             </Link>
-          </div>
+          </StyledButtonArea>
         </Form>
       )}
     </Formik>

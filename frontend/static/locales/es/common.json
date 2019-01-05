@@ -5,6 +5,8 @@
   "Enter": "Entrar",
   "getData": "Buscar datos",
   "Name": "Nombre completo",
+  "NationalId": "Número de cédula",
+  "WrongNationalIdFormat": "Formato inválido, solo use números",
   "BirthDate": "Fecha de nacimiento",
   "PhoneNumber": "Número telefónico",
   "Email": "Correo electrónico",

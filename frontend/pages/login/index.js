@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { withNamespaces } from '../../i18n';
 import { AuthContextConsumer } from '../../context/AuthContext';
 import LoginForm from '../../components/LoginForm';
+import { StyledLogo, StyledPage } from '../../styles/pages/LoginPage';
 
 export class LoginPage extends Component {
   static async getInitialProps() {
@@ -21,19 +22,18 @@ export class LoginPage extends Component {
 
   render() {
     return (
-      <div className="loginPage" style={{
-        maxWidth: '900px',
-        width: '100%',
-        margin: '0 auto'
-      }}>
+      <StyledPage>
         <AuthContextConsumer>
           {({ handleLogin, isAuth }) => (
             !isAuth && (
+              <>
+              <StyledLogo src="/static/images/goen-logo-small-trans.png" alt="GOEN Maracaibo" />
               <LoginForm {...this.props } handleLogin={handleLogin} />
+              </>
             )
           )}
         </AuthContextConsumer>
-      </div>
+      </StyledPage>
     )
   }
 }

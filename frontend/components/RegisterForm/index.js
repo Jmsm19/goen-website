@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  Form, Icon, Input, Button } from 'antd';
+import Link from 'next/link';
+import {  Form, Icon, Button } from 'antd';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import {
-  hasErrors
-} from '../../utils/formValidation';
+import { hasErrors } from '../../utils/formValidation';
+import { StyledButtonArea } from '../../styles/components/RegisterForm';
+import { StyledInput } from '../../styles/components/Forms';
 
-export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
+const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
   const initialState = {
     name: '',
     birth_date: '',
@@ -26,8 +27,11 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
   const ValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('Required')),
+    national_id: Yup.string()
+      .matches(/^[0-9]{7,}$/i, { message: t('WrongNationalIdFormat') })
+      .required(t('Required')),
     phone_number: Yup.string()
-      .matches(/^[0-9]{3,4}-[0-9]{7}$/i, { message: t('WrongPhoneFormat') })
+      .matches(/^[0-9]{4}-[0-9]{7}$/i, { message: t('WrongPhoneFormat') })
       .required(t('Required')),
     birth_date: Yup.date()
       .max(MINIMUM_DATE, t('Underage', {age: MINIMUM_AGE}))
@@ -36,7 +40,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
       .email(t('InvalidEmail'))
       .required(t('Required')),
     password: Yup.string()
-      .min(PASSWORD_MIN_LENGTH, t('common:TooShort', { minimum: PASSWORD_MIN_LENGTH }))
+      .min(PASSWORD_MIN_LENGTH, t('TooShort', { minimum: PASSWORD_MIN_LENGTH }))
       .required(t('Required')),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password'), null], t('PasswordNotEqual'))
@@ -54,12 +58,27 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
         <Form onSubmit={handleSubmit}>
           {/* Name */}
           <Label htmlFor="register_name" label={t('Name')}
+            extra={t('NameUsedInCertificateWarning')}
             validateStatus={hasErrors('name', errors, touched) ? 'error' : 'success'}
             help={hasErrors('name', errors, touched) ? errors.name : ''}>
             <Field name="name"
               render={({ field }) => (
-                <Input {...field} type="text" id="register_name"
+                <StyledInput {...field} type="text" id="register_name"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}
+                  />} />
+              )} />
+          </Label>
+
+          {/* Natinal Id */}
+          <Label htmlFor="register_national_id" label={t('NationalId')}
+            validateStatus={hasErrors('national_id', errors, touched) ? 'error' : 'success'}
+            help={hasErrors('national_id', errors, touched) ? errors.national_id : ''}>
+            <Field name="national_id"
+              render={({ field }) => (
+                <StyledInput {...field} type="text" inputMode="numeric"
+                  id="register_national_id"
+                  placeholder="20123456" pattern="[0-9]"
+                  prefix={<Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
               )} />
           </Label>
@@ -70,7 +89,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             help={hasErrors('birth_date', errors, touched) ? errors.birth_date : ''}>
             <Field name="birth_date"
               render={({ field }) => (
-                <Input {...field} type="date" id="register_birth_date"
+                <StyledInput {...field} type="date" id="register_birth_date"
                   prefix={<Icon type="calendar" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
               )} />
@@ -82,7 +101,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             help={hasErrors('phone_number', errors, touched) ? errors.phone_number : ''}>
             <Field name="phone_number"
               render={({ field }) => (
-                <Input {...field} type="tel" id="register_phone_number"
+                <StyledInput {...field} type="tel" id="register_phone_number"
                   placeholder="0424-1234567"
                   prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
@@ -97,7 +116,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             help={hasErrors('email', errors, touched) ? errors.email : ''}>
             <Field name="email"
               render={({ field }) => (
-                <Input {...field} type="email" id="register_email"
+                <StyledInput {...field} type="email" id="register_email"
                   autoComplete="username"
                   prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
@@ -110,7 +129,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             help={hasErrors('password', errors, touched) ? errors.password : ''}>
             <Field name="password"
               render={({ field }) => (
-                <Input {...field} type="password" id="register_password"
+                <StyledInput {...field} type="password" id="register_password"
                   autoComplete="new-password"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
@@ -129,7 +148,7 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
             }>
             <Field name="password_confirmation"
               render={({ field }) => (
-                <Input {...field} type="password" autoComplete="off"
+                <StyledInput {...field} type="password" autoComplete="off"
                   id="register_password_confirmation"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
@@ -137,9 +156,16 @@ export const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
           </Label>
 
           {/* Submit */}
-          <Button type="primary" htmlType="submit" loading={isSubmitting}>
-            {t('Register')}
-          </Button>
+          <StyledButtonArea>
+            <Link href="/login">
+              <Button type="ghost" style={{ border: 'none', color: 'var(--light-primary-color)' }}>
+                <Icon type="arrow-left" />{t('Login')}
+              </Button>
+            </Link>
+            <Button type="primary" htmlType="submit" loading={isSubmitting}>
+              {t('Register')}
+            </Button>
+          </StyledButtonArea>
         </Form>
       )}
     </Formik>

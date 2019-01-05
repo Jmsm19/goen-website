@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RegisterForm from '../../components/RegisterForm';
 import { AuthContextConsumer } from '../../context/AuthContext';
 import { withNamespaces } from '../../i18n';
+import { StyledPage } from '../../styles/pages/RegisterPage';
 
 export class RegisterPage extends Component {
   static async getInitialProps() {
@@ -15,11 +16,7 @@ export class RegisterPage extends Component {
     const { t } = this.props;
 
     return (
-      <div className="registerPage" style={{
-        maxWidth: '900px',
-        width: '100%',
-        margin: '0 auto'
-      }}>
+      <StyledPage>
         <AuthContextConsumer>
           {({handleRegister, fieldErrors, registerSuccess, message}) => {
             if (registerSuccess) {
@@ -39,7 +36,7 @@ export class RegisterPage extends Component {
             )
           }}
         </AuthContextConsumer>
-      </div>
+      </StyledPage>
     )
   }
 }

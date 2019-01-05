@@ -6,8 +6,7 @@ import Router, { withRouter } from 'next/router';
 import { Layout, Menu, Icon } from 'antd';
 import { withNamespaces } from '../../i18n';
 import { AuthContextConsumer } from '../../context/AuthContext';
-import { StyledNav, StyledMenu } from '../../styles/components/Header';
-import Logo from '../Logo';
+import { StyledNav, StyledMenu, StyledLogo } from '../../styles/components/Header';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -48,7 +47,7 @@ export class Header extends Component {
               <StyledNav>
                 <div>
                   <Link href="/">
-                    <a><Logo /></a>
+                    <a><StyledLogo /></a>
                   </Link>
                 </div>
                 <StyledMenu
