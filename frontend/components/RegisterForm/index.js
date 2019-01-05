@@ -71,13 +71,14 @@ const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
 
           {/* Natinal Id */}
           <Label htmlFor="register_national_id" label={t('NationalId')}
-            validateStatus={hasErrors('national_id', errors, touched) ? 'error' : 'success'}
+            validateStatus={
+              hasErrors('national_id', errors, touched, fieldErrors) ? 'error' : 'success'
+            }
             help={hasErrors('national_id', errors, touched) ? errors.national_id : ''}>
             <Field name="national_id"
               render={({ field }) => (
                 <StyledInput {...field} type="text" inputMode="numeric"
-                  id="register_national_id"
-                  placeholder="20123456" pattern="[0-9]"
+                  id="register_national_id" placeholder="20123456"
                   prefix={<Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }}
                   />} />
               )} />
