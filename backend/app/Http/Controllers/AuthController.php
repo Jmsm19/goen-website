@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\SignupRequest;
-use App\Http\Resources\UserResource;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Log;
+use App\Http\Requests\SignupRequest;
+use App\Http\Resources\UserResource;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -50,8 +51,10 @@ class AuthController extends Controller
     public function signupActivate($token)
     {
         $user = User::where('activation_token', $token)->first();
-
+        Log::debug("Activation token: ". $token);
+        Log::debug("Activation attempt for ". $user);
         if (!$user) {
+            Log::debug("Last user registered " . User::orderBy('created_at', 'desc')->first());
             return response()->json([
                 'message' => trans('auth.invalid_active_token'),
             ], 404);
