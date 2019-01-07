@@ -1,5 +1,7 @@
 # GOEN Website (Front & Back)
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 | **Backend Testing**                                             | **Frontend Testing** |
 | --------------------------------------------------------------- | -------------------- |
 | ![alt text](./backend/public/img/coverage.svg "Coverage badge") | None yet             |

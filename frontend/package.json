@@ -1,21 +1,22 @@
 {
   "name": "goen_maracaibo_website",
   "version": "1.0.0",
+  "homepage": "https://goen-website-test.herokuapp.com",
   "main": "index.html",
   "author": "Jorge Soto <Jorgemsm19@gmail.com>",
   "license": "MIT",
-  "description": "Frontend boilerplate",
+  "description": "GOEN Maracaibo website",
   "scripts": {
     "dev": "next dev",
-    "start": "next start",
+    "start": "node server.js",
     "build": "next build",
-    "export": "next export",
-    "create-netlify-redirect": "echo '/* /index.html 200' >> out/_redirects",
-    "buildex": "yarn build && yarn export && yarn create-netlify-redirect && yarn copy-root-statics",
     "copy-root-statics": "mv ./out/static/root/* ./out/",
+    "export": "next export",
+    "buildex": "yarn build && yarn export && yarn copy-root-statics",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --watch",
-    "test-win": "SET NODE_ENV=test&& jest --watch"
+    "test-win": "SET NODE_ENV=test&& jest --watch",
+    "heroku-postbuild": "next build"
   },
   "pre-commit": [
     "lint"
@@ -60,7 +61,6 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.6.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.15.3",
     "raw-loader": "^1.0.0",

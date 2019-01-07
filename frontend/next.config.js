@@ -25,5 +25,10 @@ const nextConfig = {
 
 module.exports = withPlugins([
   [withCss, {}],
-  [withOffline, {}]
+  [withOffline, {
+    registerSwPrefix: 'static',
+    workboxOpts: {
+      swDest: 'static/service-worker.js',
+    }
+  }]
 ], nextConfig);
