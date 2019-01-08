@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "root",
+    "password": "secret",
+    "database": "goen_development",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "secret",
+    "database": "test_goen",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
