@@ -1,7 +1,7 @@
 {
   "name": "goen_maracaibo_website",
   "version": "1.0.0",
-  "homepage": "https://goen-website-test.herokuapp.com",
+  "homepage": "http://goen-website-test.netlify.com",
   "main": "index.html",
   "author": "Jorge Soto <Jorgemsm19@gmail.com>",
   "license": "MIT",

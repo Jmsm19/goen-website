@@ -1,6 +1,6 @@
 # GOEN Website (Front & Back)
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![buddy pipeline](https://app.buddy.works/jorgemsm19/django-rest-test/pipelines/pipeline/166951/badge.svg?token=3420fe66756554140e76b73c269f6ef000ac075252b7ada1e5a5fccb48297593 "buddy pipeline")](https://app.buddy.works/jorgemsm19/django-rest-test/pipelines/pipeline/166951)
 
 | **Backend Testing**                                             | **Frontend Testing** |
 | --------------------------------------------------------------- | -------------------- |
@@ -85,7 +85,7 @@ Deployment is done automatically, both for backend and frontend, by pushing mast
 
 Backend is deployed to a Heroku App.
 
-Frontkend is deployed to Netlify.
+Frontend is deployed to Netlify.
 
 ### Backend initial config
 
