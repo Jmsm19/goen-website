@@ -29,9 +29,39 @@ module.exports = withPlugins(
     [
       withOffline,
       {
-        registerSwPrefix: 'static',
         workboxOpts: {
-          swDest: 'static/service-worker.js',
+          swDest: 'static/root/service-worker.js',
+          runtimeCaching: [
+            {
+              urlPattern: /static\/locales\/*/,
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'locales',
+                networkTimeoutSeconds: 15,
+                expiration: {
+                  maxAgeSeconds: 1, // 1 month
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https?.*/,
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'https-calls',
+                networkTimeoutSeconds: 15,
+                expiration: {
+                  maxEntries: 150,
+                  maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
         },
       },
     ],
