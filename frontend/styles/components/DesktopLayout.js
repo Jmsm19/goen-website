@@ -25,3 +25,8 @@ export const StyledContent = styled(({ isAuth, ...rest }) => <Layout.Content {..
   display: ${({ isAuth }) => (!isAuth ? 'grid' : 'block')};
   align-items: ${({ isAuth }) => (isAuth ? 'center' : undefined)};
 `;
+
+export const StyledHeader = styled(Layout.Header)`
+  padding: 0;
+  height: 100%;
+`;

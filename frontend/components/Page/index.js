@@ -1,30 +1,36 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../Header';
-import Footer from '../Footer';
-import Meta from '../Meta';
 import { appWithTranslation } from '../../i18n';
-import { StyledLayout, StyledContent, StyledMain } from '../../styles/components/Page';
+import enquireScreen from '../../utils/enquire';
+import DesktopLayout from '../DesktopLayout';
+import MobileLayout from '../MobileLayout';
 
 export class Page extends Component {
-  state = {};
+  state = {
+    isMobile: false,
+  };
+
+  componentDidMount() {
+    enquireScreen(isMobile => {
+      this.setState({
+        isMobile,
+      });
+    });
+  }
 
   render() {
+    const { isMobile } = this.state;
     const { children, isAuth } = this.props;
 
-    return (
-      /* isAuth props if removed from component by styled-components
-      as it's just required for styling */
-      <StyledLayout isAuth={isAuth}>
-        <Meta />
-        {isAuth && <Header />}
-        {/* isAuth props if removed from component by styled-components */}
-        <StyledMain isAuth={isAuth}>
-          <StyledContent isAuth={isAuth}>{children}</StyledContent>
-        </StyledMain>
-        <Footer />
-      </StyledLayout>
+    return isMobile ? (
+      <MobileLayout isMobile={isMobile} isAuth={isAuth}>
+        {children}
+      </MobileLayout>
+    ) : (
+      <DesktopLayout isMobile={isMobile} isAuth={isAuth}>
+        {children}
+      </DesktopLayout>
     );
   }
 }

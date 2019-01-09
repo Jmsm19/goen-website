@@ -1,16 +1,27 @@
+/* eslint-disable react/react-in-jsx-scope */
 import styled from 'styled-components';
-import { Menu, Layout } from 'antd';
+import { Menu } from 'antd';
 import media from '../../utils/styling';
 
-export const StyledHeader = styled(Layout.Header)`
-  padding: 0;
-  height: 100%;
+const { SubMenu } = Menu;
+
+export const StyleSubMenu = styled(({ isMobile, ...rest }) => <SubMenu {...rest} />)`
+  ${({ isMobile }) =>
+    !isMobile &&
+    `
+    display: inline-block;
+    margin-left: auto;
+  `};
 `;
 
 export const StyledNav = styled.nav`
+  ${({ isMobile }) =>
+    !isMobile &&
+    `
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
+  `}
 
   & > div {
     background-color: #fff;

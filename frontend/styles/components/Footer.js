@@ -7,4 +7,5 @@ export const StyledFooter = styled(Layout.Footer)`
   text-align: center;
   height: 100%;
   padding: 0 50px 30px;
+  background: #eff2f5;
 `;

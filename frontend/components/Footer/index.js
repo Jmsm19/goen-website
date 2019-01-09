@@ -7,7 +7,7 @@ import { StyledFooter } from '../../styles/components/Footer';
 
 const { publicRuntimeConfig } = getConfig();
 
-export class Footer extends Component {
+class Footer extends Component {
   changeLocale = ({ target: { value } }) => {
     const { i18n } = this.props;
 
@@ -43,3 +43,4 @@ Footer.propTypes = {
 };
 
 export default withNamespaces('common')(Footer);
+export const CleanFooter = Footer;
