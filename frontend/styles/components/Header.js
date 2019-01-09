@@ -1,6 +1,11 @@
 import styled from 'styled-components';
-import { Menu } from 'antd';
+import { Menu, Layout } from 'antd';
 import media from '../../utils/styling';
+
+export const StyledHeader = styled(Layout.Header)`
+  padding: 0;
+  height: 100%;
+`;
 
 export const StyledNav = styled.nav`
   display: grid;

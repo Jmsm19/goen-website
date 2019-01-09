@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import Link from 'next/link';
 import Router, { withRouter } from 'next/router';
-import { Layout, Menu, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 import { withNamespaces } from '../../i18n';
 import { AuthContextConsumer } from '../../context/AuthContext';
-import { StyledNav, StyledMenu, StyledLogo } from '../../styles/components/Header';
+import { StyledNav, StyledMenu, StyledLogo, StyledHeader } from '../../styles/components/Header';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -41,7 +41,7 @@ export class Header extends Component {
 
     return (
       <header>
-        <Layout.Header style={{ padding: '0', height: '100%' }}>
+        <StyledHeader>
           <AuthContextConsumer>
             {({ isAuth, authUser, handleLogout }) => (
               <StyledNav>
@@ -84,7 +84,7 @@ export class Header extends Component {
               </StyledNav>
             )}
           </AuthContextConsumer>
-        </Layout.Header>
+        </StyledHeader>
       </header>
     );
   }

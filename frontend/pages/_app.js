@@ -1,12 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 // eslint-disable-next-line import/no-named-as-default
 import Page from '../components/Page';
 import { AuthContextProvider, AuthContextConsumer } from '../context/AuthContext';
 import '../styles/nprogress.css';
 import '../styles/antd.css';
 import '../styles/styles.css';
+import { StyledContainer } from '../styles/pages/app';
 
 class MyApp extends App {
   static async getInitialProps({ Component, _, ctx }) {
@@ -21,7 +22,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Container style={{ height: '100%' }}>
+      <StyledContainer>
         <AuthContextProvider>
           <AuthContextConsumer>
             {({ isAuth, authUser }) => (
@@ -31,7 +32,7 @@ class MyApp extends App {
             )}
           </AuthContextConsumer>
         </AuthContextProvider>
-      </Container>
+      </StyledContainer>
     );
   }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getConfig from 'next/config';
-import { Layout, Radio } from 'antd';
+import { Radio } from 'antd';
 import { withNamespaces } from '../../i18n';
+import { StyledFooter } from '../../styles/components/Footer';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -21,14 +22,14 @@ export class Footer extends Component {
     const RadioGroup = Radio.Group;
 
     return (
-      <Layout.Footer style={{ textAlign: 'center', height: '100%', padding: '0 50px 30px' }}>
+      <StyledFooter>
         <p>&copy; 2018 - {publicRuntimeConfig.SITE_NAME}</p>
 
         <RadioGroup onChange={this.changeLocale} defaultValue={i18n.language || 'es'}>
           <RadioButton value='es'>{t('Spanish')}</RadioButton>
           <RadioButton value='en'>{t('English')}</RadioButton>
         </RadioGroup>
-      </Layout.Footer>
+      </StyledFooter>
     );
   }
 }

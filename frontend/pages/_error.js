@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from 'antd';
+import { StyledAlert } from '../styles/pages/error';
 
 class ErrorPage extends React.Component {
   static getInitialProps({ res, err }) {
@@ -13,8 +13,7 @@ class ErrorPage extends React.Component {
     const { statusCode } = this.props;
 
     return (
-      <Alert
-        style={{ minWidth: 'fit-content', width: '100%', maxWidth: '900px', margin: '0 auto' }}
+      <StyledAlert
         showIcon
         type='error'
         message={`Error ${statusCode || ''}`}
