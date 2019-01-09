@@ -90,7 +90,7 @@ export class AccountActivationPage extends Component {
           </>
         ) : (
           <>
-            <h1>{t('ActivationActivationFailed')}</h1>
+            <h1>{t('AccountActivationFailed')}</h1>
           </>
         )}
       </StyledPage>
