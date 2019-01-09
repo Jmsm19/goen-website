@@ -16,7 +16,7 @@ export const StyledMain = styled.main`
 // remove isAuth from props
 export const StyledLayout = styled(Layout)`
   display: grid;
-  min-height: 100vh;
+  min-height: 100%;
   grid-template-rows: 1fr auto;
 `;
 

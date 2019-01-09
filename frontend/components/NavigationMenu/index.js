@@ -29,13 +29,18 @@ class NavigationMenu extends Component {
 
   handlePageChange(pageKey = null, callbacks = {}) {
     const { logout } = callbacks;
+    const { toggleSidebar } = this.props;
 
     if (pageKey === 'logout') {
       logout();
+      toggleSidebar();
     } else {
-      this.setState({
-        currentPage: pageKey === '' ? 'home' : pageKey,
-      });
+      this.setState(
+        {
+          currentPage: pageKey === '' ? 'home' : pageKey,
+        },
+        toggleSidebar,
+      );
     }
   }
 
@@ -47,7 +52,7 @@ class NavigationMenu extends Component {
       <AuthContextConsumer>
         {({ isAuth, authUser, handleLogout }) => (
           <StyledNav isMobile={isMobile}>
-            {!isMobile && (
+            {!isMobile ? (
               <div>
                 <Link href='/'>
                   <a>
@@ -55,6 +60,21 @@ class NavigationMenu extends Component {
                   </a>
                 </Link>
               </div>
+            ) : (
+              <Menu
+                selectedKeys={[currentPage]}
+                mode={isMobile ? 'inline' : 'horizontal'}
+                onClick={({ key }) => this.handlePageChange(key)}
+              >
+                {/* <Menu.Item key='home'>
+                  <Link href='/'>
+                    <a>
+                      <Icon type='home' />
+                      {t('Home')}
+                    </a>
+                  </Link>
+                </Menu.Item> */}
+              </Menu>
             )}
             <StyledMenu
               mode={isMobile ? 'inline' : 'horizontal'}
@@ -92,8 +112,13 @@ class NavigationMenu extends Component {
   }
 }
 
+NavigationMenu.defaultProps = {
+  toggleSidebar: () => null,
+};
+
 NavigationMenu.propTypes = {
   t: PropTypes.func.isRequired,
+  toggleSidebar: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   router: PropTypes.shape({
     asPath: PropTypes.string,

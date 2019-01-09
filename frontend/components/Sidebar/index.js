@@ -2,18 +2,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NProgress from 'nprogress';
-import Link from 'next/link';
-import Router, { withRouter } from 'next/router';
-import { Menu, Icon } from 'antd';
-import Sider from 'antd/lib/layout/Sider';
-import { withNamespaces } from '../../i18n';
 import NavigationMenu from '../NavigationMenu';
 import { StyledSidebar, StyledMask } from '../../styles/components/Sidebar';
-
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
 
 class SidebarNavigation extends Component {
   state = {
@@ -46,7 +36,7 @@ class SidebarNavigation extends Component {
             });
           }}
         >
-          <NavigationMenu isMobile={isMobile} />
+          <NavigationMenu isMobile={isMobile} toggleSidebar={this.toggleColapse} />
         </StyledSidebar>
         {!isCollapsed && <StyledMask onClick={this.toggleColapse} />}
       </>
