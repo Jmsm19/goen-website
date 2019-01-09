@@ -35,7 +35,6 @@ export const StyledProfile = styled.div`
   ${media.tablet`
     justify-content: initial;
   `}
-
 `;
 
 export const UserProfileUpper = styled.div`
@@ -84,5 +83,4 @@ export const UserUpperThirdCol = styled.div`
   align-items: end;
 `;
 
-export const UserProfileLower = styled.div`
-`;
+export const UserProfileLower = styled.div``;

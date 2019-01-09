@@ -2,13 +2,15 @@
 import styled from 'styled-components';
 import media from '../../utils/styling';
 
-const StyledPage = styled(({isEditing, ...rest}) => <div {...rest} />)`
+const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
   display: grid;
-  ${({ isEditing }) => isEditing && (`
+  ${({ isEditing }) =>
+    isEditing &&
+    `
     padding: 30px 50px;
     grid-template-columns: auto 1fr;
     grid-gap: 30px;
-  `)}
+  `}
 
   ${media.phone`
     padding: ${({ isEditing }) => isEditing && '45px 25px 10px'};;

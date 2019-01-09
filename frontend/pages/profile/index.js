@@ -9,20 +9,20 @@ import StyledPage from '../../styles/pages/ProfilePage';
 
 export class ProfilePage extends Component {
   state = {
-    isEditing: false
-  }
+    isEditing: false,
+  };
 
   static async getInitialProps() {
     return {
-      namespacesRequired: ['common']
-    }
+      namespacesRequired: ['common'],
+    };
   }
 
   toggleEdition = () => {
-    this.setState((prevState) => ({
-      isEditing: !prevState.isEditing
-    }))
-  }
+    this.setState(prevState => ({
+      isEditing: !prevState.isEditing,
+    }));
+  };
 
   render() {
     const { isEditing } = this.state;
@@ -43,23 +43,27 @@ export class ProfilePage extends Component {
                   shape={authUser.clan ? 'square' : 'circle'}
                   src={authUser.clan && `/static/images/clans/${authUser.clan.toLowerCase()}.png`}
                   size={200}
-                  icon="user" />
-                <UserProfileEditionForm t={t} user={authUser}
+                  icon='user'
+                />
+                <UserProfileEditionForm
+                  t={t}
+                  user={authUser}
                   toggleEdition={this.toggleEdition}
                   updateUser={handleUserUpdate}
-                  fieldErrors={fieldErrors} />
+                  fieldErrors={fieldErrors}
+                />
               </>
             )}
           </StyledPage>
         )}
       </RequireAuthentication>
-    )
+    );
   }
 }
 
 ProfilePage.propTypes = {
   t: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired
-}
+  isAuth: PropTypes.bool.isRequired,
+};
 
 export default withNamespaces('common')(ProfilePage);

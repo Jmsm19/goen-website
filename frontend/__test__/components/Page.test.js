@@ -11,8 +11,8 @@ describe('Test Page component', () => {
         <Page isAuth={false}>
           <div />
         </Page>
-      </I18nextProvider>
+      </I18nextProvider>,
     );
-    expect(getByText('© 2018 - GOEN Maracaibo'))
-  })
-})
+    expect(getByText('© 2018 - GOEN Maracaibo'));
+  });
+});

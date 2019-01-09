@@ -29,8 +29,8 @@ export class Header extends Component {
       logout();
     } else {
       this.setState({
-        currentPage: pageKey === '' ? 'home' : pageKey
-      })
+        currentPage: pageKey === '' ? 'home' : pageKey,
+      });
     }
   }
 
@@ -46,49 +46,55 @@ export class Header extends Component {
             {({ isAuth, authUser, handleLogout }) => (
               <StyledNav>
                 <div>
-                  <Link href="/">
-                    <a><StyledLogo /></a>
+                  <Link href='/'>
+                    <a>
+                      <StyledLogo />
+                    </a>
                   </Link>
                 </div>
                 <StyledMenu
-                  mode="horizontal"
+                  mode='horizontal'
                   selectedKeys={[currentPage]}
-                  onClick={({key}) => this.handlePageChange(key, {
-                    logout: handleLogout
-                  })}>
-                  {
-                    isAuth && authUser && (
-                      <SubMenu key="user"
-                        style={{ display: 'inline-block', marginLeft: 'auto' }}
-                        title={
-                          <span>
-                            <Icon type="user" /><Icon type="caret-down" />
-                          </span>
-                        }>
-                        <Menu.Item key="profile">
-                          <Link href="/profile" >
-                            <a>{t('Profile')}</a>
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item key="logout">{t('Logout')}</Menu.Item>
-                      </SubMenu>
-                    )
+                  onClick={({ key }) =>
+                    this.handlePageChange(key, {
+                      logout: handleLogout,
+                    })
                   }
+                >
+                  {isAuth && authUser && (
+                    <SubMenu
+                      key='user'
+                      style={{ display: 'inline-block', marginLeft: 'auto' }}
+                      title={
+                        <span>
+                          <Icon type='user' />
+                          <Icon type='caret-down' />
+                        </span>
+                      }
+                    >
+                      <Menu.Item key='profile'>
+                        <Link href='/profile'>
+                          <a>{t('Profile')}</a>
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key='logout'>{t('Logout')}</Menu.Item>
+                    </SubMenu>
+                  )}
                 </StyledMenu>
               </StyledNav>
             )}
           </AuthContextConsumer>
         </Layout.Header>
       </header>
-    )
+    );
   }
 }
 
 Header.propTypes = {
   t: PropTypes.func.isRequired,
   router: PropTypes.shape({
-    asPath: PropTypes.string
-  }).isRequired
-}
+    asPath: PropTypes.string,
+  }).isRequired,
+};
 
 export default withRouter(withNamespaces('common')(Header));

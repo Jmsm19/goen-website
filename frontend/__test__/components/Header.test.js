@@ -5,23 +5,21 @@ import tFunction from '../utils/tFunction';
 
 // Props
 const router = {
-  asPath: '/'
+  asPath: '/',
 };
 
 jest.mock('../../context/AuthContext', () => ({
-  AuthContextConsumer: ({children}) => children({
-    isAuth: true,
-    authUser: {
-      name: 'Tester',
-    }
-  })
-}))
+  AuthContextConsumer: ({ children }) =>
+    children({
+      isAuth: true,
+      authUser: {
+        name: 'Tester',
+      },
+    }),
+}));
 
 describe('Test Header component', () => {
   test('renders Header', () => {
-
-    const { getByText } = render(
-      <Header t={tFunction} router={router} />
-    );
-  })
+    const { getByText } = render(<Header t={tFunction} router={router} />);
+  });
 });

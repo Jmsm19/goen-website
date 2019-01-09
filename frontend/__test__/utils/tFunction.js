@@ -1,17 +1,17 @@
 import common from '../../static/locales/es/common.json';
 
 const translations = {
-  ...common
-}
+  ...common,
+};
 
-const tFunction = (key) => {
+const tFunction = key => {
   const keys = key.split('.');
 
   if (keys.length > 1) {
     let result;
 
     keys.map((k, index) => {
-      result = index === 0 ? translations[k] : result[k]
+      result = index === 0 ? translations[k] : result[k];
       return 1;
     });
 

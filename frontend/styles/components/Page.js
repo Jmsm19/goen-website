@@ -6,16 +6,18 @@ import styled from 'styled-components';
 export const StyledMain = styled.main`
   display: grid;
 
-  ${({ isAuth }) => (!isAuth && (`
+  ${({ isAuth }) =>
+    !isAuth &&
+    `
     padding: 30px;
-  `))}
+  `}
 `;
 
 // remove isAuth from props
 export const StyledLayout = styled(({ isAuth, ...rest }) => <Layout {...rest} />)`
   display: grid;
   min-height: 100vh;
-  grid-template-rows: ${({ isAuth }) => (isAuth ? 'auto 1fr auto' : '1fr auto')}
+  grid-template-rows: ${({ isAuth }) => (isAuth ? 'auto 1fr auto' : '1fr auto')};
 `;
 
 // remove isAuth from props

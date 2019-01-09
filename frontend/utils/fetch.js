@@ -10,22 +10,25 @@ const setLocalizationHeader = () => Cookies.get('i18next') || 'es';
 const setAuthorizationHeader = () => {
   const TOKEN = Cookies.get('token'); // undefined if not present
   return !TOKEN ? '' : `Bearer ${TOKEN}`;
-}
+};
 
-const setHeaders = () => new Headers({
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'Authorization': setAuthorizationHeader(),
-  'X-Localization': setLocalizationHeader()
-})
+const setHeaders = () =>
+  new Headers({
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    Authorization: setAuthorizationHeader(),
+    'X-Localization': setLocalizationHeader(),
+  });
 
-export const GetData = (endpoint = '') =>fetch(`${ROOT_API}${endpoint}`, {
-  headers: setHeaders()
-});
+export const GetData = (endpoint = '') =>
+  fetch(`${ROOT_API}${endpoint}`, {
+    headers: setHeaders(),
+  });
 
-export const SendData = (method, endpoint = '', data = {}) =>fetch(`${ROOT_API}${endpoint}`, {
-  method: method.toUpperCase(),
-  body: JSON.stringify(data),
-  headers: setHeaders(),
-});
+export const SendData = (method, endpoint = '', data = {}) =>
+  fetch(`${ROOT_API}${endpoint}`, {
+    method: method.toUpperCase(),
+    body: JSON.stringify(data),
+    headers: setHeaders(),
+  });

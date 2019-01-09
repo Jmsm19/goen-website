@@ -20,7 +20,7 @@ class AuthContextProvider extends Component {
     } else {
       this.setState({
         mounted: true,
-      })
+      });
     }
   }
 
@@ -28,37 +28,42 @@ class AuthContextProvider extends Component {
     NProgress.start();
     GetData('/auth/user')
       .then(response => response.json())
-      .then(({data, message}) => {
+      .then(({ data, message }) => {
         NProgress.done();
         if (message) {
-          throw Error(message)
+          throw Error(message);
         } else {
           NProgress.done();
-          this.setState((prevState) => ({
+          this.setState(prevState => ({
             authUser: data,
             isAuth: !prevState.isAuth ? true : prevState.isAuth,
             mounted: prevState.mounted ? true : !prevState.mounted,
-          }))
+          }));
         }
       })
       .catch(error => {
         NProgress.done();
-        this.setState((prevState) => ({
-          authUser: null,
-          isAuth: false,
-          mounted: prevState.mounted ? true : !prevState.mounted,
-        }), () => {
-          notification.error({
-            message: 'Error',
-            description: error.message,
-          });
-          Router.push('/login')
-        })
+        this.setState(
+          prevState => ({
+            authUser: null,
+            isAuth: false,
+            mounted: prevState.mounted ? true : !prevState.mounted,
+          }),
+          () => {
+            notification.error({
+              message: 'Error',
+              description: error.message,
+            });
+            Router.push('/login');
+          },
+        );
       });
-  }
+  };
 
-  updateAuthUser = (values, {toggleEdition, setSubmitting}) => {
-    const { authUser: { id } } = this.state;
+  updateAuthUser = (values, { toggleEdition, setSubmitting }) => {
+    const {
+      authUser: { id },
+    } = this.state;
 
     NProgress.start();
     SendData('PUT', `/user/${id}`, values)
@@ -66,18 +71,21 @@ class AuthContextProvider extends Component {
       .then(({ data, error }) => {
         NProgress.done();
         if (error) {
-          throw Error(error)
+          throw Error(error);
         } else {
           NProgress.done();
-          this.setState(() => ({
-            authUser: data,
-          }), () => {
-            toggleEdition();
-            setSubmitting(false);
-            notification.success({
-              message: 'Usuario actualizado',
-            });
-          })
+          this.setState(
+            () => ({
+              authUser: data,
+            }),
+            () => {
+              toggleEdition();
+              setSubmitting(false);
+              notification.success({
+                message: 'Usuario actualizado',
+              });
+            },
+          );
         }
       })
       .catch(({ message, error }) => {
@@ -88,15 +96,15 @@ class AuthContextProvider extends Component {
         });
         setSubmitting(false);
       });
-  }
+  };
 
   handleLogin = (values, { setSubmitting }) => {
     NProgress.start();
     SendData('POST', '/auth/login', values)
       .then(data => data.json())
-      .then(({access_token, expires_at, message}) => {
+      .then(({ access_token, expires_at, message }) => {
         if (message) {
-          throw Error(message)
+          throw Error(message);
         } else {
           NProgress.done();
           Cookies.set('token', access_token, {
@@ -104,13 +112,16 @@ class AuthContextProvider extends Component {
             expires: expires_at ? 7 : null,
           });
           setSubmitting(false);
-          this.setState(() => ({
-            isAuth: true,
-            mounted: false,
-          }), () => {
-            this.getAuthUser();
-            Router.push('/profile')
-          })
+          this.setState(
+            () => ({
+              isAuth: true,
+              mounted: false,
+            }),
+            () => {
+              this.getAuthUser();
+              Router.push('/profile');
+            },
+          );
         }
       })
       .catch(error => {
@@ -121,22 +132,22 @@ class AuthContextProvider extends Component {
           description: error.message,
         });
       });
-  }
+  };
 
   handleLogout = () => {
     NProgress.start();
 
     GetData('/auth/logout')
       .then(data => data.json())
-      .then(({message}) => {
+      .then(({ message }) => {
         NProgress.done();
         Router.push('/');
         Cookies.remove('token');
         this.setState({
           isAuth: false,
           authUser: null,
-          message
-        })
+          message,
+        });
       })
       .catch(error => {
         NProgress.done();
@@ -145,26 +156,29 @@ class AuthContextProvider extends Component {
           description: error.message,
         });
       });
-  }
+  };
 
   handleRegister = (values, { setSubmitting }) => {
     NProgress.start();
     SendData('POST', '/auth/signup', values)
       .then(data => data.json())
-      .then((data) => {
+      .then(data => {
         if (data.errors) {
           throw data;
         } else {
           NProgress.done();
-          this.setState(() => ({
-            registerSuccess: true,
-            message: data.message
-          }), () => {
-            setSubmitting(false);
-          })
+          this.setState(
+            () => ({
+              registerSuccess: true,
+              message: data.message,
+            }),
+            () => {
+              setSubmitting(false);
+            },
+          );
         }
       })
-      .catch(({_, errors}) => {
+      .catch(({ _, errors }) => {
         NProgress.done();
         setSubmitting(false);
 
@@ -176,16 +190,19 @@ class AuthContextProvider extends Component {
           fields = Object.keys(errors);
         }
 
-        this.setState(() => ({
-          fieldErrors: fields
-        }), () => {
-          notification.error({
-            message: 'Error',
-            description,
-          });
-        })
+        this.setState(
+          () => ({
+            fieldErrors: fields,
+          }),
+          () => {
+            notification.error({
+              message: 'Error',
+              description,
+            });
+          },
+        );
       });
-  }
+  };
 
   state = {
     mounted: false,
@@ -204,14 +221,10 @@ class AuthContextProvider extends Component {
     const { children } = this.props;
     const { mounted, ...state } = this.state;
 
-    return (
-      mounted ? (
-        <AuthContext.Provider value={{...state}}>
-          { children }
-        </AuthContext.Provider>
-      ) : (
-        <Loading />
-      )
+    return mounted ? (
+      <AuthContext.Provider value={{ ...state }}>{children}</AuthContext.Provider>
+    ) : (
+      <Loading />
     );
   }
 }
@@ -222,4 +235,4 @@ AuthContextProvider.propTypes = {
 
 const AuthContextConsumer = AuthContext.Consumer;
 
-export { AuthContextProvider,  AuthContextConsumer};
+export { AuthContextProvider, AuthContextConsumer };

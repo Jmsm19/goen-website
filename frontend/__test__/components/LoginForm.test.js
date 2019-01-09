@@ -5,12 +5,10 @@ import tFunction from '../utils/tFunction';
 
 describe('Test Login Form component', () => {
   test('renders form', () => {
-    const { getByText } = render(
-      <LoginForm t={tFunction} />
-    );
-    expect(getByText('Correo electrónico'))
-    expect(getByText('Contraseña'))
-    expect(getByText('Iniciar sesión'))
-    expect(getByText('Registrarse'))
-  })
-})
+    const { getByText } = render(<LoginForm t={tFunction} />);
+    expect(getByText('Correo electrónico'));
+    expect(getByText('Contraseña'));
+    expect(getByText('Iniciar sesión'));
+    expect(getByText('Registrarse'));
+  });
+});

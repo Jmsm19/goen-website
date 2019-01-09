@@ -17,26 +17,25 @@ class RequireAuthentication extends Component {
       notification.error({
         message: t('Unauthorized'),
         description: t('LoginFirst'),
-      })
+      });
 
       Router.push('/login');
     }
-  }
+  };
 
   render() {
     const { children } = this.props;
 
     return (
       <AuthContextConsumer>
-        {context => (
-          context.isAuth && (
-            children({
-              ...context
-            })
-          )
-        )}
+        {context =>
+          context.isAuth &&
+          children({
+            ...context,
+          })
+        }
       </AuthContextConsumer>
-    )
+    );
   }
 }
 
@@ -44,6 +43,6 @@ RequireAuthentication.propTypes = {
   children: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   isAuth: PropTypes.bool.isRequired,
-}
+};
 
 export default RequireAuthentication;

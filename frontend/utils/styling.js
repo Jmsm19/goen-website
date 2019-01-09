@@ -4,7 +4,7 @@ const sizes = {
   // desktop: 992,
   tablet: 768,
   phone: 576,
-}
+};
 
 const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
@@ -12,7 +12,7 @@ const media = Object.keys(sizes).reduce((acc, label) => {
       ${css(...args)}
     }
   `;
-  return acc
+  return acc;
 }, {});
 
 export default media;

@@ -33,10 +33,6 @@
       "error",
       "unix"
     ],
-    "quotes": [
-      "error",
-      "single"
-    ],
     "no-unused-vars": [
       "warn",
       {

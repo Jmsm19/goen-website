@@ -14,7 +14,7 @@ export const StyledNav = styled.nav`
 
 export const StyledLogo = styled.div`
   display: block;
-  height:43px;
+  height: 43px;
   width: 43px;
   background-color: #fff;
   background: url(/static/images/goen-logo-small.jpg) no-repeat center;

@@ -8,8 +8,8 @@ import { StyledPage } from '../../styles/pages/RegisterPage';
 export class RegisterPage extends Component {
   static async getInitialProps() {
     return {
-      namespacesRequired: ['common']
-    }
+      namespacesRequired: ['common'],
+    };
   }
 
   render() {
@@ -18,31 +18,32 @@ export class RegisterPage extends Component {
     return (
       <StyledPage>
         <AuthContextConsumer>
-          {({handleRegister, fieldErrors, registerSuccess, message}) => {
+          {({ handleRegister, fieldErrors, registerSuccess, message }) => {
             if (registerSuccess) {
               return (
                 <>
-                  <h2>{ message }</h2>
+                  <h2>{message}</h2>
                   <p>{t('common:CheckConfirmationEmail')}</p>
                 </>
-              )
+              );
             }
 
             return (
               <RegisterForm
                 {...this.props}
                 handleRegister={handleRegister}
-                fieldErrors={fieldErrors} />
-            )
+                fieldErrors={fieldErrors}
+              />
+            );
           }}
         </AuthContextConsumer>
       </StyledPage>
-    )
+    );
   }
 }
 
 RegisterPage.propTypes = {
   t: PropTypes.func.isRequired,
-}
+};
 
 export default withNamespaces('common')(RegisterPage);

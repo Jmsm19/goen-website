@@ -5,5 +5,5 @@ import Meta from '../../components/Meta';
 describe('Test Meta component', () => {
   test('renders', () => {
     render(<Meta />);
-  })
-})
+  });
+});

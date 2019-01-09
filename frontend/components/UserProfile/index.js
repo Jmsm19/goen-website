@@ -11,14 +11,10 @@ import {
   UserUpperFirstCol,
   UserUpperSecondCol,
   UserUpperThirdCol,
-  UserProfileLower
+  UserProfileLower,
 } from '../../styles/components/UserProfile';
 
-function UserProfile({
-  t,
-  toggleEdition,
-  user: { name, clan, birth_date, email, phone_number }
-}) {
+function UserProfile({ t, toggleEdition, user: { name, clan, birth_date, email, phone_number } }) {
   const clanName = clan ? clan.toLowerCase() : null;
   return (
     <StyledProfile>
@@ -31,7 +27,8 @@ function UserProfile({
               shape={clanName ? 'square' : 'circle'}
               src={clanName && `/static/images/clans/${clanName}.png`}
               size={200}
-              icon="user" />
+              icon='user'
+            />
           </UserUpperFirstCol>
           <UserUpperSecondCol>
             <h1>{name}</h1>
@@ -40,8 +37,8 @@ function UserProfile({
             <h2>{phone_number}</h2>
           </UserUpperSecondCol>
           <UserUpperThirdCol>
-            <Button type="default" onClick={toggleEdition}>
-              <Icon type="edit" /> {t('EditProfile')}
+            <Button type='default' onClick={toggleEdition}>
+              <Icon type='edit' /> {t('EditProfile')}
             </Button>
           </UserUpperThirdCol>
         </UserProfileUpper>
@@ -51,11 +48,13 @@ function UserProfile({
 
       <StyledCard loading={false}>
         <UserProfileLower>
-          <p><b>{t('CurrentModule')}:</b> ¯\_(ツ)_/¯ </p>
+          <p>
+            <b>{t('CurrentModule')}:</b> ¯\_(ツ)_/¯{' '}
+          </p>
         </UserProfileLower>
       </StyledCard>
     </StyledProfile>
-  )
+  );
 }
 
 UserProfile.propTypes = {
@@ -66,9 +65,8 @@ UserProfile.propTypes = {
     clan: PropTypes.string,
     birth_date: PropTypes.string.isRequired,
     phone_number: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
-  }).isRequired
-}
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default UserProfile;
-

@@ -11,33 +11,27 @@ export class Page extends Component {
   state = {};
 
   render() {
-    const { children , isAuth } = this.props;
+    const { children, isAuth } = this.props;
 
     return (
       /* isAuth props if removed from component by styled-components
       as it's just required for styling */
       <StyledLayout isAuth={isAuth}>
         <Meta />
-        {
-          isAuth && (
-            <Header/>
-          )
-        }
+        {isAuth && <Header />}
         {/* isAuth props if removed from component by styled-components */}
         <StyledMain isAuth={isAuth}>
-          <StyledContent isAuth={isAuth}>
-            {children}
-          </StyledContent>
+          <StyledContent isAuth={isAuth}>{children}</StyledContent>
         </StyledMain>
         <Footer />
       </StyledLayout>
-    )
+    );
   }
 }
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
   isAuth: PropTypes.bool.isRequired,
-}
+};
 
 export default appWithTranslation(Page);

@@ -9,8 +9,8 @@ import { StyledLogo, StyledPage } from '../../styles/pages/LoginPage';
 export class LoginPage extends Component {
   static async getInitialProps() {
     return {
-      namespacesRequired: ['common']
-    }
+      namespacesRequired: ['common'],
+    };
   }
 
   componentDidMount() {
@@ -24,22 +24,22 @@ export class LoginPage extends Component {
     return (
       <StyledPage>
         <AuthContextConsumer>
-          {({ handleLogin, isAuth }) => (
+          {({ handleLogin, isAuth }) =>
             !isAuth && (
               <>
-              <StyledLogo src="/static/images/goen-logo-small-trans.png" alt="GOEN Maracaibo" />
-              <LoginForm {...this.props } handleLogin={handleLogin} />
+                <StyledLogo src='/static/images/goen-logo-small-trans.png' alt='GOEN Maracaibo' />
+                <LoginForm {...this.props} handleLogin={handleLogin} />
               </>
             )
-          )}
+          }
         </AuthContextConsumer>
       </StyledPage>
-    )
+    );
   }
 }
 
 LoginPage.propTypes = {
   t: PropTypes.func.isRequired,
-}
+};
 
 export default withNamespaces('common')(LoginPage);

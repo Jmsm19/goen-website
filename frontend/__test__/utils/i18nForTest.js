@@ -6,10 +6,7 @@ const options = {
   defaultLanguage: 'es',
   defaultLng: 'es',
   fallbackLng: 'es',
-  otherLanguages: [
-    'en',
-    'jp'
-  ],
+  otherLanguages: ['en', 'jp'],
   localeSubpaths: true,
 
   debug: false,
@@ -23,10 +20,8 @@ const options = {
   react: {
     wait: false,
   },
-}
+};
 
-i18n
-  .use(LanguageDetector)
-  .init(options);
+i18n.use(LanguageDetector).init(options);
 
 export default i18n;

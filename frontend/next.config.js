@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const nextConfig = {
   publicRuntimeConfig: {
     ...process.env,
-    ...localEnv
+    ...localEnv,
   },
   webpack(config, options) {
     config.module.rules.push({
@@ -20,15 +20,21 @@ const nextConfig = {
       }
     }
     return config;
-  }
-}
+  },
+};
 
-module.exports = withPlugins([
-  [withCss, {}],
-  [withOffline, {
-    registerSwPrefix: 'static',
-    workboxOpts: {
-      swDest: 'static/service-worker.js',
-    }
-  }]
-], nextConfig);
+module.exports = withPlugins(
+  [
+    [withCss, {}],
+    [
+      withOffline,
+      {
+        registerSwPrefix: 'static',
+        workboxOpts: {
+          swDest: 'static/service-worker.js',
+        },
+      },
+    ],
+  ],
+  nextConfig,
+);

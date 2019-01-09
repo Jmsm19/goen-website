@@ -13,7 +13,7 @@ export class Footer extends Component {
     if (i18n.language !== value) {
       i18n.changeLanguage(value);
     }
-  }
+  };
 
   render() {
     const { t, i18n } = this.props;
@@ -25,12 +25,11 @@ export class Footer extends Component {
         <p>&copy; 2018 - {publicRuntimeConfig.SITE_NAME}</p>
 
         <RadioGroup onChange={this.changeLocale} defaultValue={i18n.language || 'es'}>
-          <RadioButton value="es">{t('Spanish')}</RadioButton>
-          <RadioButton value="en">{t('English')}</RadioButton>
+          <RadioButton value='es'>{t('Spanish')}</RadioButton>
+          <RadioButton value='en'>{t('English')}</RadioButton>
         </RadioGroup>
-
       </Layout.Footer>
-    )
+    );
   }
 }
 
@@ -40,6 +39,6 @@ Footer.propTypes = {
     language: PropTypes.string,
     changeLanguage: PropTypes.func.isRequired,
   }).isRequired,
-}
+};
 
 export default withNamespaces('common')(Footer);
