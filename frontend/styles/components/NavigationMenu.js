@@ -10,7 +10,6 @@ export const StyleSubMenu = styled(({ isMobile, ...rest }) => <SubMenu {...rest}
     !isMobile &&
     `
     display: inline-block;
-    margin-left: auto;
   `};
 `;
 
@@ -21,11 +20,12 @@ export const StyledNav = styled.nav`
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
-  `}
 
-  & > div {
-    background-color: #fff;
-  }
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  `}
+  background-color: #fff;
 `;
 
 export const StyledLogo = styled.div`
@@ -45,6 +45,7 @@ export const StyledLogo = styled.div`
 
 export const StyledMenu = styled(Menu)`
   border-bottom: 0;
-  display: grid;
-  align-content: flex-end;
+  height: max-content;
+  align-self: flex-end;
+  justify-self: flex-end;
 `;

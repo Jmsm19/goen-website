@@ -52,7 +52,7 @@ class NavigationMenu extends Component {
       <AuthContextConsumer>
         {({ isAuth, authUser, handleLogout }) => (
           <StyledNav isMobile={isMobile}>
-            {!isMobile ? (
+            {!isMobile && (
               <div>
                 <Link href='/'>
                   <a>
@@ -60,21 +60,6 @@ class NavigationMenu extends Component {
                   </a>
                 </Link>
               </div>
-            ) : (
-              <Menu
-                selectedKeys={[currentPage]}
-                mode={isMobile ? 'inline' : 'horizontal'}
-                onClick={({ key }) => this.handlePageChange(key)}
-              >
-                {/* <Menu.Item key='home'>
-                  <Link href='/'>
-                    <a>
-                      <Icon type='home' />
-                      {t('Home')}
-                    </a>
-                  </Link>
-                </Menu.Item> */}
-              </Menu>
             )}
             <StyledMenu
               mode={isMobile ? 'inline' : 'horizontal'}
@@ -85,6 +70,12 @@ class NavigationMenu extends Component {
                 })
               }
             >
+              <Menu.Item key='module'>
+                <Link href='/modules'>
+                  <a>{t('Modules')}</a>
+                </Link>
+              </Menu.Item>
+
               {isAuth && authUser && (
                 <StyleSubMenu
                   isMobile={isMobile}
