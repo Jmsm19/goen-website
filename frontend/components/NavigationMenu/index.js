@@ -11,6 +11,7 @@ import {
   StyledMenu,
   StyledLogo,
   StyleSubMenu,
+  StyledLogoDiv,
 } from '../../styles/components/NavigationMenu';
 
 Router.onRouteChangeStart = () => NProgress.start();
@@ -31,16 +32,14 @@ class NavigationMenu extends Component {
     const { logout } = callbacks;
     const { toggleSidebar } = this.props;
 
+    if (toggleSidebar) toggleSidebar();
+
     if (pageKey === 'logout') {
       logout();
-      toggleSidebar();
     } else {
-      this.setState(
-        {
-          currentPage: pageKey === '' ? 'home' : pageKey,
-        },
-        toggleSidebar,
-      );
+      this.setState({
+        currentPage: pageKey === '' ? 'home' : pageKey,
+      });
     }
   }
 
@@ -51,16 +50,14 @@ class NavigationMenu extends Component {
     return (
       <AuthContextConsumer>
         {({ isAuth, authUser, handleLogout }) => (
-          <StyledNav isMobile={isMobile}>
-            {!isMobile && (
-              <div>
-                <Link href='/'>
-                  <a>
-                    <StyledLogo />
-                  </a>
-                </Link>
-              </div>
-            )}
+          <StyledNav>
+            <StyledLogoDiv>
+              <Link href='/'>
+                <a>
+                  <StyledLogo onClick={() => this.handlePageChange('')} />
+                </a>
+              </Link>
+            </StyledLogoDiv>
             <StyledMenu
               mode={isMobile ? 'inline' : 'horizontal'}
               selectedKeys={[currentPage]}
@@ -78,7 +75,6 @@ class NavigationMenu extends Component {
 
               {isAuth && authUser && (
                 <StyleSubMenu
-                  isMobile={isMobile}
                   key='user'
                   title={
                     <span>

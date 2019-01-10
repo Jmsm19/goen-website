@@ -4,6 +4,8 @@ import media from '../../utils/styling';
 
 const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
   display: grid;
+  grid-auto-rows: max-content;
+
   ${({ isEditing }) =>
     isEditing &&
     `
@@ -12,10 +14,9 @@ const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
     grid-gap: 30px;
   `}
 
-  ${media.phone`
-    padding: ${({ isEditing }) => isEditing && '45px 25px 10px'};;
+  ${media.tablet`
+    padding: ${({ isEditing }) => isEditing && '45px 25px 10px'};
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
     grid-gap: 0;
     justify-content: center;
 

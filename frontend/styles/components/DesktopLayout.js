@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Layout } from 'antd';
 import styled from 'styled-components';
-// import media from '../../utils/styling';
+import media from '../../utils/styling';
 
 export const StyledMain = styled.main`
   display: grid;
@@ -21,15 +21,13 @@ export const StyledLayout = styled(({ isAuth, ...rest }) => <Layout {...rest} />
 `;
 
 // remove isAuth from props
-export const StyledContent = styled(({ isAuth, isMobile, ...rest }) => (
-  <Layout.Content {...rest} />
-))`
+export const StyledContent = styled(({ isAuth, ...rest }) => <Layout.Content {...rest} />)`
   display: ${({ isAuth }) => (!isAuth ? 'grid' : 'block')};
   align-items: ${({ isAuth }) => (isAuth ? 'center' : undefined)};
-  ${({ isMobile }) =>
-    !isMobile &&
-    `
-    margin-top: 53px;
+  margin-top: 53px;
+
+  ${media.tablet`
+    margint-top: 0;
   `}
 `;
 

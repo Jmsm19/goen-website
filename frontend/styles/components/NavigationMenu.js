@@ -5,18 +5,15 @@ import media from '../../utils/styling';
 
 const { SubMenu } = Menu;
 
-export const StyleSubMenu = styled(({ isMobile, ...rest }) => <SubMenu {...rest} />)`
-  ${({ isMobile }) =>
-    !isMobile &&
-    `
-    display: inline-block;
-  `};
+export const StyleSubMenu = styled(SubMenu)`
+  display: inline-block;
+
+  ${media.tablet`
+  display: initial;
+  `}
 `;
 
 export const StyledNav = styled.nav`
-  ${({ isMobile }) =>
-    !isMobile &&
-    `
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
@@ -24,8 +21,19 @@ export const StyledNav = styled.nav`
   position: fixed;
   z-index: 1;
   width: 100%;
-  `}
   background-color: #fff;
+
+  ${media.tablet`
+  display: block;
+  position: relative;
+  z-index: 0;
+  `}
+`;
+
+export const StyledLogoDiv = styled.div`
+  ${media.tablet`
+    width: min-content
+    `}
 `;
 
 export const StyledLogo = styled.div`

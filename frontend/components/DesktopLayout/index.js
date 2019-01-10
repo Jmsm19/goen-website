@@ -22,9 +22,7 @@ const DesktopLayout = ({ children, isAuth, isMobile }) => (
     )}
     {/* isAuth props if removed from component by styled-components */}
     <StyledMain isAuth={isAuth}>
-      <StyledContent isAuth={isAuth} isMobile={isMobile}>
-        {children}
-      </StyledContent>
+      <StyledContent isAuth={isAuth}>{children}</StyledContent>
     </StyledMain>
     <Footer />
   </StyledLayout>
