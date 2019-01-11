@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
 :root {
   --primary-color: #bf1a21;
   /* --primary-color: #1890ff; */
@@ -11,10 +13,14 @@
   /* --clear-primary-color: #bae7ff; */
   --clear-primary-color-calendar-date-back: #ffd1d5;
   /* --clear-primary-color-calendar-date-back: #d1e9ff; */
-  --light-obscure-primary-color: #3e191c;
+  --light-obscure-primary-color: #d9091a;
+  /* --light-obscure-primary-color: #3e191c; // Custom */
   /* --light-obscure-primary-color: #192c3e; */
-  --obscure-primary-color: #290002;
+  --obscure-primary-color: #bf1a21;
+  /* --obscure-primary-color: #290002; // Custom */
   /* --obscure-primary-color: #001529; */
+
+
 
   --danger-color: #ff4d4f;
   /* --danger-color: #ff4d4f; */
@@ -41,6 +47,10 @@
 
   --tablet-size: 768px;
   --phone-size: 576px;
+}
+
+* {
+  font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Helvetica, Verdana, sans-serif;
 }
 
 .page-loading {

@@ -26,3 +26,4 @@ Loading.propTypes = {
 };
 
 export default withNamespaces('common')(Loading);
+export const CleanLoading = Loading;

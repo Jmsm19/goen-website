@@ -32,5 +32,11 @@
   "NameUsedInCertificateWarning": "Este nombre será usado en su certificado",
   "VerifyingAccount": "Verificando...",
   "AccountActivated": "Cuenta verificada y activada",
-  "AccountActivationFailed": "Error de activación"
+  "AccountActivationFailed": "Error de activación",
+  "AvailableModulesForPeriod": "Módulos disponibles para el período {{ period }}",
+  "ModuleRegister": "Inscripciones",
+  "ModuleRegisterConfirm": "¿Seguro que desea inscribirse en este módulo?",
+  "Yes": "Sí",
+  "No": "No",
+  "ChooseModule": "¿En cuál módulo desea inscribirse?"
 }

@@ -32,5 +32,11 @@
   "NameUsedInCertificateWarning": "This name will be used in your certificate",
   "VerifyingAccount": "Verifying...",
   "AccountActivated": "Email confirmed",
-  "AccountActivationFailed": "Activation error"
+  "AccountActivationFailed": "Activation error",
+  "AvailableModulesForPeriod": "Modules availables for Period {{ period }}",
+  "ModuleRegister": "Register in a module",
+  "ModuleRegisterConfirm": "Are your sure you want to register in this module?",
+  "Yes": "Yes",
+  "No": "No",
+  "ChooseModule": "In which module would you like to register?"
 }
