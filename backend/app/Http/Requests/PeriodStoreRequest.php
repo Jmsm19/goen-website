@@ -15,6 +15,8 @@ class PeriodStoreRequest extends FormRequest
     {
         return [
             'year' => 'date_format:Y',
+            'signup_from' => 'required|date',
+            'signup_until' => 'required|date'
         ];
     }
 }

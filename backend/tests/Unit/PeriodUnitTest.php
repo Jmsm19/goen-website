@@ -21,13 +21,20 @@ class PeriodUnitTest extends TestCase
     {
         $year = 2018;
         $name = 'I';
+        $signup_from = $this->faker->date('Y-m-d');
+        $signup_until = Carbon::parse($signup_from)->addWeeks(2)->format('Y-m-d');
 
         $period = Period::create([
             'year' => $year,
             'name' => $name,
+            'signup_from' => $signup_from,
+            'signup_until' => $signup_until
         ]);
 
-        $this->assertEquals([$name, $year], [$period->name, $period->year]);
+        $this->assertEquals(
+            [$name, $year, $signup_from, $signup_until ],
+            [$period->name, $period->year, $period->signup_from, $period->signup_until]
+        );
     }
 
     /**
@@ -38,12 +45,16 @@ class PeriodUnitTest extends TestCase
     public function testPeriodModulesRelationship()
     {
         $year = 2018;
+        $signup_from = $this->faker->date('Y-m-d');
+        $signup_until = Carbon::parse($signup_from)->addWeeks(2)->format('Y-m-d');
         $period_name = 'I';
         $module_name = 'Module Name';
 
         $period = Period::create([
             'year' => $year,
             'name' => $period_name,
+            'signup_from' => $signup_from,
+            'signup_until' => $signup_until
         ]);
 
         $module = Module::create([

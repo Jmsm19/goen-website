@@ -50,8 +50,15 @@ class PeriodApiTest extends TestCase
     {
         $this->passportActingAs('admin');
 
+        $signup_from = $this->faker->date('Y-m-d');
+        $signup_until = Carbon::parse($signup_from)->addWeeks(2)->format('Y-m-d');
+
         // No params period creation
-        $this->json('POST', route('period.store'))
+        $this->json(
+            'POST',
+            route('period.store'),
+            ['signup_from' => $signup_from, 'signup_until' => $signup_until ]
+            )
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
@@ -59,6 +66,8 @@ class PeriodApiTest extends TestCase
                     'year',
                     'name',
                     'active',
+                    'signup_from',
+                    'signup_until',
                     'modules' => []
                 ]
             ]);
@@ -69,27 +78,30 @@ class PeriodApiTest extends TestCase
 
         // Custom year period creation
         $year = Carbon::now()->year + 10;
-        $this->json(
-            'POST',
-            route('period.store'),
-            ['year' => $year]
-        )
-        ->assertStatus(201)
-        ->assertJson([
-            'data' => [
-                'year' => $year,
-            ]
-        ]);
+
+        $correct_params = [
+            'year' => $year,
+            'signup_from' => $signup_from,
+            'signup_until' => $signup_until
+        ];
+
+        $this->json('POST', route('period.store'), $correct_params)
+            ->assertStatus(201)
+            ->assertJson([
+                'data' => [
+                    'year' => $year,
+                ]
+            ]);
 
         // Failed period creation, invalid argument
         $this->json(
             'POST',
             route('period.store'),
-            ['year' => -1999]
+            ['year' => -1999, 'signup_from' => 9999, 'signup_until' => 9999]
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'year'
+            'year', 'signup_from', 'signup_until'
         ]);
 
         // Period creation yearly limit reached
@@ -100,11 +112,17 @@ class PeriodApiTest extends TestCase
         $year = Carbon::now()->year + 1;
         $period_limit = count(Config::get('constants.period_order'));
         factory(Period::class, $period_limit)->create(['year' => $year]);
-        $this->json('POST', route('period.store'), ['year' => $year])
-            ->assertStatus(400)
-            ->assertJson([
-                'error' => trans('messages.period_limit_reached')
-            ]);
+        $this->json(
+            'POST',
+            route('period.store'),
+            ['year' => $year,
+            'signup_from' => $signup_from,
+            'signup_until' => $signup_until]
+        )
+        ->assertStatus(400)
+        ->assertJson([
+            'error' => trans('messages.period_limit_reached')
+        ]);
     }
 
     /**
@@ -126,6 +144,8 @@ class PeriodApiTest extends TestCase
                     'year' => $period->year,
                     'name' => $period->name,
                     'active' => $period->active,
+                    'signup_from' => $period->signup_from,
+                    'signup_until' => $period->signup_until,
                     'modules' => $period->modules
                 ]
             ]);
@@ -147,11 +167,15 @@ class PeriodApiTest extends TestCase
     {
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
+        $signup_from = $this->faker->date('Y-m-d');
+        $signup_until = Carbon::parse($signup_from)->addWeeks(2)->format('Y-m-d');
 
         // Successful period update
         $params = [
             'name' => 'New name',
             'year' => 1234,
+            'signup_from' => $signup_from,
+            'signup_until' => $signup_until,
         ];
         $this->put(route('period.update', ['period' => $period->id]), $params)
             ->assertStatus(200)
@@ -161,13 +185,20 @@ class PeriodApiTest extends TestCase
                     'year' => $params['year'],
                     'name' => $params['name'],
                     'active' => $period->active,
+                    'signup_from' => $params['signup_from'],
+                    'signup_until' =>$params['signup_until'],
                     'modules' => $period->modules
                 ]
             ]);
 
         // Failed period update, invalid argument
         $period = factory(Period::class)->create();
-        $params = ['name' => 1, 'year' => -2018];
+        $params = [
+            'name' => 1,
+            'year' => -2018,
+            'signup_from' => 999,
+             'signup_until' => 999
+        ];
         $this->json(
             'PUT',
             route('period.update', ['period' => $period->id]),
@@ -176,7 +207,7 @@ class PeriodApiTest extends TestCase
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'name', 'year'
+            'name', 'year', 'signup_from', 'signup_until'
         ]);
     }
 
@@ -228,6 +259,8 @@ class PeriodApiTest extends TestCase
                 'year',
                 'name',
                 'active',
+                'signup_from',
+                'signup_until',
                 'modules' => []
             ]]);
     }

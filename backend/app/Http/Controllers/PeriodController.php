@@ -56,7 +56,9 @@ class PeriodController extends Controller
             'name' => $name,
             'year' => $year,
             // The new period is now the current period (active period)
-            'active' => true
+            'active' => true,
+            'signup_from' => $request->signup_from,
+            'signup_until' => $request->signup_until
         ]);
 
         return new PeriodResource($period);
@@ -82,7 +84,7 @@ class PeriodController extends Controller
      */
     public function update(PeriodUpdateRequest $request, Period $period)
     {
-        $period->update($request->only(['name', 'year']));
+        $period->update($request->only(['name', 'year', 'signup_from', 'signup_until']));
         return new PeriodResource($period);
     }
 
