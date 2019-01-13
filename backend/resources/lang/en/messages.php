@@ -12,4 +12,5 @@ return [
     'role_added' => 'User is now :role.',
     'role_removed' => 'User is no longer :role.',
     'route_not_found' => 'Route not found.',
+    'schedule_exists' => 'A similar schedule already exists.',
 ];

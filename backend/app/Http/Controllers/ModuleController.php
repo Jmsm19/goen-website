@@ -47,6 +47,7 @@ class ModuleController extends Controller
             'period_id' => $request->period_id,
             // Name is based on module section order from config
             'name' => "$request->name $section",
+            'schedule_id' => $request->schedule_id,
         ]);
 
         return new ModuleResource($module);
@@ -72,7 +73,7 @@ class ModuleController extends Controller
      */
     public function update(ModuleUpdateRequest $request, Module $module)
     {
-        $module->update($request->only(['period_id', 'name']));
+        $module->update($request->only(['period_id', 'name', 'schedule_id']));
         return new ModuleResource($module);
     }
 

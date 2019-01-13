@@ -40,13 +40,18 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
         ->name('period.year');
     Route::apiResource('period', 'PeriodController');
 
+    // User Controller
     Route::get('/user', 'UserController@index')->name('user.index');
     Route::get('/user/{user}', 'UserController@show')->name('user.show');
     Route::delete('/user/{user}', 'UserController@destroy')->name('user.destroy');
+
     // Clan related routes
     Route::apiResource('clan', 'ClanController', [
         'except' => ['store']
     ]);
+
+    // Schedule related routes
+    Route::apiResource('schedule', 'ScheduleController');
 });
 
 // Routes that require Authentication and Instructor Role

@@ -16,6 +16,7 @@ class ModuleStoreRequest extends FormRequest
         return [
             'period_id' => 'required|exists:periods,id',
             'name' => 'required|string',
+            'schedule_id' => 'required|exists:schedules,id'
         ];
     }
 }

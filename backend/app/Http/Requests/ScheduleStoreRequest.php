@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModuleUpdateRequest extends FormRequest
+class ScheduleStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,9 +14,9 @@ class ModuleUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'period_id' => 'exists:periods,id',
-            'name' => 'string',
-            'schedule_id' => 'exists:schedules,id'
+            'start_date' => 'date|required',
+            'from' => 'date_format:H:i|required',
+            'until' => 'date_format:H:i|required',
         ];
     }
 }

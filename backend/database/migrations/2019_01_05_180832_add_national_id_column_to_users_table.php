@@ -15,9 +15,9 @@ class AddNationalIdColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             if (env('APP_ENV') !== 'testing') {
-                $table->string('national_id')->unique()->after('name');
+                $table->integer('national_id')->unique()->after('name');
             } else {
-                $table->string('national_id')->unique()->after('name')->nullable();
+                $table->integer('national_id')->unique()->after('name')->nullable();
             }
         });
     }

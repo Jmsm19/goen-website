@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     protected $fillable = [
-        'name', 'period_id'
+        'name', 'period_id', 'schedule_id'
     ];
 
     public function period()
@@ -18,5 +18,10 @@ class Module extends Model
     public function grades()
     {
         return $this->hasMany('App\Grade');
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo('App\Schedule');
     }
 }

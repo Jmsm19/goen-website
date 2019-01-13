@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Module;
 use App\Period;
+use App\Schedule;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Config;
@@ -51,11 +52,13 @@ class ModuleApiTest extends TestCase
     {
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
+        $schedule = factory(Schedule::class)->create();
 
         // Module creation
         $params = [
             'name' => 'M-0',
-            'period_id' => $period->id
+            'period_id' => $period->id,
+            'schedule_id' => $schedule->id,
         ];
         $this->json('POST', route('module.store'), $params)
             ->assertStatus(201)
@@ -63,13 +66,15 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id',
                     'name',
+                    'schedule'
                 ]
             ]);
 
         // Module creation section limit reached
         $params = [
             'name' => 'M-1',
-            'period_id' => $period->id
+            'period_id' => $period->id,
+            'schedule_id' => $schedule->id,
         ];
         $section_limit = count(Config::get('constants.module_section_order'));
         for ($i=0; $i <= $section_limit; $i++) {
@@ -82,11 +87,11 @@ class ModuleApiTest extends TestCase
             ]);
 
         // Failed period creation, invalid argument
-        $params = ['name' => 999, 'period' => 999];
+        $params = ['name' => 999, 'period' => 999, 'schedule_id' => 999];
         $this->json('POST', route('module.store'), $params, $this->headers)
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'name', 'period_id'
+                'name', 'period_id', 'schedule_id'
             ]);
     }
 
