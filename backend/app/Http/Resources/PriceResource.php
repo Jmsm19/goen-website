@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ScheduleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ModuleResource extends JsonResource
+class PriceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,7 @@ class ModuleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price->amount,
-            'schedule' => new ScheduleResource($this->schedule)
+            'amount' => $this->amount,
         ];
     }
 }

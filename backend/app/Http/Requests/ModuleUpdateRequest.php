@@ -16,6 +16,7 @@ class ModuleUpdateRequest extends FormRequest
         return [
             'period_id' => 'exists:periods,id',
             'name' => 'string',
+            'price' => 'numeric|min:0',
             'schedule_id' => 'exists:schedules,id'
         ];
     }

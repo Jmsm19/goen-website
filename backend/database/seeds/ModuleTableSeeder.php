@@ -1,5 +1,6 @@
 <?php
 
+use App\Price;
 use App\Module;
 use App\Period;
 use App\Schedule;
@@ -19,13 +20,16 @@ class ModuleTableSeeder extends Seeder
 
         $available_schedueles = Schedule::all();
         $amount_of_schedules = count($available_schedueles);
-
+        $available_prices = Price::all();
+        $amount_of_prices = count($available_prices);
 
         for ($i=0; $i < 3 ; $i++) {
             $random_schedule = $available_schedueles[round(rand(0, $amount_of_schedules - 1))];
+            $random_price = $available_prices[round(rand(0, $amount_of_prices - 1))];
             Module::create([
                 'name' => 'M-' . $i . ' ' . 'A',
                 'period_id' => $current_period->id,
+                'price_id' => $random_price->id,
                 'schedule_id' => $random_schedule->id,
             ]);
         }

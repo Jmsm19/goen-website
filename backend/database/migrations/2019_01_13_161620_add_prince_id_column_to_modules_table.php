@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddScheduleIdColumnToModulesTable extends Migration
+class AddPrinceIdColumnToModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,13 @@ class AddScheduleIdColumnToModulesTable extends Migration
     public function up()
     {
         Schema::table('modules', function (Blueprint $table) {
+            $table->integer('price_id')->unsigned()->nullable()->after('period_id');
+
             if (env('APP_ENV') !== 'testing') {
-                $table->integer('schedule_id')->unsigned()->after('period_id');
-                $table->foreign('schedule_id')
+                $table->foreign('price_id')
                     ->references('id')
-                    ->on('schedules')
+                    ->on('prices')
                     ->onDelete('set null');
-            } else {
-                $table->integer('schedule_id')->unsigned()->after('period_id')->nullable();
             }
         });
     }
@@ -35,10 +34,10 @@ class AddScheduleIdColumnToModulesTable extends Migration
     {
         Schema::table('modules', function (Blueprint $table) {
             if (env('APP_ENV') !== 'testing') {
-                $table->dropForeign(['schedule_id']);
+                $table->dropForeign(['price_id']);
             }
 
-            $table->dropColumn(['schedule_id']);
+            $table->dropColumn(['price_id']);
         });
     }
 }

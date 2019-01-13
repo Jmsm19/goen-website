@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
 
     // Schedule related routes
     Route::apiResource('schedule', 'ScheduleController');
+
+    // Price related routes
+    Route::apiResource('price', 'PriceController');
 });
 
 // Routes that require Authentication and Instructor Role

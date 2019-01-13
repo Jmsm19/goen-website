@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Price;
 use App\Module;
 use App\Period;
 use App\Schedule;
@@ -53,19 +54,23 @@ class ModuleApiTest extends TestCase
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
         $schedule = factory(Schedule::class)->create();
+        $price = $this->faker->randomFloat(2, 1000);
 
         // Module creation
         $params = [
             'name' => 'M-0',
             'period_id' => $period->id,
+            'price' => $price,
             'schedule_id' => $schedule->id,
         ];
+
         $this->json('POST', route('module.store'), $params)
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
                     'id',
                     'name',
+                    'price',
                     'schedule'
                 ]
             ]);
@@ -74,6 +79,7 @@ class ModuleApiTest extends TestCase
         $params = [
             'name' => 'M-1',
             'period_id' => $period->id,
+            'price' => $price,
             'schedule_id' => $schedule->id,
         ];
         $section_limit = count(Config::get('constants.module_section_order'));
@@ -87,11 +93,11 @@ class ModuleApiTest extends TestCase
             ]);
 
         // Failed period creation, invalid argument
-        $params = ['name' => 999, 'period' => 999, 'schedule_id' => 999];
+        $params = ['name' => 999, 'period' => 999, 'schedule_id' => 999, 'price' => "not a number"];
         $this->json('POST', route('module.store'), $params, $this->headers)
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'name', 'period_id', 'schedule_id'
+                'name', 'period_id', 'schedule_id', 'price'
             ]);
     }
 
@@ -112,6 +118,13 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id' => $module->id,
                     'name' => $module->name,
+                    'price' => $module->price->amount,
+                    'schedule' => [
+                        'id' => $module->schedule->id,
+                        'start_date' => $module->schedule->start_date,
+                        'from' => $module->schedule->from,
+                        'until' => $module->schedule->until
+                    ]
                 ]
             ]);
 
@@ -132,12 +145,15 @@ class ModuleApiTest extends TestCase
     {
         $this->passportActingAs('admin');
         $module = factory(Module::class)->create();
+        $schedule = factory(Schedule::class)->create();
         $new_period = factory(Period::class)->create();
 
         // Successful module update
         $params = [
             'name' => 'M-0',
-            'period_id' => $new_period->id
+            'period_id' => $new_period->id,
+            'price' => $this->faker->randomFloat(2, 1000),
+            'schedule_id' => $schedule->id,
         ];
         $this->put(route('module.update', ['module' => $module->id]), $params)
             ->assertStatus(200)
@@ -145,8 +161,13 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id' => $module->id,
                     'name' => $params['name'],
+                    'price' => $params['price'],
+                    'schedule' => [
+                        'id' => $params['schedule_id']
+                    ]
                 ]
             ]);
+
         // Get updated model
         $module = Module::where('id', $module->id)->first();
         // Compare correct update of period
@@ -154,7 +175,12 @@ class ModuleApiTest extends TestCase
 
         // Failed module update, invalid argument
         $module = factory(Module::class)->create();
-        $params = ['name' => 1, 'period_id' => 99];
+        $params = [
+            'name' => 1,
+            'period_id' => 99,
+            'price' => 'Not a number',
+            'schedule_id' => 9999
+        ];
         $this->json(
             'PUT',
             route('module.update', ['module' => $module->id]),
@@ -163,7 +189,7 @@ class ModuleApiTest extends TestCase
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'name', 'period_id'
+            'name', 'period_id', 'price', 'schedule_id'
         ]);
     }
 

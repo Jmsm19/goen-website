@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModuleStoreRequest extends FormRequest
+class PriceUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,10 +14,7 @@ class ModuleStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'period_id' => 'required|exists:periods,id',
-            'name' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'schedule_id' => 'required|exists:schedules,id'
+            'amount' => 'numeric|min:0|unique:prices'
         ];
     }
 }

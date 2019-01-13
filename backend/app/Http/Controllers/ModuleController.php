@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Price;
 use App\Module;
 use Illuminate\Http\Request;
 use App\Http\Resources\ModuleResource;
@@ -41,12 +42,17 @@ class ModuleController extends Controller
             ], 400);
         }
 
+        $price = Price::firstOrCreate([
+            'amount' => $request->price,
+        ]);
+
         // Create Module
         $section = $module_sections[$next_section_index];
         $module = Module::create([
             'period_id' => $request->period_id,
             // Name is based on module section order from config
             'name' => "$request->name $section",
+            'price_id' => $price->id,
             'schedule_id' => $request->schedule_id,
         ]);
 
@@ -73,7 +79,17 @@ class ModuleController extends Controller
      */
     public function update(ModuleUpdateRequest $request, Module $module)
     {
-        $module->update($request->only(['period_id', 'name', 'schedule_id']));
+        $price = Price::firstOrCreate([
+            'amount' => $request->price ?: $module->price->amount,
+        ]);
+
+        $module->update([
+         'period_id' => $request->period_id ?: $module->period_id,
+         'name' => $request->name ?: $module->name,
+         'price_id' => $price->id ?: $module->price->id,
+         'schedule_id' => $request->schedule_id ?: $module->schedule->id
+        ]);
+
         return new ModuleResource($module);
     }
 
