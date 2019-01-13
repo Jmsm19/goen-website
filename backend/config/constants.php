@@ -20,5 +20,6 @@ return [
         '4' => 'D',
         '5' => 'E',
         '6' => 'F'
-    ]
+    ],
+    'max_students_per_module' => env('MAX_STUDENTS_PER_MODULE', 14)
 ];
