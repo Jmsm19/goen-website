@@ -38,5 +38,12 @@
   "ModuleRegisterConfirm": "Are your sure you want to register in this module?",
   "Yes": "Yes",
   "No": "No",
-  "ChooseModule": "In which module would you like to register?"
+  "ChooseModule": "In which module would you like to register?",
+  "Day0": "Sunday",
+  "Day1": "Monday",
+  "Day2": "Tuesday",
+  "Day3": "Wednesday",
+  "Day4": "Thursday",
+  "Day5": "Friday",
+  "Day6": "Saturday"
 }

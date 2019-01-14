@@ -11,6 +11,7 @@ import {
   StyledPageContent,
   StyledModulesGrid,
 } from '../../styles/pages/ModuleRegisterPage';
+import { formatHoursFromDB, formatPrice, localizeDate } from '../../utils';
 
 class ModuleRegisterPage extends Component {
   state = {
@@ -67,7 +68,7 @@ class ModuleRegisterPage extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, lng } = this.props;
     const { mounted, periodData, currentStep } = this.state;
     const { modules } = periodData;
     const periodName = `${periodData.name} - ${periodData.year}`;
@@ -87,35 +88,60 @@ class ModuleRegisterPage extends Component {
               <h2>{t('ChooseModule')}</h2>
               <StyledModulesGrid>
                 {modules &&
-                  modules.map(({ name, id }) => (
-                    <StyledModuleCard
-                      title={name}
-                      extra={t('AvailableSpaces')}
-                      key={uuid()}
-                      hoverable
-                      onClick={() => {
-                        this.toggleConfirmPopFor(id);
-                      }}
-                    >
-                      <Card.Meta
-                        title={t('Price')}
-                        description={`${t('Day')} ${t('TimeFrom')}-${t('TimeUntil')}`}
-                        avatar={
-                          <img
-                            style={{ width: '90px' }}
-                            src='/static/images/clans/kani.png'
-                            alt='Kani'
-                          />
-                        }
-                      />
-                    </StyledModuleCard>
-                  ))}
+                  modules.map(({ name, section, price, schedule, clan, id }) => {
+                    const clanName = clan ? clan.toLowerCase() : null;
+                    const day = t(`Day${new Date(schedule.start_date).getDay()}`);
+                    const fromTime = formatHoursFromDB(schedule.from);
+                    const untilTime = formatHoursFromDB(schedule.until);
+                    const formatedPrice = formatPrice(price, lng);
+
+                    return (
+                      <StyledModuleCard
+                        title={`${name} ${section}`}
+                        extra={t('AvailableSpaces')}
+                        key={uuid()}
+                        hoverable
+                        onClick={() => {
+                          this.toggleConfirmPopFor(id);
+                        }}
+                      >
+                        <Card.Meta
+                          title={formatedPrice}
+                          description={
+                            <div>
+                              <span>{day}</span>
+                              <br />
+                              <span>
+                                {fromTime} - {untilTime}
+                              </span>
+                            </div>
+                          }
+                          avatar={
+                            clanName && (
+                              <img
+                                style={{ width: '90px' }}
+                                src={`/static/images/clans/${clanName}.png`}
+                                alt={clanName}
+                              />
+                            )
+                          }
+                        />
+                      </StyledModuleCard>
+                    );
+                  })}
               </StyledModulesGrid>
             </StyledPageContent>
           </Skeleton>
         )}
 
-        {currentStep === 1 && <h2>Process Payment</h2>}
+        {currentStep === 1 && (
+          <>
+            <h2>Process Payment</h2>
+            <button type='button' onClick={this.nextStep}>
+              Next
+            </button>
+          </>
+        )}
 
         {currentStep === 2 && <h2>You are registered</h2>}
       </StyledPage>
@@ -125,6 +151,7 @@ class ModuleRegisterPage extends Component {
 
 ModuleRegisterPage.propTypes = {
   t: PropTypes.func.isRequired,
+  lng: PropTypes.string.isRequired,
 };
 
 export default withNamespaces('common')(ModuleRegisterPage);
