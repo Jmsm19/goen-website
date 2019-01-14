@@ -54,12 +54,14 @@ class ModuleApiTest extends TestCase
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
         $schedule = factory(Schedule::class)->create();
-        $price = $this->faker->randomFloat(2, 1000);
+        $price = 132456789;
 
         // Module creation
+        $number = $this->faker->randomNumber();
         $params = [
-            'name' => 'M-' . $this->faker->randomNumber(),
+            'name' => 'M-' . $number,
             'section' => strtoupper($this->faker->randomLetter),
+            'clan_id' => $number == 0 ? 1 : null,
             'period_id' => $period->id,
             'price' => $price,
             'schedule_id' => $schedule->id,
@@ -79,7 +81,6 @@ class ModuleApiTest extends TestCase
 
         // Failed period creation, module exists
         $this->json('POST', route('module.store'), $params, $this->headers)
-            // ->dump()
             ->assertStatus(400)
             ->assertJson([
                 'error' => trans('messages.module_exists')
@@ -97,6 +98,21 @@ class ModuleApiTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors([
                 'name', 'section', 'period_id', 'schedule_id', 'price'
+            ]);
+
+        // Require clan_id when module name is M-0
+        $params = [
+            'name' => 'M-0',
+            'section' => strtoupper($this->faker->randomLetter),
+            'period_id' => $period->id,
+            'price' => $price,
+            'schedule_id' => $schedule->id
+        ];
+
+        $this->json('POST', route('module.store'), $params, $this->headers)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors([
+                'clan_id'
             ]);
     }
 
@@ -153,7 +169,7 @@ class ModuleApiTest extends TestCase
             'name' => 'Test-' . $this->faker->randomNumber(),
             'period_id' => $new_period->id,
             'section' => 'Z',
-            'price' => $this->faker->randomFloat(2, 1000),
+            'price' => 321654,
             'schedule_id' => $schedule->id,
         ];
         $this->put(route('module.update', ['module' => $module->id]), $params)

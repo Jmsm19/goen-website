@@ -22,6 +22,7 @@ class ModuleUpdateRequest extends FormRequest
                 'string',
                 Rule::in(Config::get('constants.section_letters'))
             ],
+            'clan_id' => 'exists:clans,id',
             'section' => 'string',
             'price' => 'numeric|min:0',
             'schedule_id' => 'exists:schedules,id'

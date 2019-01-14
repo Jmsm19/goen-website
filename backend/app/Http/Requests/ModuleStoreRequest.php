@@ -15,7 +15,7 @@ class ModuleStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'period_id' => 'required|exists:periods,id',
             'name' => 'required|string',
             'section' => [
@@ -26,6 +26,12 @@ class ModuleStoreRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'schedule_id' => 'required|exists:schedules,id'
         ];
+
+        if (FormRequest::input('name') == 'M-0') {
+            $rules['clan_id'] = 'required|exists:clans,id';
+        }
+
+        return $rules;
     }
 
     public function messages()

@@ -28,8 +28,8 @@ class ModuleUnitTest extends TestCase
             'year' => $period_year
         ]);
 
-        $price = Price::firstOrCreate([
-            'amount' => $this->faker->randomFloat(2, 1000)
+        $price = Price::create([
+            'amount' => 96382
         ]);
 
         $module = Module::create([

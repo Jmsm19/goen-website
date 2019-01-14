@@ -18,6 +18,7 @@ $factory->define(App\Module::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'section' => strtoupper($faker->randomLetter),
+        'clan_id' => null,
         'period_id' => $period->id,
         'price_id' => $price->id,
         'schedule_id' => $schedule->id,

@@ -29,6 +29,7 @@ class ModuleTableSeeder extends Seeder
             Module::create([
                 'name' => 'M-' . $i,
                 'section' => 'A',
+                'clan_id' => $i == 0 ? 1 : null,
                 'period_id' => $current_period->id,
                 'price_id' => $random_price->id,
                 'schedule_id' => $random_schedule->id,

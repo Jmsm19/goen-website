@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     protected $fillable = [
-        'name', 'section', 'period_id', 'schedule_id', 'price_id'
+        'name', 'section', 'period_id', 'schedule_id', 'price_id', 'clan_id'
     ];
 
     public function period()
@@ -28,5 +28,10 @@ class Module extends Model
     public function price()
     {
         return $this->belongsTo('App\Price');
+    }
+
+    public function clan()
+    {
+        return $this->belongsTo('App\Clan');
     }
 }
