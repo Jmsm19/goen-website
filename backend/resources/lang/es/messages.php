@@ -13,5 +13,7 @@ return [
     'role_removed' => 'El usuario ya no es :role.',
     'route_not_found' => 'Ruta no encontrada.',
     'schedule_exists' => 'Ya existe un horario similar.',
-    'price_exists' => 'Ya existe un precio similar.'
+    'price_exists' => 'Ya existe un precio similar.',
+    'module_exists' => 'Ya existe un módulo similar en el período.',
+    'section_not_in_options' => 'La sección seleccionada es inválida.',
 ];

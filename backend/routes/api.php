@@ -31,13 +31,17 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
         ->name('remove_role');
 
     Route::apiResource('module', 'ModuleController');
+    Route::get(
+        '/module/availablesections/{period_id}/{name}',
+        'ModuleController@availableSectionsFor'
+    )->name('module.availablesections');
 
     // Get current active period
     Route::get('/period/current', 'PeriodController@current')
         ->name(('period.current'));
     // Get specified (or current) year's periods
     Route::get('/period/year/{year?}', 'PeriodController@year')
-        ->name('period.year');
+    ->name('period.year');
     Route::apiResource('period', 'PeriodController');
 
     // User Controller

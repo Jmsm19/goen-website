@@ -9,6 +9,7 @@ use App\Http\Resources\ModuleResource;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\ModuleStoreRequest;
 use App\Http\Requests\ModuleUpdateRequest;
+use App\Http\Requests\AvailableSectionsForModuleRequest;
 
 class ModuleController extends Controller
 {
@@ -30,15 +31,16 @@ class ModuleController extends Controller
      */
     public function store(ModuleStoreRequest $request)
     {
-        $module_sections = Config::get('constants.module_section_order');
-        // Look for all similarly named Modules on target period
-        $same_level_modules = Module::where('period_id', $request->period_id)                     ->where('name', 'like', "$request->name %")->get();
-
-        // Send response if there are already too many similarly named Modules
-        $next_section_index = count($same_level_modules) + 1;
-        if ($next_section_index > count($module_sections)) {
+        // Check for similar Modules on the Period
+        $module = Module::where([
+            'period_id' => $request->period_id,
+            'name' =>  $request->name,
+            'section' => $request->section,
+        ])->count();
+        // If exists
+        if ($module > 0) {
             return response()->json([
-                'error' => trans('messages.section_limit_reached')
+                'error' => trans('messages.module_exists')
             ], 400);
         }
 
@@ -47,11 +49,10 @@ class ModuleController extends Controller
         ]);
 
         // Create Module
-        $section = $module_sections[$next_section_index];
         $module = Module::create([
             'period_id' => $request->period_id,
-            // Name is based on module section order from config
-            'name' => "$request->name $section",
+            'name' => $request->name,
+            'section' => $request->section,
             'price_id' => $price->id,
             'schedule_id' => $request->schedule_id,
         ]);
@@ -62,7 +63,7 @@ class ModuleController extends Controller
     /**
      * Display the specified Module.
      *
-     * @param  int  $id
+     * @param  Module  $module
      * @return \Illuminate\Http\Response
      */
     public function show(Module $module)
@@ -74,11 +75,13 @@ class ModuleController extends Controller
      * Update the specified Module in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Module  $module
      * @return \Illuminate\Http\Response
      */
     public function update(ModuleUpdateRequest $request, Module $module)
     {
+        $section = null;
+
         $price = Price::firstOrCreate([
             'amount' => $request->price ?: $module->price->amount,
         ]);
@@ -86,6 +89,7 @@ class ModuleController extends Controller
         $module->update([
          'period_id' => $request->period_id ?: $module->period_id,
          'name' => $request->name ?: $module->name,
+         'section' => $request->section ?: $module->section,
          'price_id' => $price->id ?: $module->price->id,
          'schedule_id' => $request->schedule_id ?: $module->schedule->id
         ]);
@@ -96,12 +100,42 @@ class ModuleController extends Controller
     /**
      * Remove the specified Module from storage.
      *
-     * @param  int  $id
+     * @param  Module  $module
      * @return \Illuminate\Http\Response
      */
     public function destroy(Module $module)
     {
         $module->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Remove the specified Module from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function availableSectionsFor($period_id, $name)
+    {
+        $sections = Config::get('constants.section_letters');
+
+        $module = Module::where([
+            'name' => $name,
+            'period_id' => $period_id,
+        ])->get();
+
+        $existing_sections = [];
+
+        for ($i=0; $i < count($module); $i++) {
+            array_push($existing_sections, $module[$i]->section);
+        }
+
+        $available_sections = array_diff($sections, $existing_sections);
+
+        return response()->json([
+            'data' => [
+                'modules_available' => $available_sections,
+            ]
+        ], 200);
     }
 }

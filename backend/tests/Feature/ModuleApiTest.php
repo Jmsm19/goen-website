@@ -58,7 +58,8 @@ class ModuleApiTest extends TestCase
 
         // Module creation
         $params = [
-            'name' => 'M-0',
+            'name' => 'M-' . $this->faker->randomNumber(),
+            'section' => strtoupper($this->faker->randomLetter),
             'period_id' => $period->id,
             'price' => $price,
             'schedule_id' => $schedule->id,
@@ -70,34 +71,32 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id',
                     'name',
+                    'section',
                     'price',
                     'schedule'
                 ]
             ]);
 
-        // Module creation section limit reached
-        $params = [
-            'name' => 'M-1',
-            'period_id' => $period->id,
-            'price' => $price,
-            'schedule_id' => $schedule->id,
-        ];
-        $section_limit = count(Config::get('constants.module_section_order'));
-        for ($i=0; $i <= $section_limit; $i++) {
-            $this->json('POST', route('module.store'), $params);
-        }
-        $this->json('POST', route('module.store'), $params)
+        // Failed period creation, module exists
+        $this->json('POST', route('module.store'), $params, $this->headers)
+            // ->dump()
             ->assertStatus(400)
             ->assertJson([
-                'error' => trans('messages.section_limit_reached')
+                'error' => trans('messages.module_exists')
             ]);
 
         // Failed period creation, invalid argument
-        $params = ['name' => 999, 'period' => 999, 'schedule_id' => 999, 'price' => "not a number"];
+        $params = [
+            'name' => 999,
+            'period' => 999,
+            'section' => 12,
+            'schedule_id' => 999,
+            'price' => "not a number"
+        ];
         $this->json('POST', route('module.store'), $params, $this->headers)
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'name', 'period_id', 'schedule_id', 'price'
+                'name', 'section', 'period_id', 'schedule_id', 'price'
             ]);
     }
 
@@ -118,6 +117,7 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id' => $module->id,
                     'name' => $module->name,
+                    'section' => $module->section,
                     'price' => $module->price->amount,
                     'schedule' => [
                         'id' => $module->schedule->id,
@@ -150,8 +150,9 @@ class ModuleApiTest extends TestCase
 
         // Successful module update
         $params = [
-            'name' => 'M-0',
+            'name' => 'Test-' . $this->faker->randomNumber(),
             'period_id' => $new_period->id,
+            'section' => 'Z',
             'price' => $this->faker->randomFloat(2, 1000),
             'schedule_id' => $schedule->id,
         ];
@@ -161,6 +162,7 @@ class ModuleApiTest extends TestCase
                 'data' => [
                     'id' => $module->id,
                     'name' => $params['name'],
+                    'section' => $params['section'],
                     'price' => $params['price'],
                     'schedule' => [
                         'id' => $params['schedule_id']
@@ -178,6 +180,7 @@ class ModuleApiTest extends TestCase
         $params = [
             'name' => 1,
             'period_id' => 99,
+            'section' => 121,
             'price' => 'Not a number',
             'schedule_id' => 9999
         ];
@@ -189,7 +192,7 @@ class ModuleApiTest extends TestCase
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'name', 'period_id', 'price', 'schedule_id'
+            'name', 'section', 'period_id', 'price', 'schedule_id'
         ]);
     }
 
@@ -205,5 +208,41 @@ class ModuleApiTest extends TestCase
 
         $this->delete(route('module.destroy', ['module' => $module->id]))
             ->assertStatus(204);
+    }
+
+    /**
+     * Test get available sections for module
+     *
+     * @return void
+     */
+    public function testGetAvailableSectionsFor()
+    {
+        $this->passportActingAs('admin');
+
+        $period = factory(Period::class)->create();
+        $name = $this->faker->word;
+
+        factory(Module::class)->create([
+            'name' => $name,
+            'period_id' => $period->id,
+            'section' => 'A'
+        ]);
+
+        $params = [
+            'name' => $name,
+            'period_id' => $period->id
+        ];
+
+        $sections  = Config::get('constants.section_letters');
+
+        // Section A should not appear
+        $this->get(route('module.availablesections', $params))
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    // Removed 'A' from array
+                    'modules_available' => array_diff($sections, ['A'])
+                ]
+            ]);
     }
 }

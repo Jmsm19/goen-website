@@ -18,6 +18,7 @@ class ModuleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'section' => $this->section,
             'price' => $this->price->amount,
             'schedule' => new ScheduleResource($this->schedule)
         ];

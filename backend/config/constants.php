@@ -13,13 +13,13 @@ return [
         '9' => 'IX',
         '10' => 'X'
     ],
-    'module_section_order' => [
-        '1' => 'A',
-        '2' => 'B',
-        '3' => 'C',
-        '4' => 'D',
-        '5' => 'E',
-        '6' => 'F'
+    'section_letters' => [
+        'A', 'B', 'C', 'D', 'E',
+        'F', 'G', 'H', 'I', 'J',
+        'K', 'L', 'M', 'N', 'O',
+        'P', 'Q', 'R', 'S', 'T',
+        'U', 'V', 'W', 'X', 'Y',
+        'Z'
     ],
     'max_students_per_module' => env('MAX_STUDENTS_PER_MODULE', 14)
 ];

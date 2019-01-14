@@ -27,7 +27,8 @@ class ModuleTableSeeder extends Seeder
             $random_schedule = $available_schedueles[round(rand(0, $amount_of_schedules - 1))];
             $random_price = $available_prices[round(rand(0, $amount_of_prices - 1))];
             Module::create([
-                'name' => 'M-' . $i . ' ' . 'A',
+                'name' => 'M-' . $i,
+                'section' => 'A',
                 'period_id' => $current_period->id,
                 'price_id' => $random_price->id,
                 'schedule_id' => $random_schedule->id,
