@@ -67,8 +67,8 @@ class NavigationMenu extends Component {
                 })
               }
             >
-              <Menu.Item key='moduleregister'>
-                <Link href='/moduleregister'>
+              <Menu.Item key='register'>
+                <Link href='/register'>
                   <a>{t('ModuleRegister')}</a>
                 </Link>
               </Menu.Item>

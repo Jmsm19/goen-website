@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import RegisterForm from '../../components/RegisterForm';
+import { SignupPage } from '../../pages/signup';
 import tFunction from '../utils/tFunction';
 
-describe('Test Register Form component', () => {
-  test('renders form', () => {
-    const { getByText } = render(<RegisterForm t={tFunction} />);
+describe('Test Signup Page', () => {
+  test("renders page's form", () => {
+    const { getByText } = render(<SignupPage t={tFunction} />);
     expect(getByText('Nombre completo'));
     expect(getByText('Fecha de nacimiento'));
     expect(getByText('Número telefónico'));

@@ -76,7 +76,7 @@ const LoginForm = ({ t, handleLogin }) => {
               {t('Login')}
             </Button>
 
-            <Link href='/register'>
+            <Link href='/signup'>
               <Button type='ghost' style={{ border: 'none', color: 'var(--light-primary-color)' }}>
                 {t('Register')}
               </Button>

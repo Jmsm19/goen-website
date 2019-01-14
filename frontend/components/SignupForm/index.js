@@ -7,10 +7,10 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 import { hasErrors } from '../../utils/formValidation';
-import { StyledButtonArea } from '../../styles/components/RegisterForm';
+import { StyledButtonArea } from '../../styles/components/SignupForm';
 import { StyledInput } from '../../styles/components/Forms';
 
-const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
+const SignupForm = ({ t, handleRegister, fieldErrors }) => {
   const initialState = {
     name: '',
     birth_date: '',
@@ -233,8 +233,8 @@ const RegisterForm = ({ t, handleRegister, fieldErrors }) => {
   );
 };
 
-RegisterForm.propTypes = {
+SignupForm.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default RegisterForm;
+export default SignupForm;
