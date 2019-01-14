@@ -15,7 +15,7 @@ class AddScheduleIdColumnToModulesTable extends Migration
     {
         Schema::table('modules', function (Blueprint $table) {
             if (env('APP_ENV') !== 'testing') {
-                $table->integer('schedule_id')->unsigned()->after('period_id');
+                $table->integer('schedule_id')->unsigned()->nullable()->after('period_id');
                 $table->foreign('schedule_id')
                     ->references('id')
                     ->on('schedules')
