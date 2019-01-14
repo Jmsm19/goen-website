@@ -37,8 +37,8 @@ class PriceApiTest extends TestCase
     public function testGetPrice()
     {
         $this->passportActingAs('admin');
-        $price = Price::firstOrCreate([
-            'amount' => $this->faker->randomFloat(2, 1000)
+        $price = Price::create([
+            'amount' => 1324
         ]);
 
         $this->get(route('price.show', ['price' => $price->id]))
@@ -62,7 +62,7 @@ class PriceApiTest extends TestCase
 
         // Successful store
         $params = [
-            'amount' => $this->faker->randomFloat(2, 1000),
+            'amount' => 1234567,
         ];
 
         $this->json('POST', route('price.store'), $params)
@@ -107,13 +107,13 @@ class PriceApiTest extends TestCase
     public function testPriceUpdate()
     {
         $this->passportActingAs('admin');
-        $price =Price::firstOrCreate([
-            'amount' => $this->faker->randomFloat(2, 1000)
+        $price =Price::create([
+            'amount' => 123456
         ]);
 
         // Successful update
         $params = [
-            'amount' => $this->faker->randomFloat(),
+            'amount' => 753159,
         ];
 
         $this->json(
@@ -152,8 +152,8 @@ class PriceApiTest extends TestCase
     public function testPriceDelete()
     {
         $this->passportActingAs('admin');
-        $price =Price::firstOrCreate([
-            'amount' => $this->faker->randomFloat(2, 1000)
+        $price =Price::create([
+            'amount' => 987654
         ]);
 
         $this->delete(route('price.destroy', ['price' => $price->id]))

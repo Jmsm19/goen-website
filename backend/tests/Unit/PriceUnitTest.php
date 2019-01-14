@@ -17,8 +17,8 @@ class PriceUnitTest extends TestCase
      */
     public function testPriceModuleRelationship()
     {
-        $price = Price::firstOrCreate([
-            'amount' => $this->faker->randomFloat(2, 1000)
+        $price = Price::create([
+            'amount' => 741258
         ]);
 
         $module = factory(Module::class)->create([
