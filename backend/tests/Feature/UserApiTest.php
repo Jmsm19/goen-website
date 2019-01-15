@@ -43,8 +43,7 @@ class UserApitest extends TestCase
     public function testGetSingleUser()
     {
         $this->passportActingAs('admin');
-        $user = factory(User::class)->create();
-        $user->roles()->attach(Role::where('name', 'student')->first());
+        $user = factory(User::class)->state('as_student')->create();
 
         $this->get(route('user.show', ['user' => $user->id]))
             ->assertStatus(200)
@@ -72,8 +71,7 @@ class UserApitest extends TestCase
     public function testCanUpdateUser()
     {
         // User can update own data
-        $user = factory(User::class)->create();
-        $user->roles()->attach(Role::where('name', 'student')->first());
+        $user = factory(User::class)->state('as_student')->create();
         Passport::actingAs($user);
 
         $params = [
@@ -127,8 +125,7 @@ class UserApitest extends TestCase
     public function testUpdateUserError()
     {
         $this->passportActingAs('admin');
-        $user = factory(User::class)->create();
-        $user->roles()->attach(Role::where('name', 'student')->first());
+        $user = factory(User::class)->state('as_student')->create();
 
         $params = [
             'name' => 123465,

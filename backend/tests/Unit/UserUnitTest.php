@@ -83,9 +83,7 @@ class UserUnitTest extends TestCase
     {
         $module = factory(Module::class)->create();
 
-        $student_role = Role::where('name', 'student')->first();
-        $user = factory(User::class)->create();
-        $user->roles()->attach($student_role);
+        $user = factory(User::class)->state('as_student')->create();
 
         // Is not registered in Module
         $this->assertTrue($user->isNotStudentIn($module->id));
@@ -108,9 +106,7 @@ class UserUnitTest extends TestCase
      */
     public function testInstructorModuleRelationship()
     {
-        $instructor_role = Role::where('name', 'instructor')->first();
-        $user = factory(User::class)->create();
-        $user->roles()->attach($instructor_role);
+        $user = factory(User::class)->state('as_instructor')->create();
         $module = factory(Module::class)->create([
             'instructor_id' => $user->id,
         ]);
@@ -131,9 +127,7 @@ class UserUnitTest extends TestCase
      */
     public function testAssistantModuleRelationship()
     {
-        $assistant_role = Role::where('name', 'assistant')->first();
-        $user = factory(User::class)->create();
-        $user->roles()->attach($assistant_role);
+        $user = factory(User::class)->state('as_assistant')->create();
         $module = factory(Module::class)->create([
             'assistant_id' => $user->id,
         ]);

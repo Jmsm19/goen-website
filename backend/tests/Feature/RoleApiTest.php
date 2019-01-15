@@ -51,14 +51,13 @@ class RoleApiTest extends TestCase
     public function testCanRemoveRole()
     {
         $admin_user = $this->passportActingAs('admin');
-        $role = Role::where('name', 'student')->first();
-        $user = factory(User::class)->create();
-        $user->roles()->attach($role);
+        $role = 'student';
+        $user = factory(User::class)->state("as_{$role}")->create();
 
         // Admin can't remove own roles
         $params = [
             'id' => $admin_user->id,
-            'role' => $role->name
+            'role' => $role
         ];
         $this->delete(route('remove_role', $params))
             ->assertStatus(200)
@@ -69,7 +68,7 @@ class RoleApiTest extends TestCase
         // Throw error when trying to delete the only role a user has
         $params = [
             'id' => $user->id,
-            'role' => $role->name
+            'role' => $role
         ];
         $this->delete(route('remove_role', $params))
             ->assertStatus(200)

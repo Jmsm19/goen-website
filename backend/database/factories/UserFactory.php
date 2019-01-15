@@ -31,7 +31,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 
 $factory->state(App\User::class, 'as_admin', [])
-        ->afterCreatingState(App\User::class, 'as-admin', function ($user, $faker) {
+        ->afterCreatingState(App\User::class, 'as_admin', function ($user, $faker) {
             $role = Role::where('name', 'admin')->first();
             $user->roles()->attach($role);
         });

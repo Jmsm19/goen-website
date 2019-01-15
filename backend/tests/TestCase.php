@@ -20,8 +20,7 @@ abstract class TestCase extends BaseTestCase
     protected $headers;
     protected function passportActingAs($role = 'student')
     {
-        $user = factory(User::class)->create();
-        $user->roles()->attach(Role::where('name', $role)->first());
+        $user = factory(User::class)->state("as_{$role}")->create();
         return Passport::actingAs($user);
     }
 
