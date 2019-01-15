@@ -66,7 +66,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-
     public function clan()
     {
         return $this->belongsTo('App\Clan');
@@ -75,5 +74,77 @@ class User extends Authenticatable implements MustVerifyEmail
     public function grades()
     {
         return $this->hasMany('App\Grade');
+    }
+
+    public function modulesAsStudent()
+    {
+        return $this->belongsToMany(
+            'App\Module', // related model
+            'module_student', // pivot table
+            'user_id', // parent model foreign key
+            'module_id', // related model pivot key
+            'id', // key name of parent model
+            'id', // key name of related model
+            'students' // relation name
+        );
+    }
+
+    public function isStudentIn($module)
+    {
+        if ($this->modulesAsStudent()->where('module_id', $module)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isNotStudentIn($module)
+    {
+        return !$this->isStudentIn($module);
+    }
+
+    public function registerIn($module)
+    {
+        return $this->modulesAsStudent()->attach($module);
+    }
+
+    public function removeFrom($module)
+    {
+        return $this->modulesAsStudent()->detach($module);
+    }
+
+    public function modulesAsInstructor()
+    {
+        return $this->hasMany('App\Module', 'instructor_id', 'id');
+    }
+
+    public function isInstructorIn($module)
+    {
+        if ($this->modulesAsInstructor()->where('id', $module)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isNotInstructorIn($module)
+    {
+        return !$this->isInstructorIn($module);
+    }
+
+    public function modulesAsAssistant()
+    {
+        return $this->hasMany('App\Module', 'assistant_id', 'id');
+    }
+
+    public function isAssistantIn($module)
+    {
+        if ($this->modulesAsAssistant()->where('id', $module)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isNotAssistantIn($module)
+    {
+        return !$this->isAssistantIn($module);
     }
 }

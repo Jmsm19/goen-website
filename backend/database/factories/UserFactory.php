@@ -1,5 +1,6 @@
 <?php
 
+use App\Role;
 use Faker\Generator as Faker;
 
 /*
@@ -28,3 +29,27 @@ $factory->define(App\User::class, function (Faker $faker) {
         'clan_id' => null,
     ];
 });
+
+$factory->state(App\User::class, 'as_admin', [])
+        ->afterCreatingState(App\User::class, 'as-admin', function ($user, $faker) {
+            $role = Role::where('name', 'admin')->first();
+            $user->roles()->attach($role);
+        });
+
+$factory->state(App\User::class, 'as_instructor', [])
+        ->afterCreatingState(App\User::class, 'as_instructor', function ($user, $faker) {
+            $role = Role::where('name', 'instructor')->first();
+            $user->roles()->attach($role);
+        });
+
+$factory->state(App\User::class, 'as_assistant', [])
+        ->afterCreatingState(App\User::class, 'as_assistant', function ($user, $faker) {
+            $role = Role::where('name', 'assistant')->first();
+            $user->roles()->attach($role);
+        });
+
+$factory->state(App\User::class, 'as_student', [])
+        ->afterCreatingState(App\User::class, 'as_student', function ($user, $faker) {
+            $role = Role::where('name', 'student')->first();
+            $user->roles()->attach($role);
+        });

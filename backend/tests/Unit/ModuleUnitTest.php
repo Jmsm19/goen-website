@@ -2,11 +2,14 @@
 
 namespace Tests\Unit;
 
+use App\Role;
+use App\User;
 use App\Grade;
 use App\Price;
 use App\Module;
 use App\Period;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -89,6 +92,75 @@ class ModuleUnitTest extends TestCase
         $this->assertEquals(
             [$price->id, $price->amount],
             [$module->price->id, $module->price->amount]
+        );
+    }
+
+    /**
+     * Test Module relationship with Students (Users)
+     *
+     * @return void
+    */
+    public function testModuleStudentsRelationship()
+    {
+        $module = factory(Module::class)->create();
+        $name = $this->faker->word;
+        $student = factory(User::class)
+                    ->state('as_student')
+                    ->create(['name' => $name]);
+
+        $this->assertTrue($module->canRegister($student));
+        $student->modulesAsStudent()->attach($module);
+        $this->assertFalse($module->canRegister($student));
+
+        $this->assertEquals($name, $module->students[0]->name);
+        $this->assertEquals(1, $module->getRegisteredStudents());
+        $this->assertEquals(
+            Config::get('constants.max_students_per_module') - 1,
+            $module->getRemainingSpaces()
+        );
+    }
+
+    /**
+     * Test Module relationship with Instructor (User)
+     *
+     * @return void
+    */
+    public function testModuleInstructorRelationship()
+    {
+        $name = $this->faker->word;
+        $instructor = factory(User::class)
+                        ->state('as_instructor')
+                        ->create([ 'name' => $name]);
+
+        $module = factory(Module::class)->create([
+            'instructor_id' => $instructor->id,
+        ]);
+
+        $this->assertEquals(
+            [$name],
+            [$module->instructor->name]
+        );
+    }
+
+    /**
+     * Test Module relationship with Assistant (User)
+     *
+     * @return void
+    */
+    public function testModuleAssistantRelationship()
+    {
+        $name = $this->faker->word;
+        $assistant = factory(User::class)
+                        ->state('as_assistant')
+                        ->create(['name' => $name]);
+
+        $module = factory(Module::class)->create([
+            'assistant_id' => $assistant->id,
+        ]);
+
+        $this->assertEquals(
+            [$name],
+            [$module->assistant->name]
         );
     }
 }
