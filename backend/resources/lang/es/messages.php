@@ -19,4 +19,5 @@ return [
     'succesfully_registered' => 'Te has inscrito exitosamente.',
     'module_full_or_registered' => 'Ya estás inscrito o el módulo ya está lleno.',
     'only_one_module_per_period' => 'Solo puedes incribirte en un módulo por cada período.',
+    'registration_outside_threshold' => 'Solo puedes inscribirte durante el período de inscripciones.',
 ];

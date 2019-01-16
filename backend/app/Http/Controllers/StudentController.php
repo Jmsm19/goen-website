@@ -16,6 +16,10 @@ class StudentController extends Controller
                 return response()->json([
                     'error' => trans('messages.only_one_module_per_period')
                 ], 400);
+            } elseif ($student->isNotWithinRegistrationThresholdOf($module->period)) {
+                return response()->json([
+                    'error' => trans('messages.registration_outside_threshold')
+                ], 400);
             }
             $student->registerIn($module);
             return response()->json([

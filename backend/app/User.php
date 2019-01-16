@@ -2,11 +2,12 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -113,6 +114,18 @@ class User extends Authenticatable implements MustVerifyEmail
                                             ->where('period_id', $module->period_id)
                                             ->count();
         return $qty_of_modules_where_is_registered === 1;
+    }
+
+    public function isNotWithinRegistrationThresholdOf($period)
+    {
+        // Normalized date, with time set to 00:00:00
+        $today = Carbon::parse(Carbon::now()->format('Y-m-d'));
+
+        // Compare dates only
+        $is_earlier_than_start = $today->lt(Carbon::parse($period->signup_from));
+        $is_later_than_end = $today->gt(Carbon::parse($period->signup_until));
+
+        return $is_earlier_than_start || $is_later_than_end;
     }
 
     public function removeFrom($module)

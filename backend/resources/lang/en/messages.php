@@ -19,4 +19,5 @@ return [
     'succesfully_registered' => 'You have registered successfuly.',
     'module_full_or_registered' => 'Already registered or module is full.',
     'only_one_module_per_period' => 'You can only register in one module per period.',
+    'registration_outside_threshold' => 'You can only register during the registration period.'
 ];

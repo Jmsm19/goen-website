@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\User;
 use App\Module;
 use App\Period;
+use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +20,11 @@ class StudentApiTest extends TestCase
     public function testRegisterStudentInModule()
     {
         $student = $this->passportActingAs('student');
-        $period = factory(Period::class)->create(['name' => 'I']);
+        $period = factory(Period::class)->create([
+            'name' => 'I',
+            'signup_from' => Carbon::now()->format('Y-m-d'),
+            'signup_until' => Carbon::now()->addWeeks(2)->format('Y-m-d')
+        ]);
         $module = factory(Module::class)->create([
             'name' => 'M-0',
             'period_id' => $period->id,
@@ -55,10 +60,14 @@ class StudentApiTest extends TestCase
         /**
          * Fail registraion, Module has no space available
          */
-        $period = factory(Period::class)->create(['name' => 'II']);
+        $period = factory(Period::class)->create([
+            'name' => 'II',
+            'signup_from' => Carbon::now()->format('Y-m-d'),
+            'signup_until' => Carbon::now()->addWeeks(2)->format('Y-m-d')
+        ]);
         $module = factory(Module::class)->create([
             'name' => 'M-2',
-            'period_id' => $period->id,
+            'period_id' => $period->id
         ]);
         $max_students_per_module = (integer) config('constants.max_students_per_module');
         $students = factory(User::class, $max_students_per_module)->state('as_student')->create();
@@ -70,6 +79,24 @@ class StudentApiTest extends TestCase
         $this->post(route('student.registration', ['module' => $module->id]))
             ->assertStatus(400)
             ->assertJson(['error' => trans('messages.module_full_or_registered')]);
+
+        /**
+         * Fail registration, trying to register outside registration threshold
+         */
+        $period = factory(Period::class)->create([
+            'name' => 'III',
+            'signup_from' => Carbon::now()->subWeeks(3)->format('Y-m-d'),
+            'signup_until' => Carbon::now()->subWeeks(1)->format('Y-m-d')
+        ]);
+        // Carbon::now() would return a date 1 week later than the signup period
+        $module = factory(Module::class)->create([
+            'name' => 'M-3',
+            'period_id' => $period->id,
+        ]);
+
+        $this->post(route('student.registration', ['module' => $module->id]))
+            ->assertStatus(400)
+            ->assertJson(['error' => trans('messages.registration_outside_threshold')]);
 
         /**
          * Fail registration, User does not have student Role
