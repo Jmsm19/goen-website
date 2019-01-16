@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name', 'national_id', 'email',
         'password', 'phone_number', 'birth_date',
-        'active', 'activation_token'
+        'active', 'activation_token', 'registration_status'
     ];
 
     /**
@@ -103,8 +103,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return !$this->isStudentIn($module);
     }
 
+    public function setRegistrationStatus($status)
+    {
+        return $this->update(['registration_status' => $status]);
+    }
+
     public function registerIn($module)
     {
+        $this->setRegistrationStatus('paying');
         return $this->modulesAsStudent()->attach($module);
     }
 

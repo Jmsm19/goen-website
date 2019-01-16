@@ -33,11 +33,13 @@ class StudentApiTest extends TestCase
         /**
          * Successfuly registered Student (User)
          */
+        $this->assertEquals('idle', $student->registration_status);
         $this->assertTrue($student->isNotStudentIn($module->id));
         $this->post(route('student.registration', ['module' => $module->id]))
             ->assertStatus(200)
             ->assertJson(['message' => trans('messages.succesfully_registered')]);
         $this->assertTrue($student->isStudentIn($module->id));
+        $this->assertEquals('paying', $student->registration_status);
 
         /**
          * Fail registraion, student already in module or Module is full

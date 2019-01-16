@@ -27,6 +27,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'phone_number' => $faker->phoneNumber(),
         'active' => true,
         'clan_id' => null,
+        'registration_status' => 'idle'
     ];
 });
 
