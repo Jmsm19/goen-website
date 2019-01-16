@@ -107,10 +107,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->modulesAsStudent()->attach($module);
     }
 
+    public function isRegisteredInPeriodOf($module)
+    {
+        $qty_of_modules_where_is_registered = $this->modulesAsStudent()
+                                            ->where('period_id', $module->period_id)
+                                            ->count();
+        return $qty_of_modules_where_is_registered === 1;
+    }
+
     public function removeFrom($module)
     {
         return $this->modulesAsStudent()->detach($module);
     }
+
 
     public function modulesAsInstructor()
     {

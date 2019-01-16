@@ -16,4 +16,7 @@ return [
     'price_exists' => 'A similar price already exists.',
     'module_exists' => 'A similar module already exists in the period.',
     'section_not_in_options' => 'The selected section is not valid.',
+    'succesfully_registered' => 'You have registered successfuly.',
+    'module_full_or_registered' => 'Already registered or module is full.',
+    'only_one_module_per_period' => 'You can only register in one module per period.',
 ];

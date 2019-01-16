@@ -16,4 +16,7 @@ return [
     'price_exists' => 'Ya existe un precio similar.',
     'module_exists' => 'Ya existe un módulo similar en el período.',
     'section_not_in_options' => 'La sección seleccionada es inválida.',
+    'succesfully_registered' => 'Te has inscrito exitosamente.',
+    'module_full_or_registered' => 'Ya estás inscrito o el módulo ya está lleno.',
+    'only_one_module_per_period' => 'Solo puedes incribirte en un módulo por cada período.',
 ];

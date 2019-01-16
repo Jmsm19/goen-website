@@ -71,3 +71,10 @@ Route::group(['middleware' => ['auth:api', 'role:instructor admin']], function (
 Route::group(['middleware' => ['auth:api']], function () {
     Route::put('/user/{user}', 'UserController@update')->name('user.update');
 });
+
+Route::group(['middleware' => ['auth:api', 'role:student']], function () {
+    Route::post(
+        '/module/{module}/register',
+        'StudentController@register'
+    )->name('student.registration');
+});
