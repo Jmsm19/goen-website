@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Period;
 use Carbon\Carbon;
 use Laravel\Passport\HasApiTokens;
+use App\Http\Resources\ModuleResource;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -136,6 +138,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function removeFrom($module)
     {
+        $this->setRegistrationStatus('idle');
         return $this->modulesAsStudent()->detach($module);
     }
 
@@ -174,5 +177,27 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isNotAssistantIn($module)
     {
         return !$this->isAssistantIn($module);
+    }
+
+    public function getCurrentModule()
+    {
+        return $this->modulesAsStudent()
+                        ->whereHas('period', function ($query) {
+                            $query->where('active', 1);
+                        })->latest()->first();
+    }
+
+    public function getPreviousModules()
+    {
+        $current_module = $this->getCurrentModule();
+        return $this->modulesAsStudent()->where('modules.id', '!=', $current_module['id'])->get();
+        // ->filter(function ($value, $key) {
+        //     $current_module = $this->getCurrentModule();
+        //     if (is_null($current_module)) {
+        //         return true;
+        //     }
+
+        //     return $value->id !== $current_module['id'];
+        // });
     }
 }

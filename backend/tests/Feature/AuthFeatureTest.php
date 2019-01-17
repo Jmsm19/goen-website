@@ -11,6 +11,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthFeatureTest extends TestCase
 {
+    private $userJsonStructure = [
+        'id', 'name', 'email', 'nationalId',
+        'phoneNumber', 'birthDate', 'clan',
+        'registrationStatus',
+        'currentModule', 'previousModules',
+        'isAdmin', 'isInstructor',
+        'isStudent', 'isAssistant'
+    ];
+
     /**
      * Test successful user signup and activation
      *
@@ -52,12 +61,7 @@ class AuthFeatureTest extends TestCase
         $this->get(route('signup_activate', ['token' => $activation_token]))
             ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
-                    'id', 'name', 'email', 'national_id',
-                    'phone_number', 'birth_date', 'clan',
-                    'is_admin', 'is_instructor',
-                    'is_student', 'is_assistant'
-                ]
+                'data' => $this->userJsonStructure
             ]);
     }
 
@@ -133,12 +137,7 @@ class AuthFeatureTest extends TestCase
 
         $this->get(route('get_auth_user'))
             ->assertJsonStructure([
-                'data' => [
-                    'id', 'name', 'email', 'national_id',
-                    'phone_number', 'birth_date', 'clan',
-                    'is_admin', 'is_instructor',
-                    'is_student', 'is_assistant'
-                ]
+                'data' => $this->userJsonStructure
             ]);
     }
 

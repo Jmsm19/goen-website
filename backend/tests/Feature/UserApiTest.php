@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Role;
 use App\User;
+use App\Module;
+use App\Period;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Laravel\Passport\Passport;
@@ -12,6 +14,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserApitest extends TestCase
 {
+    private $userJsonStructure = [
+        'id', 'name', 'email', 'nationalId',
+        'phoneNumber', 'birthDate', 'clan',
+        'registrationStatus',
+        'currentModule', 'previousModules',
+        'isAdmin', 'isInstructor',
+        'isStudent', 'isAssistant'
+    ];
+
     /**
      * Test get list of users
      *
@@ -25,12 +36,7 @@ class UserApitest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    [
-                        'id', 'name', 'email', 'national_id',
-                        'phone_number', 'birth_date',
-                        'is_admin', 'is_instructor',
-                        'is_student', 'is_assistant'
-                    ]
+                    $this->userJsonStructure
                 ]
             ]);
     }
@@ -44,21 +50,34 @@ class UserApitest extends TestCase
     {
         $this->passportActingAs('admin');
         $user = factory(User::class)->state('as_student')->create();
+        $period = Period::where('active', 1)->first();
+        $module = factory(Module::class)->create(['period_id' => $period->id]);
+        $user->registerIn($module);
+
+        $current_module = $user->getCurrentModule();
+        $previous_modules = $user->getPreviousModules();
 
         $this->get(route('user.show', ['user' => $user->id]))
             ->assertStatus(200)
             ->assertJson([
                 'data' => [
                     'id' => $user->id,
-                    'national_id' => $user->national_id,
+                    'nationalId' => $user->national_id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'phone_number' => $user->phone_number,
-                    'birth_date' => (string) $user->birth_date,
-                    'is_admin' => $user->hasRole('admin'),
-                    'is_instructor' => $user->hasRole('instructor'),
-                    'is_student' => $user->hasRole('student'),
-                    'is_assistant' => $user->hasRole('assistant')
+                    'phoneNumber' => $user->phone_number,
+                    'birthDate' => (string) $user->birth_date,
+                    'registrationStatus' => $user->registration_status,
+                    'currentModule' => [
+                        'id' => $module->id,
+                        'name' => $module->name,
+                        'section' => $module->section,
+                    ],
+                    'previousModules' => [],
+                    'isAdmin' => $user->hasRole('admin'),
+                    'isInstructor' => $user->hasRole('instructor'),
+                    'isStudent' => $user->hasRole('student'),
+                    'isAssistant' => $user->hasRole('assistant')
                 ]
             ]);
     }
@@ -85,8 +104,8 @@ class UserApitest extends TestCase
             ->assertJson([
                'data' => [
                     'name' => $params['name'],
-                    'phone_number' => $params['phone_number'],
-                    'birth_date' => $params['birth_date'],
+                    'phoneNumber' => $params['phone_number'],
+                    'birthDate' => $params['birth_date'],
                ]
             ]);
 
@@ -103,8 +122,8 @@ class UserApitest extends TestCase
             ->assertJson([
                'data' => [
                     'name' => $params['name'],
-                    'phone_number' => $params['phone_number'],
-                    'birth_date' => $params['birth_date'],
+                    'phoneNumber' => $params['phone_number'],
+                    'birthDate' => $params['birth_date'],
                ]
             ]);
 

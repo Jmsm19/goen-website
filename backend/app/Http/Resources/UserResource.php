@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\SimpleModuleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -15,19 +16,26 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         $has_clan = !is_null($this->clan);
+        $current_module = $this->getCurrentModule();
+        $previous_modules = $this->getPreviousModules();
+
         return [
             'id' => $this->id,
-            'national_id' => $this->national_id,
+            'nationalId' => $this->national_id,
             'name' => $this->name,
             'email' => $this->email,
-            'phone_number' => $this->phone_number,
-            'birth_date' => (string) $this->birth_date,
+            'phoneNumber' => $this->phone_number,
+            'birthDate' => (string) $this->birth_date,
             'clan' => $has_clan ? $this->clan->name : null,
-            'registration_status' => $this->registration_status,
-            'is_admin' => $this->hasRole('admin'),
-            'is_instructor' => $this->hasRole('instructor'),
-            'is_assistant' => $this->hasRole('assistant'),
-            'is_student' => $this->hasRole('student'),
+            'registrationStatus' => $this->registration_status,
+            'currentModule' => is_null($current_module) ?
+                null : new SimpleModuleResource($current_module),
+            'previousModules' => count($previous_modules) == 0 ?
+                [] : SimpleModuleResource::collection($previous_modules),
+            'isAdmin' => $this->hasRole('admin'),
+            'isInstructor' => $this->hasRole('instructor'),
+            'isAssistant' => $this->hasRole('assistant'),
+            'isStudent' => $this->hasRole('student'),
         ];
     }
 }
