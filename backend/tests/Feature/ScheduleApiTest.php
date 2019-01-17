@@ -23,7 +23,7 @@ class ScheduleApiTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     [
-                        'id', 'start_date', 'from', 'until'
+                        'id', 'startDate', 'from', 'until'
                     ]
                 ]
             ]);
@@ -44,7 +44,7 @@ class ScheduleApiTest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $schedule->id,
-                    'start_date' => $schedule->start_date,
+                    'startDate' => $schedule->start_date,
                     'from' => $schedule->from,
                     'until' => $schedule->until,
                 ]
@@ -71,7 +71,7 @@ class ScheduleApiTest extends TestCase
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'start_date', 'from', 'until'
+                    'id', 'startDate', 'from', 'until'
                 ]
             ]);
 
@@ -129,7 +129,7 @@ class ScheduleApiTest extends TestCase
         ->assertStatus(200)
         ->assertJson([
             'data' => [
-                'start_date' => $params['start_date'],
+                'startDate' => $params['start_date'],
                 'from' => $params['from'],
                 'until' => $params['until'],
             ]

@@ -141,7 +141,7 @@ class ModuleApiTest extends TestCase
                     'availableSpaces' => $module->getRemainingSpaces(),
                     'schedule' => [
                         'id' => $module->schedule->id,
-                        'start_date' => $module->schedule->start_date,
+                        'startDate' => $module->schedule->start_date,
                         'from' => $module->schedule->from,
                         'until' => $module->schedule->until
                     ]
