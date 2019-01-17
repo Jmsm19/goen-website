@@ -75,7 +75,9 @@ class ModuleApiTest extends TestCase
                     'name',
                     'section',
                     'price',
-                    'schedule'
+                    'schedule',
+                    'registeredStudents',
+                    'availableSpaces',
                 ]
             ]);
 
@@ -135,6 +137,8 @@ class ModuleApiTest extends TestCase
                     'name' => $module->name,
                     'section' => $module->section,
                     'price' => $module->price->amount,
+                    'registeredStudents' => $module->getRegisteredStudents(),
+                    'availableSpaces' => $module->getRemainingSpaces(),
                     'schedule' => [
                         'id' => $module->schedule->id,
                         'start_date' => $module->schedule->start_date,
@@ -180,6 +184,8 @@ class ModuleApiTest extends TestCase
                     'name' => $params['name'],
                     'section' => $params['section'],
                     'price' => $params['price'],
+                    'registeredStudents' => $module->getRegisteredStudents(),
+                    'availableSpaces' => $module->getRemainingSpaces(),
                     'schedule' => [
                         'id' => $params['schedule_id']
                     ]

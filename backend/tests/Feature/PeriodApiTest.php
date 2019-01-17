@@ -66,8 +66,8 @@ class PeriodApiTest extends TestCase
                     'year',
                     'name',
                     'active',
-                    'signup_from',
-                    'signup_until',
+                    'signupFrom',
+                    'signupUntil',
                     'modules' => []
                 ]
             ]);
@@ -144,8 +144,8 @@ class PeriodApiTest extends TestCase
                     'year' => $period->year,
                     'name' => $period->name,
                     'active' => $period->active,
-                    'signup_from' => $period->signup_from,
-                    'signup_until' => $period->signup_until,
+                    'signupFrom' => $period->signup_from,
+                    'signupUntil' => $period->signup_until,
                     'modules' => $period->modules
                 ]
             ]);
@@ -185,8 +185,8 @@ class PeriodApiTest extends TestCase
                     'year' => $params['year'],
                     'name' => $params['name'],
                     'active' => $period->active,
-                    'signup_from' => $params['signup_from'],
-                    'signup_until' =>$params['signup_until'],
+                    'signupFrom' => $params['signup_from'],
+                    'signupUntil' =>$params['signup_until'],
                     'modules' => $period->modules
                 ]
             ]);
@@ -257,8 +257,8 @@ class PeriodApiTest extends TestCase
                 'year',
                 'name',
                 'active',
-                'signup_from',
-                'signup_until',
+                'signupFrom',
+                'signupUntil',
                 'modules' => []
             ]]);
     }

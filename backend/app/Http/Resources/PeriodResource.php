@@ -20,8 +20,8 @@ class PeriodResource extends JsonResource
             'year' => $this->year,
             'name' => $this->name,
             'active' => (boolean) $this->active,
-            'signup_from' => $this->signup_from,
-            'signup_until' => $this->signup_until,
+            'signupFrom' => $this->signup_from,
+            'signupUntil' => $this->signup_until,
             'modules' => ModuleResource::collection($this->module)
         ];
     }
