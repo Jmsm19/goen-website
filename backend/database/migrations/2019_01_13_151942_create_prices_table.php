@@ -15,7 +15,7 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('amount')->unique()->unsigned();
+            $table->decimal('amount', 12, 2)->unique()->unsigned();
             $table->timestamps();
         });
     }
