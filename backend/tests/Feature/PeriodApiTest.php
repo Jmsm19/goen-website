@@ -250,8 +250,6 @@ class PeriodApiTest extends TestCase
      */
     public function testPeriodGetCurrent()
     {
-        $this->passportActingAs('admin');
-
         $this->get(route('period.current'))
             ->assertStatus(200)
             ->assertJsonStructure(['data' => [
