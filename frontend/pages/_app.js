@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import App from 'next/app';
-// eslint-disable-next-line import/no-named-as-default
 import Page from '../components/Page';
 import Meta from '../components/Meta';
 import { AuthContextProvider, AuthContextConsumer } from '../context/AuthContext';

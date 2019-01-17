@@ -6,7 +6,7 @@ import enquireScreen from '../../utils/enquire';
 import DesktopLayout from '../DesktopLayout';
 import MobileLayout from '../MobileLayout';
 
-export class Page extends Component {
+class Page extends Component {
   state = {
     isMobile: false,
   };
@@ -41,3 +41,4 @@ Page.propTypes = {
 };
 
 export default appWithTranslation(Page);
+export const CleanPage = Page;
