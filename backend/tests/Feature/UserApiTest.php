@@ -54,8 +54,8 @@ class UserApitest extends TestCase
         $module = factory(Module::class)->create(['period_id' => $period->id]);
         $user->registerIn($module);
 
-        $current_module = $user->getCurrentModule();
-        $previous_modules = $user->getPreviousModules();
+        $current_module = $user->currentModule();
+        $previous_modules = $user->previousModules();
 
         $this->get(route('user.show', ['user' => $user->id]))
             ->assertStatus(200)

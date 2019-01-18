@@ -41,6 +41,12 @@ class StudentApiTest extends TestCase
         $this->assertTrue($student->isStudentIn($module->id));
         $this->assertEquals('paying', $student->registration_status);
 
+        // Check module status
+        $module_status = $student->modulesAsStudent()
+                                ->where('module_id', $module->id)->first()
+                                ->pivot->status;
+        $this->assertEquals('current', $module_status);
+
         /**
          * Fail registraion, student already in module or Module is full
          */

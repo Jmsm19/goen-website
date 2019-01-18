@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    /**
+     * If possible, register student in module
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Module $module
+     * @return \Illuminate\Http\Response
+     */
     public function register(Request $request, Module $module)
     {
         $student = $request->user();
 
-        if ($module->canRegister($student)) {
+        if ($student->canRegisterIn($module)) {
             if ($student->isRegisteredInPeriodOf($module)) {
                 return response()->json([
                     'error' => trans('messages.only_one_module_per_period')

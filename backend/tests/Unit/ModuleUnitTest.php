@@ -108,9 +108,9 @@ class ModuleUnitTest extends TestCase
                     ->state('as_student')
                     ->create(['name' => $name]);
 
-        $this->assertTrue($module->canRegister($student));
+        $this->assertTrue($student->canRegisterIn($module));
         $student->modulesAsStudent()->attach($module);
-        $this->assertFalse($module->canRegister($student));
+        $this->assertFalse($student->canRegisterIn($module));
 
         $this->assertEquals($name, $module->students[0]->name);
         $this->assertEquals(1, $module->getRegisteredStudents());

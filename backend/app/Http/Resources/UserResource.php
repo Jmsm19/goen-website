@@ -16,8 +16,8 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         $has_clan = !is_null($this->clan);
-        $current_module = $this->getCurrentModule();
-        $previous_modules = $this->getPreviousModules();
+        $current_module = $this->currentModule();
+        $previous_modules = $this->previousModules();
 
         return [
             'id' => $this->id,

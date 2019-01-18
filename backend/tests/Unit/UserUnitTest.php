@@ -93,25 +93,22 @@ class UserUnitTest extends TestCase
         // Is now registered in Module
         $this->assertTrue($user->isStudentIn($module->id));
         $this->assertEquals($module->id, $user->modulesAsStudent[0]->id);
-        // Get previous Modules
-        $this->assertEquals($module->id, $user->getPreviousModules()[0]->id);
+        $this->assertEquals($module->id, $user->currentModule()->id);
+        // Register in new Module
+        $new_module = factory(Module::class)->create();
+        $user->registerIn($new_module);
+        $this->assertTrue($user->isStudentIn($new_module->id));
+        $this->assertEquals($new_module->id, $user->currentModule()->id);
+        // Now previously registered Module is not current
+        $this->assertEquals($module->id, $user->previousModules()[0]->id);
+        // Current module should not appear in previous modules
+        $this->assertEquals(1, $user->previousModules()->count());
 
-        // Remove from Module
+        // Remove from Modules
         $user->removeFrom($module);
         $this->assertTrue($user->isNotStudentIn($module->id));
-
-        // Get current Module
-        $period = Period::where('active', 1)->first();
-        $module = factory(Module::class)->create([
-            'period_id' => $period->id
-        ]);
-        $user->registerIn($module);
-        $this->assertEquals(
-            $module->id,
-            $user->getCurrentModule()['id']
-        );
-        // Current module shoudl not appear in previous modules
-        $this->assertEquals(0, $user->getPreviousModules()->count());
+        $user->removeFrom($new_module);
+        $this->assertTrue($user->isNotStudentIn($new_module->id));
     }
 
     /**

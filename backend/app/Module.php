@@ -47,7 +47,7 @@ class Module extends Model
             'id', // key name of parent model
             'id', // key name of related model
             'students' // relation name
-        );
+        )->withPivot('status');
     }
 
     public function getRegisteredStudents()
@@ -60,11 +60,6 @@ class Module extends Model
         return Config::get('constants.max_students_per_module') - $this->getRegisteredStudents();
     }
 
-    public function canRegister($student)
-    {
-        return $this->getRemainingSpaces() > 0 && $student->isNotStudentIn($this->id);
-    }
-
     public function instructor()
     {
         return $this->belongsTo('App\User', 'instructor_id', 'id');
@@ -73,5 +68,24 @@ class Module extends Model
     public function assistant()
     {
         return $this->belongsTo('App\User', 'assistant_id', 'id');
+    }
+
+    public function setModuleStatusFor($student, $status)
+    {
+        // When new status is current, set all previous Modules with that status to be failed
+        if ($status == 'current') {
+            $this->setAllCurrentModulesToFailedFor($student);
+        }
+
+        return $this->students()->updateExistingPivot($student->id, ['status' => $status]);
+    }
+
+    public function setAllCurrentModulesToFailedFor($student)
+    {
+        $student->modulesAsStudent()
+                ->newPivotStatement()
+                ->where([
+                    'status' => 'current'
+                ])->update(['status' => 'failed']);
     }
 }

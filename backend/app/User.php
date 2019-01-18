@@ -89,7 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'id', // key name of parent model
             'id', // key name of related model
             'students' // relation name
-        );
+        )->withPivot('status');
     }
 
     public function isStudentIn($module)
@@ -110,10 +110,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->update(['registration_status' => $status]);
     }
 
+    public function canRegisterIn($module)
+    {
+        $module_order = config('constants.module_order');
+        $prev_modules = $this->passedModules();
+        // TODO:
+        // $module_number = explode('-', $module->name)[1];
+        return $module->getRemainingSpaces() > 0 && $this->isNotStudentIn($module->id);
+    }
+
+    /**
+     * Register student in module
+     * and update registration and module status for student
+     * @param  \App\Module  $module
+     * @return void
+     */
     public function registerIn($module)
     {
+        // Set relation
+        $this->modulesAsStudent()->attach($module);
+        $module->setModuleStatusFor($this, 'current');
+        // Update status
         $this->setRegistrationStatus('paying');
-        return $this->modulesAsStudent()->attach($module);
     }
 
     public function isRegisteredInPeriodOf($module)
@@ -179,25 +197,29 @@ class User extends Authenticatable implements MustVerifyEmail
         return !$this->isAssistantIn($module);
     }
 
-    public function getCurrentModule()
+    public function currentModule()
     {
         return $this->modulesAsStudent()
-                        ->whereHas('period', function ($query) {
-                            $query->where('active', 1);
-                        })->latest()->first();
+                    ->wherePivot('status', 'current')->first();
     }
 
-    public function getPreviousModules()
+    public function previousModules()
     {
-        $current_module = $this->getCurrentModule();
-        return $this->modulesAsStudent()->where('modules.id', '!=', $current_module['id'])->get();
-        // ->filter(function ($value, $key) {
-        //     $current_module = $this->getCurrentModule();
-        //     if (is_null($current_module)) {
-        //         return true;
-        //     }
+        $current_module = $this->currentModule();
+        if ($current_module) {
+            return $this->modulesAsStudent()
+                ->where('module_id', '!=', $current_module->id)->get();
+        }
+        return $this->modulesAsStudent()->get();
+    }
 
-        //     return $value->id !== $current_module['id'];
-        // });
+    public function passedModules()
+    {
+        return $this->modulesAsStudent()->where('status', 'passed')->get();
+    }
+
+    public function failedModules()
+    {
+        return $this->modulesAsStudent()->where('status', 'failed')->get();
     }
 }

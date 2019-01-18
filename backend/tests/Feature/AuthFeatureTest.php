@@ -95,7 +95,7 @@ class AuthFeatureTest extends TestCase
     public function testLoginSuccess()
     {
         $login_data = [
-            'email' => 'jorgemsm19@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => '20689293',
             'remember_me' => true
         ];
