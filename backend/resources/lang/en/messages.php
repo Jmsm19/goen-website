@@ -17,7 +17,9 @@ return [
     'module_exists' => 'A similar module already exists in the period.',
     'section_not_in_options' => 'The selected section is not valid.',
     'succesfully_registered' => 'You have registered successfuly.',
-    'module_full_or_registered' => 'Already registered or module is full.',
+    'module_full' => 'Module is full.',
+    'already_registered_in_module' => 'Already registered in this module.',
+    'wrong_next_module' => 'You must register in :module first.',
     'only_one_module_per_period' => 'You can only register in one module per period.',
     'registration_outside_threshold' => 'You can only register during the registration period.'
 ];

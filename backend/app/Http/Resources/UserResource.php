@@ -17,7 +17,7 @@ class UserResource extends JsonResource
     {
         $has_clan = !is_null($this->clan);
         $current_module = $this->currentModule();
-        $previous_modules = $this->previousModules();
+        $passed_modules = $this->passedModules();
 
         return [
             'id' => $this->id,
@@ -30,8 +30,8 @@ class UserResource extends JsonResource
             'registrationStatus' => $this->registration_status,
             'currentModule' => is_null($current_module) ?
                 null : new SimpleModuleResource($current_module),
-            'previousModules' => count($previous_modules) == 0 ?
-                [] : SimpleModuleResource::collection($previous_modules),
+            'passedModules' => count($passed_modules) == 0 ?
+                [] : SimpleModuleResource::collection($passed_modules),
             'isAdmin' => $this->hasRole('admin'),
             'isInstructor' => $this->hasRole('instructor'),
             'isAssistant' => $this->hasRole('assistant'),

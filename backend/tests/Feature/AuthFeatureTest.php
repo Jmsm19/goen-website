@@ -15,7 +15,7 @@ class AuthFeatureTest extends TestCase
         'id', 'name', 'email', 'nationalId',
         'phoneNumber', 'birthDate', 'clan',
         'registrationStatus',
-        'currentModule', 'previousModules',
+        'currentModule', 'passedModules',
         'isAdmin', 'isInstructor',
         'isStudent', 'isAssistant'
     ];

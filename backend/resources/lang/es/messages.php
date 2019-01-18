@@ -17,7 +17,9 @@ return [
     'module_exists' => 'Ya existe un módulo similar en el período.',
     'section_not_in_options' => 'La sección seleccionada es inválida.',
     'succesfully_registered' => 'Te has inscrito exitosamente.',
-    'module_full_or_registered' => 'Ya estás inscrito o el módulo ya está lleno.',
+    'module_full' => 'El módulo ya está lleno.',
+    'already_registered_in_module' => 'Ya estás inscrito en este módulo.',
+    'wrong_next_module' => 'Debes inscribirte primero en el :module.',
     'only_one_module_per_period' => 'Solo puedes incribirte en un módulo por cada período.',
     'registration_outside_threshold' => 'Solo puedes inscribirte durante el período de inscripciones.',
 ];

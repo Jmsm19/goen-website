@@ -60,6 +60,34 @@ class Module extends Model
         return Config::get('constants.max_students_per_module') - $this->getRegisteredStudents();
     }
 
+    public function hasSpace()
+    {
+        return $this->getRemainingSpaces() > 0;
+    }
+
+    /**
+     * Checks if module is correct for student according to module order.
+     * Returns an array with a bool [0] and next module name [1]
+     * @param \App\User $student
+     * @return Array
+     */
+    public function isCorrectFor($student)
+    {
+        $taken_modules = [];
+        $passed_modules = $student->passedModules();
+        $module_order = config('constants.module_order');
+
+        for ($i=0; $i < count($passed_modules); $i++) {
+            $module_number = explode('-', $passed_modules[$i]->name)[1];
+            $taken_modules[$module_number] = $passed_modules[$i]->name;
+        }
+
+        $not_taken_modules = array_diff($module_order, $taken_modules);
+        $next_module = array_shift($not_taken_modules);
+
+        return [$this->name === $next_module, $next_module];
+    }
+
     public function instructor()
     {
         return $this->belongsTo('App\User', 'instructor_id', 'id');

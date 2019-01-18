@@ -86,18 +86,18 @@ class UserUnitTest extends TestCase
 
         $user = factory(User::class)->state('as_student')->create();
         // Is not registered in Module
-        $this->assertTrue($user->isNotStudentIn($module->id));
+        $this->assertTrue($user->isNotStudentIn($module));
 
         // Register in Module
         $user->registerIn($module);
         // Is now registered in Module
-        $this->assertTrue($user->isStudentIn($module->id));
+        $this->assertTrue($user->isStudentIn($module));
         $this->assertEquals($module->id, $user->modulesAsStudent[0]->id);
         $this->assertEquals($module->id, $user->currentModule()->id);
         // Register in new Module
         $new_module = factory(Module::class)->create();
         $user->registerIn($new_module);
-        $this->assertTrue($user->isStudentIn($new_module->id));
+        $this->assertTrue($user->isStudentIn($new_module));
         $this->assertEquals($new_module->id, $user->currentModule()->id);
         // Now previously registered Module is not current
         $this->assertEquals($module->id, $user->previousModules()[0]->id);
@@ -106,9 +106,9 @@ class UserUnitTest extends TestCase
 
         // Remove from Modules
         $user->removeFrom($module);
-        $this->assertTrue($user->isNotStudentIn($module->id));
+        $this->assertTrue($user->isNotStudentIn($module));
         $user->removeFrom($new_module);
-        $this->assertTrue($user->isNotStudentIn($new_module->id));
+        $this->assertTrue($user->isNotStudentIn($new_module));
     }
 
     /**

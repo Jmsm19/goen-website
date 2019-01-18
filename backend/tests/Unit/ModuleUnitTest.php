@@ -102,15 +102,13 @@ class ModuleUnitTest extends TestCase
     */
     public function testModuleStudentsRelationship()
     {
-        $module = factory(Module::class)->create();
+        $module = factory(Module::class)->create(['name' => 'M-0']);
         $name = $this->faker->word;
         $student = factory(User::class)
                     ->state('as_student')
                     ->create(['name' => $name]);
 
-        $this->assertTrue($student->canRegisterIn($module));
         $student->modulesAsStudent()->attach($module);
-        $this->assertFalse($student->canRegisterIn($module));
 
         $this->assertEquals($name, $module->students[0]->name);
         $this->assertEquals(1, $module->getRegisteredStudents());

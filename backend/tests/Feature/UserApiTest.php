@@ -18,7 +18,7 @@ class UserApitest extends TestCase
         'id', 'name', 'email', 'nationalId',
         'phoneNumber', 'birthDate', 'clan',
         'registrationStatus',
-        'currentModule', 'previousModules',
+        'currentModule', 'passedModules',
         'isAdmin', 'isInstructor',
         'isStudent', 'isAssistant'
     ];
@@ -54,9 +54,6 @@ class UserApitest extends TestCase
         $module = factory(Module::class)->create(['period_id' => $period->id]);
         $user->registerIn($module);
 
-        $current_module = $user->currentModule();
-        $previous_modules = $user->previousModules();
-
         $this->get(route('user.show', ['user' => $user->id]))
             ->assertStatus(200)
             ->assertJson([
@@ -73,7 +70,7 @@ class UserApitest extends TestCase
                         'name' => $module->name,
                         'section' => $module->section,
                     ],
-                    'previousModules' => [],
+                    'passedModules' => [],
                     'isAdmin' => $user->hasRole('admin'),
                     'isInstructor' => $user->hasRole('instructor'),
                     'isStudent' => $user->hasRole('student'),

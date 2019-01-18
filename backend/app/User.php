@@ -94,9 +94,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isStudentIn($module)
     {
-        if ($this->modulesAsStudent()->where('module_id', $module)->first()) {
+        if ($this->modulesAsStudent()->where('module_id', $module->id)->first()) {
             return true;
         }
+
         return false;
     }
 
@@ -108,15 +109,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setRegistrationStatus($status)
     {
         return $this->update(['registration_status' => $status]);
-    }
-
-    public function canRegisterIn($module)
-    {
-        $module_order = config('constants.module_order');
-        $prev_modules = $this->passedModules();
-        // TODO:
-        // $module_number = explode('-', $module->name)[1];
-        return $module->getRemainingSpaces() > 0 && $this->isNotStudentIn($module->id);
     }
 
     /**

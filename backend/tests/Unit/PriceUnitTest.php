@@ -25,9 +25,7 @@ class PriceUnitTest extends TestCase
             'price_id' => $price->id
         ]);
 
-        $this->assertEquals(
-            $price->id,
-            $module->price->id
-        );
+        $this->assertEquals($price->id, $module->price->id);
+        $this->assertEquals($module->id, $price->modules[0]->id);
     }
 }
