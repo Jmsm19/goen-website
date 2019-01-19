@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 /* eslint-disable react/sort-comp */
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
@@ -102,14 +101,14 @@ class AuthContextProvider extends Component {
     NProgress.start();
     SendData('POST', '/auth/login', values)
       .then(data => data.json())
-      .then(({ access_token, expires_at, message }) => {
+      .then(({ accessToken, expiresAt, message }) => {
         if (message) {
           throw Error(message);
         } else {
           NProgress.done();
-          Cookies.set('token', access_token, {
+          Cookies.set('token', accessToken, {
             secure: publicRuntimeConfig.NODE_ENV !== 'development',
-            expires: expires_at ? 7 : null,
+            expires: expiresAt ? 7 : null,
           });
           setSubmitting(false);
           this.setState(
@@ -119,7 +118,7 @@ class AuthContextProvider extends Component {
             }),
             () => {
               this.getAuthUser();
-              Router.push('/profile');
+              Router.push('/module/register');
             },
           );
         }
@@ -141,13 +140,17 @@ class AuthContextProvider extends Component {
       .then(data => data.json())
       .then(({ message }) => {
         NProgress.done();
-        Router.push('/');
         Cookies.remove('token');
-        this.setState({
-          isAuth: false,
-          authUser: null,
-          message,
-        });
+        this.setState(
+          {
+            isAuth: false,
+            authUser: null,
+            message,
+          },
+          () => {
+            Router.push('/');
+          },
+        );
       })
       .catch(error => {
         NProgress.done();
@@ -204,6 +207,16 @@ class AuthContextProvider extends Component {
       });
   };
 
+  setRegistrationStatus = status => {
+    this.setState(prevState => ({
+      ...prevState,
+      authUser: {
+        ...prevState.authUser,
+        registrationStatus: status,
+      },
+    }));
+  };
+
   state = {
     mounted: false,
     isAuth: false,
@@ -212,6 +225,7 @@ class AuthContextProvider extends Component {
     handleRegister: this.handleRegister,
     handleUserUpdate: this.updateAuthUser,
     registerSuccess: false,
+    setRegistrationStatus: this.setRegistrationStatus,
     message: '',
     fieldErrors: [],
     authUser: null,

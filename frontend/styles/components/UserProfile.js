@@ -40,9 +40,20 @@ export const StyledProfile = styled.div`
 export const UserProfileUpper = styled.div`
   display: grid;
   grid-template-columns: 200px 1fr auto;
+  padding-top: 20px;
+
+  div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   ${media.tablet`
     grid-template-columns: 1fr;
+
+    div:first-child {
+      padding-bottom: 10px;
+    }
   `}
 `;
 

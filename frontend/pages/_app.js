@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import App from 'next/app';
 import Page from '../components/Page';
@@ -8,6 +7,7 @@ import '../styles/nprogress.css';
 import '../styles/antd.css';
 import '../styles/styles.css';
 import { StyledContainer } from '../styles/pages/app';
+import { InstitutionContextProvider } from '../context/InstitutionContext';
 
 class MyApp extends App {
   static async getInitialProps({ Component, _, ctx }) {
@@ -24,14 +24,16 @@ class MyApp extends App {
     return (
       <StyledContainer>
         <AuthContextProvider>
-          <AuthContextConsumer>
-            {({ isAuth, authUser }) => (
-              <Page isAuth={isAuth}>
-                <Meta />
-                <Component {...pageProps} isAuth={isAuth} />
-              </Page>
-            )}
-          </AuthContextConsumer>
+          <InstitutionContextProvider>
+            <AuthContextConsumer>
+              {({ isAuth, authUser }) => (
+                <Page isAuth={isAuth}>
+                  <Meta />
+                  <Component {...pageProps} isAuth={isAuth} authUser={authUser} />
+                </Page>
+              )}
+            </AuthContextConsumer>
+          </InstitutionContextProvider>
         </AuthContextProvider>
       </StyledContainer>
     );

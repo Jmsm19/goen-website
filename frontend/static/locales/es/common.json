@@ -36,14 +36,32 @@
   "AvailableModulesForPeriod": "Módulos disponibles para el período {{ period }}",
   "ModuleRegister": "Inscripciones",
   "ModuleRegisterConfirm": "¿Seguro que desea inscribirse en este módulo?",
+  "AvailableSpaces": "Cupos disponibles",
   "Yes": "Sí",
   "No": "No",
   "ChooseModule": "¿En cuál módulo desea inscribirse?",
+  "OnlyModulesForYou": "Solo módulos para ti",
+  "AllModules": "Todos los módulos",
+  "NotRegisteredInAnyModule": "Actualmente no estás inscrito en ningún módulo.",
   "Day0": "Domingo",
   "Day1": "Lunes",
   "Day2": "Martes",
   "Day3": "Miércoles",
   "Day4": "Jueves",
   "Day5": "Viernes",
-  "Day6": "Sábado"
+  "Day6": "Sábado",
+  "Passed": "Aprobado",
+  "Failed": "Fallido",
+  "Current": "Actual",
+  "Module": "Módulo",
+  "Period": "Período",
+  "Score": "Nota",
+  "Status": "Estado",
+  "CannotRegister": "Inscripción prohibida",
+  "RegistrationSteps": {
+    "Selection": "Selección",
+    "Payment": "Pago",
+    "PaymentVerification": "Verificación",
+    "Done": "Listo"
+  }
 }

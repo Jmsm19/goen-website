@@ -4,7 +4,6 @@ import media from '../../utils/styling';
 
 const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
   display: grid;
-  grid-auto-rows: max-content;
 
   ${({ isEditing }) =>
     isEditing &&

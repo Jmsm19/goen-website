@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -13,8 +12,10 @@ import {
   UserUpperThirdCol,
   UserProfileLower,
 } from '../../styles/components/UserProfile';
+import ModulesTable from '../ModulesTable';
 
-function UserProfile({ t, toggleEdition, user: { name, clan, birth_date, email, phone_number } }) {
+function UserProfile({ t, toggleEdition, user }) {
+  const { name, clan, birthDate, email, phoneNumber, currentModule, passedModules } = user;
   const clanName = clan ? clan.toLowerCase() : null;
   return (
     <StyledProfile>
@@ -26,15 +27,15 @@ function UserProfile({ t, toggleEdition, user: { name, clan, birth_date, email, 
               title={clanName || 'user'}
               shape={clanName ? 'square' : 'circle'}
               src={clanName && `/static/images/clans/${clanName}.png`}
-              size={200}
+              size={clanName ? 200 : 150}
               icon='user'
             />
           </UserUpperFirstCol>
           <UserUpperSecondCol>
             <h1>{name}</h1>
-            <h2>{moment().diff(birth_date.split(' '[0]), 'years')} años</h2>
+            <h2>{moment().diff(birthDate.split(' '[0]), 'years')} años</h2>
             <h2>{email}</h2>
-            <h2>{phone_number}</h2>
+            <h2>{phoneNumber}</h2>
           </UserUpperSecondCol>
           <UserUpperThirdCol>
             <Button type='default' onClick={toggleEdition}>
@@ -46,12 +47,17 @@ function UserProfile({ t, toggleEdition, user: { name, clan, birth_date, email, 
 
       <SectionTitle>{t('AcademicInfo')}</SectionTitle>
 
-      <StyledCard loading={false}>
-        <UserProfileLower>
-          <p>
-            <b>{t('CurrentModule')}:</b> ¯\_(ツ)_/¯{' '}
-          </p>
-        </UserProfileLower>
+      {currentModule && (
+        <StyledCard loading={false}>
+          <UserProfileLower>
+            <h3>{t('CurrentModule')}</h3>
+            <p>{currentModule.name}</p>
+          </UserProfileLower>
+        </StyledCard>
+      )}
+
+      <StyledCard bodyStyle={{ padding: '0' }}>
+        <ModulesTable t={t} modules={passedModules} />
       </StyledCard>
     </StyledProfile>
   );
@@ -63,8 +69,8 @@ UserProfile.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     clan: PropTypes.string,
-    birth_date: PropTypes.string.isRequired,
-    phone_number: PropTypes.string.isRequired,
+    birthDate: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }).isRequired,
 };

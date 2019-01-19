@@ -13,6 +13,7 @@ import {
   StyleSubMenu,
   StyledLogoDiv,
 } from '../../styles/components/NavigationMenu';
+import { InstitutionContextConsumer } from '../../context/InstitutionContext';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -50,49 +51,55 @@ class NavigationMenu extends Component {
     return (
       <AuthContextConsumer>
         {({ isAuth, authUser, handleLogout }) => (
-          <StyledNav>
-            <StyledLogoDiv>
-              <Link href='/'>
-                <a>
-                  <StyledLogo onClick={() => this.handlePageChange('')} />
-                </a>
-              </Link>
-            </StyledLogoDiv>
-            <StyledMenu
-              mode={isMobile ? 'inline' : 'horizontal'}
-              selectedKeys={[currentPage]}
-              onClick={({ key }) =>
-                this.handlePageChange(key, {
-                  logout: handleLogout,
-                })
-              }
-            >
-              <Menu.Item key='register'>
-                <Link href='/register'>
-                  <a>{t('ModuleRegister')}</a>
-                </Link>
-              </Menu.Item>
-
-              {isAuth && authUser && (
-                <StyleSubMenu
-                  key='user'
-                  title={
-                    <span>
-                      <Icon type='user' />
-                      {isMobile ? 'User Settings' : <Icon type='caret-down' />}
-                    </span>
+          <InstitutionContextConsumer>
+            {({ registrationActive }) => (
+              <StyledNav>
+                <StyledLogoDiv>
+                  <Link href='/'>
+                    <a>
+                      <StyledLogo onClick={() => this.handlePageChange('')} />
+                    </a>
+                  </Link>
+                </StyledLogoDiv>
+                <StyledMenu
+                  mode={isMobile ? 'inline' : 'horizontal'}
+                  selectedKeys={[currentPage]}
+                  onClick={({ key }) =>
+                    this.handlePageChange(key, {
+                      logout: handleLogout,
+                    })
                   }
                 >
-                  <Menu.Item key='profile'>
-                    <Link href='/profile'>
-                      <a>{t('Profile')}</a>
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key='logout'>{t('Logout')}</Menu.Item>
-                </StyleSubMenu>
-              )}
-            </StyledMenu>
-          </StyledNav>
+                  {registrationActive && (
+                    <Menu.Item key='module-register'>
+                      <Link href='/module/register'>
+                        <a>{t('ModuleRegister')}</a>
+                      </Link>
+                    </Menu.Item>
+                  )}
+
+                  {isAuth && authUser && (
+                    <StyleSubMenu
+                      key='user'
+                      title={
+                        <span>
+                          <Icon type='user' />
+                          {isMobile ? 'User Settings' : <Icon type='caret-down' />}
+                        </span>
+                      }
+                    >
+                      <Menu.Item key='profile'>
+                        <Link href='/profile'>
+                          <a>{t('Profile')}</a>
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key='logout'>{t('Logout')}</Menu.Item>
+                    </StyleSubMenu>
+                  )}
+                </StyledMenu>
+              </StyledNav>
+            )}
+          </InstitutionContextConsumer>
         )}
       </AuthContextConsumer>
     );

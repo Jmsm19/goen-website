@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
@@ -13,8 +12,8 @@ function UserProfileEditionForm({ t, toggleEdition, updateUser, user, fieldError
 
   const initialState = {
     name: user.name,
-    birth_date: user.birth_date.split(' ')[0],
-    phone_number: user.phone_number,
+    birth_date: user.birthDate.split(' ')[0],
+    phone_number: user.phoneNumber,
     email: user.email,
   };
 
@@ -153,8 +152,8 @@ UserProfileEditionForm.propTypes = {
   t: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    birth_date: PropTypes.string.isRequired,
-    phone_number: PropTypes.string.isRequired,
+    birthDate: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }).isRequired,
 };
