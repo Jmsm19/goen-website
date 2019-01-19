@@ -32,10 +32,12 @@ class StudentSeeder extends Seeder
         $user->roles()->attach($role_student);
 
         $period = Period::where('year', '2018')->first();
-        $user->registerIn(factory(Module::class)->create([
+        $module = factory(Module::class)->create([
             'name' => 'M-0',
             'period_id' => $period->id,
-        ]));
+        ]);
+        $user->registerIn($module);
+        $module->setModuleStatusFor($user, 'passed');
         $user->setRegistrationStatus('idle');
 
         $period = Period::where('active', 1)->first();
