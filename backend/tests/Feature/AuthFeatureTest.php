@@ -103,7 +103,7 @@ class AuthFeatureTest extends TestCase
         $this->json('POST', route('login'), $login_data, $this->headers)
             ->assertStatus(200)
             ->assertJsonStructure([
-                'access_token', 'token_type', 'expires_at'
+                'accessToken', 'tokenType', 'expiresAt'
             ]);
     }
 

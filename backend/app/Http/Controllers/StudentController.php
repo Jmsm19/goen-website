@@ -3,10 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Module;
+use App\Period;
+use Spatie\Dropbox\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ImageUploadRequest;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->dropbox = Storage::disk('dropbox')->getDriver()->getAdapter()->getClient();
+    }
+
+    private function makeImageName($user)
+    {
+        $username = implode('_', explode(' ', $user->name));
+        $national_id = $user->national_id;
+        $current_module = $user->currentModule();
+        $module = $current_module->name . '_' . $current_module->section;
+
+        return "{$username}_{$national_id}_{$module}.jpg";
+    }
+
     /**
      * If possible, register student in module
      * @param \Illuminate\Http\Request $request
@@ -53,6 +73,50 @@ class StudentController extends Controller
         $student->registerIn($module);
         return response()->json([
             'message' => trans('messages.succesfully_registered')
+        ], 200);
+    }
+
+    /**
+     * Upload transfer capture image to Dropbox's "comprobantes" folder
+     * @param \App\Http\Requests\ImageUploadRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadTransferCapture(ImageUploadRequest $request)
+    {
+        $period = Period::where('active', 1)->first();
+        $image = Input::file('image');
+        $user = $request->user();
+
+        $image_name = $this->makeImageName($user);
+        $period_name = "Período {$period->name}-{$period->year}";
+
+        $root_folder = 'comprobantes';
+        Storage::disk('dropbox')->putFileAs("{$root_folder}/{$period_name}", $image, $image_name);
+
+        $image_full_path = "{$root_folder}/{$period_name}/{$image_name}";
+        $shared_links = $this->dropbox->listSharedLinks($image_full_path);
+
+        if (count($shared_links) > 0) {
+            $response = $shared_links[0];
+            $user->setRegistrationStatus("verifying payment");
+            return response()->json([
+                'id' => $response['id'],
+                'name' => $response['name'],
+                'url' => $response['url'],
+            ], 200);
+        }
+
+        $response = $this->dropbox->createSharedLinkWithSettings(
+            $image_full_path,
+            ["requested_visibility" => "public"]
+        );
+
+        $user->setRegistrationStatus("verifying payment");
+        return response()->json([
+            'id' => $response['id'],
+            'name' => $response['name'],
+            'url' => $response['url'],
+            'status' => $user->registration_status
         ], 200);
     }
 }

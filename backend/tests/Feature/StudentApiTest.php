@@ -7,11 +7,24 @@ use App\Module;
 use App\Period;
 use Carbon\Carbon;
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentApiTest extends TestCase
 {
+    private function makeImageName($student)
+    {
+        $username = implode('_', explode(' ', $student->name));
+        $national_id = $student->national_id;
+        $current_module = $student->currentModule();
+        $module = $current_module->name . '_' . $current_module->section;
+        $ext = 'jpg';
+
+        return "{$username}_{$national_id}_{$module}.{$ext}";
+    }
+
     /**
      * Test Student registration in Module
      *
@@ -142,5 +155,28 @@ class StudentApiTest extends TestCase
         $this->post(route('student.registration', ['module' => $module->id]))
                 ->assertStatus(403)
                 ->assertJson(['error' => trans('auth.no_privilages')]);
+    }
+
+    public function testUploadTransferCapture()
+    {
+        $student = $this->passportActingAs('student');
+        // Register User in Module
+        $module = factory(Module::class)->create();
+        $student->registerIn($module);
+        // Create fake dropbox folder
+        Storage::fake('dropbox');
+
+        $this->json('POST', route('student.transfercapture'), [
+            'image' => UploadedFile::fake()->image('comprobante.jpg')
+        ]);
+
+        // Current Period subfolder
+        $period = Period::where('active', 1)->first();
+        $period_name = "Período {$period->name}-{$period->year}";
+
+        // Image name
+        $image_name = $this->makeImageName($student);
+
+        Storage::disk('dropbox')->assertExists("comprobantes/{$period_name}/{$image_name}");
     }
 }
