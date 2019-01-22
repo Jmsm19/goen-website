@@ -26,12 +26,12 @@ export class ProfilePage extends Component {
 
   render() {
     const { isEditing } = this.state;
-    const { t, isAuth } = this.props;
+    const { t } = this.props;
 
     return (
-      <RequireAuthentication t={t} isAuth={isAuth}>
+      <RequireAuthentication t={t}>
         {({ authUser, handleUserUpdate, fieldErrors }) => (
-          /* Prop removed by styled-components */
+          // Prop removed by styled-components
           <StyledPage isEditing={isEditing}>
             {!isEditing ? (
               <UserProfile t={t} user={authUser} toggleEdition={this.toggleEdition} />
@@ -63,7 +63,6 @@ export class ProfilePage extends Component {
 
 ProfilePage.propTypes = {
   t: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired,
 };
 
 export default withNamespaces('common')(ProfilePage);

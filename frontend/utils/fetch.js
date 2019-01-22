@@ -12,14 +12,16 @@ const setAuthorizationHeader = () => {
   return !TOKEN ? '' : `Bearer ${TOKEN}`;
 };
 
-const setHeaders = () =>
-  new Headers({
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest',
-    Authorization: setAuthorizationHeader(),
-    'X-Localization': setLocalizationHeader(),
-  });
+export const getHeaders = (args = {}) => ({
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+  Authorization: setAuthorizationHeader(),
+  'X-Localization': setLocalizationHeader(),
+  ...args,
+});
+
+const setHeaders = () => new Headers(getHeaders());
 
 export const GetData = (endpoint = '') =>
   fetch(`${ROOT_API}${endpoint}`, {

@@ -51,7 +51,16 @@ function UserProfile({ t, toggleEdition, user }) {
         <StyledCard loading={false}>
           <UserProfileLower>
             <h3>{t('CurrentModule')}</h3>
-            <p>{currentModule.name}</p>
+            {currentModule.registrationStatus === 'registered' ? (
+              <h4>
+                {currentModule.name} {currentModule.section}{' '}
+              </h4>
+            ) : (
+              <h4>
+                You are currently in the process of registering in {currentModule.name}{' '}
+                {currentModule.section}.
+              </h4>
+            )}
           </UserProfileLower>
         </StyledCard>
       )}

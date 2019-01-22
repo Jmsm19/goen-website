@@ -63,5 +63,16 @@
     "Payment": "Payment",
     "PaymentVerification": "Payment verification",
     "Done": "Done"
-  }
+  },
+  "ClickDragToUploadFile": "Click or Drag the image to this area",
+  "ImageLT500": "Image must smaller than 500 Kb!",
+  "JpgPngOnly": "You can only a upload JPG or PNG file!",
+  "UploadSuccess": "File uploaded successfuly.",
+  "UploadFailed": "File upload failed.",
+  "AccountNumber": "Account number",
+  "BeneficiaryName": "Name of Account Holder",
+  "WaitPaymentVerification": "Wait for us to verify your payment.",
+  "ModuleAssuredHeader": "As of now, your space in the Module is assured.",
+  "EmailNotifOnFinish": "You'll recieve an email notification once we are done.",
+  "NotStudent": "You are not a student."
 }

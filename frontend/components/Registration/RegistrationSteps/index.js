@@ -15,6 +15,14 @@ function RegistrationSteps({ t, registrationStatus }) {
       currentStep = 1;
       break;
     }
+    case 'verifying payment': {
+      currentStep = 2;
+      break;
+    }
+    case 'registered': {
+      currentStep = 3;
+      break;
+    }
     default: {
       currentStep = 0;
       break;

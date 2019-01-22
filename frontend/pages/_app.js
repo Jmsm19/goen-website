@@ -26,10 +26,10 @@ class MyApp extends App {
         <AuthContextProvider>
           <InstitutionContextProvider>
             <AuthContextConsumer>
-              {({ isAuth, authUser }) => (
+              {({ isAuth }) => (
                 <Page isAuth={isAuth}>
                   <Meta />
-                  <Component {...pageProps} isAuth={isAuth} authUser={authUser} />
+                  <Component {...pageProps} isAuth={isAuth} />
                 </Page>
               )}
             </AuthContextConsumer>

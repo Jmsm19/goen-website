@@ -1,47 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
-import { notification } from 'antd';
+import ProtectedView from '../ProtectedView';
 import { AuthContextConsumer } from '../../context/AuthContext';
+import { Loading } from '../Loading';
 
-class RequireAuthentication extends Component {
-  componentDidMount() {
-    this.redirectIfNotAuth();
-  }
-
-  redirectIfNotAuth = () => {
-    const { t, isAuth } = this.props;
-
-    if (!isAuth) {
-      notification.error({
-        message: t('Unauthorized'),
-        description: t('LoginFirst'),
-      });
-
-      Router.push('/login');
-    }
-  };
-
-  render() {
-    const { children } = this.props;
-
-    return (
-      <AuthContextConsumer>
-        {context =>
-          context.isAuth &&
+const RequireAuthentication = ({ children, t }) => (
+  <AuthContextConsumer>
+    {context => (
+      <ProtectedView
+        t={t}
+        conditions={[context.isAuth]}
+        notificationMessage={t('Unauthorized')}
+        notificationDescription={t('LoginFirst')}
+      >
+        {context.authUser ? (
           children({
             ...context,
           })
-        }
-      </AuthContextConsumer>
-    );
-  }
-}
+        ) : (
+          <Loading />
+        )}
+      </ProtectedView>
+    )}
+  </AuthContextConsumer>
+);
 
 RequireAuthentication.propTypes = {
-  children: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default RequireAuthentication;

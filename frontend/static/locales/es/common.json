@@ -63,5 +63,16 @@
     "Payment": "Pago",
     "PaymentVerification": "Verificación",
     "Done": "Listo"
-  }
+  },
+  "ClickDragToUploadFile": "Haz clic o arrastra la imagen a este recuadro",
+  "ImageLT500": "La imágenes debe ser menor a 500Kb!",
+  "JpgPngOnly": "Solo imágenes PNG o JPG!",
+  "UploadSuccess": "El archivo se subió exitosamente.",
+  "UploadFailed": "Error al subir el archivo.",
+  "AccountNumber": "Número de cuenta",
+  "BeneficiaryName": "Nombre del beneficiario",
+  "WaitPaymentVerification": "Estaremos verificando su pago.",
+  "ModuleAssuredHeader": "A partir de ahora su cupo está asegurado.",
+  "EmailNotifOnFinish": "Le estaremos notificando por correo.",
+  "NotStudent": "No eres un estudiante."
 }

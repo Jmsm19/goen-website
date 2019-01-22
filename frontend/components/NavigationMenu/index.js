@@ -23,9 +23,17 @@ class NavigationMenu extends Component {
   constructor(props) {
     super(props);
     const { router } = props;
+    let page = null;
+    if (router.asPath === '/') {
+      page = 'home';
+    }
+    const routerPath = router.asPath
+      .split('/')
+      .slice(1)
+      .join('-');
 
     this.state = {
-      currentPage: router.asPath === '/' ? 'home' : router.asPath.split('/')[1],
+      currentPage: page || routerPath,
     };
   }
 
@@ -70,7 +78,7 @@ class NavigationMenu extends Component {
                     })
                   }
                 >
-                  {registrationActive && (
+                  {registrationActive && authUser.isStudent && (
                     <Menu.Item key='module-register'>
                       <Link href='/module/register'>
                         <a>{t('ModuleRegister')}</a>
