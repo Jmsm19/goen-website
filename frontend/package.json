@@ -14,8 +14,8 @@
     "export": "next export",
     "buildex": "yarn build && yarn export && yarn copy-root-statics",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --watch",
-    "test-win": "SET NODE_ENV=test&& jest --watch",
+    "test": "NODE_ENV=test jest --watchAll --coverage",
+    "test-win": "SET NODE_ENV=test&& jest --watchAll --coverage",
     "heroku-postbuild": "next build"
   },
   "pre-commit": [
