@@ -35,4 +35,7 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
 
     // Price related routes
     Route::apiResource('price', 'PriceController');
+
+    // Price related routes
+    Route::get('/period/current/students', 'PeriodController@currentPeriodStudents');
 });

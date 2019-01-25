@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Period;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Http\Resources\PeriodResource;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\PeriodStoreRequest;
 use App\Http\Requests\PeriodUpdateRequest;
+use App\Http\Resources\PeriodWithStudentsResource;
 
 class PeriodController extends Controller
 {
@@ -126,5 +128,16 @@ class PeriodController extends Controller
         return PeriodResource::collection(
             Period::where('year', $target_year)->get()
         );
+    }
+
+    public function currentPeriodStudents()
+    {
+        // Period::where('active', true)->with(['module.students'])->get()
+        // $CURRENT_PERIOD = $this->current();
+        // User::with(['modulesAsStudent.'])->get()
+        $period = Period::where('active', true)->with(['module.students'])->first();
+        return response()->json([
+            'data' => new PeriodWithStudentsResource($period)
+        ], 200);
     }
 }
