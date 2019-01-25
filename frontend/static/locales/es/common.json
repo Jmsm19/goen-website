@@ -74,5 +74,9 @@
   "WaitPaymentVerification": "Estaremos verificando su pago.",
   "ModuleAssuredHeader": "A partir de ahora su cupo está asegurado.",
   "EmailNotifOnFinish": "Le estaremos notificando por correo.",
-  "NotStudent": "No eres un estudiante."
+  "NotStudent": "No eres un estudiante.",
+  "RegistrationStatus": "Estado",
+  "paying": "Pago pendiente",
+  "registered": "Inscrito",
+  "verifying payment": "Requiere verificación de pago"
 }

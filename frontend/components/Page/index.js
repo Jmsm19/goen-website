@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { appWithTranslation } from '../../i18n';
 import enquireScreen from '../../utils/enquire';
-import DesktopLayout from '../DesktopLayout';
-import MobileLayout from '../MobileLayout';
+import DesktopLayout from '../Layouts/DesktopLayout';
+import MobileLayout from '../Layouts/MobileLayout';
 
 class Page extends Component {
   state = {

@@ -69,7 +69,10 @@ const LoginForm = ({ t, handleLogin }) => {
             />
           </Label>
 
-          <Checkbox name='remember_me'>{t('RememberMe')}</Checkbox>
+          <Field
+            name='remember_me'
+            render={({ field }) => <Checkbox {...field}>{t('RememberMe')}</Checkbox>}
+          />
 
           <StyledButtonArea>
             <Button type='primary' htmlType='submit' loading={isSubmitting}>

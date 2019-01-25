@@ -74,5 +74,9 @@
   "WaitPaymentVerification": "Wait for us to verify your payment.",
   "ModuleAssuredHeader": "As of now, your space in the Module is assured.",
   "EmailNotifOnFinish": "You'll recieve an email notification once we are done.",
-  "NotStudent": "You are not a student."
+  "NotStudent": "You are not a student.",
+  "RegistrationStatus": "Status",
+  "paying": "Pending payment",
+  "registered": "Registered",
+  "verifying payment": "Requires payment confirmation"
 }

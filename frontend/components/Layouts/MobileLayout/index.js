@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'antd';
-import { StyledLayout, StyledContent, StyledMain } from '../../styles/components/MobileLayout';
-import SidebarNavigation from '../Sidebar';
-import Footer from '../Footer';
+import { StyledLayout, StyledContent, StyledMain } from '../../../styles/components/MobileLayout';
+import SidebarNavigation from '../../Sidebar';
+import Footer from '../../Footer';
 
 /* isAuth props if removed from component by styled-components
     as it's just required for styling */

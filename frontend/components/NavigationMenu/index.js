@@ -86,6 +86,14 @@ class NavigationMenu extends Component {
                     </Menu.Item>
                   )}
 
+                  {isAuth && authUser && authUser.isAdmin && (
+                    <Menu.Item key='dashboard'>
+                      <Link href='/dashboard'>
+                        <a>{t('Dashboard')}</a>
+                      </Link>
+                    </Menu.Item>
+                  )}
+
                   {isAuth && authUser && (
                     <StyleSubMenu
                       key='user'

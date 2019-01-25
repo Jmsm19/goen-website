@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Footer from '../Footer';
-import NavigationMenu from '../NavigationMenu';
+import Footer from '../../Footer';
+import NavigationMenu from '../../NavigationMenu';
 import {
   StyledHeader,
   StyledLayout,
   StyledMain,
   StyledContent,
-} from '../../styles/components/DesktopLayout';
+} from '../../../styles/components/DesktopLayout';
 
 /* isAuth props if removed from component by styled-components
       as it's just required for styling */
