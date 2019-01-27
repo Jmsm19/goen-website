@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { appWithTranslation } from '../../i18n';
 import enquireScreen from '../../utils/enquire';
-import DesktopLayout from '../Layouts/DesktopLayout';
-import MobileLayout from '../Layouts/MobileLayout';
+import DashboardLayout from '../Layouts/DashboardLayout';
 
 class Page extends Component {
   state = {
@@ -23,14 +22,10 @@ class Page extends Component {
     const { isMobile } = this.state;
     const { children, isAuth } = this.props;
 
-    return isMobile ? (
-      <MobileLayout isMobile={isMobile} isAuth={isAuth}>
+    return (
+      <DashboardLayout isMobile={isMobile} isAuth={isAuth}>
         {children}
-      </MobileLayout>
-    ) : (
-      <DesktopLayout isMobile={isMobile} isAuth={isAuth}>
-        {children}
-      </DesktopLayout>
+      </DashboardLayout>
     );
   }
 }

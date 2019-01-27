@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Checkbox, Button } from 'antd';
+import { Form, Checkbox, Button } from 'antd';
 import { hasErrors } from '../../utils/formValidation';
 import { StyledButtonArea } from '../../styles/components/LoginForm';
 import { StyledInput } from '../../styles/components/Forms';
+import { StyledFaintIcon } from '../../styles/pages/GeneralStyles';
 
 const LoginForm = ({ t, handleLogin }) => {
   const initialState = {
@@ -43,7 +44,7 @@ const LoginForm = ({ t, handleLogin }) => {
                   autoComplete='username'
                   id='login_email'
                   placeholder='ejemplo@email.com'
-                  prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='mail' />}
                 />
               )}
             />
@@ -63,7 +64,7 @@ const LoginForm = ({ t, handleLogin }) => {
                   type='password'
                   autoComplete='current-password'
                   id='login_password'
-                  prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='lock' />}
                 />
               )}
             />

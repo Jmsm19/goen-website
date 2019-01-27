@@ -6,7 +6,7 @@ import { GetData, SendData } from '../../../utils/fetch';
 import {
   StyledModulesGrid,
   StyledPageContent,
-} from '../../../styles/components/Registration/ModuleSelection';
+} from '../../../styles/components/registration/ModuleSelection';
 import ModuleCard from '../../ModuleCard';
 import ModuleSelectionHeader from '../ModuleSelectionHeader';
 import { moduleOrder } from '../../../utils/config';

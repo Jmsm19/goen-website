@@ -54,7 +54,6 @@
 }
 
 .page-loading {
-  min-height: 100vh;
   width: 100vw;
   align-items: center;
   display: grid;
@@ -65,4 +64,8 @@
   .ant-notification {
     margin-right: 9px;
   }
+}
+
+i:hover {
+  cursor: pointer;
 }

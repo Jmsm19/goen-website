@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   StyledHeader,
   StyledSwitch,
-} from '../../../styles/components/Registration/ModuleSelectionHeader';
+} from '../../../styles/components/registration/ModuleSelectionHeader';
 
 function ModuleSelectionHeader({ filterModules, periodName, t }) {
   return (

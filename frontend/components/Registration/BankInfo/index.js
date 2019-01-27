@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StyledContainer from '../../../styles/components/Registration/BankInfo';
+import StyledContainer from '../../../styles/components/registration/BankInfo';
 
 function BankInfo({ accountNumber, name, nationalId, t }) {
   return (

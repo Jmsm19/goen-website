@@ -9,6 +9,7 @@ import moment from 'moment';
 import { hasErrors } from '../../utils/formValidation';
 import { StyledButtonArea } from '../../styles/components/SignupForm';
 import { StyledInput } from '../../styles/components/Forms';
+import { StyledFaintIcon } from '../../styles/pages/GeneralStyles';
 
 const SignupForm = ({ t, handleRegister, fieldErrors }) => {
   const initialState = {
@@ -75,7 +76,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   {...field}
                   type='text'
                   id='register_name'
-                  prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='user' />}
                 />
               )}
             />
@@ -99,7 +100,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   inputMode='numeric'
                   id='register_national_id'
                   placeholder='20123456'
-                  prefix={<Icon type='idcard' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='idcard' />}
                 />
               )}
             />
@@ -119,7 +120,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   {...field}
                   type='date'
                   id='register_birth_date'
-                  prefix={<Icon type='calendar' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='calendar' />}
                 />
               )}
             />
@@ -140,7 +141,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   type='tel'
                   id='register_phone_number'
                   placeholder='0424-1234567'
-                  prefix={<Icon type='phone' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='phone' />}
                 />
               )}
             />
@@ -161,7 +162,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   type='email'
                   id='register_email'
                   autoComplete='username'
-                  prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='mail' />}
                 />
               )}
             />
@@ -182,7 +183,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   type='password'
                   id='register_password'
                   autoComplete='new-password'
-                  prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='lock' />}
                 />
               )}
             />
@@ -209,7 +210,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
                   type='password'
                   autoComplete='off'
                   id='register_password_confirmation'
-                  prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<StyledFaintIcon type='lock' />}
                 />
               )}
             />

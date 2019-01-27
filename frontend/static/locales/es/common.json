@@ -78,5 +78,7 @@
   "RegistrationStatus": "Estado",
   "paying": "Pago pendiente",
   "registered": "Inscrito",
-  "verifying payment": "Requiere verificación de pago"
+  "verifying payment": "Requiere verificación de pago",
+  "PendingPayments": "Pagos pendientes",
+  "PendingCount": "{{ count }} pendientes"
 }

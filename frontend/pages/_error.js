@@ -23,8 +23,12 @@ class ErrorPage extends React.Component {
   }
 }
 
+ErrorPage.defaultProps = {
+  statusCode: 404,
+};
+
 ErrorPage.propTypes = {
-  statusCode: PropTypes.number.isRequired,
+  statusCode: PropTypes.number,
 };
 
 export default ErrorPage;

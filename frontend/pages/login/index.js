@@ -16,7 +16,7 @@ export class LoginPage extends Component {
   componentDidMount() {
     const { isAuth } = this.props;
     if (isAuth) {
-      Router.push('/profile');
+      Router.push('/dashboard');
     }
   }
 

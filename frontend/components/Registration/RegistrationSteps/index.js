@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Steps, Icon } from 'antd';
-import StyledSteps from '../../../styles/components/Registration/RegistrationSteps';
+import StyledSteps from '../../../styles/components/registration/RegistrationSteps';
 
 function RegistrationSteps({ t, registrationStatus }) {
   let currentStep;

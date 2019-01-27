@@ -5,7 +5,6 @@ import UniversalCookies from 'universal-cookie';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import getConfig from 'next/config';
-import moment from 'moment';
 import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
 import { Loading } from '../components/Loading';
@@ -61,7 +60,7 @@ class AuthContextProvider extends Component {
       });
   };
 
-  updateAuthUser = (values, { toggleEdition, setSubmitting }) => {
+  updateAuthUser = (values, { setSubmitting }) => {
     const {
       authUser: { id },
     } = this.state;
@@ -80,7 +79,6 @@ class AuthContextProvider extends Component {
               authUser: data,
             }),
             () => {
-              toggleEdition();
               setSubmitting(false);
               notification.success({
                 message: 'Usuario actualizado',
@@ -121,7 +119,7 @@ class AuthContextProvider extends Component {
             }),
             () => {
               this.getAuthUser();
-              Router.push('/module/register');
+              Router.push('/dashboard/');
             },
           );
         }

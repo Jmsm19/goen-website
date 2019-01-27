@@ -38,7 +38,8 @@ export const SendData = (method, endpoint = '', data = {}) =>
   });
 
 export const ServerGetData = (endpoint, request) => {
-  const cookies = new UniversalCookies(request.headers.cookie);
+  const requestCookies = request ? request.headers.cookie : null;
+  const cookies = new UniversalCookies(requestCookies);
   const authToken = cookies.get('token');
 
   return fetch(`${ROOT_API}${endpoint}`, {

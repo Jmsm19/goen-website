@@ -7,7 +7,11 @@ export class IndexPage extends Component {
   }
 
   render() {
-    return <></>;
+    return (
+      <>
+        <h3>Redirecting...</h3>
+      </>
+    );
   }
 }
 

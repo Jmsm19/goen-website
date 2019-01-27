@@ -1,5 +1,7 @@
 import React from 'react';
 import App from 'next/app';
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import Page from '../components/Page';
 import Meta from '../components/Meta';
 import { AuthContextProvider, AuthContextConsumer } from '../context/AuthContext';
@@ -8,6 +10,10 @@ import '../styles/antd.css';
 import '../styles/styles.css';
 import { StyledContainer } from '../styles/pages/app';
 import { InstitutionContextProvider } from '../context/InstitutionContext';
+
+Router.onRouteChangeStart = () => NProgress.start().inc(0.5);
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 class MyApp extends App {
   static async getInitialProps({ Component, _, ctx }) {

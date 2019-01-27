@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withNamespaces } from '../../../i18n';
-import StyledPage from '../../../styles/pages/ModuleRegisterPage';
-import RegistrationSteps from '../../../components/Registration/RegistrationSteps';
-import ModuleSelection from '../../../components/Registration/ModuleSelection';
-import PaymentProcessing from '../../../components/Registration/PaymenProcessing';
-import RegisteredMessage from '../../../components/Registration/RegisteredMessage';
-import PaymentVerification from '../../../components/Registration/PaymentVerification';
-import RequireStudentRole from '../../../components/RequireStudentRole';
-import { InstitutionContextConsumer } from '../../../context/InstitutionContext';
+import { withNamespaces } from '../../../../i18n';
+import StyledPage from '../../../../styles/pages/ModuleRegisterPage';
+import RegistrationSteps from '../../../../components/Registration/RegistrationSteps';
+import ModuleSelection from '../../../../components/Registration/ModuleSelection';
+import PaymentProcessing from '../../../../components/Registration/PaymenProcessing';
+import RegisteredMessage from '../../../../components/Registration/RegisteredMessage';
+import PaymentVerification from '../../../../components/Registration/PaymentVerification';
+import RequireRole from '../../../../components/RequireRole';
+import { InstitutionContextConsumer } from '../../../../context/InstitutionContext';
 
 class ModuleRegisterPage extends Component {
   static async getInitialProps() {
@@ -21,7 +21,7 @@ class ModuleRegisterPage extends Component {
     const { t, lng } = this.props;
 
     return (
-      <RequireStudentRole t={t}>
+      <RequireRole t={t} requiredRole='student'>
         {({ authUser, setRegistrationStatus }) => {
           const { registrationStatus } = authUser;
           return (
@@ -58,7 +58,7 @@ class ModuleRegisterPage extends Component {
             </StyledPage>
           );
         }}
-      </RequireStudentRole>
+      </RequireRole>
     );
   }
 }

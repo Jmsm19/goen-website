@@ -78,5 +78,7 @@
   "RegistrationStatus": "Status",
   "paying": "Pending payment",
   "registered": "Registered",
-  "verifying payment": "Requires payment confirmation"
+  "verifying payment": "Requires payment confirmation",
+  "PendingPayments": "Pending payments",
+  "PendingCount": "{{ count }} pending"
 }

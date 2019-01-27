@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from 'antd';
-import { withNamespaces } from '../../i18n';
-import RequireAuthentication from '../../components/RequireAuthentication';
-import UserProfile from '../../components/UserProfile';
-import UserProfileEditionForm from '../../components/UserProfileEditionForm';
-import StyledPage from '../../styles/pages/ProfilePage';
+import { withNamespaces } from '../../../../i18n';
+import RequireAuthentication from '../../../../components/RequireAuthentication';
+import UserProfile from '../../../../components/UserProfile';
+import UserProfileEditionForm from '../../../../components/UserProfileEditionForm';
+import StyledPage from '../../../../styles/pages/ProfilePage';
 
 export class ProfilePage extends Component {
   state = {

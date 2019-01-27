@@ -3,6 +3,20 @@ import { Form } from 'antd';
 import media from '../../utils/styling';
 
 export const StyledForm = styled(Form)`
+  .input-area {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 600px));
+    grid-gap: 0 30px;
+  }
+
+  ${media.tablet`
+    .input-area {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(300px, 600px));
+    grid-gap: 0 30px;
+    }
+  `}
+
   label {
     text-transform: uppercase;
   }
@@ -11,8 +25,6 @@ export const StyledForm = styled(Form)`
 export const StyledButtonArea = styled.div`
   display: grid;
   justify-content: end;
-  grid-template-columns: repeat(2, minmax(max-content, 200px));
-  grid-template-rows: auto;
 
   label {
     text-transform: uppercase;
