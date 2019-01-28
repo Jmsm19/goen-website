@@ -4,7 +4,7 @@ import uuid from 'uuid/v4';
 import { Icon, Button } from 'antd';
 import { StyledTable } from '../../styles/pages/GeneralStyles';
 
-function PendingPaymentsTable({ t, students }) {
+function StudentPaymentStatusTable({ t, students }) {
   const columns = [
     {
       title: t('Name'),
@@ -15,7 +15,6 @@ function PendingPaymentsTable({ t, students }) {
       dataIndex: 'action',
       key: 'action',
       width: 150,
-      class: 'td-actions',
       render: actions =>
         actions.length > 0 && (
           <div className='actions-column'>
@@ -31,7 +30,7 @@ function PendingPaymentsTable({ t, students }) {
 
   const createTableDataSource = () => {
     const data = [];
-    students.map(({ name, registrationStatus }) => {
+    students.map(({ name, registrationStatus, currentModule }) => {
       const actions = [];
       if (registrationStatus === 'verifying payment') {
         actions.push(
@@ -65,11 +64,16 @@ function PendingPaymentsTable({ t, students }) {
       pagination={false}
       columns={columns}
       dataSource={createTableDataSource()}
+      locale={{
+        emptyText: t('NoData'),
+        filterReset: t('Reset'),
+        filterConfirm: t('Ok'),
+      }}
     />
   );
 }
 
-PendingPaymentsTable.propTypes = {
+StudentPaymentStatusTable.propTypes = {
   t: PropTypes.func.isRequired,
   students: PropTypes.arrayOf(
     PropTypes.shape({
@@ -79,4 +83,4 @@ PendingPaymentsTable.propTypes = {
   ).isRequired,
 };
 
-export default PendingPaymentsTable;
+export default StudentPaymentStatusTable;

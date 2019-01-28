@@ -57,9 +57,9 @@ function ModulesTable({ modules, t }) {
       columns={columns}
       dataSource={data}
       locale={{
-        emptyText: 'Sin datos',
-        filterReset: 'Reset',
-        filterConfirm: 'Ok',
+        emptyText: t('NoData'),
+        filterReset: t('Reset'),
+        filterConfirm: t('Ok'),
       }}
     />
   );

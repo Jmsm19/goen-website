@@ -80,5 +80,12 @@
   "registered": "Registered",
   "verifying payment": "Requires payment confirmation",
   "PendingPayments": "Pending payments",
-  "PendingCount": "{{ count }} pending"
+  "PendingCount": "{{ count }} pending",
+  "NoData": "No data",
+  "Reset": "Reset",
+  "Ok": "Ok",
+  "Verifying": "Verifying",
+  "Pending": "Pending",
+  "Confirmed": "Confirmed",
+  "Payments": "Payments"
 }

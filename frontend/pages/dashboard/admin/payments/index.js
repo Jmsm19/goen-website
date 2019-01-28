@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { ServerGetData } from '../../../../utils/fetch';
 import { withNamespaces } from '../../../../i18n';
 import RequireRole from '../../../../components/RequireRole';
+import { InstitutionContextConsumer } from '../../../../context/InstitutionContext';
 import StudentPaymentStatusCard from '../../../../components/StudentPaymentStatusCard';
+import StyledPage from '../../../../styles/pages/dashboard/admin/PaymentsPage';
 
 class PaymentPage extends Component {
   state = {};
 
   static async getInitialProps({ req }) {
-    let periodData;
+    let periodData = null;
 
     try {
       const periodResponse = await ServerGetData('/period/current/students', req);
@@ -21,18 +23,24 @@ class PaymentPage extends Component {
 
     return {
       namespacesRequired: ['common'],
-      periodData,
+      students: periodData.students,
+      period: periodData.period,
     };
   }
 
   render() {
-    const { periodData, t } = this.props;
+    const { students, t } = this.props;
+
     return (
       <RequireRole t={t} requiredRole='admin'>
         {() => (
-          <div className='admin-payments-page'>
-            <StudentPaymentStatusCard t={t} period={periodData} />
-          </div>
+          <StyledPage>
+            <InstitutionContextConsumer>
+              {({ currentPeriod }) => (
+                <StudentPaymentStatusCard t={t} period={currentPeriod} students={students} />
+              )}
+            </InstitutionContextConsumer>
+          </StyledPage>
         )}
       </RequireRole>
     );
@@ -41,9 +49,7 @@ class PaymentPage extends Component {
 
 PaymentPage.propTypes = {
   t: PropTypes.func.isRequired,
-  periodData: PropTypes.shape({
-    modules: PropTypes.arrayOf(PropTypes.shape()),
-  }).isRequired,
+  students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default withNamespaces('common')(PaymentPage);

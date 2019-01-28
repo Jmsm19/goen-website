@@ -80,5 +80,12 @@
   "registered": "Inscrito",
   "verifying payment": "Requiere verificación de pago",
   "PendingPayments": "Pagos pendientes",
-  "PendingCount": "{{ count }} pendientes"
+  "PendingCount": "{{ count }} pendientes",
+  "NoData": "No hay datos",
+  "Reset": "Reset",
+  "Ok": "Ok",
+  "Verifying": "Verificando",
+  "Pending": "Pendientes",
+  "Confirmed": "Confirmados",
+  "Payments": "Pagos"
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-import { Card, Collapse } from 'antd';
+import { Collapse } from 'antd';
+import StudentPaymentStatusTable from '../StudentPaymentStatusTable';
 import { CardCollapsingPanel } from '../../styles/pages/GeneralStyles';
-import PendingPaymentsTable from '../PendingPaymentsTable';
+import StyledCard from '../../styles/components/StudentPaymentStatusCard';
 
 class StudentPaymentStatusCard extends Component {
   state = {
@@ -15,33 +16,39 @@ class StudentPaymentStatusCard extends Component {
   };
 
   makeAccordion = status => {
-    const { t, period } = this.props;
+    const { t, students, period } = this.props;
     const modules = period ? period.modules : [];
 
-    return (
-      <Collapse accordion>
-        {modules.map(module => {
-          const moduleName = `${module.name} - ${module.section}`;
-          const { students } = module;
-          const pendingStudentsCount = students.filter(
-            student => student.registrationStatus === status,
-          ).length;
+    const panels = [];
 
-          return (
-            pendingStudentsCount > 0 && (
-              <CardCollapsingPanel
-                key={uuid()}
-                style={{ width: '400px' }}
-                header={`${moduleName} (${t('PendingCount', {
-                  count: pendingStudentsCount,
-                })})`}
-              >
-                <PendingPaymentsTable t={t} students={students} />
-              </CardCollapsingPanel>
-            )
-          );
-        })}
-      </Collapse>
+    modules.forEach(module => {
+      const moduleName = `${module.name} - ${module.section}`;
+      const filteredStudents = students.filter(student => {
+        const studentModule = `${student.currentModule.name} - ${student.currentModule.section}`;
+        return student.registrationStatus === status && moduleName === studentModule;
+      });
+      const studentCount = filteredStudents.length;
+      let cardHeader = moduleName;
+
+      if (status === 'verifying payment') {
+        cardHeader += ` (${t('PendingCount', {
+          count: studentCount,
+        })})`;
+      }
+
+      if (studentCount > 0) {
+        panels.push(
+          <CardCollapsingPanel key={uuid()} header={cardHeader}>
+            <StudentPaymentStatusTable t={t} students={filteredStudents} />
+          </CardCollapsingPanel>,
+        );
+      }
+    });
+
+    return panels.length > 0 ? (
+      <Collapse accordion>{panels}</Collapse>
+    ) : (
+      <StudentPaymentStatusTable t={t} students={[]} />
     );
   };
 
@@ -71,19 +78,22 @@ class StudentPaymentStatusCard extends Component {
     };
 
     return (
-      <Card
+      <StyledCard
         tabList={tabList}
         defaultActiveTabKey={currentTab}
         onTabChange={this.handleTabChange}
-        style={{ marginTop: '10px', width: 'max-content' }}
         title={`${t('Payments')} ${period && `- ${t('Period')} ${period.name} - ${period.year}`}`}
         bodyStyle={{ padding: '0' }}
       >
         {contentList[currentTab]}
-      </Card>
+      </StyledCard>
     );
   }
 }
+
+StudentPaymentStatusCard.defaultProps = {
+  period: null,
+};
 
 StudentPaymentStatusCard.propTypes = {
   t: PropTypes.func.isRequired,
@@ -91,7 +101,8 @@ StudentPaymentStatusCard.propTypes = {
     name: PropTypes.string,
     year: PropTypes.number,
     modules: PropTypes.arrayOf(PropTypes.shape()),
-  }).isRequired,
+  }),
+  students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default StudentPaymentStatusCard;
