@@ -10,7 +10,10 @@ use App\Http\Resources\PeriodResource;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\PeriodStoreRequest;
 use App\Http\Requests\PeriodUpdateRequest;
+use App\Http\Resources\SimplePeriodResource;
+use App\Http\Resources\SimpleStudentResource;
 use App\Http\Resources\PeriodWithStudentsResource;
+use App\Http\Resources\SimpleStudentWithCurrentModuleResource;
 
 class PeriodController extends Controller
 {
@@ -132,12 +135,25 @@ class PeriodController extends Controller
 
     public function currentPeriodStudents()
     {
-        // Period::where('active', true)->with(['module.students'])->get()
-        // $CURRENT_PERIOD = $this->current();
-        // User::with(['modulesAsStudent.'])->get()
-        $period = Period::where('active', true)->with(['module.students'])->first();
+        $period = Period::where('active', true)->first();
+
+        $students = User::with(['modulesAsStudent.period' => function ($query) {
+            $query->where('active', 1);
+        }])->get()->filter(function ($user) {
+            $periods = [];
+            foreach ($user->modulesAsStudent as $module) {
+                if (!is_null($module->period)) {
+                    array_push($periods, $module->period);
+                }
+            }
+            return count($periods) > 0;
+        });
+
         return response()->json([
-            'data' => new PeriodWithStudentsResource($period)
+            'data' => [
+                'period' => new SimplePeriodResource($period),
+                'students' => SimpleStudentWithCurrentModuleResource::collection($students)
+            ]
         ], 200);
     }
 }
