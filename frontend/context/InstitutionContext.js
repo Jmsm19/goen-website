@@ -1,16 +1,12 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
-import { GetData } from '../utils/fetch';
+import { notification } from 'antd';
+import { GetData, SendData } from '../utils/fetch';
 import { todayIsBetween } from '../utils';
 
 const InstitutionContext = createContext({});
 
 class InstitutionContextProvider extends Component {
-  state = {
-    currentPeriod: null,
-    registrationActive: false,
-  };
-
   componentDidMount() {
     this.getCurrentPeriod();
   }
@@ -27,6 +23,18 @@ class InstitutionContextProvider extends Component {
           registrationActive: this.isRegistrationActiveForPeriod(data),
         });
       });
+  };
+
+  confirmPayment = studentId => SendData('POST', `/student/${studentId}/confirm-payment`);
+
+  rejectPayment = studentId => SendData('POST', `/student/${studentId}/reject-payment`);
+
+  // eslint-disable-next-line react/sort-comp
+  state = {
+    currentPeriod: null,
+    registrationActive: false,
+    confirmPayment: this.confirmPayment,
+    rejectPayment: this.rejectPayment,
   };
 
   render() {

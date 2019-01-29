@@ -8,8 +8,6 @@ import StudentPaymentStatusCard from '../../../../components/StudentPaymentStatu
 import StyledPage from '../../../../styles/pages/dashboard/admin/PaymentsPage';
 
 class PaymentPage extends Component {
-  state = {};
-
   static async getInitialProps({ req }) {
     let periodData = null;
 
@@ -36,8 +34,14 @@ class PaymentPage extends Component {
         {() => (
           <StyledPage>
             <InstitutionContextConsumer>
-              {({ currentPeriod }) => (
-                <StudentPaymentStatusCard t={t} period={currentPeriod} students={students} />
+              {({ currentPeriod, confirmPayment, rejectPayment }) => (
+                <StudentPaymentStatusCard
+                  t={t}
+                  period={currentPeriod}
+                  students={students}
+                  confirmPayment={confirmPayment}
+                  rejectPayment={rejectPayment}
+                />
               )}
             </InstitutionContextConsumer>
           </StyledPage>

@@ -1,55 +1,74 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uuid from 'uuid/v4';
-import { Collapse } from 'antd';
+import { notification } from 'antd';
 import StudentPaymentStatusTable from '../StudentPaymentStatusTable';
-import { CardCollapsingPanel } from '../../styles/pages/GeneralStyles';
 import StyledCard from '../../styles/components/StudentPaymentStatusCard';
+import { GetData } from '../../utils/fetch';
 
 class StudentPaymentStatusCard extends Component {
   state = {
     currentTab: 'verifying',
+    stateStudents: null,
+    loading: false,
   };
+
+  updateStudents = () =>
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        GetData('/period/current/students')
+          .then(res => res.json())
+          .then(({ data }) =>
+            this.setState({
+              stateStudents: data.students,
+              loading: false,
+            }),
+          )
+          .catch(({ error, message }) => {
+            notification.error({
+              message: error || message,
+            });
+          });
+      },
+    );
 
   handleTabChange = key => {
     this.setState({ currentTab: key });
   };
 
   makeAccordion = status => {
-    const { t, students, period } = this.props;
+    const { loading, stateStudents } = this.state;
+    const { t, students, period, confirmPayment, rejectPayment } = this.props;
     const modules = period ? period.modules : [];
-
+    const studentsArr = stateStudents || students;
     const panels = [];
 
     modules.forEach(module => {
       const moduleName = `${module.name} - ${module.section}`;
-      const filteredStudents = students.filter(student => {
-        const studentModule = `${student.currentModule.name} - ${student.currentModule.section}`;
-        return student.registrationStatus === status && moduleName === studentModule;
-      });
+      const filteredStudents = studentsArr.filter(
+        student => student.registrationStatus === status && module.id === student.currentModule.id,
+      );
       const studentCount = filteredStudents.length;
-      let cardHeader = moduleName;
-
-      if (status === 'verifying payment') {
-        cardHeader += ` (${t('PendingCount', {
-          count: studentCount,
-        })})`;
-      }
 
       if (studentCount > 0) {
         panels.push(
-          <CardCollapsingPanel key={uuid()} header={cardHeader}>
-            <StudentPaymentStatusTable t={t} students={filteredStudents} />
-          </CardCollapsingPanel>,
+          <StudentPaymentStatusTable
+            t={t}
+            key={moduleName}
+            title={moduleName}
+            loading={loading}
+            students={filteredStudents}
+            confirmPayment={confirmPayment}
+            rejectPayment={rejectPayment}
+            updateStudents={this.updateStudents}
+          />,
         );
       }
     });
 
-    return panels.length > 0 ? (
-      <Collapse accordion>{panels}</Collapse>
-    ) : (
-      <StudentPaymentStatusTable t={t} students={[]} />
-    );
+    return panels.length > 0 ? panels : <StudentPaymentStatusTable t={t} students={[]} />;
   };
 
   render() {
@@ -103,6 +122,8 @@ StudentPaymentStatusCard.propTypes = {
     modules: PropTypes.arrayOf(PropTypes.shape()),
   }),
   students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  confirmPayment: PropTypes.func.isRequired,
+  rejectPayment: PropTypes.func.isRequired,
 };
 
 export default StudentPaymentStatusCard;

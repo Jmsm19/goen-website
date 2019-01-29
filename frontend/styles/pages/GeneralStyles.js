@@ -18,4 +18,11 @@ export const StyledTable = styled(Table)`
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
   }
+
+  .ant-table-title {
+    padding-left: 16px;
+    padding-bottom: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
 `;

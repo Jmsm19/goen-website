@@ -87,5 +87,9 @@
   "Verifying": "Verifying",
   "Pending": "Pending",
   "Confirmed": "Confirmed",
-  "Payments": "Payments"
+  "Payments": "Payments",
+  "NotReceived": "Not received",
+  "Confirm": "Confirm",
+  "ConfirmPaymentAcceptance": "Have you received the student's payment?",
+  "ConfirmPaymentRejection": "Are you sure you want to reject this payment?"
 }
