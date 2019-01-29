@@ -21,5 +21,7 @@ return [
     'already_registered_in_module' => 'Already registered in this module.',
     'wrong_next_module' => 'You must register in :module first.',
     'only_one_module_per_period' => 'You can only register in one module per period.',
-    'registration_outside_threshold' => 'You can only register during the registration period.'
+    'registration_outside_threshold' => 'You can only register during the registration period.',
+    'student_registered' => 'Student registered successfully.',
+    'reject_payment' => 'Payment rejected.',
 ];

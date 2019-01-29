@@ -22,4 +22,6 @@ return [
     'wrong_next_module' => 'Debes inscribirte primero en el :module.',
     'only_one_module_per_period' => 'Solo puedes incribirte en un módulo por cada período.',
     'registration_outside_threshold' => 'Solo puedes inscribirte durante el período de inscripciones.',
+    'student_registered' => 'Estudiante registrado exitosamente.',
+    'reject_payment' => 'Pago rechazado.',
 ];

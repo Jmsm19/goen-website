@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Module;
 use App\Period;
 use Spatie\Dropbox\Client;
@@ -117,6 +118,22 @@ class StudentController extends Controller
             'name' => $response['name'],
             'url' => $response['url'],
             'status' => $user->registration_status
+        ], 200);
+    }
+
+    public function confirmPayment(User $student)
+    {
+        $student->setRegistrationStatus('registered');
+        return response()->json([
+            'message' => trans('message.student_registered')
+        ], 200);
+    }
+
+    public function rejectPayment(User $student)
+    {
+        $student->setRegistrationStatus('paying');
+        return response()->json([
+            'message' => trans('message.invalid_payment')
         ], 200);
     }
 }
