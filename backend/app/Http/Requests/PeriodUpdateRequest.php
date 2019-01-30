@@ -17,7 +17,7 @@ class PeriodUpdateRequest extends FormRequest
             'name' => 'string',
             'year' => 'date_format:Y',
             'signup_from' => 'date',
-            'signup_until' => 'date'
+            'signup_until' => 'date|after:signup_from'
         ];
     }
 }

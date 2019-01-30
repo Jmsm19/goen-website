@@ -24,7 +24,7 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        return PeriodResource::collection(Period::all());
+        return PeriodResource::collection(Period::orderBy('created_at', 'desc')->get());
     }
 
     /**
@@ -50,9 +50,11 @@ class PeriodController extends Controller
         }
 
         // Current period(s) will be marked as inactive (false)
-        $previous_active_period = Period::where('active', 1);
-        if (!empty($previous_active_period)) {
-            $previous_active_period->update(['active' => false]);
+        if ($request->make_current) {
+            $previous_active_period = Period::where('active', 1);
+            if (!empty($previous_active_period)) {
+                $previous_active_period->update(['active' => false]);
+            }
         }
 
         // Create period with correct name based on period order
@@ -61,7 +63,7 @@ class PeriodController extends Controller
             'name' => $name,
             'year' => $year,
             // The new period is now the current period (active period)
-            'active' => true,
+            'active' => $request->make_current ?: false,
             'signup_from' => $request->signup_from,
             'signup_until' => $request->signup_until
         ]);
@@ -101,6 +103,12 @@ class PeriodController extends Controller
      */
     public function destroy(Period $period)
     {
+        if ($period->active) {
+            return response()->json([
+                'error' => trans('message.CannotDeleteActivePeriod')
+            ], 403);
+        }
+
         $period->delete();
         return response()->json(null, 204);
     }
@@ -155,5 +163,11 @@ class PeriodController extends Controller
                 'students' => SimpleStudentWithCurrentModuleResource::collection($students)
             ]
         ], 200);
+    }
+
+    public function makeCurrent(Period $period)
+    {
+        $period->makeCurrent();
+        return new PeriodResource($period);
     }
 }

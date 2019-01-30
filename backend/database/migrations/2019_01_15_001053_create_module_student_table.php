@@ -20,7 +20,7 @@ class CreateModuleStudentTable extends Migration
             $table->timestamps();
 
             if (env('APP_ENV') !== 'testing') {
-                $table->foreign('module_id')->references('id')->on('modules');
+                $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users');
             }
         });

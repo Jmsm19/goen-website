@@ -24,4 +24,5 @@ return [
     'registration_outside_threshold' => 'You can only register during the registration period.',
     'student_registered' => 'Student registered successfully.',
     'reject_payment' => 'Payment rejected.',
+    'CannotDeleteActivePeriod' => 'You cannot delete active periods.',
 ];

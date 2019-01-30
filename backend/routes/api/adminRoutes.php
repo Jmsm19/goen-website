@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     // Period related routes
     Route::get('/period/current/students', 'PeriodController@currentPeriodStudents')
         ->name('current-period-students');
+    Route::post('/period/{period}/make-current', 'PeriodController@makeCurrent')
+        ->name('make-period-current');
 
     // Student releated routes
     Route::post('student/{student}/confirm-payment', 'StudentController@confirmPayment')
