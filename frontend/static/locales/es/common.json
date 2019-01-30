@@ -84,6 +84,7 @@
   "verifying payment": "Requiere verificación de pago",
   "PendingPayments": "Pagos pendientes",
   "PendingCount": "{{ count }} pendientes",
+  "MustBeAfterSignupFrom": "Debe ser posterior a la fecha de inicio",
   "NoData": "No hay datos",
   "Reset": "Reset",
   "Ok": "Ok",
@@ -118,5 +119,6 @@
   "NoPeriods": "No hay períodos disponibles",
   "PeriodCreationModuleText": "El nombre y año del período serán asignados automáticamente.",
   "PeriodDelitionConfirmation": "¿Seguro que quieres borrar este período?",
-  "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período."
+  "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período.",
+  "Update": "Actualizar"
 }

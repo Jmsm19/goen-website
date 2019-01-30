@@ -8,11 +8,13 @@ import PeriodCreationForm from '../../../../components/PeriodCreationForm';
 import PeriodList from '../../../../components/PeriodList';
 import PeriodPageHeader from '../../../../components/PeriodPageHeader';
 import ModuleListCard from '../../../../components/ModuleListCard';
+import PeriodUpdateForm from '../../../../components/PeriodUpdateForm';
 
 class PeriodPage extends Component {
   state = {
     visibleCreationModal: false,
     visibleListModal: false,
+    visibleUpdateModal: false,
   };
 
   static async getInitialProps() {
@@ -24,6 +26,12 @@ class PeriodPage extends Component {
   togglePeriodCreationModal = () => {
     this.setState(prevState => ({
       visibleCreationModal: !prevState.visibleCreationModal,
+    }));
+  };
+
+  togglePeriodUpdateModal = () => {
+    this.setState(prevState => ({
+      visibleUpdateModal: !prevState.visibleUpdateModal,
     }));
   };
 
@@ -40,11 +48,12 @@ class PeriodPage extends Component {
       currentPeriod,
       deletePeriod,
       createPeriod,
+      updatePeriod,
       makePeriodCurrent,
       gettingPeriods,
       periodList,
     } = institution;
-    const { visibleCreationModal, visibleListModal } = this.state;
+    const { visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
 
     return (
       <RequireRole t={t} requiredRole='admin'>
@@ -54,10 +63,25 @@ class PeriodPage extends Component {
               t={t}
               currentPeriod={currentPeriod}
               getPeriodList={getPeriodList}
+              togglePeriodUpdateModal={this.togglePeriodUpdateModal}
               togglePeriodCreationModal={this.togglePeriodCreationModal}
               toggleListModal={this.toggleListModal}
               modules={periodList}
             />
+
+            <Modal
+              footer={null}
+              visible={visibleUpdateModal}
+              closable
+              onCancel={this.togglePeriodUpdateModal}
+            >
+              <PeriodUpdateForm
+                t={t}
+                updatePeriod={updatePeriod}
+                afterSubmit={this.togglePeriodUpdateModal}
+                period={currentPeriod}
+              />
+            </Modal>
 
             <Modal
               bodyStyle={{ maxHeight: '50vh', overflowY: 'auto' }}

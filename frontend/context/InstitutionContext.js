@@ -96,6 +96,30 @@ class InstitutionContextProvider extends Component {
     });
   };
 
+  updatePeriod = (id, values, { setSubmitting }, callback) => {
+    SendData('PUT', `/period/${id}`, values)
+      .then(res => res.json())
+      .then(({ data, error, message }) => {
+        if (error || message) {
+          Error(error || message);
+        }
+        this.setState(
+          {
+            currentPeriod: data,
+          },
+          () => {
+            setSubmitting(false);
+            callback();
+          },
+        );
+      })
+      .catch(({ error, message }) =>
+        notification.error({
+          message: message || error,
+        }),
+      );
+  };
+
   getPeriodListWithUpdatedActivePeriod = updatedPeriodId => {
     const { periodList } = this.state;
 
@@ -210,6 +234,7 @@ class InstitutionContextProvider extends Component {
     makePeriodCurrent: this.makePeriodCurrent,
     deletePeriod: this.deletePeriod,
     createPeriod: this.createPeriod,
+    updatePeriod: this.updatePeriod,
     periodList: [],
     gettingPeriods: false,
     getPeriodList: this.getPeriodList,

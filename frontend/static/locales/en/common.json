@@ -84,6 +84,7 @@
   "verifying payment": "Requires payment confirmation",
   "PendingPayments": "Pending payments",
   "PendingCount": "{{ count }} pending",
+  "MustBeAfterSignupFrom": "Date must be after start date",
   "NoData": "No data",
   "Reset": "Reset",
   "Ok": "Ok",
@@ -118,5 +119,6 @@
   "NoPeriods": "No periods available",
   "PeriodCreationModuleText": "The name and year of this period will be set automatically.",
   "PeriodDelitionConfirmation": "Are you sure you want to delete this period?",
-  "PeriodDeletionDangerExplanation": "Be aware that deleting a period involves deleting <em>everything</em> associated with it: like modules, scores and student progress in this period."
+  "PeriodDeletionDangerExplanation": "Be aware that deleting a period involves deleting everything associated with it: like modules, scores and student progress in this period.",
+  "Update": "Update"
 }
