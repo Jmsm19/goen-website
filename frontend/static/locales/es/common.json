@@ -116,5 +116,7 @@
   "MakeCurrent": "Marcar como activo",
   "NoModules": "No hay modulos disponibles",
   "NoPeriods": "No hay períodos disponibles",
-  "PeriodCreationModuleText": "El nombre y año del período serán asignados automáticamente."
+  "PeriodCreationModuleText": "El nombre y año del período serán asignados automáticamente.",
+  "PeriodDelitionConfirmation": "¿Seguro que quieres borrar este período?",
+  "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período."
 }
