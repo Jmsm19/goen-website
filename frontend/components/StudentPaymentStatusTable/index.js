@@ -112,7 +112,7 @@ function StudentPaymentStatusTable({
       loading={loading}
       dataSource={createTableDataSource()}
       locale={{
-        emptyText: t('NoData'),
+        emptyText: t('NoStudents'),
         filterReset: t('Reset'),
         filterConfirm: t('Ok'),
       }}

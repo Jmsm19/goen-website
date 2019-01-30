@@ -136,7 +136,12 @@ function UserProfileEditionForm({ t, updateUser, user, fieldErrors }) {
 
           {/* Submit */}
           <StyledButtonArea>
-            <Button type='primary' htmlType='submit' loading={isSubmitting}>
+            <Button
+              type='primary'
+              htmlType='submit'
+              loading={isSubmitting}
+              disabled={!touched.birth_date && !touched.name && !touched.phone_number}
+            >
               {t('SaveChanges')}
             </Button>
           </StyledButtonArea>

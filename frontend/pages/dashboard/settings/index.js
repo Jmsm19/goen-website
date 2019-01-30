@@ -24,7 +24,7 @@ class SettingsPage extends Component {
       <RequireAuthentication t={t}>
         {({ handleUserUpdate, authUser, fieldErrors }) => (
           <StyledPage>
-            <Divider orientation='left'>User details</Divider>
+            <Divider orientation='left'>{t('UserDetails')}</Divider>
 
             <div className='settings-area'>
               <UserProfileEditionForm
@@ -35,13 +35,13 @@ class SettingsPage extends Component {
               />
             </div>
 
-            <Divider orientation='left'>Site settings</Divider>
+            <Divider orientation='left'>{t('SiteSettings')}</Divider>
 
             <div className='settings-area'>
-              <p>Language</p>
+              <p>{t('Language')}</p>
               <Select
-                id='languague'
-                name='languague'
+                id='language'
+                name='language'
                 defaultValue={i18n.language}
                 style={{ width: 120 }}
                 onChange={this.changeLanguage}

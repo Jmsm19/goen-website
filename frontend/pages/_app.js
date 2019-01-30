@@ -9,7 +9,10 @@ import '../styles/nprogress.css';
 import '../styles/antd.css';
 import '../styles/styles.css';
 import { StyledContainer } from '../styles/pages/app';
-import { InstitutionContextProvider } from '../context/InstitutionContext';
+import {
+  InstitutionContextProvider,
+  InstitutionContextConsumer,
+} from '../context/InstitutionContext';
 
 Router.onRouteChangeStart = () => NProgress.start().inc(0.5);
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -33,10 +36,18 @@ class MyApp extends App {
           <InstitutionContextProvider>
             <AuthContextConsumer>
               {({ isAuth }) => (
-                <Page isAuth={isAuth}>
-                  <Meta />
-                  <Component {...pageProps} isAuth={isAuth} />
-                </Page>
+                <InstitutionContextConsumer>
+                  {institutionContext => (
+                    <Page isAuth={isAuth}>
+                      <Meta />
+                      <Component
+                        {...pageProps}
+                        isAuth={isAuth}
+                        institution={{ ...institutionContext }}
+                      />
+                    </Page>
+                  )}
+                </InstitutionContextConsumer>
               )}
             </AuthContextConsumer>
           </InstitutionContextProvider>
