@@ -29,7 +29,12 @@ function DashboardNavigation({
       )}
 
       {authUser && authUser.isStudent && (
-        <StudentMenu t={t} currentPage={currentPage} handlePageChange={handlePageChange} />
+        <StudentMenu
+          t={t}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+          hasClass={authUser.registrationStatus === 'registered'}
+        />
       )}
 
       <StyledNoBorderMenu
