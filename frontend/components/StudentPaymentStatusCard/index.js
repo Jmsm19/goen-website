@@ -101,7 +101,7 @@ class StudentPaymentStatusCard extends Component {
         tabList={tabList}
         defaultActiveTabKey={currentTab}
         onTabChange={this.handleTabChange}
-        title={`${t('Payments')} ${period && `- ${t('Period')} ${period.name} - ${period.year}`}`}
+        title={`${t('Payments')}`}
         bodyStyle={{ padding: '0' }}
       >
         {contentList[currentTab]}

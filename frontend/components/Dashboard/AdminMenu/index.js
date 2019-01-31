@@ -29,12 +29,6 @@ function AdminMenu({ t, handlePageChange, currentPage }) {
             <a>{t('Modules')}</a>
           </Link>
         </StyledMenuItem>
-        <StyledMenuItem key='dashboard-admin-payments'>
-          <Icon type='credit-card' />
-          <Link href='/dashboard/admin/payments'>
-            <a>{t('Payments')}</a>
-          </Link>
-        </StyledMenuItem>
       </SubMenu>
     </StyledNoBorderMenu>
   );

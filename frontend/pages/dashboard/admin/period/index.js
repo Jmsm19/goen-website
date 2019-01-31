@@ -9,6 +9,9 @@ import PeriodList from '../../../../components/PeriodList';
 import PeriodPageHeader from '../../../../components/PeriodPageHeader';
 import ModuleListCard from '../../../../components/ModuleListCard';
 import PeriodUpdateForm from '../../../../components/PeriodUpdateForm';
+import { ServerGetData } from '../../../../utils/fetch';
+import StudentPaymentStatusCard from '../../../../components/StudentPaymentStatusCard';
+import StyledPage from '../../../../styles/pages/dashboard/admin/PeriodPage';
 
 class PeriodPage extends Component {
   state = {
@@ -17,9 +20,20 @@ class PeriodPage extends Component {
     visibleUpdateModal: false,
   };
 
-  static async getInitialProps() {
+  static async getInitialProps({ req }) {
+    let periodData = null;
+
+    try {
+      const response = await ServerGetData('/period/current/students', req);
+      const json = await response.json();
+      periodData = json.data;
+    } catch (error) {
+      console.log(error);
+    }
+
     return {
       namespacesRequired: ['common'],
+      students: periodData ? periodData.students : [],
     };
   }
 
@@ -42,7 +56,7 @@ class PeriodPage extends Component {
   };
 
   render() {
-    const { t, institution } = this.props;
+    const { t, institution, students } = this.props;
     const {
       getPeriodList,
       currentPeriod,
@@ -52,13 +66,15 @@ class PeriodPage extends Component {
       makePeriodCurrent,
       gettingPeriods,
       periodList,
+      confirmPayment,
+      rejectPayment,
     } = institution;
     const { visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
 
     return (
       <RequireRole t={t} requiredRole='admin'>
         {() => (
-          <div>
+          <StyledPage>
             <PeriodPageHeader
               t={t}
               currentPeriod={currentPeriod}
@@ -121,8 +137,18 @@ class PeriodPage extends Component {
               />
             </Modal>
 
-            <ModuleListCard t={t} modules={currentPeriod ? currentPeriod.modules : []} />
-          </div>
+            <div className='row'>
+              <StudentPaymentStatusCard
+                t={t}
+                period={currentPeriod}
+                students={students}
+                confirmPayment={confirmPayment}
+                rejectPayment={rejectPayment}
+              />
+
+              <ModuleListCard t={t} modules={currentPeriod ? currentPeriod.modules : []} />
+            </div>
+          </StyledPage>
         )}
       </RequireRole>
     );
@@ -131,6 +157,7 @@ class PeriodPage extends Component {
 
 PeriodPage.propTypes = {
   t: PropTypes.func.isRequired,
+  students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   institution: PropTypes.shape({
     getPeriodList: PropTypes.func,
     deletePeriod: PropTypes.func,
