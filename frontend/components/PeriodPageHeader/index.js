@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Icon } from 'antd';
+import { Button, Icon } from 'antd';
+import StyledHeaderCard from '../../styles/components/PeriodPageHeader';
 
 function PeriodPageHeader({
   t,
@@ -12,10 +13,7 @@ function PeriodPageHeader({
   modules,
 }) {
   return (
-    <Card>
-      <h1>
-        {t('Period')} {currentPeriod.name} - {currentPeriod.year}
-      </h1>
+    <StyledHeaderCard title={`${t('Period')} ${currentPeriod.name} - ${currentPeriod.year}`}>
       <Button type='dashed' onClick={togglePeriodUpdateModal}>
         <Icon type='edit' />
       </Button>
@@ -33,7 +31,7 @@ function PeriodPageHeader({
       >
         {t('ChangeCurrentPeriod')}
       </Button>
-    </Card>
+    </StyledHeaderCard>
   );
 }
 

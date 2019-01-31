@@ -13,18 +13,20 @@ class DashboardMobileDrawer extends Component {
 
     return (
       <AuthContextConsumer>
-        {({ handleLogout, authUser }) => (
-          <StyledDrawer visible={isDrawerOpen} closable width='100%' onClose={toggleDrawer}>
-            <DashboardNavigation
-              t={t}
-              authUser={authUser}
-              isMobile={isMobile}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              handleLogout={handleLogout}
-            />
-          </StyledDrawer>
-        )}
+        {({ handleLogout, authUser }) =>
+          authUser && (
+            <StyledDrawer visible={isDrawerOpen} closable width='100%' onClose={toggleDrawer}>
+              <DashboardNavigation
+                t={t}
+                authUser={authUser}
+                isMobile={isMobile}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+                handleLogout={handleLogout}
+              />
+            </StyledDrawer>
+          )
+        }
       </AuthContextConsumer>
     );
   }

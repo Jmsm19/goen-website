@@ -81,7 +81,7 @@ class ModuleSelection extends Component {
       okType: 'primary',
       centered: true,
       cancelText: t('No'),
-      onOk() {
+      onOk: () => {
         this.handleModuleRegistration(moduleId);
       },
     });

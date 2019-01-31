@@ -13,18 +13,20 @@ class DashboardSider extends Component {
 
     return (
       <AuthContextConsumer>
-        {({ handleLogout, authUser }) => (
-          <StyledSider width='max-content'>
-            <DashboardNavigation
-              t={t}
-              authUser={authUser}
-              isMobile={false}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              handleLogout={handleLogout}
-            />
-          </StyledSider>
-        )}
+        {({ handleLogout, authUser }) =>
+          authUser && (
+            <StyledSider width='max-content'>
+              <DashboardNavigation
+                t={t}
+                authUser={authUser}
+                isMobile={false}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+                handleLogout={handleLogout}
+              />
+            </StyledSider>
+          )
+        }
       </AuthContextConsumer>
     );
   }

@@ -13,7 +13,7 @@ const RequireAuthentication = ({ children, t }) => (
         notificationMessage={t('Unauthorized')}
         notificationDescription={t('LoginFirst')}
       >
-        {context.authUser ? (
+        {context.authUser && context.isAuth ? (
           children({
             ...context,
           })

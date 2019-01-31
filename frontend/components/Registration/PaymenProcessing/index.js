@@ -47,7 +47,7 @@ class PaymentProcessing extends Component {
           <Collapse
             accordion
             defaultActiveKey='BOD'
-            style={{ maxWidth: '1024px', margin: '0 auto 30px' }}
+            style={{ maxWidth: '1024px', margin: '10px auto 30px' }}
           >
             {panelList.map(({ key, header, content }) => (
               <Panel header={header} key={key}>

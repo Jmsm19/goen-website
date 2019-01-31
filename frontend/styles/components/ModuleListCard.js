@@ -7,12 +7,16 @@ export const StyledCard = styled(Card)`
 
 export const StyledBadge = styled(Badge)`
   .ant-scroll-number.ant-badge-count {
-    height: max-content;
-    padding: 3px 6px;
-    border-radius: 50%;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: bold;
 
     ${({ count }) => {
+      if (count >= 10) {
+        return `
+          background-color: #27ae60;
+        `;
+      }
+
       if (count > 0) {
         return `
           background-color: #f39c12;

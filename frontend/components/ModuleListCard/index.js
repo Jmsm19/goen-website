@@ -15,8 +15,7 @@ function ModuleListCard({ t, modules }) {
         renderItem={module => (
           <List.Item>
             <List.Item.Meta title={`${module.name} - ${module.section}`} />
-            <StyledBadge showZero count={0} />
-            {/* count={module.registeredStudents} */}
+            <StyledBadge showZero count={module.registeredStudents} />
           </List.Item>
         )}
       />

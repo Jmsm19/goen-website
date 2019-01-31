@@ -6,6 +6,7 @@ import DashboardSider from '../../Dashboard/DashboardSider';
 import DashboardHeader from '../../Dashboard/DashboardHeader';
 import DashboardMobileDrawer from '../../Dashboard/DashboardMobileDrawer';
 import { StyledLayout, StyledContent } from '../../../styles/components/dashboard/DashboardLayout';
+import { Loading } from '../../Loading';
 
 class DashboardLayout extends Component {
   state = {
