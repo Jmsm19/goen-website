@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Skeleton, Modal, notification } from 'antd';
+import { Modal, notification } from 'antd';
 import uuid from 'uuid/v4';
-import { GetData, SendData } from '../../../utils/fetch';
+import { SendData } from '../../../utils/fetch';
 import {
   StyledModulesGrid,
   StyledPageContent,
@@ -10,33 +10,14 @@ import {
 import ModuleCard from '../../ModuleCard';
 import ModuleSelectionHeader from '../ModuleSelectionHeader';
 import { moduleOrder } from '../../../utils/config';
-import { Loading } from '../../Loading';
 
 class ModuleSelection extends Component {
   state = {
-    mounted: false,
-    periodData: {},
     modules: [],
   };
 
   componentDidMount() {
-    GetData('/period/current')
-      .then(response => response.json())
-      .then(({ data, error }) => {
-        if (error) throw Error(error);
-        this.setState(
-          () => ({
-            mounted: true,
-            periodData: data,
-          }),
-          () => this.filterModules(true),
-        );
-      })
-      .catch(error => {
-        notification.error({
-          message: error.message || error.error,
-        });
-      });
+    this.filterModules(true);
   }
 
   handleModuleRegistration = moduleId => {
@@ -77,7 +58,9 @@ class ModuleSelection extends Component {
     modulesToSort ? modulesToSort.sort((a, b) => (a.name < b.name ? -1 : 1)) : [];
 
   filterModules = shouldFilter => {
-    const { modules } = this.state;
+    const {
+      currentPeriod: { modules },
+    } = this.props;
 
     if (shouldFilter) {
       return this.setState({
@@ -105,33 +88,27 @@ class ModuleSelection extends Component {
   };
 
   render() {
-    const { lng, t } = this.props;
-    const { mounted, periodData, modules } = this.state;
-    const periodName = `${periodData.name} - ${periodData.year}`;
+    const { lng, currentPeriod, t } = this.props;
+    const { modules } = this.state;
+    const periodName = `${currentPeriod.name} - ${currentPeriod.year}`;
 
     return (
-      <Skeleton loading={!mounted} active>
-        <StyledPageContent>
-          <ModuleSelectionHeader t={t} periodName={periodName} filterModules={this.filterModules} />
-          {mounted ? (
-            <StyledModulesGrid>
-              {modules &&
-                modules.map(module => (
-                  <ModuleCard
-                    key={uuid()}
-                    t={t}
-                    lng={lng}
-                    module={module}
-                    canRegister={this.canRegisterIn(module)}
-                    toggleConfirmPopFor={this.toggleConfirmPopFor}
-                  />
-                ))}
-            </StyledModulesGrid>
-          ) : (
-            <Loading />
-          )}
-        </StyledPageContent>
-      </Skeleton>
+      <StyledPageContent>
+        <ModuleSelectionHeader t={t} periodName={periodName} filterModules={this.filterModules} />
+        <StyledModulesGrid>
+          {modules &&
+            modules.map(module => (
+              <ModuleCard
+                key={uuid()}
+                t={t}
+                lng={lng}
+                module={module}
+                canRegister={this.canRegisterIn(module)}
+                toggleConfirmPopFor={this.toggleConfirmPopFor}
+              />
+            ))}
+        </StyledModulesGrid>
+      </StyledPageContent>
     );
   }
 }
@@ -139,6 +116,10 @@ class ModuleSelection extends Component {
 ModuleSelection.propTypes = {
   t: PropTypes.func.isRequired,
   lng: PropTypes.string.isRequired,
+  currentPeriod: PropTypes.shape({
+    name: PropTypes.string,
+    year: PropTypes.number,
+  }).isRequired,
   passedModules: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setRegistrationStatus: PropTypes.func.isRequired,
 };

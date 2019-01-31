@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, List, Badge } from 'antd';
+import { List } from 'antd';
+import { StyledCard, StyledBadge } from '../../styles/components/ModuleListCard';
 
 function ModuleListCard({ t, modules }) {
   return (
-    <Card title={t('Modules')} style={{ width: '160px' }}>
+    <StyledCard title={t('Modules')}>
       <List
         itemLayout='horizontal'
         locale={{
@@ -13,12 +14,13 @@ function ModuleListCard({ t, modules }) {
         dataSource={modules}
         renderItem={module => (
           <List.Item>
-            <List.Item.Meta title={`${module.name} - ${module.section}`} description='' />
-            <Badge showZero count={module.registeredStudents} />
+            <List.Item.Meta title={`${module.name} - ${module.section}`} />
+            <StyledBadge showZero count={0} />
+            {/* count={module.registeredStudents} */}
           </List.Item>
         )}
       />
-    </Card>
+    </StyledCard>
   );
 }
 

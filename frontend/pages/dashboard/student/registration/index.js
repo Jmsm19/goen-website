@@ -8,7 +8,6 @@ import PaymentProcessing from '../../../../components/Registration/PaymenProcess
 import RegisteredMessage from '../../../../components/Registration/RegisteredMessage';
 import PaymentVerification from '../../../../components/Registration/PaymentVerification';
 import RequireRole from '../../../../components/RequireRole';
-import { InstitutionContextConsumer } from '../../../../context/InstitutionContext';
 
 class ModuleRegisterPage extends Component {
   static async getInitialProps() {
@@ -18,7 +17,8 @@ class ModuleRegisterPage extends Component {
   }
 
   render() {
-    const { t, lng } = this.props;
+    const { t, lng, institution } = this.props;
+    const { currentPeriod, registrationActive } = institution;
 
     return (
       <RequireRole t={t} requiredRole='student'>
@@ -26,35 +26,32 @@ class ModuleRegisterPage extends Component {
           const { registrationStatus } = authUser;
           return (
             <StyledPage>
-              <InstitutionContextConsumer>
-                {registrationActive =>
-                  registrationActive ? (
-                    <>
-                      <RegistrationSteps t={t} registrationStatus={registrationStatus} />
-                      {registrationStatus === 'idle' && (
-                        <ModuleSelection
-                          t={t}
-                          lng={lng}
-                          passedModules={authUser.passedModules}
-                          setRegistrationStatus={setRegistrationStatus}
-                        />
-                      )}
+              {registrationActive ? (
+                <>
+                  <RegistrationSteps t={t} registrationStatus={registrationStatus} />
+                  {registrationStatus === 'idle' && (
+                    <ModuleSelection
+                      t={t}
+                      lng={lng}
+                      currentPeriod={currentPeriod}
+                      passedModules={authUser.passedModules}
+                      setRegistrationStatus={setRegistrationStatus}
+                    />
+                  )}
 
-                      {registrationStatus === 'paying' && (
-                        <PaymentProcessing t={t} setRegistrationStatus={setRegistrationStatus} />
-                      )}
+                  {registrationStatus === 'paying' && (
+                    <PaymentProcessing t={t} setRegistrationStatus={setRegistrationStatus} />
+                  )}
 
-                      {registrationStatus === 'verifying payment' && <PaymentVerification t={t} />}
+                  {registrationStatus === 'verifying payment' && <PaymentVerification t={t} />}
 
-                      {registrationStatus === 'registered' && (
-                        <RegisteredMessage t={t} setRegistrationStatus={setRegistrationStatus} />
-                      )}
-                    </>
-                  ) : (
-                    <h1>Registrations are not open at the moment</h1>
-                  )
-                }
-              </InstitutionContextConsumer>
+                  {registrationStatus === 'registered' && (
+                    <RegisteredMessage t={t} setRegistrationStatus={setRegistrationStatus} />
+                  )}
+                </>
+              ) : (
+                <h1>Registrations are not open at the moment</h1>
+              )}
             </StyledPage>
           );
         }}
@@ -66,6 +63,10 @@ class ModuleRegisterPage extends Component {
 ModuleRegisterPage.propTypes = {
   t: PropTypes.func.isRequired,
   lng: PropTypes.string.isRequired,
+  institution: PropTypes.shape({
+    currentPeriod: PropTypes.shape(),
+    registrationActive: PropTypes.bool,
+  }).isRequired,
 };
 
 export default withNamespaces('common')(ModuleRegisterPage);

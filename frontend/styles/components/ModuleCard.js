@@ -4,6 +4,7 @@ import { Card } from 'antd';
 
 const StyledModuleCard = styled(({ canRegister, ...rest }) => <Card {...rest} />)`
   margin-bottom: 15px;
+  max-height: 190px;
 
   ${({ canRegister }) =>
     !canRegister &&
