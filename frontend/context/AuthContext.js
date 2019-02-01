@@ -15,7 +15,7 @@ const AuthContext = createContext({});
 class AuthContextProvider extends Component {
   componentDidMount() {
     const Cookies = new UniversalCookies();
-    if (Cookies.get('token') && Cookies.get('token') !== 'undefiend') {
+    if (Cookies.get('token') && Cookies.get('token') !== 'undefined') {
       this.getAuthUser();
     } else {
       this.setState({
@@ -110,6 +110,7 @@ class AuthContextProvider extends Component {
           Cookies.set('token', accessToken, {
             secure: publicRuntimeConfig.NODE_ENV !== 'development',
             maxAge: expiresAt,
+            path: '/',
           });
           setSubmitting(false);
           this.setState(
@@ -149,7 +150,7 @@ class AuthContextProvider extends Component {
             message,
           },
           () => {
-            Router.push('/');
+            Router.push('/login');
           },
         );
       })
