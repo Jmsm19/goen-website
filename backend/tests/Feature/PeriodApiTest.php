@@ -221,6 +221,17 @@ class PeriodApiTest extends TestCase
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
 
+        // Cant' delete active Period
+        $this->delete(route('period.destroy', ['period' => $period->id]))
+            ->assertStatus(403)
+            ->assertJson([
+                'error' => trans('message.CannotDeleteActivePeriod')
+            ]);
+
+        // Delete inactive Period
+        $period = factory(Period::class)->create([
+            'active' => false
+        ]);
         $this->delete(route('period.destroy', ['period' => $period->id]))
             ->assertStatus(204);
     }

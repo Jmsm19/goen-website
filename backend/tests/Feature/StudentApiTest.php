@@ -157,26 +157,26 @@ class StudentApiTest extends TestCase
                 ->assertJson(['error' => trans('auth.no_privilages')]);
     }
 
-    public function testUploadTransferCapture()
-    {
-        $student = $this->passportActingAs('student');
-        // Register User in Module
-        $module = factory(Module::class)->create();
-        $student->registerIn($module);
-        // Create fake dropbox folder
-        Storage::fake('dropbox');
+    // public function testUploadTransferCapture()
+    // {
+    //     $student = $this->passportActingAs('student');
+    //     // Register User in Module
+    //     $module = factory(Module::class)->create();
+    //     $student->registerIn($module);
+    //     // Create fake dropbox folder
+    //     Storage::fake('dropbox');
 
-        $this->json('POST', route('student.transfercapture'), [
-            'image' => UploadedFile::fake()->image('comprobante.jpg')
-        ]);
+    //     $this->json('POST', route('student.transfercapture'), [
+    //         'image' => UploadedFile::fake()->image('comprobante.jpg')
+    //     ]);
 
-        // Current Period subfolder
-        $period = Period::where('active', 1)->first();
-        $period_name = "Período {$period->name}-{$period->year}";
+    //     // Current Period subfolder
+    //     $period = Period::where('active', 1)->first();
+    //     $period_name = "Período {$period->name}-{$period->year}";
 
-        // Image name
-        $image_name = $this->makeImageName($student);
+    //     // Image name
+    //     $image_name = $this->makeImageName($student);
 
-        Storage::disk('dropbox')->assertExists("comprobantes/{$period_name}/{$image_name}");
-    }
+    //     Storage::disk('dropbox')->assertExists("comprobantes/{$period_name}/{$image_name}");
+    // }
 }
