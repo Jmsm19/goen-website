@@ -9,7 +9,7 @@ import PeriodList from '../../../../components/PeriodList';
 import PeriodPageHeader from '../../../../components/PeriodPageHeader';
 import ModuleListCard from '../../../../components/ModuleListCard';
 import PeriodUpdateForm from '../../../../components/PeriodUpdateForm';
-import { ServerGetData } from '../../../../utils/fetch';
+import { GetData } from '../../../../utils/fetch';
 import StudentPaymentStatusCard from '../../../../components/StudentPaymentStatusCard';
 import StyledPage from '../../../../styles/pages/dashboard/admin/PeriodPage';
 
@@ -18,22 +18,28 @@ class PeriodPage extends Component {
     visibleCreationModal: false,
     visibleListModal: false,
     visibleUpdateModal: false,
+    students: [],
   };
 
-  static async getInitialProps({ req }) {
+  async componentDidMount() {
     let periodData = null;
 
     try {
-      const response = await ServerGetData('/period/current/students', req);
+      const response = await GetData('/period/current/students');
       const json = await response.json();
-      periodData = json.data;
+      periodData = response.status === 200 ? json.data : null;
+
+      this.setState({
+        students: periodData ? periodData.students : [],
+      });
     } catch (error) {
       console.log(error);
     }
+  }
 
+  static async getInitialProps() {
     return {
       namespacesRequired: ['common'],
-      students: periodData ? periodData.students : [],
     };
   }
 
@@ -56,7 +62,7 @@ class PeriodPage extends Component {
   };
 
   render() {
-    const { t, institution, students } = this.props;
+    const { t, institution } = this.props;
     const {
       getPeriodList,
       currentPeriod,
@@ -69,7 +75,7 @@ class PeriodPage extends Component {
       confirmPayment,
       rejectPayment,
     } = institution;
-    const { visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
+    const { students, visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
 
     return (
       <RequireRole t={t} requiredRole='admin'>
@@ -157,7 +163,6 @@ class PeriodPage extends Component {
 
 PeriodPage.propTypes = {
   t: PropTypes.func.isRequired,
-  students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   institution: PropTypes.shape({
     getPeriodList: PropTypes.func,
     deletePeriod: PropTypes.func,

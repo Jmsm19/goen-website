@@ -1,7 +1,7 @@
 /* eslint-disable react/sort-comp */
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
-import UniversalCookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import getConfig from 'next/config';
@@ -14,7 +14,6 @@ const AuthContext = createContext({});
 
 class AuthContextProvider extends Component {
   componentDidMount() {
-    const Cookies = new UniversalCookies();
     if (Cookies.get('token') && Cookies.get('token') !== 'undefined') {
       this.getAuthUser();
     } else {
@@ -99,7 +98,6 @@ class AuthContextProvider extends Component {
 
   handleLogin = (values, { setSubmitting }) => {
     NProgress.start();
-    const Cookies = new UniversalCookies();
     SendData('POST', '/auth/login', values)
       .then(data => data.json())
       .then(({ accessToken, expiresAt, message }) => {
@@ -109,8 +107,8 @@ class AuthContextProvider extends Component {
           NProgress.done();
           Cookies.set('token', accessToken, {
             secure: publicRuntimeConfig.NODE_ENV !== 'development',
-            maxAge: expiresAt,
-            path: '/dashboard',
+            expires: new Date(expiresAt),
+            path: '/',
           });
           setSubmitting(false);
           this.setState(
@@ -137,7 +135,6 @@ class AuthContextProvider extends Component {
 
   handleLogout = () => {
     NProgress.start();
-    const Cookies = new UniversalCookies();
     GetData('/auth/logout')
       .then(data => data.json())
       .then(({ message }) => {
