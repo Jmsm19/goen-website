@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-// import getConfig from 'next/config';
+import getConfig from 'next/config';
 import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
 import { Loading } from '../components/Loading';
 
-// const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig } = getConfig();
 const AuthContext = createContext({});
 
 class AuthContextProvider extends Component {
@@ -106,8 +106,8 @@ class AuthContextProvider extends Component {
         } else {
           NProgress.done();
           Cookies.set('token', accessToken, {
-            // secure: publicRuntimeConfig.NODE_ENV !== 'development',
-            expires: new Date(expiresAt),
+            secure: publicRuntimeConfig.NODE_ENV !== 'development',
+            expires: expiresAt ? new Date(expiresAt) : null,
             path: '/',
           });
           setSubmitting(false);
