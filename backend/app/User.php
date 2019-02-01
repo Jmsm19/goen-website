@@ -74,6 +74,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Clan');
     }
 
+    public function hasClan()
+    {
+        return !is_null($this->clan);
+    }
+
     public function grades()
     {
         return $this->hasMany('App\Grade');

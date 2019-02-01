@@ -15,7 +15,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $has_clan = !is_null($this->clan);
         $current_module = $this->currentModule();
         $passed_modules = $this->passedModules();
 
@@ -26,7 +25,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phoneNumber' => $this->phone_number,
             'birthDate' => (string) $this->birth_date,
-            'clan' => $has_clan ? $this->clan->name : null,
+            'clan' => $this->hasClan() ? $this->clan->name : null,
             'registrationStatus' => $this->registration_status,
             'currentModule' => is_null($current_module) ?
                 null : new SimpleModuleResource($current_module),

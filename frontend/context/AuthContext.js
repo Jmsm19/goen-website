@@ -110,7 +110,7 @@ class AuthContextProvider extends Component {
           Cookies.set('token', accessToken, {
             secure: publicRuntimeConfig.NODE_ENV !== 'development',
             maxAge: expiresAt,
-            path: '/',
+            path: '/dashboard',
           });
           setSubmitting(false);
           this.setState(

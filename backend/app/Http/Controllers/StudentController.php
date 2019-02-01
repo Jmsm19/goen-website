@@ -7,6 +7,8 @@ use App\Module;
 use App\Period;
 use Spatie\Dropbox\Client;
 use Illuminate\Http\Request;
+use App\Events\PaymentAccepted;
+use App\Events\PaymentRejected;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ImageUploadRequest;
@@ -123,7 +125,16 @@ class StudentController extends Controller
 
     public function confirmPayment(User $student)
     {
+        $module = $student->currentModule();
         $student->setRegistrationStatus('registered');
+
+        if (!$student->hasClan() && $student->currentModule()->name === "M-0") {
+            $student->clan_id = $module->clan->id;
+            $student->save();
+        }
+
+        event(new PaymentAccepted($student, $module));
+
         return response()->json([
             'message' => trans('message.student_registered')
         ], 200);
@@ -132,6 +143,9 @@ class StudentController extends Controller
     public function rejectPayment(User $student)
     {
         $student->setRegistrationStatus('paying');
+
+        event(new PaymentRejected($student));
+
         return response()->json([
             'message' => trans('message.invalid_payment')
         ], 200);
