@@ -23,7 +23,7 @@ class AuthContextProvider extends Component {
     }
   }
 
-  getAuthUser = () => {
+  getAuthUser = callback => {
     NProgress.start();
     GetData('/auth/user')
       .then(response => response.json())
@@ -33,11 +33,19 @@ class AuthContextProvider extends Component {
           throw Error(message);
         } else {
           NProgress.done();
-          this.setState(prevState => ({
-            authUser: data,
-            isAuth: !prevState.isAuth ? true : prevState.isAuth,
-            mounted: prevState.mounted ? true : !prevState.mounted,
-          }));
+          this.setState(
+            prevState => ({
+              authUser: data,
+              isAuth: !prevState.isAuth ? true : prevState.isAuth,
+              mounted: prevState.mounted ? true : !prevState.mounted,
+            }),
+            () => {
+              if (typeof callback === 'function') {
+                callback();
+              }
+              this.redirectToCommonRouteIfNotInDashboard();
+            },
+          );
         }
       })
       .catch(error => {
@@ -53,6 +61,9 @@ class AuthContextProvider extends Component {
               message: 'Error',
               description: error.message,
             });
+            if (typeof callback === 'function') {
+              callback();
+            }
             Router.push('/login');
           },
         );
@@ -110,15 +121,13 @@ class AuthContextProvider extends Component {
             expires: expiresAt ? new Date(expiresAt) : null,
             path: '/',
           });
-          setSubmitting(false);
           this.setState(
             () => ({
               isAuth: true,
               mounted: false,
             }),
             () => {
-              this.getAuthUser();
-              Router.push('/dashboard/');
+              this.getAuthUser(() => setSubmitting(false));
             },
           );
         }
@@ -216,6 +225,25 @@ class AuthContextProvider extends Component {
     }));
   };
 
+  redirectToCommonRouteIfNotInDashboard = () => {
+    const { authUser } = this.state;
+    const currentRoute = Router.asPath;
+    if (!currentRoute.match(/dashboard/gi)) {
+      const userStatus = authUser.registrationStatus;
+
+      if (userStatus !== 'registered' && authUser.isStudent) {
+        return Router.push('/dashboard/student/registration');
+      }
+
+      if (authUser.isAdmin) {
+        return Router.push('/dashboard/admin/period');
+      }
+
+      return Router.push('/dashboard/settings');
+    }
+    return undefined;
+  };
+
   state = {
     mounted: false,
     isAuth: false,
@@ -224,6 +252,7 @@ class AuthContextProvider extends Component {
     handleRegister: this.handleRegister,
     handleUserUpdate: this.updateAuthUser,
     registerSuccess: false,
+    redirectToCommonRouteIfNotInDashboard: this.redirectToCommonRouteIfNotInDashboard,
     setRegistrationStatus: this.setRegistrationStatus,
     message: '',
     fieldErrors: [],

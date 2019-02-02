@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
 import SignupForm from '../../components/SignupForm';
 import { AuthContextConsumer } from '../../context/AuthContext';
 import { withNamespaces } from '../../i18n';
@@ -11,13 +10,6 @@ export class SignupPage extends Component {
     return {
       namespacesRequired: ['common'],
     };
-  }
-
-  componentDidMount() {
-    const { isAuth } = this.props;
-    if (isAuth) {
-      Router.push('/dashboard');
-    }
   }
 
   render() {
