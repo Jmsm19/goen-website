@@ -38,7 +38,7 @@ class RoleApiTest extends TestCase
         $this->put(route('add_role', $params))
             ->assertStatus(200)
             ->assertJson([
-                'message' =>
+                'error' =>
                     trans('messages.has_role', ['role' => $params['role']]),
             ]);
     }
@@ -57,12 +57,12 @@ class RoleApiTest extends TestCase
         // Admin can't remove own roles
         $params = [
             'id' => $admin_user->id,
-            'role' => $role
+            'role' => 'admin'
         ];
         $this->delete(route('remove_role', $params))
             ->assertStatus(200)
             ->assertJson([
-                'message' => trans('messages.admin_forbid_self_role_change')
+                'error' => trans('messages.admin_forbid_self_role_change')
             ]);
 
         // Throw error when trying to delete the only role a user has
@@ -73,18 +73,18 @@ class RoleApiTest extends TestCase
         $this->delete(route('remove_role', $params))
             ->assertStatus(200)
             ->assertJson([
-                'message' => trans('messages.at_least_one_role')
+                'error' => trans('messages.at_least_one_role')
             ]);
 
         // Throw error when trying to delete a role the user doesn't have
         $params = [
             'id' => $user->id,
-            'role' => 'admin'
+            'role' => 'instructor'
         ];
         $this->delete(route('remove_role', $params))
             ->assertStatus(200)
             ->assertJson([
-                'message' =>
+                'error' =>
                     trans('messages.not_has_role', ['role' => $params['role']])
             ]);
 

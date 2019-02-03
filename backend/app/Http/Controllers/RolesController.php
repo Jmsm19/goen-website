@@ -22,7 +22,7 @@ class RolesController extends Controller
         // Prevent addition of role if user already has it
         if ($user->hasRole($role)) {
             return response()->json([
-                'message' => trans('messages.has_role', ['role' => $role]),
+                'error' => trans('messages.has_role', ['role' => $role]),
             ], 200);
         }
 
@@ -44,9 +44,9 @@ class RolesController extends Controller
     public function removeRole(Request $request, $id, $role)
     {
         // Admins can't remove own roles
-        if ($id == $request->user()->id) {
+        if ($id == $request->user()->id && $role == 'admin') {
             return response()->json([
-                'message' => trans('messages.admin_forbid_self_role_change'),
+                'error' => trans('messages.admin_forbid_self_role_change'),
              ], 200);
         }
 
@@ -55,14 +55,14 @@ class RolesController extends Controller
         // Send response if user doesn't have specified role
         if (!$user->hasRole($role)) {
             return response()->json([
-                'message' => trans('messages.not_has_role', ['role' => $role]),
+                'error' => trans('messages.not_has_role', ['role' => $role]),
             ], 200);
         }
 
         // Do not allow removal of role if user only has one
         if (count($user->roles()->get()) == 1) {
             return response()->json([
-                'message' => trans('messages.at_least_one_role'),
+                'error' => trans('messages.at_least_one_role'),
             ], 200);
         }
 
