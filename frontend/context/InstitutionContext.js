@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
 import { todayIsBetween } from '../utils';
 import { Loading } from '../components/Loading';
+import { UsersContextProvider } from './UsersContext';
 
 const InstitutionContext = createContext({});
 
@@ -245,7 +246,9 @@ class InstitutionContextProvider extends Component {
     const { loading, ...state } = this.state;
 
     return !loading ? (
-      <InstitutionContext.Provider value={{ ...state }}>{children}</InstitutionContext.Provider>
+      <UsersContextProvider>
+        <InstitutionContext.Provider value={{ ...state }}>{children}</InstitutionContext.Provider>
+      </UsersContextProvider>
     ) : (
       <Loading />
     );

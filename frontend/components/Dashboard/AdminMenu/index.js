@@ -25,8 +25,8 @@ function AdminMenu({ t, handlePageChange, currentPage }) {
         </StyledMenuItem>
         <StyledMenuItem key='dashboard-admin-modules'>
           <Icon type='team' />
-          <Link href='/dashboard/admin/modules'>
-            <a>{t('Modules')}</a>
+          <Link href='/dashboard/admin/instructors'>
+            <a>{t('Instructors')}</a>
           </Link>
         </StyledMenuItem>
       </SubMenu>

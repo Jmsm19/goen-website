@@ -19,3 +19,10 @@ export const todayIsBetween = (date1, date2) => {
   const today = moment().format('Y-MM-DD');
   return moment(today).isBetween(date1, date2, null, '[]');
 };
+
+/**
+ * Capitalize the first letter of a given string
+ *
+ * @param {String} str
+ */
+export const capitalize = str => str[0].toUpperCase() + str.substring(1);
