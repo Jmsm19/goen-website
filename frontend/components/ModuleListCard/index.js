@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'antd';
-import { StyledCard, StyledBadge } from '../../styles/components/ModuleListCard';
+import { StyledCard, StyledIcon, StyledListItem } from '../../styles/components/ModuleListCard';
 
 function ModuleListCard({ t, modules }) {
   return (
@@ -13,10 +13,11 @@ function ModuleListCard({ t, modules }) {
         }}
         dataSource={modules}
         renderItem={module => (
-          <List.Item>
+          <StyledListItem>
             <List.Item.Meta title={`${module.name} - ${module.section}`} />
-            <StyledBadge showZero count={module.registeredStudents} />
-          </List.Item>
+            <StyledIcon type='team' count={module.registeredStudents} />
+            {module.registeredStudents}
+          </StyledListItem>
         )}
       />
     </StyledCard>
