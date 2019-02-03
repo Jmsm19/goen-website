@@ -7,7 +7,6 @@ import { GetData } from '../../utils/fetch';
 
 class StudentPaymentStatusCard extends Component {
   state = {
-    currentTab: 'verifying',
     stateStudents: null,
     loading: false,
   };
@@ -34,11 +33,7 @@ class StudentPaymentStatusCard extends Component {
       },
     );
 
-  handleTabChange = key => {
-    this.setState({ currentTab: key });
-  };
-
-  makeAccordion = status => {
+  createTable = status => {
     const { loading, stateStudents } = this.state;
     const { t, students, period, confirmPayment, rejectPayment } = this.props;
     const modules = period ? period.modules : [];
@@ -72,7 +67,7 @@ class StudentPaymentStatusCard extends Component {
   };
 
   render() {
-    const { t, period } = this.props;
+    const { t } = this.props;
     const { currentTab } = this.state;
 
     const tabList = [
@@ -91,16 +86,16 @@ class StudentPaymentStatusCard extends Component {
     ];
 
     const contentList = {
-      verifying: this.makeAccordion('verifying payment'),
-      pending: this.makeAccordion('paying'),
-      confirmed: this.makeAccordion('registered'),
+      verifying: this.createTable('verifying payment'),
+      pending: this.createTable('paying'),
+      confirmed: this.createTable('registered'),
     };
 
     return (
       <StyledCard
-        tabList={tabList}
-        defaultActiveTabKey={currentTab}
-        onTabChange={this.handleTabChange}
+        tabs={tabList}
+        content={contentList}
+        defaultTabKey='verifying'
         title={`${t('Payments')}`}
         bodyStyle={{ padding: '0' }}
       >

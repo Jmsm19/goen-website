@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Card } from 'antd';
 import media from '../../utils/styling';
+import CardWithtabs from '../../components/CardWithTabs';
 
-const StyledCard = styled(Card)`
+const StyledCard = styled(CardWithtabs)`
   ${media.tablet`
     width: 100vw;
   `}
