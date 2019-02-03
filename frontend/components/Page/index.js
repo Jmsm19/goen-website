@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { appWithTranslation } from '../../i18n';
-import enquireScreen from '../../utils/enquire';
+import { enquireScreen, StopEnquireScreen } from '../../utils/enquire';
 import DashboardLayout from '../Layouts/DashboardLayout';
 
 class Page extends Component {
@@ -13,9 +13,13 @@ class Page extends Component {
   componentDidMount() {
     enquireScreen(isMobile => {
       this.setState({
-        isMobile,
+        isMobile: Boolean(isMobile),
       });
     });
+  }
+
+  componentWillUnmount() {
+    StopEnquireScreen();
   }
 
   render() {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable import/prefer-default-export */
 let enquire;
 
@@ -14,20 +15,28 @@ if (typeof window !== 'undefined') {
   enquire = require('enquire.js'); // eslint-disable-line global-require
 }
 
-const enquireScreen = cb => {
+const mediaQuery = 'only screen and (max-width: 768px)';
+const queryHandler = cb => ({
+  match: () => {
+    cb && cb(true);
+  },
+  unmatch: () => {
+    cb && cb();
+  },
+});
+
+export const enquireScreen = cb => {
   if (!enquire) {
     return;
   }
-  /* eslint-disable no-unused-expressions */
   // and (min-width: 320px)
-  enquire.register('only screen and (max-width: 768px)', {
-    match: () => {
-      cb && cb(true);
-    },
-    unmatch: () => {
-      cb && cb();
-    },
-  });
+  enquire.register(mediaQuery, queryHandler(cb));
 };
 
-export default enquireScreen;
+export const StopEnquireScreen = () => {
+  if (!enquire) {
+    return;
+  }
+
+  enquire.unregister(mediaQuery);
+};
