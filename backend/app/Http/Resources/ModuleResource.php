@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\ScheduleResource;
+use App\Http\Resources\SimpleInstructorResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ModuleResource extends JsonResource
@@ -24,6 +25,7 @@ class ModuleResource extends JsonResource
             'schedule' => new ScheduleResource($this->schedule),
             'registeredStudents' => $this->getRegisteredStudents(),
             'availableSpaces' => $this->getRemainingSpaces(),
+            'instructor' => new SimpleInstructorResource($this->instructor)
         ];
     }
 }
