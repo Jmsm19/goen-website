@@ -74,23 +74,9 @@ class UserController extends Controller
     *       required=true,
     *       @OA\Schema(format="int64", type="integer")
     *   ),
-    *   @OA\Parameter(
-    *       description="User's new name",
-    *       in="query",
-    *       name="name",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's new phone number",
-    *       in="query",
-    *       name="phone_number",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's new birth_date",
-    *       in="query",
-    *       name="birth_date",
-    *       @OA\Schema(type="string", format="date")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/UserUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

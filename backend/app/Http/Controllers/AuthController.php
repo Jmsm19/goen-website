@@ -21,54 +21,9 @@ class AuthController extends Controller
     *   summary="Create user and send notification to validate email and user.",
     *   operationId="userSignup",
     *
-    *   @OA\Parameter(
-    *       description="User's name",
-    *       in="query",
-    *       name="name",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's national identification",
-    *       in="query",
-    *       name="national_id",
-    *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's password",
-    *       in="query",
-    *       name="password",
-    *       required=true,
-    *       @OA\Schema(type="string", format="password")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's password confirmation",
-    *       in="query",
-    *       name="password_confirmation",
-    *       required=true,
-    *       @OA\Schema(type="string", format="password")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's email",
-    *       in="query",
-    *       name="email",
-    *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's phone number",
-    *       in="query",
-    *       name="phone_number",
-    *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User's birth_date",
-    *       in="query",
-    *       name="birth_date",
-    *       required=true,
-    *       @OA\Schema(type="string", format="date")
+    *       @OA\JsonContent(ref="#/components/schemas/SignupRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -144,19 +99,9 @@ class AuthController extends Controller
     *   summary="Login user and return API Token",
     *   operationId="userLogin",
     *
-    *   @OA\Parameter(
-    *       description="User email",
-    *       in="query",
-    *       name="email",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="User password",
-    *       in="query",
-    *       name="password",
-    *       required=true,
-    *       @OA\Schema(type="string", format="password")
+    *       @OA\JsonContent(ref="#/components/schemas/LoginRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

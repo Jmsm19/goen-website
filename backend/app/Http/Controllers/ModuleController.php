@@ -43,39 +43,9 @@ class ModuleController extends Controller
     *       {"Bearer": {}}
     *   },
     *
-    *   @OA\Parameter(
-    *       description="Module's period",
-    *       in="query",
-    *       name="period_id",
-    *       @OA\Schema(type="integer", format="int64")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's name",
-    *       in="query",
-    *       name="name",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's section",
-    *       in="query",
-    *       name="section",
-    *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-     *   @OA\Parameter(
-    *       description="Module's price",
-    *       in="query",
-    *       name="amount",
-    *       required=true,
-    *       @OA\Schema(type="number", format="double")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's schedule",
-    *       in="query",
-    *       name="schedule_id",
-    *       required=true,
-    *       @OA\Schema(type="integer", format="int64")
+    *       @OA\JsonContent(ref="#/components/schemas/ModuleStoreRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -164,35 +134,9 @@ class ModuleController extends Controller
     *       required=true,
     *       @OA\Schema(type="integer",format="int64")
     *   ),
-    *   @OA\Parameter(
-    *       description="Module's period",
-    *       in="query",
-    *       name="period_id",
-    *       @OA\Schema(type="integer", format="int64")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's name",
-    *       in="query",
-    *       name="name",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's section",
-    *       in="query",
-    *       name="section",
-    *       @OA\Schema(type="string")
-    *   ),
-     *   @OA\Parameter(
-    *       description="Module's price",
-    *       in="query",
-    *       name="amount",
-    *       @OA\Schema(type="number", format="double")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Module's schedule",
-    *       in="query",
-    *       name="schedule_id",
-    *       @OA\Schema(type="integer", format="int64")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/ModuleUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

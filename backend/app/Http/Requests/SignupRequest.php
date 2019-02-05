@@ -4,6 +4,53 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *   schema="SignupRequest",
+ *   required={
+ *      "name", "national_id", "password", "password_confirmation",
+ *      "email", "phone_number", "birth_date"
+ *   },
+ *   @OA\Property(
+ *       description="User's name",
+ *       property="name",
+ *       type="string"
+ *   ),
+ *   @OA\Property(
+ *       description="User's national identification",
+ *       property="national_id",
+ *       type="string"
+ *   ),
+ *   @OA\Property(
+ *       description="User's password",
+ *       property="password",
+ *       type="string",
+ *       format="password"
+ *   ),
+ *   @OA\Property(
+ *       description="User's password confirmation",
+ *       property="password_confirmation",
+ *       type="string",
+ *      format="password"
+ *   ),
+ *   @OA\Property(
+ *       description="User's email",
+ *       property="email",
+ *       type="string"
+ *   ),
+ *   @OA\Property(
+ *       description="User's phone number",
+ *       property="phone_number",
+ *       type="string"
+ *   ),
+ *   @OA\Property(
+ *       description="User's birth_date",
+ *       property="birth_date",
+ *       type="string",
+ *      format="date"
+ *   ),
+ * )
+ */
 class SignupRequest extends FormRequest
 {
     /**

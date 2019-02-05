@@ -40,26 +40,9 @@ class ScheduleController extends Controller
     *       {"Bearer": {}}
     *   },
     *
-    *   @OA\Parameter(
-    *       description="Class date",
-    *       in="query",
-    *       name="start_date",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="string", format="date")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Class start time",
-    *       in="query",
-    *       name="from",
-    *       required=true,
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Class end time",
-    *       in="query",
-    *       name="until",
-    *       required=true,
-    *       @OA\Schema(type="string")
+    *       @OA\JsonContent(ref="#/components/schemas/ScheduleStoreRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -142,17 +125,9 @@ class ScheduleController extends Controller
     *       required=true,
     *       @OA\Schema(type="integer",format="int64")
     *   ),
-    *   @OA\Parameter(
-    *       description="Class start time",
-    *       in="query",
-    *       name="from",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Class end time",
-    *       in="query",
-    *       name="until",
-    *       @OA\Schema(type="string")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/ScheduleUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

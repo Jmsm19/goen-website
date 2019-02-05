@@ -50,32 +50,9 @@ class PeriodController extends Controller
     *   security={
     *       {"Bearer": {}}
     *   },
-    *
-    *   @OA\Parameter(
-    *       description="Period's year",
-    *       in="query",
-    *       name="year",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Period's registrations start date",
-    *       in="query",
-    *       name="signup_from",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="string", format="date")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Period's registrations end date",
-    *       in="query",
-    *       name="signup_until",
-    *       required=true,
-    *       @OA\Schema(type="string", format="date")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Should it be created as current active Period",
-    *       in="query",
-    *       name="make_current",
-    *       @OA\Schema(type="boolean")
+    *       @OA\JsonContent(ref="#/components/schemas/PeriodStoreRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -156,7 +133,7 @@ class PeriodController extends Controller
     }
 
     /**
-    * @OA\Put(path="/api/Period/{Period}",
+    * @OA\Put(path="/api/period/{period}",
     *   tags={"Model: Period"},
     *   summary="Update period data",
     *   operationId="updatePeriod",
@@ -171,29 +148,9 @@ class PeriodController extends Controller
     *       required=true,
     *       @OA\Schema(format="int64", type="integer")
     *   ),
-    *   @OA\Parameter(
-    *       description="Period's name",
-    *       in="query",
-    *       name="name",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Period's year",
-    *       in="query",
-    *       name="year",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Period's registrations start date",
-    *       in="query",
-    *       name="signup_from",
-    *       @OA\Schema(type="string", format="date")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Period's registrations end date",
-    *       in="query",
-    *       name="signup_until",
-    *       @OA\Schema(type="string", format="date")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/PeriodUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

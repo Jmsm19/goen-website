@@ -40,12 +40,9 @@ class PriceController extends Controller
     *       {"Bearer": {}}
     *   },
     *
-    *   @OA\Parameter(
-    *       description="Price's amount",
-    *       in="query",
-    *       name="amount",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="number", format="double")
+    *       @OA\JsonContent(ref="#/components/schemas/PriceStoreRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -107,11 +104,9 @@ class PriceController extends Controller
     *       required=true,
     *       @OA\Schema(type="integer",format="int64")
     *   ),
-    *   @OA\Parameter(
-    *       description="Price's new score",
-    *       in="query",
-    *       name="amount",
-    *       @OA\Schema(type="number", format="double")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/PriceUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

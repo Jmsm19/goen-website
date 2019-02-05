@@ -40,26 +40,9 @@ class GradeController extends Controller
     *       {"Bearer": {}}
     *   },
     *
-    *   @OA\Parameter(
-    *       description="Grade's score",
-    *       in="query",
-    *       name="score",
+    *   @OA\RequestBody(
     *       required=true,
-    *       @OA\Schema(type="number", format="double")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Grade's module id",
-    *       in="query",
-    *       name="module_id",
-    *       required=true,
-    *       @OA\Schema(type="integer", format="int64")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Grade's user id",
-    *       in="query",
-    *       name="user_id",
-    *       required=true,
-    *       @OA\Schema(type="integer", format="int64")
+    *       @OA\JsonContent(ref="#/components/schemas/GradeStoreRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,
@@ -123,11 +106,9 @@ class GradeController extends Controller
     *       required=true,
     *       @OA\Schema(type="integer",format="int64")
     *   ),
-    *   @OA\Parameter(
-    *       description="Grade's new score",
-    *       in="query",
-    *       name="score",
-    *       @OA\Schema(type="number", format="double")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/GradeUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

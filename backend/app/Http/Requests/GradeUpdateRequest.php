@@ -4,6 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+*
+* @OA\Schema(
+*   schema="GradeUpdateRequest",
+*   @OA\Property(
+*       description="Grade's new score",
+*       property="score",
+*       type="number",
+*       format="double"
+*   ),
+* )
+*/
 class GradeUpdateRequest extends FormRequest
 {
     /**
@@ -14,7 +26,7 @@ class GradeUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'score' => 'required|numeric|min:0|max:100',
+            'score' => 'numeric|min:0|max:100',
         ];
     }
 }

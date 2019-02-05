@@ -114,13 +114,16 @@ class StudentController extends Controller
     *       required=true,
     *       @OA\MediaType(
     *           mediaType="multipart/form-data",
+    *           encoding={
+    *               "contentType": "image/*"
+    *           },
     *           @OA\Schema(
-    *               required={"file"},
+    *               required={"image"},
     *               @OA\Property(
     *                   description="Bank transfer confirmation picture.",
     *                   property="image",
-    *                   type="file",
-    *                   format="file",
+    *                   type="string",
+    *                   format="base64",
     *               ),
     *           )
     *       )
@@ -129,6 +132,11 @@ class StudentController extends Controller
     *       response=200,
     *       description="Successful image upload",
     *       @OA\JsonContent(ref="#/components/schemas/ImageUploaded")
+    *   ),
+    *   @OA\Response(
+    *       response=422,
+    *       description="Invalid data",
+    *       @OA\JsonContent(ref="#/components/schemas/InvalidData")
     *   )
     * )
     */

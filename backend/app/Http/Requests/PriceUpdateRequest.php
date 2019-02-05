@@ -4,6 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+*
+* @OA\Schema(
+*   schema="PriceUpdateRequest",
+*   @OA\Property(
+*       description="Price's score",
+*       property="amount",
+*       type="number",
+*       format="double"
+*   )
+* )
+*/
 class PriceUpdateRequest extends FormRequest
 {
     /**

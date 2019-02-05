@@ -75,17 +75,9 @@ class ClanController extends Controller
     *       required=true,
     *       @OA\Schema(format="int64", type="integer")
     *   ),
-    *   @OA\Parameter(
-    *       description="Clan's new name",
-    *       in="query",
-    *       name="name",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Clan's new picture url",
-    *       in="query",
-    *       name="picture",
-    *       @OA\Schema(type="string")
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\JsonContent(ref="#/components/schemas/ClanUpdateRequest"),
     *   ),
     *   @OA\Response(
     *       response=200,

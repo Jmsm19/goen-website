@@ -2,12 +2,19 @@
     "openapi": "3.0.0",
     "info": {
         "title": "GOEN API",
+        "description": "GOEN Maracaibo API",
         "contact": {
             "name": "Jorge Soto",
             "email": "jorgemsm@gmail.com"
         },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Development server"
+        }
+    ],
     "paths": {
         "/api/auth/signup": {
             "post": {
@@ -16,77 +23,26 @@
                 ],
                 "summary": "Create user and send notification to validate email and user.",
                 "operationId": "userSignup",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "User's name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "national_id",
-                        "in": "query",
-                        "description": "User's national identification",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "User's password",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "password"
-                        }
-                    },
-                    {
-                        "name": "password_confirmation",
-                        "in": "query",
-                        "description": "User's password confirmation",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "password"
-                        }
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "User's email",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "phone_number",
-                        "in": "query",
-                        "description": "User's phone number",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "birth_date",
-                        "in": "query",
-                        "description": "User's birth_date",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignupRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "Successful signup"
+                        "description": "Successful signup",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseMessage"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -131,27 +87,16 @@
                 ],
                 "summary": "Login user and return API Token",
                 "operationId": "userLogin",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "User email",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "User password",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "password"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Successfully logged in",
@@ -310,24 +255,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Clan's new name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "picture",
-                        "in": "query",
-                        "description": "Clan's new picture url",
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClanUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated clan",
@@ -412,38 +351,16 @@
                 ],
                 "summary": "Store grade",
                 "operationId": "storeGrade",
-                "parameters": [
-                    {
-                        "name": "score",
-                        "in": "query",
-                        "description": "Grade's score",
-                        "required": true,
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
-                        }
-                    },
-                    {
-                        "name": "module_id",
-                        "in": "query",
-                        "description": "Grade's module id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "user_id",
-                        "in": "query",
-                        "description": "Grade's user id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GradeStoreRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Returns created grade",
@@ -518,17 +435,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "score",
-                        "in": "query",
-                        "description": "Grade's new score",
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GradeUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated grade",
@@ -612,55 +530,16 @@
                 ],
                 "summary": "Store module",
                 "operationId": "storeModule",
-                "parameters": [
-                    {
-                        "name": "period_id",
-                        "in": "query",
-                        "description": "Module's period",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Module's name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "section",
-                        "in": "query",
-                        "description": "Module's section",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "amount",
-                        "in": "query",
-                        "description": "Module's price",
-                        "required": true,
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
-                        }
-                    },
-                    {
-                        "name": "schedule_id",
-                        "in": "query",
-                        "description": "Module's schedule",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ModuleStoreRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Returns created module",
@@ -743,51 +622,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "period_id",
-                        "in": "query",
-                        "description": "Module's period",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Module's name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "section",
-                        "in": "query",
-                        "description": "Module's section",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "amount",
-                        "in": "query",
-                        "description": "Module's price",
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
-                        }
-                    },
-                    {
-                        "name": "schedule_id",
-                        "in": "query",
-                        "description": "Module's schedule",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ModuleUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated module",
@@ -917,44 +763,16 @@
                 ],
                 "summary": "Store period",
                 "operationId": "storePeriod",
-                "parameters": [
-                    {
-                        "name": "year",
-                        "in": "query",
-                        "description": "Period's year",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "signup_from",
-                        "in": "query",
-                        "description": "Period's registrations start date",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    },
-                    {
-                        "name": "signup_until",
-                        "in": "query",
-                        "description": "Period's registrations end date",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    },
-                    {
-                        "name": "make_current",
-                        "in": "query",
-                        "description": "Should it be created as current active Period",
-                        "schema": {
-                            "type": "boolean"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeriodStoreRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Returns created period",
@@ -1021,6 +839,52 @@
                     }
                 ]
             },
+            "put": {
+                "tags": [
+                    "Model: Period"
+                ],
+                "summary": "Update period data",
+                "operationId": "updatePeriod",
+                "parameters": [
+                    {
+                        "name": "period",
+                        "in": "path",
+                        "description": "Id of period",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PeriodUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns updated Period",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SinglePeriod"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
             "delete": {
                 "tags": [
                     "Model: Period"
@@ -1042,78 +906,6 @@
                 "responses": {
                     "204": {
                         "description": "Period deleted"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/api/Period/{Period}": {
-            "put": {
-                "tags": [
-                    "Model: Period"
-                ],
-                "summary": "Update period data",
-                "operationId": "updatePeriod",
-                "parameters": [
-                    {
-                        "name": "period",
-                        "in": "path",
-                        "description": "Id of period",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Period's name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "year",
-                        "in": "query",
-                        "description": "Period's year",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "signup_from",
-                        "in": "query",
-                        "description": "Period's registrations start date",
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    },
-                    {
-                        "name": "signup_until",
-                        "in": "query",
-                        "description": "Period's registrations end date",
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns updated Period",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SinglePeriod"
-                                }
-                            }
-                        }
                     }
                 },
                 "security": [
@@ -1275,18 +1067,16 @@
                 ],
                 "summary": "Store price",
                 "operationId": "storePrice",
-                "parameters": [
-                    {
-                        "name": "amount",
-                        "in": "query",
-                        "description": "Price's amount",
-                        "required": true,
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PriceStoreRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Returns created price",
@@ -1361,17 +1151,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "amount",
-                        "in": "query",
-                        "description": "Price's new score",
-                        "schema": {
-                            "type": "number",
-                            "format": "double"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PriceUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated price",
@@ -1567,36 +1358,16 @@
                 ],
                 "summary": "Store schedule",
                 "operationId": "storeSchedule",
-                "parameters": [
-                    {
-                        "name": "start_date",
-                        "in": "query",
-                        "description": "Class date",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    },
-                    {
-                        "name": "from",
-                        "in": "query",
-                        "description": "Class start time",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "until",
-                        "in": "query",
-                        "description": "Class end time",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ScheduleStoreRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Returns created schedule",
@@ -1679,24 +1450,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "from",
-                        "in": "query",
-                        "description": "Class start time",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "until",
-                        "in": "query",
-                        "description": "Class end time",
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ScheduleUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated schedule",
@@ -1806,16 +1571,19 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "file"
+                                    "image"
                                 ],
                                 "properties": {
                                     "image": {
                                         "description": "Bank transfer confirmation picture.",
-                                        "type": "file",
-                                        "format": "file"
+                                        "type": "string",
+                                        "format": "base64"
                                     }
                                 },
                                 "type": "object"
+                            },
+                            "encoding": {
+                                "contentType": "image/*"
                             }
                         }
                     }
@@ -1827,6 +1595,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ImageUploaded"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidData"
                                 }
                             }
                         }
@@ -2002,33 +1780,18 @@
                             "type": "integer",
                             "format": "int64"
                         }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "User's new name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "phone_number",
-                        "in": "query",
-                        "description": "User's new phone number",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "birth_date",
-                        "in": "query",
-                        "description": "User's new birth_date",
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Returns updated user",
@@ -2151,6 +1914,316 @@
                         "description": "User to whom the score belongs.",
                         "type": "integer",
                         "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
+            "ClanUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Clan's new name",
+                        "type": "string"
+                    },
+                    "picture": {
+                        "description": "Clan's new picture url",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GradeStoreRequest": {
+                "required": [
+                    "score",
+                    "module_id",
+                    "user_id"
+                ],
+                "properties": {
+                    "score": {
+                        "description": "Grade's score",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "module_id": {
+                        "description": "Grade's module id",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "user_id": {
+                        "description": "Grade's user id",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
+            "GradeUpdateRequest": {
+                "properties": {
+                    "score": {
+                        "description": "Grade's new score",
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "format": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "ModuleStoreRequest": {
+                "required": [
+                    "period_id",
+                    "name",
+                    "section",
+                    "amount",
+                    "schedule_id"
+                ],
+                "properties": {
+                    "period_id": {
+                        "description": "Module's period",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Module's name",
+                        "type": "string"
+                    },
+                    "section": {
+                        "description": "Module's section",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "Module's price",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "schedule_id": {
+                        "description": "Module's schedule",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
+            "ModuleUpdateRequest": {
+                "properties": {
+                    "period_id": {
+                        "description": "Module's period",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Module's name",
+                        "type": "string"
+                    },
+                    "section": {
+                        "description": "Module's section",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "Module's price",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "schedule_id": {
+                        "description": "Module's schedule",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            },
+            "PeriodStoreRequest": {
+                "required": [
+                    "signup_from",
+                    "signup_until"
+                ],
+                "properties": {
+                    "year": {
+                        "description": "Period's year",
+                        "type": "string"
+                    },
+                    "signup_from": {
+                        "description": "Period's registrations start date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "signup_until": {
+                        "description": "Period's registrations end date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "make_current": {
+                        "description": "Should it be created as current active Period",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "PeriodUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Period's name",
+                        "type": "string"
+                    },
+                    "year": {
+                        "description": "Period's year",
+                        "type": "string"
+                    },
+                    "signup_from": {
+                        "description": "Period's registrations start date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "signup_until": {
+                        "description": "Period's registrations end date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "make_current": {
+                        "description": "Should it be created as current active Period",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "PriceStoreRequest": {
+                "required": [
+                    "amount"
+                ],
+                "properties": {
+                    "amount": {
+                        "description": "Price's score",
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "PriceUpdateRequest": {
+                "properties": {
+                    "amount": {
+                        "description": "Price's score",
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "ScheduleStoreRequest": {
+                "required": [
+                    "start_date",
+                    "from",
+                    "until"
+                ],
+                "properties": {
+                    "start_date": {
+                        "description": "Class date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "from": {
+                        "description": "Class start time",
+                        "type": "string"
+                    },
+                    "until": {
+                        "description": "Class end time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ScheduleUpdateRequest": {
+                "properties": {
+                    "start_date": {
+                        "description": "Class date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "from": {
+                        "description": "Class start time",
+                        "type": "string"
+                    },
+                    "until": {
+                        "description": "Class end time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SignupRequest": {
+                "required": [
+                    "name",
+                    "national_id",
+                    "password",
+                    "password_confirmation",
+                    "email",
+                    "phone_number",
+                    "birth_date"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "User's name",
+                        "type": "string"
+                    },
+                    "national_id": {
+                        "description": "User's national identification",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User's password",
+                        "type": "string",
+                        "format": "password"
+                    },
+                    "password_confirmation": {
+                        "description": "User's password confirmation",
+                        "type": "string",
+                        "format": "password"
+                    },
+                    "email": {
+                        "description": "User's email",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "User's phone number",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "User's birth_date",
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "User's new name",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "User's new phone number",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "User's new birth_date",
+                        "type": "string",
+                        "format": "date"
                     }
                 },
                 "type": "object"
@@ -2365,22 +2438,6 @@
                 },
                 "type": "object"
             },
-            "DataWrapperExample": {
-                "properties": {
-                    "data": {
-                        "description": "Obeject Schema, data wrapper",
-                        "properties": {
-                            "expiresAt": {
-                                "title": "expiresAt",
-                                "description": "Token expiration date",
-                                "type": "string"
-                            }
-                        },
-                        "type": "object"
-                    }
-                },
-                "type": "object"
-            },
             "ErrorResponse": {
                 "required": [
                     "error"
@@ -2406,6 +2463,40 @@
                     }
                 },
                 "type": "object"
+            },
+            "InvalidData": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "Response message",
+                        "type": "string"
+                    },
+                    "errors": {
+                        "title": "errors",
+                        "description": "Fields with errors",
+                        "properties": {
+                            "field": {
+                                "title": "field",
+                                "description": "Field with error",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "message": "The given data was invalid.",
+                    "errors": {
+                        "image": "['The image must be a file of type: jpeg, bmp, png.']"
+                    }
+                }
             },
             "LoginData": {
                 "description": "Login response",
