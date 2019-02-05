@@ -146,7 +146,7 @@ class PeriodApiTest extends TestCase
                     'active' => $period->active,
                     'signupFrom' => $period->signup_from,
                     'signupUntil' => $period->signup_until,
-                    'modules' => $period->modules
+                    'modules' => []
                 ]
             ]);
 
@@ -187,7 +187,7 @@ class PeriodApiTest extends TestCase
                     'active' => $period->active,
                     'signupFrom' => $params['signup_from'],
                     'signupUntil' =>$params['signup_until'],
-                    'modules' => $period->modules
+                    'modules' => []
                 ]
             ]);
 

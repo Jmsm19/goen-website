@@ -10,33 +10,100 @@ use App\Http\Requests\UserUpdateRequest;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the User.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/user",
+    *   tags={"Model: User", "Role: Admin"},
+    *   summary="Display a listing of Users",
+    *   operationId="getAllUsers",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Users found",
+    *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/UserCollection"))
+    *   )
+    * )
+    */
     public function index()
     {
         return UserResource::collection(User::all());
     }
 
     /**
-     * Display the specified User.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/user/{user}",
+    *   tags={"Model: User", "Role: Admin"},
+    *   summary="Get a User by Id",
+    *   operationId="getUserById",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of user",
+    *       in="path",
+    *       name="user",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="User found",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleUser")
+    *   )
+    * )
+    */
     public function show(User $user)
     {
         return new UserResource($user);
     }
 
     /**
-     * Update the specified User in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/user/{user}",
+    *   tags={"Model: User", "Role: Admin"},
+    *   summary="Update user data",
+    *   operationId="updateUser",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of user",
+    *       in="path",
+    *       name="user",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's new name",
+    *       in="query",
+    *       name="name",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's new phone number",
+    *       in="query",
+    *       name="phone_number",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's new birth_date",
+    *       in="query",
+    *       name="birth_date",
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated user",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleUser")
+    *   ),
+    *   @OA\Response(
+    *       response=403,
+    *       description="No privilages. Only Admin user or owner can update data.",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
+    */
     public function update(UserUpdateRequest $request, User $user)
     {
         if ($request->user()->hasRole('admin') || $request->user()->id == $user->id) {
@@ -50,11 +117,27 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified User from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/user/{user}",
+    *   tags={"Model: User", "Role: Admin"},
+    *   summary="Delete user",
+    *   operationId="deleteUser",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of user",
+    *       in="path",
+    *       name="user",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="User deleted",
+    *   )
+    * )
+    */
     public function destroy(User $user)
     {
         $user->delete();

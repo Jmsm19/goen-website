@@ -18,21 +18,77 @@ use App\Http\Resources\SimpleStudentWithCurrentModuleResource;
 class PeriodController extends Controller
 {
     /**
-     * Display a listing of Periods.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/period",
+    *   tags={"Model: Period"},
+    *   summary="Display a listing of Periods",
+    *   operationId="getAllPeriods",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Periods found",
+    *       @OA\JsonContent(
+    *           type="array",
+    *           @OA\Items(ref="#/components/schemas/PeriodCollection")
+    *        )
+    *      )
+    *   )
+    * )
+    */
     public function index()
     {
         return PeriodResource::collection(Period::orderBy('created_at', 'desc')->get());
     }
 
     /**
-     * Store a newly created Period in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/period",
+    *   tags={"Model: Period"},
+    *   summary="Store period",
+    *   operationId="storePeriod",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Period's year",
+    *       in="query",
+    *       name="year",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's registrations start date",
+    *       in="query",
+    *       name="signup_from",
+    *       required=true,
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's registrations end date",
+    *       in="query",
+    *       name="signup_until",
+    *       required=true,
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Should it be created as current active Period",
+    *       in="query",
+    *       name="make_current",
+    *       @OA\Schema(type="boolean")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns created period",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePeriod")
+    *   ),
+    *   @OA\Response(
+    *       response=400,
+    *       description="Period limit reached for the year.",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
+    */
     public function store(PeriodStoreRequest $request)
     {
         // Get current year or take it from request
@@ -72,23 +128,80 @@ class PeriodController extends Controller
     }
 
     /**
-     * Display the specified Period.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/period/{period}",
+    *   tags={"Model: Period"},
+    *   summary="Get a Period by Id",
+    *   operationId="getPeriodById",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of period",
+    *       in="path",
+    *       name="period",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Period found",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePeriod")
+    *   )
+    * )
+    */
     public function show(Period $period)
     {
         return new PeriodResource($period);
     }
 
     /**
-     * Update the specified Period in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/Period/{Period}",
+    *   tags={"Model: Period"},
+    *   summary="Update period data",
+    *   operationId="updatePeriod",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of period",
+    *       in="path",
+    *       name="period",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's name",
+    *       in="query",
+    *       name="name",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's year",
+    *       in="query",
+    *       name="year",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's registrations start date",
+    *       in="query",
+    *       name="signup_from",
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Period's registrations end date",
+    *       in="query",
+    *       name="signup_until",
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated Period",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePeriod")
+    *   )
+    * )
+    */
     public function update(PeriodUpdateRequest $request, Period $period)
     {
         $period->update($request->only(['name', 'year', 'signup_from', 'signup_until']));
@@ -96,11 +209,27 @@ class PeriodController extends Controller
     }
 
     /**
-     * Remove the specified Period from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/period/{period}",
+    *   tags={"Model: Period"},
+    *   summary="Delete period",
+    *   operationId="deletePeriod",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of period",
+    *       in="path",
+    *       name="period",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="Period deleted",
+    *   )
+    * )
+    */
     public function destroy(Period $period)
     {
         if ($period->active) {
@@ -114,22 +243,58 @@ class PeriodController extends Controller
     }
 
     /**
-    * Get all data for the current active period
+    * @OA\Get(path="/api/period/current",
+    *   tags={"Model: Period"},
+    *   summary="Get active Period",
+    *   description="",
+    *   operationId="getCurrentPeriod",
     *
-    * @return \Illuminate\Http\Response
+    *   @OA\Response(
+    *       response=200,
+    *       description="Period found",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePeriod")
+    *       ),
+    *   ),
+    *   @OA\Response(
+    *       response=404,
+    *       description="Period not found",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
     */
     public function current()
     {
-        return new PeriodResource(
-            Period::where('active', true)->first()
-        );
+        $period = Period::where('active', true)->firstOrFail();
+
+        return new PeriodResource($period);
     }
 
     /**
-    * Get all data for the current year's periods
+    * @OA\Get(path="/api/period/year/{year}",
+    *   tags={"Model: Period"},
+    *   summary="Get all data for the current year's or the given year's periods",
+    *   operationId="getPeriodByYear",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
     *
-    * @param  date $year format(YYYY)
-    * @return \Illuminate\Http\Response
+    *   @OA\Parameter(
+    *       description="Year of the period to fetch",
+    *       in="path",
+    *       name="year",
+    *       required=false,
+    *       allowEmptyValue=true,
+    *       @OA\Schema(
+    *           format="date",
+    *           type="integer"
+    *       )
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Period found",
+    *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/SinglePeriod"))
+    *   ),
+    * )
     */
     public function year($year = null)
     {
@@ -141,6 +306,22 @@ class PeriodController extends Controller
         );
     }
 
+    /**
+    * @OA\Get(path="/api/period/current/students",
+    *   tags={"Model: Period"},
+    *   summary="Get students of current active Period",
+    *   operationId="getStudentsOfCurrentPeriod",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Period and students found",
+    *       @OA\JsonContent(ref="#/components/schemas/CurrentPeriodStudents")
+    *   ),
+    * )
+    */
     public function currentPeriodStudents()
     {
         $period = Period::where('active', true)->first();
@@ -165,6 +346,22 @@ class PeriodController extends Controller
         ], 200);
     }
 
+    /**
+    * @OA\Post(path="/api/period/{period}/make-current",
+    *   tags={"Model: Period"},
+    *   summary="Make period the current active one",
+    *   operationId="makePeriodCurrent",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Period and students found",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePeriod")
+    *   ),
+    * )
+    */
     public function makeCurrent(Period $period)
     {
         $period->makeCurrent();

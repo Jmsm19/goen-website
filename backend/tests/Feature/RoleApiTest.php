@@ -36,7 +36,7 @@ class RoleApiTest extends TestCase
 
         // Don't add role if user already has it
         $this->put(route('add_role', $params))
-            ->assertStatus(200)
+            ->assertStatus(400)
             ->assertJson([
                 'error' =>
                     trans('messages.has_role', ['role' => $params['role']]),
@@ -60,7 +60,7 @@ class RoleApiTest extends TestCase
             'role' => 'admin'
         ];
         $this->delete(route('remove_role', $params))
-            ->assertStatus(200)
+            ->assertStatus(400)
             ->assertJson([
                 'error' => trans('messages.admin_forbid_self_role_change')
             ]);
@@ -71,7 +71,7 @@ class RoleApiTest extends TestCase
             'role' => $role
         ];
         $this->delete(route('remove_role', $params))
-            ->assertStatus(200)
+            ->assertStatus(400)
             ->assertJson([
                 'error' => trans('messages.at_least_one_role')
             ]);
@@ -82,7 +82,7 @@ class RoleApiTest extends TestCase
             'role' => 'instructor'
         ];
         $this->delete(route('remove_role', $params))
-            ->assertStatus(200)
+            ->assertStatus(400)
             ->assertJson([
                 'error' =>
                     trans('messages.not_has_role', ['role' => $params['role']])

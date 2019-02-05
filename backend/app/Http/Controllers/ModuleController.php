@@ -14,9 +14,20 @@ use App\Http\Requests\AvailableSectionsForModuleRequest;
 class ModuleController extends Controller
 {
     /**
-     * Display a listing of the Module.
+     * @OA\Get(path="/api/module",
+     *   tags={"Model: Module"},
+     *   summary="Display a listing of Grades",
+     *   operationId="getAllGrades",
+     *   security={
+     *       {"Bearer": {}}
+     *   },
      *
-     * @return \Illuminate\Http\Response
+     *   @OA\Response(
+     *       response=200,
+     *       description="Modules found",
+     *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/ModuleCollection"))
+     *   )
+     * )
      */
     public function index()
     {
@@ -24,11 +35,60 @@ class ModuleController extends Controller
     }
 
     /**
-     * Store a newly created Module in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/module",
+    *   tags={"Model: Module"},
+    *   summary="Store module",
+    *   operationId="storeModule",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Module's period",
+    *       in="query",
+    *       name="period_id",
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's name",
+    *       in="query",
+    *       name="name",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's section",
+    *       in="query",
+    *       name="section",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+     *   @OA\Parameter(
+    *       description="Module's price",
+    *       in="query",
+    *       name="amount",
+    *       required=true,
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's schedule",
+    *       in="query",
+    *       name="schedule_id",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns created module",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleModule")
+    *   ),
+    *   @OA\Response(
+    *       response=400,
+    *       description="Module already exists",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
+    */
     public function store(ModuleStoreRequest $request)
     {
         // Check for similar Modules on the Period
@@ -61,23 +121,86 @@ class ModuleController extends Controller
     }
 
     /**
-     * Display the specified Module.
-     *
-     * @param  Module  $module
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/module/{module}",
+    *   tags={"Model: Module"},
+    *   summary="Get a Module by Id",
+    *   operationId="getModuleById",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of module",
+    *       in="path",
+    *       name="module",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Module found",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleModule")
+    *   )
+    * )
+    */
     public function show(Module $module)
     {
         return new ModuleResource($module);
     }
 
     /**
-     * Update the specified Module in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Module  $module
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/module/{module}",
+    *   tags={"Model: Module"},
+    *   summary="Update module data",
+    *   operationId="updateModule",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of module",
+    *       in="path",
+    *       name="module",
+    *       required=true,
+    *       @OA\Schema(type="integer",format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's period",
+    *       in="query",
+    *       name="period_id",
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's name",
+    *       in="query",
+    *       name="name",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's section",
+    *       in="query",
+    *       name="section",
+    *       @OA\Schema(type="string")
+    *   ),
+     *   @OA\Parameter(
+    *       description="Module's price",
+    *       in="query",
+    *       name="amount",
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Module's schedule",
+    *       in="query",
+    *       name="schedule_id",
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated module",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleModule")
+    *   )
+    * )
+    */
     public function update(ModuleUpdateRequest $request, Module $module)
     {
         $section = null;
@@ -98,11 +221,27 @@ class ModuleController extends Controller
     }
 
     /**
-     * Remove the specified Module from storage.
-     *
-     * @param  Module  $module
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/module/{module}",
+    *   tags={"Model: Module"},
+    *   summary="Delete module",
+    *   operationId="deleteModule",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of module",
+    *       in="path",
+    *       name="module",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="Module deleted",
+    *   )
+    * )
+    */
     public function destroy(Module $module)
     {
         $module->delete();
@@ -110,10 +249,34 @@ class ModuleController extends Controller
     }
 
     /**
-     * Remove the specified Module from storage.
+     * @OA\Get(path="/api/module/availablesections/{period_id}/{name}",
+     *   tags={"Model: Module"},
+     *   summary="Display a listing of Grades",
+     *   operationId="getAvailableSectionsForPeriodModule",
+     *   security={
+     *       {"Bearer": {}}
+     *   },
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *   @OA\Parameter(
+     *       description="Id of Period",
+     *       in="path",
+     *       name="period_id",
+     *       required=true,
+     *       @OA\Schema(type="integer", format="int64")
+     *   ),
+     *   @OA\Parameter(
+     *       description="Module name",
+     *       in="path",
+     *       name="name",
+     *       required=true,
+     *       @OA\Schema(type="string")
+     *   ),
+     *   @OA\Response(
+     *       response=200,
+     *       description="Returns an array of the sections available for Module creation",
+     *       @OA\JsonContent(ref="#/components/schemas/AvailableSections")
+     *   )
+     * )
      */
     public function availableSectionsFor($period_id, $name)
     {

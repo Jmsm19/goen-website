@@ -5,8 +5,82 @@ namespace App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *     title="Module",
+ *     description="Module model",
+ *     required={
+ *      "id", "name", "section", "period_id", "schedule_id",
+ *      "price_id", "instructor_id"
+ *     }
+ * )
+ */
 class Module extends Model
 {
+    /**
+    * @OA\Property(
+    *     description="Unique identificator",
+    *     title="id",
+    *     property="id",
+    *     type="integer",
+    *     format="int64",
+    * ),
+    * @OA\Property(
+    *     description="Module name",
+    *     property="name",
+    *     type="string",
+    *     title="name",
+    * ),
+    * @OA\Property(
+    *     description="Module section",
+    *     type="string",
+    *     title="section",
+    *     property="section",
+    * ),
+    * @OA\Property(
+    *     description="Period to whom the module belongs",
+    *     title="period_id",
+    *     type="integer",
+    *     format="int64",
+    *     property="period_id",
+    * ),
+    * @OA\Property(
+    *     description="Schedule where the module takes places.",
+    *     title="schedule_id",
+    *     type="integer",
+    *     format="int64",
+    *     property="schedule_id",
+    * ),
+    * @OA\Property(
+    *     description="Price to register in module.",
+    *     type="integer",
+    *     title="price_id",
+    *     format="int64",
+    *     property="price_id",
+    * ),
+    * @OA\Property(
+    *     description="If M0, the module needs a clan to give new students.",
+    *     type="integer",
+    *     title="clan_id",
+    *     format="int64",
+    *     property="clan_id",
+    * ),
+    * @OA\Property(
+    *     description="Instructor in charge of the module.",
+    *     type="integer",
+    *     title="instructor_id",
+    *     format="int64",
+    *     property="instructor_id",
+    * ),
+    * @OA\Property(
+    *     description="Instructor's assistant in the module.",
+    *     type="integer",
+    *     title="assistant_id",
+    *     format="int64",
+    *     property="assistant_id",
+    * )
+    */
+
     protected $fillable = [
         'name', 'section', 'period_id', 'schedule_id', 'price_id',
         'clan_id', 'instructor_id', 'assistant_id'

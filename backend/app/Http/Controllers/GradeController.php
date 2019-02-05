@@ -11,21 +11,63 @@ use App\Http\Requests\GradeUpdateRequest;
 class GradeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/grade",
+    *   tags={"Model: Grade", "Role: Instructor"},
+    *   summary="Display a listing of Grades",
+    *   operationId="getAllGrades",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Grades found",
+    *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/GradeCollection"))
+    *   )
+    * )
+    */
     public function index()
     {
         return GradeResource::collection(Grade::all());
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/grade",
+    *   tags={"Model: Grade", "Role: Instructor"},
+    *   summary="Store grade",
+    *   operationId="storeGrade",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Grade's score",
+    *       in="query",
+    *       name="score",
+    *       required=true,
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Grade's module id",
+    *       in="query",
+    *       name="module_id",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Grade's user id",
+    *       in="query",
+    *       name="user_id",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns created grade",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleGrade")
+    *   )
+    * )
+    */
     public function store(GradeStoreRequest $request)
     {
         $grade = Grade::create([
@@ -38,23 +80,62 @@ class GradeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/grade/{grade}",
+    *   tags={"Model: Grade", "Role: Instructor"},
+    *   summary="Get a Grade by Id",
+    *   operationId="getGradeById",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of grade",
+    *       in="path",
+    *       name="grade",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Grade found",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleGrade")
+    *   )
+    * )
+    */
     public function show(Grade $grade)
     {
         return new GradeResource($grade);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/grade/{grade}",
+    *   tags={"Model: Grade", "Role: Instructor"},
+    *   summary="Update grade data",
+    *   operationId="updateGrade",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of grade",
+    *       in="path",
+    *       name="grade",
+    *       required=true,
+    *       @OA\Schema(type="integer",format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Grade's new score",
+    *       in="query",
+    *       name="score",
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated grade",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleGrade")
+    *   )
+    * )
+    */
     public function update(GradeUpdateRequest $request, Grade $grade)
     {
         $grade->update($request->only(['score']));
@@ -62,11 +143,27 @@ class GradeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/grade/{grade}",
+    *   tags={"Model: Grade", "Role: Instructor"},
+    *   summary="Delete grade",
+    *   operationId="deleteGrade",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of grade",
+    *       in="path",
+    *       name="grade",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="Grade deleted",
+    *   )
+    * )
+    */
     public function destroy(Grade $grade)
     {
         $grade->delete();

@@ -68,7 +68,7 @@ class PeriodUnitTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            [$period->year, $period->name, $period->module[0]->name]
+            [$period->year, $period->name, $period->modules[0]->name]
         );
     }
 }

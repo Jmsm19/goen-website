@@ -11,33 +11,89 @@ use App\Http\Resources\SimpleClanResource;
 class ClanController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/clan",
+    *   tags={"Model: Clan"},
+    *   summary="Display a listing of Clans",
+    *   operationId="getAllClans",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Clans found",
+    *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/ClanCollection"))
+    *   )
+    * )
+    */
     public function index()
     {
         return SimpleClanResource::collection(Clan::all());
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/clan/{clan}",
+    *   tags={"Model: Clan"},
+    *   summary="Get a Clan by Id",
+    *   operationId="getClanById",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of clan",
+    *       in="path",
+    *       name="clan",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Clan found",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleClan")
+    *   )
+    * )
+    */
     public function show(Clan $clan)
     {
         return new ClanResource($clan);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/clan/{clan}",
+    *   tags={"Model: Clan"},
+    *   summary="Update clan data",
+    *   operationId="updateClan",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of clan",
+    *       in="path",
+    *       name="clan",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Clan's new name",
+    *       in="query",
+    *       name="name",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Clan's new picture url",
+    *       in="query",
+    *       name="picture",
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated clan",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleClan")
+    *   )
+    * )
+    */
     public function update(ClanUpdateRequest $request, Clan $clan)
     {
         $clan->update($request->only(['name', 'picture']));
@@ -45,11 +101,27 @@ class ClanController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/clan/{clan}",
+    *   tags={"Model: Clan"},
+    *   summary="Delete clan",
+    *   operationId="deleteClan",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of clan",
+    *       in="path",
+    *       name="clan",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="Clan deleted",
+    *   )
+    * )
+    */
     public function destroy(Clan $clan)
     {
         $clan->delete();

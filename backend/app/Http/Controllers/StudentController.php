@@ -31,11 +31,33 @@ class StudentController extends Controller
     }
 
     /**
-     * If possible, register student in module
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Module $module
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/module/{module}/register",
+    *   tags={"Role: Student"},
+    *   summary="If possible, register student in module.",
+    *   operationId="studentRegister",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of module",
+    *       in="path",
+    *       name="module",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successful registration",
+    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   ),
+    *   @OA\Response(
+    *       response=400,
+    *       description="Error due to: registration_outside_threshold, already_registered_in_module, only_one_module_per_period, wrong_next_module, module_full, etc.",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
+    */
     public function register(Request $request, Module $module)
     {
         $student = $request->user();
@@ -80,10 +102,36 @@ class StudentController extends Controller
     }
 
     /**
-     * Upload transfer capture image to Dropbox's "comprobantes" folder
-     * @param \App\Http\Requests\ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/module/register/send-capture",
+    *   tags={"Role: Student"},
+    *   summary="Upload transfer capture image to Dropbox's comprobantes folder.",
+    *   operationId="uploadTransferCapture",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\RequestBody(
+    *       required=true,
+    *       @OA\MediaType(
+    *           mediaType="multipart/form-data",
+    *           @OA\Schema(
+    *               required={"file"},
+    *               @OA\Property(
+    *                   description="Bank transfer confirmation picture.",
+    *                   property="image",
+    *                   type="file",
+    *                   format="file",
+    *               ),
+    *           )
+    *       )
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successful image upload",
+    *       @OA\JsonContent(ref="#/components/schemas/ImageUploaded")
+    *   )
+    * )
+    */
     public function uploadTransferCapture(ImageUploadRequest $request)
     {
         $period = Period::where('active', 1)->first();
@@ -106,6 +154,7 @@ class StudentController extends Controller
                 'id' => $response['id'],
                 'name' => $response['name'],
                 'url' => $response['url'],
+                'status' => $user->registration_status
             ], 200);
         }
 
@@ -123,6 +172,30 @@ class StudentController extends Controller
         ], 200);
     }
 
+    /**
+    * @OA\Post(path="/api/student/{student}/confirm-payment",
+    *   tags={"Role: Admin"},
+    *   summary="Confirm student payment.",
+    *   description="Email is sent to notify student.",
+    *   operationId="confirmPayment",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of student",
+    *       in="path",
+    *       name="student",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successful payment confirmation",
+    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   )
+    * )
+    */
     public function confirmPayment(User $student)
     {
         $module = $student->currentModule();
@@ -140,6 +213,30 @@ class StudentController extends Controller
         ], 200);
     }
 
+    /**
+    * @OA\Post(path="/api/student/{student}/reject-payment",
+    *   tags={"Role: Admin"},
+    *   summary="Reject student payment.",
+    *   description="Email is sent to notify student.",
+    *   operationId="rejectPayment",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of student",
+    *       in="path",
+    *       name="student",
+    *       required=true,
+    *       @OA\Schema(format="int64", type="integer")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successful payment confirmation",
+    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   )
+    * )
+    */
     public function rejectPayment(User $student)
     {
         $student->setRegistrationStatus('paying');

@@ -11,21 +11,49 @@ use App\Http\Requests\PriceUpdateRequest;
 class PriceController extends Controller
 {
     /**
-     * Display a listing of the Price.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/price",
+    *   tags={"Model: Price", "Role: Admin"},
+    *   summary="Display a listing of Prices",
+    *   operationId="getAllPrices",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Prices found",
+    *       @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/PriceCollection"))
+    *   )
+    * )
+    */
     public function index()
     {
         return PriceResource::collection(Price::all());
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/price",
+    *   tags={"Model: Price", "Role: Admin"},
+    *   summary="Store price",
+    *   operationId="storePrice",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Price's amount",
+    *       in="query",
+    *       name="amount",
+    *       required=true,
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns created price",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePrice")
+    *   )
+    * )
+    */
     public function store(PriceStoreRequest $request)
     {
         $price = Price::create([
@@ -36,10 +64,27 @@ class PriceController extends Controller
     }
 
     /**
-     * Display the specified Price.
+     * @OA\Get(path="/api/price/{price}",
+     *   tags={"Model: Price", "Role: Admin"},
+     *   summary="Get a Price by Id",
+     *   operationId="getPriceById",
+     *   security={
+     *       {"Bearer": {}}
+     *   },
      *
-     * @param  Price  $price
-     * @return \Illuminate\Http\Response
+     *   @OA\Parameter(
+     *       description="Id of price",
+     *       in="path",
+     *       name="price",
+     *       required=true,
+     *       @OA\Schema(format="int64", type="integer")
+     *   ),
+     *   @OA\Response(
+     *       response=200,
+     *       description="Price found",
+     *       @OA\JsonContent(ref="#/components/schemas/SinglePrice")
+     *   )
+     * )
      */
     public function show(Price $price)
     {
@@ -47,12 +92,34 @@ class PriceController extends Controller
     }
 
     /**
-     * Update the specified Price in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Price  $price
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(path="/api/price/{price}",
+    *   tags={"Model: Price", "Role: Admin"},
+    *   summary="Update price data",
+    *   operationId="updatePrice",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of price",
+    *       in="path",
+    *       name="price",
+    *       required=true,
+    *       @OA\Schema(type="integer",format="int64")
+    *   ),
+    *   @OA\Parameter(
+    *       description="Price's new score",
+    *       in="query",
+    *       name="amount",
+    *       @OA\Schema(type="number", format="double")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Returns updated price",
+    *       @OA\JsonContent(ref="#/components/schemas/SinglePrice")
+    *   )
+    * )
+    */
     public function update(PriceUpdateRequest $request, Price $price)
     {
         $price->update($request->only(['amount']));
@@ -60,11 +127,27 @@ class PriceController extends Controller
     }
 
     /**
-     * Remove the specified Price from storage.
-     *
-     * @param  Price  $price
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(path="/api/price/{price}",
+    *   tags={"Model: Price", "Role: Admin"},
+    *   summary="Delete price",
+    *   operationId="deletePrice",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Parameter(
+    *       description="Id of price",
+    *       in="path",
+    *       name="price",
+    *       required=true,
+    *       @OA\Schema(type="integer", format="int64")
+    *   ),
+    *   @OA\Response(
+    *       response=204,
+    *       description="Price deleted",
+    *   )
+    * )
+    */
     public function destroy(Price $price)
     {
         $price->delete();

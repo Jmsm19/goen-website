@@ -11,30 +11,92 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @OA\Schema(
+ *     title="User",
+ *     description="User model",
+ *     required={
+ *          "id", "name", "national_id", "email",
+ *          "password", "phone_number", "birth_date",
+ *          "active", "registration_status"
+ *     }
+ * )
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable, SoftDeletes;
+
+    /**
+    * @OA\Property(
+    *     property="id",
+    *     description="Unique identificator",
+    *     title="id",
+    *     type="integer",
+    *     format="int64",
+    * ),
+    * @OA\Property(
+    *     property="name",
+    *     description="User name",
+    *     title="name",
+    *     type="string",
+    * ),
+    * @OA\Property(
+    *     property="national_id",
+    *     description="User's national identification",
+    *     title="national_id",
+    *     type="string",
+    * ),
+    * @OA\Property(
+    *     property="email",
+    *     description="User email",
+    *     title="email",
+    *     type="string",
+    * ),
+    * @OA\Property(
+    *     property="password",
+    *     description="User password",
+    *     title="password",
+    *     type="string",
+    *     format="password",
+    * ),
+    * @OA\Property(
+    *     property="phone_number",
+    *     description="User phone number",
+    *     title="phone_number",
+    *     type="string",
+    * ),
+    * @OA\Property(
+    *     property="birth_date",
+    *     description="User birth date",
+    *     title="birth_date",
+    *     type="string",
+    *     format="date",
+    * ),
+    * @OA\Property(
+    *     property="active",
+    *     description="User is active and has a confirmed email",
+    *     title="active",
+    *     type="boolean",
+    * ),
+     * @OA\Property(
+     **   property="registration_status",
+    *     description="Current registration status as a student of GOEN",
+    *     title="registration_status",
+    *     type="string",
+    * )
+    */
+
 
     protected $dates = [
         'deleted_at', 'birth_date'
     ];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'national_id', 'email',
         'password', 'phone_number', 'birth_date',
         'active', 'activation_token', 'registration_status'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token', 'activation_token',
     ];

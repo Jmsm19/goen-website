@@ -55,13 +55,9 @@ Any configuration must be done within the respective folder (backend or frontend
    php artisan serve
    ```
 
-9. **Optional**: You can generate a Postman collection for the API by running the following command:
+9. **Optional**: The API is documented using **swagger-php**, the necesary config and Schemas were placed within **~/app/Swagger**.
 
-   ```bash
-   php artisan apidoc:generate
-   ```
-
-   The **collection.json** file will be generated in **./backend/public/docs/**.
+    You can access the Swagger-UI by going to http://localhost:8000/api/documentation.
 
 ## Frontend
 
@@ -96,11 +92,8 @@ Frontend is deployed to Netlify.
    - Sendgrid
 
 3. Set Heroku environment variables based on the local **.env**
-4. Create and set the following environment variables in the **Bitbucket** repo.
-   - \$HEROKU_API_KEY
-   - \$HEROKU_APP_NAME
-5. Run migrations on server
-6. Generate passport keys via
+4. Run migrations on server
+5. Generate passport keys via
 
    ```bash
    php artisan passport:install
@@ -124,3 +117,8 @@ heroku ps:exec -a deployed_app_name
 ```bash
 php artisan passport:keys
 ```
+
+## Aditional Resources
+
+- Swagger specifications: https://swagger.io/specification/
+- Swagger-PHP docs: http://zircote.com/swagger-php/Getting-started.html

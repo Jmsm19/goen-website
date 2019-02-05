@@ -16,12 +16,67 @@ use Illuminate\Auth\Events\Registered;
 class AuthController extends Controller
 {
     /**
-     * Create user and send notification to validate email and user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/auth/signup",
+    *   tags={"Model: User"},
+    *   summary="Create user and send notification to validate email and user.",
+    *   operationId="userSignup",
+    *
+    *   @OA\Parameter(
+    *       description="User's name",
+    *       in="query",
+    *       name="name",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's national identification",
+    *       in="query",
+    *       name="national_id",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's password",
+    *       in="query",
+    *       name="password",
+    *       required=true,
+    *       @OA\Schema(type="string", format="password")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's password confirmation",
+    *       in="query",
+    *       name="password_confirmation",
+    *       required=true,
+    *       @OA\Schema(type="string", format="password")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's email",
+    *       in="query",
+    *       name="email",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's phone number",
+    *       in="query",
+    *       name="phone_number",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User's birth_date",
+    *       in="query",
+    *       name="birth_date",
+    *       required=true,
+    *       @OA\Schema(type="string", format="date")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successful signup",
+    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   )
+    * )
+    */
     public function signup(SignupRequest $request)
     {
         $user = User::create([
@@ -42,12 +97,25 @@ class AuthController extends Controller
     }
 
     /**
-     * Activate user based on activation token.
-     *
-     * @param string $token
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/auth/signup/activate/{token}",
+    *   tags={"Model: User"},
+    *   summary="Activate user based on activation token.",
+    *   operationId="userSignupActivate",
+    *
+    *   @OA\Parameter(
+    *       description="Activation token",
+    *       in="path",
+    *       name="token",
+    *       required=true,
+    *       @OA\Schema(type="string", format="byte")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="User activated and email confirmed",
+    *       @OA\JsonContent(ref="#/components/schemas/User")
+    *   )
+    * )
+    */
     public function signupActivate($token)
     {
         $user = User::where('activation_token', $token)->first();
@@ -71,12 +139,37 @@ class AuthController extends Controller
     }
 
     /**
-     * Login user and send API Token.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(path="/api/auth/login",
+    *   tags={"Model: User"},
+    *   summary="Login user and return API Token",
+    *   operationId="userLogin",
+    *
+    *   @OA\Parameter(
+    *       description="User email",
+    *       in="query",
+    *       name="email",
+    *       required=true,
+    *       @OA\Schema(type="string")
+    *   ),
+    *   @OA\Parameter(
+    *       description="User password",
+    *       in="query",
+    *       name="password",
+    *       required=true,
+    *       @OA\Schema(type="string", format="password")
+    *   ),
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successfully logged in",
+    *       @OA\JsonContent(ref="#/components/schemas/LoginData")
+    *   ),
+    *   @OA\Response(
+    *       response=401,
+    *       description="Invalid credentials provided",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+    *   )
+    * )
+    */
     public function login(LoginRequest $request)
     {
         $credentials = request(['email', 'password']);
@@ -106,12 +199,21 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout user and invalidate API Token.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/auth/logout",
+    *   tags={"Model: User"},
+    *   summary="Logout user and invalidate Auth Token",
+    *   operationId="userLogout",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Successfully logged out",
+    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   )
+    * )
+    */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -120,12 +222,21 @@ class AuthController extends Controller
     }
 
     /**
-     * Get logged in user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(path="/api/auth/user",
+    *   tags={"Model: User"},
+    *   summary="Get logged in user",
+    *   operationId="getLoggedInUser",
+    *   security={
+    *       {"Bearer": {}}
+    *   },
+    *
+    *   @OA\Response(
+    *       response=200,
+    *       description="Return logged in user data",
+    *       @OA\JsonContent(ref="#/components/schemas/SingleUser")
+    *   )
+    * )
+    */
     public function user(Request $request)
     {
         return new UserResource($request->user());
