@@ -30,6 +30,12 @@ class StudentController extends Controller
         return "{$username}_{$national_id}_{$module}.jpg";
     }
 
+    private function convertToPreviewUrl($url)
+    {
+        $new_url = str_replace('dl=0', 'raw=1', $url);
+        return $new_url;
+    }
+
     /**
     * @OA\Post(path="/api/module/{module}/register",
     *   tags={"Role: Student"},
@@ -146,6 +152,12 @@ class StudentController extends Controller
         $image = Input::file('image');
         $user = $request->user();
 
+        if ($user->registration_status !== "paying") {
+            return response()->json([
+                'error' => trans('auth.no_privilages')
+            ], 401);
+        }
+
         $image_name = $this->makeImageName($user);
         $period_name = "Período {$period->name}-{$period->year}";
 
@@ -161,7 +173,7 @@ class StudentController extends Controller
             return response()->json([
                 'id' => $response['id'],
                 'name' => $response['name'],
-                'url' => $response['url'],
+                'url' => $this->convertToPreviewUrl($response['url']),
                 'status' => $user->registration_status
             ], 200);
         }
@@ -175,7 +187,7 @@ class StudentController extends Controller
         return response()->json([
             'id' => $response['id'],
             'name' => $response['name'],
-            'url' => $response['url'],
+            'url' => $this->convertToPreviewUrl($response['url']),
             'status' => $user->registration_status
         ], 200);
     }
