@@ -174,3 +174,50 @@
 *   )
 * )
 */
+
+
+/**
+* @OA\Schema(
+*     schema="Instructor",
+*     title="Instructor",
+*     required={
+*          "id", "name", "email", "phone_number"
+*     },
+*     @OA\Property(
+*         property="id",
+*         description="Unique identificator",
+*         title="id",
+*         type="integer",
+*         format="int64",
+*     ),
+*     @OA\Property(
+*         property="name",
+*         description="User name",
+*         title="name",
+*         type="string",
+*     ),
+*     @OA\Property(
+*         property="email",
+*         description="User email",
+*         title="email",
+*         type="string",
+*     ),
+*     @OA\Property(
+*         property="phone_number",
+*         description="User phone number",
+*         title="phone_number",
+*         type="string",
+*     )
+* )
+*/
+
+/**
+* @OA\Schema(
+*   schema="InstructorCollection",
+*   @OA\Property(
+*       property="data",
+*       type="array",
+*       @OA\Items(ref="#/components/schemas/Instructor")
+*   )
+* )
+*/

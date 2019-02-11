@@ -496,6 +496,33 @@
                 ]
             }
         },
+        "/api/instructor": {
+            "get": {
+                "tags": [
+                    "Model: Instructor",
+                    "Role: Admin"
+                ],
+                "summary": "Display a listing of Instructors",
+                "operationId": "getAllInstructors",
+                "responses": {
+                    "200": {
+                        "description": "Instructors found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InstructorCollection"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/api/module": {
             "get": {
                 "tags": [
@@ -2719,6 +2746,50 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/User"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Instructor": {
+                "title": "Instructor",
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "phone_number"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Unique identificator",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "User name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "User email",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "title": "phone_number",
+                        "description": "User phone number",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "InstructorCollection": {
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Instructor"
                         }
                     }
                 },

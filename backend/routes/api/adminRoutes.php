@@ -47,4 +47,8 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
         ->name('confirm-student-payment');
     Route::post('student/{student}/reject-payment', 'StudentController@rejectPayment')
         ->name('reject-student-payment');
+
+    // Instructor related routes
+    Route::get('/instructor', 'InstructorController@index')
+        ->name('instructor.index');
 });
