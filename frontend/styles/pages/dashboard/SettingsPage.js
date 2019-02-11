@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import media from '../../../utils/styling';
+import { media } from '../../../utils/styling';
 
 const StyledPage = styled.div`
   margin-bottom: 30px;

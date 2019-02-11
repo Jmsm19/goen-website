@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Form } from 'antd';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 
 export const StyledForm = styled(Form)`
   .input-area {

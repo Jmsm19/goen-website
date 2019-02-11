@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 import CardWithtabs from '../../components/CardWithTabs';
 
 const StyledCard = styled(CardWithtabs)`

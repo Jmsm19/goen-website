@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 
 export const StyledButtonArea = styled.div`
   display: grid;

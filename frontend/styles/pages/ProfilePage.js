@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import styled from 'styled-components';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 
 const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
   display: grid;

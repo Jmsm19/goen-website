@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Lustria');
 
 :root {
   --primary-color: #bf1a21;
@@ -51,6 +51,10 @@
 
 * {
   font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Helvetica, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lustria', 'Times New Roman', Times, serif;
 }
 
 .page-loading {

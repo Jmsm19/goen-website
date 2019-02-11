@@ -7,8 +7,9 @@ import {
   StyledNoBorderMenu,
   StyledMenuItem,
 } from '../../../styles/components/dashboard/DashboardMenu';
+import { setActiveLinkClass } from '../../../utils/styling';
 
-function StudentMenu({ t, handlePageChange, currentPage, hasClass }) {
+function StudentMenu({ t, handlePageChange, currentPage, hasClass, router }) {
   const { SubMenu } = Menu;
   return (
     <InstitutionContextConsumer>
@@ -24,7 +25,10 @@ function StudentMenu({ t, handlePageChange, currentPage, hasClass }) {
             title={<span className='submenu-title-wrapper'>{t('Student')}</span>}
           >
             {registrationActive && (
-              <StyledMenuItem key='dashboard-student-registration'>
+              <StyledMenuItem
+                key='dashboard-student-registration'
+                className={setActiveLinkClass('/dashboard/student/registration', router)}
+              >
                 <Icon type='user-add' />
                 <Link href='/dashboard/student/registration'>
                   <a>{t('ModuleRegister')}</a>
@@ -32,7 +36,10 @@ function StudentMenu({ t, handlePageChange, currentPage, hasClass }) {
               </StyledMenuItem>
             )}
             {hasClass && (
-              <StyledMenuItem key='dashboard-student-payments'>
+              <StyledMenuItem
+                key='dashboard-student-payments'
+                className={setActiveLinkClass('/dashboard/student/payments', router)}
+              >
                 <Icon type='team' />
                 <Link href='/dashboard/student/payments'>
                   <a>{t('MyClass')}</a>
@@ -51,6 +58,7 @@ StudentMenu.propTypes = {
   hasClass: PropTypes.bool.isRequired,
   currentPage: PropTypes.string.isRequired,
   handlePageChange: PropTypes.func.isRequired,
+  router: PropTypes.shape().isRequired,
 };
 
 export default StudentMenu;

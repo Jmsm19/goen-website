@@ -112,7 +112,7 @@
   "Assistant": "Assistant",
   "Assistants": "Assistants",
   "NoAssistants": "No assistants",
-  "AssignInstructor": "Assign to modules",
+  "AssignInstructor": "Assign instructor",
   "ManageInstructors": "Manage instructors",
   "MakeInstructor": "Make instructor",
   "RemoveAsInstructor": "Remove as instructor",
@@ -132,5 +132,7 @@
   "PeriodCreationModuleText": "The name and year of this period will be set automatically.",
   "PeriodDelitionConfirmation": "Are you sure you want to delete this period?",
   "PeriodDeletionDangerExplanation": "Be aware that deleting a period involves deleting everything associated with it: like modules, scores and student progress in this period.",
-  "Update": "Update"
+  "Update": "Update",
+  "NoInstructorAssigned": "No instructor assigned",
+  "ChangeInstructor": "Change instructor"
 }

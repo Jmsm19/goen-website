@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 
 export const StyledPage = styled.div`
   max-width: 900px;

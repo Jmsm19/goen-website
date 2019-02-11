@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'antd';
 import RequireRole from '../../../../components/RequireRole';
 import { withNamespaces } from '../../../../i18n';
+import AssignInstructorModuleForm from '../../../../components/Dashboard/AssignInstructorModuleForm';
 
 class ModulesPage extends Component {
   static async getInitialProps() {
@@ -15,9 +17,9 @@ class ModulesPage extends Component {
     return (
       <RequireRole t={t} requiredRole='admin'>
         {() => (
-          <div>
-            <h1>ModulesPage</h1>
-          </div>
+          <Card bodyStyle={{ padding: 0 }}>
+            <AssignInstructorModuleForm t={t} />
+          </Card>
         )}
       </RequireRole>
     );

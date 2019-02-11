@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'next/router';
 import Link from 'next/link';
 import { Icon } from 'antd';
 import DashboardMenuUser from '../DashboardMenuUser';
@@ -9,9 +10,11 @@ import {
   StyledNoBorderMenu,
   StyledMenuItem,
 } from '../../../styles/components/dashboard/DashboardMenu';
+import { setActiveLinkClass } from '../../../utils/styling';
 
 function DashboardNavigation({
   t,
+  router,
   isMobile,
   authUser,
   currentPage,
@@ -25,12 +28,18 @@ function DashboardNavigation({
       {!isMobile && <DashboardMenuUser user={authUser} />}
 
       {authUser && authUser.isAdmin && (
-        <AdminMenu t={t} currentPage={currentPage} handlePageChange={handlePageChange} />
+        <AdminMenu
+          t={t}
+          router={router}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+        />
       )}
 
       {authUser && authUser.isStudent && (
         <StudentMenu
           t={t}
+          router={router}
           currentPage={currentPage}
           handlePageChange={handlePageChange}
           hasClass={authUser.registrationStatus === 'registered'}
@@ -46,7 +55,10 @@ function DashboardNavigation({
           })
         }
       >
-        <StyledMenuItem key='dashboard-settings'>
+        <StyledMenuItem
+          key='dashboard-settings'
+          className={setActiveLinkClass('/dashboard/settings', router)}
+        >
           <Icon type='setting' />
           <Link href='/dashboard/settings'>
             <a>{t('Settings')}</a>
@@ -70,4 +82,4 @@ DashboardNavigation.propTypes = {
   handleLogout: PropTypes.func.isRequired,
 };
 
-export default DashboardNavigation;
+export default withRouter(DashboardNavigation);

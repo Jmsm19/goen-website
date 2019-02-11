@@ -112,7 +112,7 @@
   "Assistant": "Asistente",
   "Assistants": "Asistentes",
   "NoAssistants": "No hay asistentes",
-  "AssignInstructor": "Asignar módulo",
+  "AssignInstructor": "Asignar instructor",
   "ManageInstructors": "Administrar instructores",
   "MakeInstructor": "Volver instructor",
   "RemoveAsInstructor": "Remover como instructor",
@@ -132,5 +132,7 @@
   "PeriodCreationModuleText": "El nombre y año del período serán asignados automáticamente.",
   "PeriodDelitionConfirmation": "¿Seguro que quieres borrar este período?",
   "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período.",
-  "Update": "Actualizar"
+  "Update": "Actualizar",
+  "NoInstructorAssigned": "Sin instructor assignado",
+  "ChangeInstructor": "Cambiar instructor"
 }

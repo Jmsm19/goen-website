@@ -13,6 +13,7 @@ import {
   InstitutionContextProvider,
   InstitutionContextConsumer,
 } from '../context/InstitutionContext';
+import { InstructorsContextProvider } from '../context/InstructorsContext';
 
 Router.onRouteChangeStart = () => NProgress.start().inc(0.5);
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -34,22 +35,24 @@ class MyApp extends App {
       <StyledContainer>
         <AuthContextProvider>
           <InstitutionContextProvider>
-            <AuthContextConsumer>
-              {({ isAuth }) => (
-                <InstitutionContextConsumer>
-                  {institutionContext => (
-                    <Page isAuth={isAuth}>
-                      <Meta />
-                      <Component
-                        {...pageProps}
-                        isAuth={isAuth}
-                        institution={{ ...institutionContext }}
-                      />
-                    </Page>
-                  )}
-                </InstitutionContextConsumer>
-              )}
-            </AuthContextConsumer>
+            <InstructorsContextProvider>
+              <AuthContextConsumer>
+                {({ isAuth }) => (
+                  <InstitutionContextConsumer>
+                    {institutionContext => (
+                      <Page isAuth={isAuth}>
+                        <Meta />
+                        <Component
+                          {...pageProps}
+                          isAuth={isAuth}
+                          institution={{ ...institutionContext }}
+                        />
+                      </Page>
+                    )}
+                  </InstitutionContextConsumer>
+                )}
+              </AuthContextConsumer>
+            </InstructorsContextProvider>
           </InstitutionContextProvider>
         </AuthContextProvider>
       </StyledContainer>

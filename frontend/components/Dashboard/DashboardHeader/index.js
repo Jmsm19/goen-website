@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'next/router';
 import Link from 'next/link';
 import { Menu } from 'antd';
 import { withNamespaces } from '../../../i18n';
@@ -8,8 +9,9 @@ import {
   StyledHeaderMenuItem,
   StyledHeaderHamburgerIcon,
 } from '../../../styles/components/dashboard/DashboardHeader';
+import { setActiveLinkClass } from '../../../utils/styling';
 
-function DashboardHeader({ t, isMobile, currentPage, handlePageChange }) {
+function DashboardHeader({ t, router, isMobile, currentPage, handlePageChange }) {
   return (
     <StyledHeader>
       <Menu
@@ -17,7 +19,7 @@ function DashboardHeader({ t, isMobile, currentPage, handlePageChange }) {
         selectedKeys={[currentPage]}
         onClick={({ key }) => handlePageChange(key)}
       >
-        <StyledHeaderMenuItem key=''>
+        <StyledHeaderMenuItem key='' className={setActiveLinkClass('/', router)}>
           <Link href='/'>
             <a>{t('Home')}</a>
           </Link>
@@ -30,9 +32,10 @@ function DashboardHeader({ t, isMobile, currentPage, handlePageChange }) {
 
 DashboardHeader.propTypes = {
   t: PropTypes.func.isRequired,
+  router: PropTypes.shape().isRequired,
   isMobile: PropTypes.bool.isRequired,
   currentPage: PropTypes.string.isRequired,
   handlePageChange: PropTypes.func.isRequired,
 };
 
-export default withNamespaces('common')(DashboardHeader);
+export default withNamespaces('common')(withRouter(DashboardHeader));

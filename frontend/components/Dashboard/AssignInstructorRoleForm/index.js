@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UsersTable from '../UsersTable';
-import { UsersContextConsumer } from '../../../context/UsersContext';
+import { InstructorsContextConsumer } from '../../../context/InstructorsContext';
+import InstructorsTable from '../../InstructorsTable';
 
-class AssignInstructorRoleForm extends Component {
+class AssignInstructorRole extends Component {
   state = {};
 
   render() {
     const { t } = this.props;
 
     return (
-      <UsersContextConsumer>
-        {({ users, getAllUsers, gettingUsers, addRole, removeRole }) => (
-          <UsersTable
+      <InstructorsContextConsumer>
+        {({ instructors, getAllInstructors, loading, removeRole }) => (
+          <InstructorsTable
             t={t}
-            users={users}
-            getUsers={getAllUsers}
-            loading={gettingUsers}
-            addRole={addRole}
+            instructors={instructors}
+            getInstructors={getAllInstructors}
+            loading={loading}
             removeRole={removeRole}
           />
         )}
-      </UsersContextConsumer>
+      </InstructorsContextConsumer>
     );
   }
 }
 
-AssignInstructorRoleForm.propTypes = {
+AssignInstructorRole.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default AssignInstructorRoleForm;
+export default AssignInstructorRole;

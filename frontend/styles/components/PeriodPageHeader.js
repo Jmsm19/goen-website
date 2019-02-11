@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Card } from 'antd';
-import media from '../../utils/styling';
+import { media } from '../../utils/styling';
 
 const StyledHeaderCard = styled(Card)`
   .ant-card-head-title {

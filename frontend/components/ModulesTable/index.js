@@ -1,55 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-import { Table, Badge } from 'antd';
+import { Table, Button } from 'antd';
 
-function ModulesTable({ modules, t }) {
-  const columns = [
-    {
-      title: t('Module'),
-      dataIndex: 'name',
-      key: 'name',
-      width: 60,
-    },
-    {
-      title: t('Period'),
-      dataIndex: 'period',
-      key: 'period',
-    },
-    {
-      title: t('Score'),
-      dataIndex: 'score',
-      key: 'score',
-      width: 60,
-    },
-    {
-      title: t('Status'),
-      dataIndex: 'status',
-      key: 'status',
-      width: 130,
-      render: status => (
-        <Badge
-          style={{ textTransform: 'uppercase' }}
-          key={status}
-          text={t(status)}
-          title={t(status)}
-          status={status === 'Passed' ? 'success' : 'error'}
-        />
-      ),
-    },
-  ];
-
+function ModulesTable({ modules, hiddenColumns, t }) {
   const data = [];
 
-  modules.map(module =>
-    data.push({
-      key: uuid(),
-      name: `${module.name}`,
-      period: `V ${2018}`,
-      score: 100,
-      status: 'Passed',
-    }),
-  );
+  const columns = [
+    !hiddenColumns.includes('moduleName') && {
+      title: t('Module'),
+      dataIndex: 'moduleName',
+      key: 'moduleName',
+      width: 60,
+    },
+    !hiddenColumns.includes('instructor') && {
+      title: t('Instructor'),
+      dataIndex: 'instructor',
+      key: 'instructor',
+    },
+    !hiddenColumns.includes('action') && {
+      title: '',
+      dataIndex: 'action',
+      key: 'action',
+      // eslint-disable-next-line react/prop-types
+      render: ({ name, btnType, event }) => (
+        <Button type={btnType} onClick={event}>
+          {name}
+        </Button>
+      ),
+    },
+  ].filter(Boolean);
+
+  if (modules.length > 0) {
+    modules.map(({ name, instructor }) =>
+      data.push({
+        key: uuid(),
+        moduleName: `${name}`,
+        instructor: instructor ? instructor.name : t('NoInstructorAssigned'),
+        action: !instructor
+          ? {
+              name: t('AssignInstructor'),
+              btnType: 'primary',
+              event: () => null,
+            }
+          : {
+              name: t('ChangeInstructor'),
+              btnType: 'dashed',
+              event: () => null,
+            },
+      }),
+    );
+  }
 
   return (
     <Table
@@ -67,10 +68,12 @@ function ModulesTable({ modules, t }) {
 
 ModulesTable.defaultProps = {
   modules: [],
+  hiddenColumns: [],
 };
 
 ModulesTable.propTypes = {
   t: PropTypes.func.isRequired,
+  hiddenColumns: PropTypes.arrayOf(PropTypes.string),
   modules: PropTypes.arrayOf(PropTypes.shape()),
 };
 

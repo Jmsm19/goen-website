@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Switch } from 'antd';
-import media from '../../../utils/styling';
+import { media } from '../../../utils/styling';
 
 export const StyledHeader = styled.div`
   display: grid;

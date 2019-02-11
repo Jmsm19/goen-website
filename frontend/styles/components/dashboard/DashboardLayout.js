@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Layout } from 'antd';
-import media from '../../../utils/styling';
+import { media } from '../../../utils/styling';
 
 export const StyledLayout = styled(Layout)`
   height: 100vh;

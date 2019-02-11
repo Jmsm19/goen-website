@@ -25,6 +25,7 @@
     "@zeit/next-css": "^1.0.1",
     "antd": "^3.11.6",
     "babel-core": "^7.0.0-bridge.0",
+    "classnames": "^2.2.6",
     "dotenv": "^6.2.0",
     "enquire.js": "^2.1.6",
     "formik": "^1.4.1",

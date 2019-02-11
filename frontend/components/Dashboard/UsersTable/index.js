@@ -88,7 +88,15 @@ class UsersTable extends Component {
         dataIndex: 'roles',
         key: 'roles',
         render: roles =>
-          roles && roles.map(role => !!role && <Tag color={role.color}>{role.name}</Tag>),
+          roles &&
+          roles.map(
+            role =>
+              !!role && (
+                <Tag key={uuid()} color={role.color}>
+                  {role.name}
+                </Tag>
+              ),
+          ),
       },
       {
         title: t('Actions'),
