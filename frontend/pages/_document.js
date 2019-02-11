@@ -17,7 +17,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script type='application/javascript' src='/static/scripts/truePushSDK.js' />
         </body>
       </html>
     );
