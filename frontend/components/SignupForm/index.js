@@ -10,8 +10,9 @@ import { hasErrors } from '../../utils/formValidation';
 import { StyledButtonArea } from '../../styles/components/SignupForm';
 import { StyledInput } from '../../styles/components/Forms';
 import { StyledFaintIcon } from '../../styles/pages/GeneralStyles';
+import RoleSelector from '../RoleSelector';
 
-const SignupForm = ({ t, handleRegister, fieldErrors }) => {
+const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
   const initialState = {
     name: '',
     birth_date: '',
@@ -19,6 +20,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
     email: '',
     password: '',
     password_confirmation: '',
+    role_name: 'student',
   };
 
   const PASSWORD_MIN_LENGTH = 6;
@@ -49,6 +51,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password'), null], t('PasswordNotEqual'))
       .required(t('Required')),
+    role_name: Yup.string().default(initialState.role_name),
   });
 
   const Label = Form.Item;
@@ -59,8 +62,31 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
       validationSchema={ValidationSchema}
       onSubmit={handleRegister}
     >
-      {({ handleSubmit, isSubmitting, errors, touched }) => (
+      {({ handleSubmit, isSubmitting, errors, touched, setFieldValue }) => (
         <Form onSubmit={handleSubmit}>
+          {/* Role */}
+          {showRoleSelector && (
+            <Label
+              htmlFor='role_name'
+              label={t('Role')}
+              validateStatus={hasErrors('role_name', errors, touched) ? 'error' : 'success'}
+              help={hasErrors('role_name', errors, touched) ? errors.role_name : ''}
+            >
+              <Field
+                name='role_name'
+                render={({ field }) => (
+                  <RoleSelector
+                    t={t}
+                    field={{
+                      ...field,
+                      onChange: setFieldValue,
+                    }}
+                  />
+                )}
+              />
+            </Label>
+          )}
+
           {/* Name */}
           <Label
             htmlFor='register_name'
@@ -217,7 +243,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
           </Label>
 
           {/* Submit */}
-          <StyledButtonArea>
+          <StyledButtonArea showRoleSelector>
             <Link href='/login'>
               <Button type='ghost' style={{ border: 'none', color: 'var(--light-primary-color)' }}>
                 <Icon type='arrow-left' />
@@ -234,8 +260,16 @@ const SignupForm = ({ t, handleRegister, fieldErrors }) => {
   );
 };
 
+SignupForm.defaultProps = {
+  showRoleSelector: false,
+  fieldErrors: [],
+};
+
 SignupForm.propTypes = {
   t: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+  fieldErrors: PropTypes.arrayOf(PropTypes.string),
+  showRoleSelector: PropTypes.bool,
 };
 
 export default SignupForm;
