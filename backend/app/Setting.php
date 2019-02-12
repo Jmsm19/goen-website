@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     title="Settting",
- *     description="Settting model",
+ *     title="Setting",
+ *     description="Setting model",
  *     required={
  *      "id", "name", "user_signup_active"
  *     }
  * )
  */
-class Settting extends Model
+class Setting extends Model
 {
     /**
     * @OA\Property(

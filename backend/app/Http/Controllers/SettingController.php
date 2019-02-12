@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use Illuminate\Http\Request;
 
-class InstitutionController extends Controller
+class SettingController extends Controller
 {
     public function all()
     {
-        return Settings::firstOrFail();
+        return Setting::firstOrFail();
     }
 
     public function update($request)
     {
-        $settings = Settings::firstOrFail();
+        $settings = Setting::firstOrFail();
         $settings->update($request->all());
         return $settings;
     }
