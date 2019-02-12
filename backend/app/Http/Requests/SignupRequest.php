@@ -49,6 +49,11 @@ use Illuminate\Foundation\Http\FormRequest;
  *       type="string",
  *      format="date"
  *   ),
+ *   @OA\Property(
+ *       description="Role that the user will have on signup. Default: student",
+ *       property="role_name",
+ *       type="string"
+ *   ),
  * )
  */
 class SignupRequest extends FormRequest
@@ -67,6 +72,7 @@ class SignupRequest extends FormRequest
             'password' => 'required|string|confirmed',
             'birth_date' => 'required|string',
             'phone_number' => 'required|string',
+            'role_name' => 'string',
         ];
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
+use App\Settting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
@@ -29,26 +31,51 @@ class AuthController extends Controller
     *       response=200,
     *       description="Successful signup",
     *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
+    *   ),
+    *   @OA\Response(
+    *       response=401,
+    *       description="Successful signup",
+    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
     *   )
     * )
     */
     public function signup(SignupRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'national_id' => $request->national_id,
-            'password' => bcrypt($request->password),
-            'birth_date' => $request->birth_date,
-            'phone_number' => $request->phone_number,
-            'activation_token' => str_random(60),
-        ]);
+        $request_user = $request->user();
+        $is_admin = false;
+        if ($request_user) {
+            $is_admin = $request_user->hasRole('admin');
+        }
 
-        event(new Registered($user));
+        if (Settting::first()->user_signup_active || $is_admin) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'national_id' => $request->national_id,
+                'password' => bcrypt($request->password),
+                'birth_date' => $request->birth_date,
+                'phone_number' => $request->phone_number,
+                'activation_token' => str_random(60),
+            ]);
+
+            if ($is_admin && $request->role_name) {
+                $role = Role::where('name', $request->role_name)->firstOrFail();
+                $user->roles()->attach($role);
+            } else {
+                $student_role = Role::where('name', 'student')->firstOrFail();
+                $user->roles()->attach($student_role);
+            }
+
+            event(new Registered($user));
+
+            return response()->json([
+                'message' => trans('auth.successful_signup'),
+            ], 201);
+        }
 
         return response()->json([
-            'message' => trans('auth.successful_signup'),
-        ], 201);
+            'error' => trans('auth.signup_forbidden'),
+        ], 401);
     }
 
     /**

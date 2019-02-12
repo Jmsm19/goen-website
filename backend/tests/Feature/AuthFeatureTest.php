@@ -37,11 +37,32 @@ class AuthFeatureTest extends TestCase
             'birth_date' => '1999-01-09',
         ];
 
+        // User created as student by default
         $this->json('POST', route('signup'), $new_user_data, $this->headers)
             ->assertStatus(201)
             ->assertJson([
                 'message' => trans('auth.successful_signup'),
             ]);
+
+        $user = User::where('national_id', $new_user_data['national_id'])->first();
+        $this->assertTrue($user->hasRole('student'));
+
+        // Custom Role by Admin
+        $this->passportActingAs('admin');
+
+        $custom_role = 'assistant';
+        $new_user_data['role_name'] = $custom_role;
+        $new_user_data['national_id'] = $this->faker->ean8;
+        $new_user_data['email'] = $this->faker->unique()->safeEmail;
+
+        $this->json('POST', route('signup'), $new_user_data, $this->headers)
+            ->assertStatus(201)
+            ->assertJson([
+                'message' => trans('auth.successful_signup'),
+            ]);
+
+        $user = User::where('national_id', $new_user_data['national_id'])->first();
+        $this->assertTrue($user->hasRole($custom_role));
     }
 
     /**

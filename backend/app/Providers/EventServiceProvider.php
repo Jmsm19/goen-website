@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Events\PaymentAccepted;
 use App\Events\PaymentRejected;
-use App\Listeners\AssignStudentRole;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -23,9 +22,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        Verified::class => [
-            AssignStudentRole::class,
         ],
         PaymentAccepted::class => [
             SendPaymentAcceptedNotification::class,
