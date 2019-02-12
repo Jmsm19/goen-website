@@ -1,9 +1,7 @@
 /* eslint-disable react/sort-comp */
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
-import { notification } from 'antd';
-import { capitalize } from '../utils';
-import { GetData, SendData } from '../utils/fetch';
+import { GetData } from '../utils/fetch';
 
 const UsersContext = createContext({});
 

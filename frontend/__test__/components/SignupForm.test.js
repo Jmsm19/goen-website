@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import SignupForm from '../../components/SignupForm';
+import SignupForm from '../../components/Forms/SignupForm';
 import tFunction from '../utils/tFunction';
 
 describe('Test Register Form component', () => {

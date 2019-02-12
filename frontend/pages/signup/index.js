@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SignupForm from '../../components/SignupForm';
+import SignupForm from '../../components/Forms/SignupForm';
 import { AuthContextConsumer } from '../../context/AuthContext';
 import ProtectedView from '../../components/ProtectedView';
 import { StyledPage } from '../../styles/pages/SignupPage';

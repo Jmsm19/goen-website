@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Divider, Select } from 'antd';
 import RequireAuthentication from '../../../components/RequireAuthentication';
 import { withNamespaces, i18n } from '../../../i18n';
-import UserProfileEditionForm from '../../../components/UserProfileEditionForm';
+import UserProfileEditionForm from '../../../components/Forms/UserProfileEditionForm';
 import StyledPage from '../../../styles/pages/dashboard/SettingsPage';
 import GlobalSettingsArea from '../../../components/GlobalSettingsArea';
 

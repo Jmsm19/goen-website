@@ -4,7 +4,7 @@ import { Avatar } from 'antd';
 import { withNamespaces } from '../../../../i18n';
 import RequireAuthentication from '../../../../components/RequireAuthentication';
 import UserProfile from '../../../../components/UserProfile';
-import UserProfileEditionForm from '../../../../components/UserProfileEditionForm';
+import UserProfileEditionForm from '../../../../components/Forms/UserProfileEditionForm';
 import StyledPage from '../../../../styles/pages/ProfilePage';
 
 export class ProfilePage extends Component {

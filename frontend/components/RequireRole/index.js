@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProtectedView from '../ProtectedView';
 import { AuthContextConsumer } from '../../context/AuthContext';
-import { Loading } from '../Loading';
+import { Loading } from '../SiteGeneral/Loading';
 
 const RequireRole = ({ children, t, requiredRole }) => (
   <AuthContextConsumer>

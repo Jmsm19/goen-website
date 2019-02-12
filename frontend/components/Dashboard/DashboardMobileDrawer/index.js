@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from '../../../i18n';
 import { AuthContextConsumer } from '../../../context/AuthContext';
-import { StyledDrawer } from '../../../styles/components/dashboard/DashboardMobileDrawer';
+import StyledDrawer from '../../../styles/components/dashboard/DashboardMobileDrawer';
 import DashboardNavigation from '../DashboardNavigation';
 
 class DashboardMobileDrawer extends Component {

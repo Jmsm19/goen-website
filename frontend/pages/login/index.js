@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from '../../i18n';
 import { AuthContextConsumer } from '../../context/AuthContext';
-import LoginForm from '../../components/LoginForm';
+import LoginForm from '../../components/Forms/LoginForm';
 import { StyledLogo, StyledPage } from '../../styles/pages/LoginPage';
 
 export class LoginPage extends Component {

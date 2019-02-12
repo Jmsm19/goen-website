@@ -35,7 +35,12 @@ class GlobalSettingsProvider extends Component {
               ...data,
             },
           });
-        }),
+        })
+        .catch(({ error, message }) =>
+          notification.error({
+            message: error || message,
+          }),
+        ),
     );
   };
 
@@ -50,7 +55,12 @@ class GlobalSettingsProvider extends Component {
               ...data,
             },
           });
-        }),
+        })
+        .catch(({ error, message }) =>
+          notification.error({
+            message: error || message,
+          }),
+        ),
     );
   };
 

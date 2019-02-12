@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
 import { todayIsBetween } from '../utils';
-import { Loading } from '../components/Loading';
+import { Loading } from '../components/SiteGeneral/Loading';
 import { UsersContextProvider } from './UsersContext';
 
 const InstitutionContext = createContext({});

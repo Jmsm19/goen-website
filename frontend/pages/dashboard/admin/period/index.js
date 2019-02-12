@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Icon } from 'antd';
+import { Modal, Icon, notification } from 'antd';
 import { Button } from 'antd/lib/radio';
 import RequireRole from '../../../../components/RequireRole';
 import { withNamespaces } from '../../../../i18n';
-import PeriodCreationForm from '../../../../components/PeriodCreationForm';
-import PeriodList from '../../../../components/PeriodList';
-import PeriodPageHeader from '../../../../components/PeriodPageHeader';
-import ModuleListCard from '../../../../components/ModuleListCard';
-import PeriodUpdateForm from '../../../../components/PeriodUpdateForm';
+import PeriodCreationForm from '../../../../components/Forms/PeriodCreationForm';
+import PeriodList from '../../../../components/Lists/PeriodList';
+import PeriodPageHeader from '../../../../components/PeriodPage/PeriodPageHeader';
+import ModuleListCard from '../../../../components/Cards/ModuleListCard';
+import PeriodUpdateForm from '../../../../components/Forms/PeriodUpdateForm';
 import { GetData } from '../../../../utils/fetch';
-import StudentPaymentStatusCard from '../../../../components/StudentPaymentStatusCard';
+import StudentPaymentStatusCard from '../../../../components/Cards/StudentPaymentStatusCard';
 import StyledPage from '../../../../styles/pages/dashboard/admin/PeriodPage';
 
 class PeriodPage extends Component {
@@ -33,7 +33,9 @@ class PeriodPage extends Component {
         students: periodData ? periodData.students : [],
       });
     } catch (error) {
-      console.log(error);
+      notification.error({
+        message: error,
+      });
     }
   }
 

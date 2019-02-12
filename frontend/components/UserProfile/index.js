@@ -12,7 +12,7 @@ import {
   UserUpperThirdCol,
   UserProfileLower,
 } from '../../styles/components/UserProfile';
-import ModulesTable from '../ModulesTable';
+import ModulesTable from '../Tables/ModulesTable';
 
 function UserProfile({ t, toggleEdition, user }) {
   const { name, clan, birthDate, email, phoneNumber, currentModule, passedModules } = user;

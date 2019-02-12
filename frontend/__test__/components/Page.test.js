@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { I18nextProvider } from 'next-i18next/node_modules/react-i18next';
-import { CleanPage } from '../../components/Page';
+import { CleanPage } from '../../components/SiteGeneral/Page';
 import i18n from '../utils/i18nForTest';
 
 describe('Test Page component', () => {

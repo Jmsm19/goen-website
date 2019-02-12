@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
-import Footer from '../../Footer';
+import Footer from '../../SiteGeneral/Footer';
 import DashboardSider from '../../Dashboard/DashboardSider';
 import DashboardHeader from '../../Dashboard/DashboardHeader';
 import DashboardMobileDrawer from '../../Dashboard/DashboardMobileDrawer';

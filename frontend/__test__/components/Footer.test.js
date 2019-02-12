@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import Footer from '../../components/Footer';
+import Footer from '../../components/SiteGeneral/Footer';
 import tFunction from '../utils/tFunction';
 
 describe('Test Footer', () => {

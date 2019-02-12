@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { notification } from 'antd';
-import { Loading } from '../Loading';
+import { Loading } from '../SiteGeneral/Loading';
 
 class ProtectedView extends Component {
   state = {

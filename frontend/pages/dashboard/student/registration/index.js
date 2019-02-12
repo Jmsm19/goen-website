@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from '../../../../i18n';
 import StyledPage from '../../../../styles/pages/ModuleRegisterPage';
-import RegistrationSteps from '../../../../components/Registration/RegistrationSteps';
-import ModuleSelection from '../../../../components/Registration/ModuleSelection';
-import PaymentProcessing from '../../../../components/Registration/PaymenProcessing';
-import RegisteredMessage from '../../../../components/Registration/RegisteredMessage';
-import PaymentVerification from '../../../../components/Registration/PaymentVerification';
+import RegistrationSteps from '../../../../components/RegistrationPage/RegistrationSteps';
+import ModuleSelection from '../../../../components/RegistrationPage/ModuleSelection';
+import PaymentProcessing from '../../../../components/RegistrationPage/PaymenProcessing';
+import RegisteredMessage from '../../../../components/RegistrationPage/RegisteredMessage';
+import PaymentVerification from '../../../../components/RegistrationPage/PaymentVerification';
 import RequireRole from '../../../../components/RequireRole';
 
 class ModuleRegisterPage extends Component {

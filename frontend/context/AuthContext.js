@@ -7,7 +7,7 @@ import Router from 'next/router';
 import getConfig from 'next/config';
 import { notification } from 'antd';
 import { GetData, SendData } from '../utils/fetch';
-import { Loading } from '../components/Loading';
+import { Loading } from '../components/SiteGeneral/Loading';
 
 const { publicRuntimeConfig } = getConfig();
 const AuthContext = createContext({});
