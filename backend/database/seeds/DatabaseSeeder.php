@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     private $seeders = [
+        SettingsTableSeeder::class,
         PeriodTableSeeder::class,
         ClanTableSeeder::class,
         RoleTableSeeder::class,
