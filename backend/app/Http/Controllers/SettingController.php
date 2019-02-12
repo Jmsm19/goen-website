@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Setting;
 use Illuminate\Http\Request;
 use App\Http\Resources\SettingResource;
+use App\Http\Requests\SettingsUpdateRequest;
 
 class SettingController extends Controller
 {
@@ -13,7 +14,7 @@ class SettingController extends Controller
         return new SettingResource(Setting::firstOrFail());
     }
 
-    public function update($request)
+    public function update(SettingsUpdateRequest $request)
     {
         $settings = Setting::firstOrFail();
         $settings->update($request->all());
