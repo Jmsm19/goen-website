@@ -96,6 +96,7 @@
   "Confirm": "Confirm",
   "Settings": "Settings",
   "SiteSettings": "Site settings",
+  "PersonalSettings": "Personal settings",
   "Language": "Language",
   "UserDetails": "User details",
   "Logout": "Logout",
@@ -134,5 +135,7 @@
   "PeriodDeletionDangerExplanation": "Be aware that deleting a period involves deleting everything associated with it: like modules, scores and student progress in this period.",
   "Update": "Update",
   "NoInstructorAssigned": "No instructor assigned",
-  "ChangeInstructor": "Change instructor"
+  "ChangeInstructor": "Change instructor",
+  "GlobalSettings": "Global settings",
+  "AllowUserSignup": "Allow new users to register"
 }

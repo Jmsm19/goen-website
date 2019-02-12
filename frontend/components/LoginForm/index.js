@@ -8,6 +8,7 @@ import { hasErrors } from '../../utils/formValidation';
 import { StyledButtonArea } from '../../styles/components/LoginForm';
 import { StyledInput } from '../../styles/components/Forms';
 import { StyledFaintIcon } from '../../styles/pages/GeneralStyles';
+import { GlobalSettingsConsumer } from '../../context/GlobalSettingsContext';
 
 const LoginForm = ({ t, handleLogin }) => {
   const initialState = {
@@ -80,11 +81,20 @@ const LoginForm = ({ t, handleLogin }) => {
               {t('Login')}
             </Button>
 
-            <Link href='/signup'>
-              <Button type='ghost' style={{ border: 'none', color: 'var(--light-primary-color)' }}>
-                {t('Register')}
-              </Button>
-            </Link>
+            <GlobalSettingsConsumer>
+              {({ settings }) =>
+                settings.userSignupActive && (
+                  <Link href='/signup'>
+                    <Button
+                      type='ghost'
+                      style={{ border: 'none', color: 'var(--light-primary-color)' }}
+                    >
+                      {t('Register')}
+                    </Button>
+                  </Link>
+                )
+              }
+            </GlobalSettingsConsumer>
           </StyledButtonArea>
         </Form>
       )}

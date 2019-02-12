@@ -96,6 +96,7 @@
   "Confirm": "Confirmar",
   "Settings": "Opciones",
   "SiteSettings": "Opciones generales del sitio",
+  "PersonalSettings": "Opciones personales",
   "Language": "Idioma",
   "UserDetails": "Detalles del usuario",
   "Logout": "Cerrar sesión",
@@ -134,5 +135,7 @@
   "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período.",
   "Update": "Actualizar",
   "NoInstructorAssigned": "Sin instructor assignado",
-  "ChangeInstructor": "Cambiar instructor"
+  "ChangeInstructor": "Cambiar instructor",
+  "GlobalSettings": "Opciones globales",
+  "AllowUserSignup": "Permitir registro de nuevos usuarios"
 }
