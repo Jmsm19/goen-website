@@ -14,6 +14,7 @@ import {
   InstitutionContextConsumer,
 } from '../context/InstitutionContext';
 import { InstructorsContextProvider } from '../context/InstructorsContext';
+import { GlobalSettingsProvider } from '../context/GlobalSettingsContext';
 
 Router.onRouteChangeStart = () => NProgress.start().inc(0.5);
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -33,28 +34,30 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <StyledContainer>
-        <AuthContextProvider>
-          <InstitutionContextProvider>
-            <InstructorsContextProvider>
-              <AuthContextConsumer>
-                {({ isAuth }) => (
-                  <InstitutionContextConsumer>
-                    {institutionContext => (
-                      <Page isAuth={isAuth}>
-                        <Meta />
-                        <Component
-                          {...pageProps}
-                          isAuth={isAuth}
-                          institution={{ ...institutionContext }}
-                        />
-                      </Page>
-                    )}
-                  </InstitutionContextConsumer>
-                )}
-              </AuthContextConsumer>
-            </InstructorsContextProvider>
-          </InstitutionContextProvider>
-        </AuthContextProvider>
+        <GlobalSettingsProvider>
+          <AuthContextProvider>
+            <InstitutionContextProvider>
+              <InstructorsContextProvider>
+                <AuthContextConsumer>
+                  {({ isAuth }) => (
+                    <InstitutionContextConsumer>
+                      {institutionContext => (
+                        <Page isAuth={isAuth}>
+                          <Meta />
+                          <Component
+                            {...pageProps}
+                            isAuth={isAuth}
+                            institution={{ ...institutionContext }}
+                          />
+                        </Page>
+                      )}
+                    </InstitutionContextConsumer>
+                  )}
+                </AuthContextConsumer>
+              </InstructorsContextProvider>
+            </InstitutionContextProvider>
+          </AuthContextProvider>
+        </GlobalSettingsProvider>
       </StyledContainer>
     );
   }

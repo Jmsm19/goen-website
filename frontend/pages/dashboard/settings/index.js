@@ -5,6 +5,7 @@ import RequireAuthentication from '../../../components/RequireAuthentication';
 import { withNamespaces, i18n } from '../../../i18n';
 import UserProfileEditionForm from '../../../components/UserProfileEditionForm';
 import StyledPage from '../../../styles/pages/dashboard/SettingsPage';
+import GlobalSettingsArea from '../../../components/GlobalSettingsArea';
 
 class SettingsPage extends Component {
   static async getInitialProps() {
@@ -35,7 +36,7 @@ class SettingsPage extends Component {
               />
             </div>
 
-            <Divider orientation='left'>{t('SiteSettings')}</Divider>
+            <Divider orientation='left'>{t('PersonalSettings')}</Divider>
 
             <div className='settings-area'>
               <p>{t('Language')}</p>
@@ -50,6 +51,8 @@ class SettingsPage extends Component {
                 <Option value='en'>{t('English')}</Option>
               </Select>
             </div>
+
+            {authUser && authUser.isAdmin && <GlobalSettingsArea t={t} />}
           </StyledPage>
         )}
       </RequireAuthentication>
