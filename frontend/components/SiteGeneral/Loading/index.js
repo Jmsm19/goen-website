@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Icon } from 'antd';
+import StyledLoadingPage from '../../../styles/components/Loading';
 
 const Loading = ({ iconType, spinnerFontSize, text = '' }) => {
   const LoadingIcon = <Icon type={iconType} spin style={{ fontSize: spinnerFontSize }} />;
 
   return (
-    <div className='page-loading'>
+    <StyledLoadingPage className='page-loading'>
       <Spin tip={text} indicator={LoadingIcon} size='large' />
-    </div>
+    </StyledLoadingPage>
   );
 };
 

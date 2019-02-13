@@ -53,15 +53,12 @@
   font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Helvetica, Verdana, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lustria', 'Times New Roman', Times, serif;
+#__next {
+  height: 100%;
 }
 
-.page-loading {
-  width: 100vw;
-  align-items: center;
-  display: grid;
-  justify-content: center;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lustria', 'Times New Roman', Times, serif;
 }
 
 @media screen and (max-width: 576px) {
