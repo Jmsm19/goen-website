@@ -19,6 +19,7 @@ class SimpleInstructorResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phoneNumber' => $this->phone_number,
+            'clan' => $this->hasClan() ? $this->clan->name : null
         ];
     }
 }
