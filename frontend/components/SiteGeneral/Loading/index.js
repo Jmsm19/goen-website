@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Icon } from 'antd';
-import { withNamespaces } from '../../../i18n';
 
-export const Loading = ({ iconType, spinnerFontSize, text = '' }) => {
+const Loading = ({ iconType, spinnerFontSize, text = '' }) => {
   const LoadingIcon = <Icon type={iconType} spin style={{ fontSize: spinnerFontSize }} />;
 
   return (
@@ -25,5 +24,4 @@ Loading.propTypes = {
   text: PropTypes.string,
 };
 
-export default withNamespaces('common')(Loading);
-export const CleanLoading = Loading;
+export default Loading;
