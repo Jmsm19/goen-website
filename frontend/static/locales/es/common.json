@@ -137,5 +137,7 @@
   "NoInstructorAssigned": "Sin instructor assignado",
   "ChangeInstructor": "Cambiar instructor",
   "GlobalSettings": "Opciones globales",
-  "AllowUserSignup": "Permitir registro de nuevos usuarios"
+  "AllowUserSignup": "Permitir registro de nuevos usuarios",
+  "InstructorName": "Nombre del instructor",
+  "AddInstructor": "Agregar nuevo instructor"
 }

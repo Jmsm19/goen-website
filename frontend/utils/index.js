@@ -26,3 +26,21 @@ export const todayIsBetween = (date1, date2) => {
  * @param {String} str
  */
 export const capitalize = str => str[0].toUpperCase() + str.substring(1);
+
+/**
+ * Get component's display name
+ * @param {*} Component
+ */
+export const getDisplayName = Component => Component.displayName || Component.name || 'Component';
+
+/**
+ * Filter a given array of objects by the name property
+ * @param {Array} array
+ * @param {String} name
+ */
+export const filterArrayByName = (array, name) => {
+  if (array.length) {
+    return array.filter(item => RegExp(`${name}`, 'i').test(item.name));
+  }
+  return array;
+};
