@@ -51,6 +51,8 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     // Instructor related routes
     Route::get('/instructor', 'InstructorController@index')
         ->name('instructor.index');
+    Route::put('/instructor/add/{id}', 'InstructorController@addInstructorRole')
+        ->name('instructor.add');
 
     // Global Settings routes
     Route::put('/setting', 'SettingController@update')

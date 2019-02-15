@@ -9,60 +9,6 @@ use Illuminate\Http\Request;
 class RolesController extends Controller
 {
     /**
-    * @OA\Put(path="/api/users/{id}/{role}",
-    *   tags={"Model: Role", "Role: Admin"},
-    *   summary="Add Role to specified user",
-    *   operationId="addRoleToUser",
-    *   security={
-    *       {"Bearer": {}}
-    *   },
-    *
-    *   @OA\Parameter(
-    *       description="Id of user",
-    *       in="path",
-    *       name="id",
-    *       required=true,
-    *       @OA\Schema(format="int64", type="integer")
-    *   ),
-    *   @OA\Parameter(
-    *       description="Role name",
-    *       in="path",
-    *       name="role",
-    *       @OA\Schema(type="string")
-    *   ),
-    *   @OA\Response(
-    *       response=200,
-    *       description="Role added to User",
-    *       @OA\JsonContent(ref="#/components/schemas/ResponseMessage")
-    *   ),
-    *   @OA\Response(
-    *       response=400,
-    *       description="User already has role",
-    *       @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
-    *   )
-    * )
-    */
-    public function addRole($id, $role)
-    {
-        // Get user
-        $user = User::where('id', $id)->first();
-
-        // Prevent addition of role if user already has it
-        if ($user->hasRole($role)) {
-            return response()->json([
-                'error' => trans('messages.has_role', ['role' => $role]),
-            ], 400);
-        }
-
-        // Add Role
-        $new_role = Role::where('name', $role)->first();
-        $user->roles()->attach($new_role);
-        return response()->json([
-            'message' => trans('messages.role_added', ['role' => $role]),
-         ], 200);
-    }
-
-    /**
     * @OA\Delete(path="/api/users/{id}/{role}",
     *   tags={"Model: Role", "Role: Admin"},
     *   summary="Remove Role from specified user",

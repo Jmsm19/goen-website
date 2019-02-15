@@ -11,39 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class RoleApiTest extends TestCase
 {
     /**
-     * Test admin can add roles to users
-     *
-     * @return void
-     */
-    public function testCanAddRole()
-    {
-        $this->passportActingAs('admin');
-        $role = Role::where('name', 'student')->first();
-        $user = factory(User::class)->create();
-
-        // Successfully add role
-        $params = [
-            'id' => $user->id,
-            'role' => $role->name,
-        ];
-        $this->put(route('add_role', $params))
-            ->assertStatus(200)
-            ->assertJson([
-                'message' =>
-                    trans('messages.role_added', ['role' => $params['role']]),
-            ]);
-        $this->assertTrue($user->hasRole($role->name));
-
-        // Don't add role if user already has it
-        $this->put(route('add_role', $params))
-            ->assertStatus(400)
-            ->assertJson([
-                'error' =>
-                    trans('messages.has_role', ['role' => $params['role']]),
-            ]);
-    }
-
-    /**
     * Test admin can remove roles from users
     *
     * @return void

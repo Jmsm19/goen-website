@@ -41,7 +41,7 @@ class AuthController extends Controller
     */
     public function signup(SignupRequest $request)
     {
-        $request_user = $request->user();
+        $request_user = Auth::guard('api')->user();
         $is_admin = false;
         if ($request_user) {
             $is_admin = $request_user->hasRole('admin');
