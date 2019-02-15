@@ -139,5 +139,6 @@
   "GlobalSettings": "Global settings",
   "AllowUserSignup": "Allow new users to register",
   "InstructorName": "Instructor's name",
-  "AddInstructor": "Add new instructor"
+  "AddInstructor": "Add new instructor",
+  "AddInstructorFromExistingUser": "Add from existing user"
 }

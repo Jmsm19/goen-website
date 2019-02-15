@@ -28,8 +28,6 @@ class UsersContextProvider extends Component {
     users: [],
     gettingUsers: false,
     getAllUsers: this.getAllUsers,
-    addRole: this.addRole,
-    removeRole: this.removeRole,
   };
 
   render() {

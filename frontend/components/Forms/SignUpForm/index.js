@@ -7,12 +7,12 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 import { hasErrors } from '../../../utils/formValidation';
-import { StyledButtonArea } from '../../../styles/components/SignupForm';
+import { StyledButtonArea } from '../../../styles/components/SignUpForm';
 import { StyledInput } from '../../../styles/components/Forms';
 import { StyledFaintIcon } from '../../../styles/pages/GeneralStyles';
 import RoleSelector from '../../Inputs/RoleSelector';
 
-const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
+const SignUpForm = ({ t, handleRegister, fieldErrors, showRoleSelector, defaultRole }) => {
   const initialState = {
     name: '',
     birth_date: '',
@@ -20,7 +20,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
     email: '',
     password: '',
     password_confirmation: '',
-    role_name: 'student',
+    role_name: defaultRole,
   };
 
   const PASSWORD_MIN_LENGTH = 6;
@@ -91,7 +91,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
           <Label
             htmlFor='register_name'
             label={t('Name')}
-            extra={t('NameUsedInCertificateWarning')}
+            extra={!showRoleSelector && t('NameUsedInCertificateWarning')}
             validateStatus={hasErrors('name', errors, touched) ? 'error' : 'success'}
             help={hasErrors('name', errors, touched) ? errors.name : ''}
           >
@@ -108,7 +108,7 @@ const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
             />
           </Label>
 
-          {/* Natinal Id */}
+          {/* National Id */}
           <Label
             htmlFor='register_national_id'
             label={t('NationalId')}
@@ -260,16 +260,18 @@ const SignupForm = ({ t, handleRegister, fieldErrors, showRoleSelector }) => {
   );
 };
 
-SignupForm.defaultProps = {
+SignUpForm.defaultProps = {
   showRoleSelector: false,
   fieldErrors: [],
+  defaultRole: 'student',
 };
 
-SignupForm.propTypes = {
+SignUpForm.propTypes = {
   t: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
   fieldErrors: PropTypes.arrayOf(PropTypes.string),
   showRoleSelector: PropTypes.bool,
+  defaultRole: PropTypes.string,
 };
 
-export default SignupForm;
+export default SignUpForm;

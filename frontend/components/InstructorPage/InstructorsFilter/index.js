@@ -1,35 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
 import Loading from '../../SiteGeneral/Loading';
 import InstructorListingCards from '../../Cards/InstructorListingCards';
-import { StyledButtonCard } from '../../../styles/components/InstructorPage';
 
-function InstructorsFilter({ t, loading, instructors }) {
+function InstructorsFilter({ t, loading, instructors, onUserCardClick }) {
   if (loading) {
     return <Loading />;
   }
 
   return (
     <>
-      <StyledButtonCard type='dashed'>
-        <Icon type='user-add' />
-        {t('AddInstructor')}
-      </StyledButtonCard>
-
-      <InstructorListingCards loading={loading} instructors={instructors} />
+      <InstructorListingCards
+        t={t}
+        loading={loading}
+        instructors={instructors}
+        onCardClick={onUserCardClick}
+      />
     </>
   );
 }
 
 InstructorsFilter.defaultProps = {
   instructors: [],
+  onUserCardClick: () => null,
 };
 
 InstructorsFilter.propTypes = {
   t: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   instructors: PropTypes.arrayOf(PropTypes.shape()),
+  onUserCardClick: PropTypes.func,
 };
 
 export default InstructorsFilter;

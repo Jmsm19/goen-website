@@ -2,7 +2,6 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { notification } from 'antd';
-import { capitalize } from '../utils';
 import { GetData, SendData } from '../utils/fetch';
 
 const InstructorsContext = createContext({});
@@ -26,42 +25,35 @@ class InstructorsContextProvider extends Component {
     );
   };
 
-  addRole = (userId, roleName) => {
+  addRole = (userId, callback) => {
     this.setState(
       {
         loading: true,
       },
       () => {
-        SendData('PUT', `/users/${userId}/${roleName}`)
+        SendData('PUT', `/instructor/add/${userId}`)
           .then(res => res.json())
-          .then(({ message, error }) => {
+          .then(({ message, error, instructor }) => {
             if (error) {
               throw Error(error);
             }
             if (message) {
-              const { instructors } = this.state;
-              const updatedUsers = instructors.map(user => {
-                if (user.id !== userId) {
-                  return user;
-                }
-                const updatedUser = {
-                  ...user,
-                  [`is${capitalize(roleName)}`]: true,
-                };
-                return updatedUser;
-              });
               return this.setState(
-                {
+                prevState => ({
                   loading: false,
-                  instructors: updatedUsers,
-                },
+                  instructors: [...prevState.instructors, instructor],
+                }),
                 () => {
                   notification.success({
                     message,
                   });
+                  if (typeof callback === 'function') {
+                    callback();
+                  }
                 },
               );
             }
+
             return this.setState({
               loading: false,
             });
@@ -78,7 +70,7 @@ class InstructorsContextProvider extends Component {
     );
   };
 
-  removeRole = (userId, roleName) => {
+  removeRole = (userId, roleName, callback) => {
     this.setState(
       {
         loading: true,
@@ -92,16 +84,7 @@ class InstructorsContextProvider extends Component {
             }
             if (message) {
               const { instructors } = this.state;
-              const updatedUsers = instructors.map(user => {
-                if (user.id !== userId) {
-                  return user;
-                }
-                const updatedUser = {
-                  ...user,
-                  [`is${capitalize(roleName)}`]: false,
-                };
-                return updatedUser;
-              });
+              const updatedUsers = instructors.filter(user => user.id !== userId);
               return this.setState(
                 {
                   loading: false,
@@ -111,6 +94,9 @@ class InstructorsContextProvider extends Component {
                   notification.success({
                     message,
                   });
+                  if (typeof callback === 'function') {
+                    callback();
+                  }
                 },
               );
             }

@@ -67,7 +67,7 @@ class UsersTable extends Component {
   };
 
   render() {
-    const { t, users, loading } = this.props;
+    const { t, users, loading, showRoles } = this.props;
     const data = [];
 
     const columns = [
@@ -83,23 +83,27 @@ class UsersTable extends Component {
         key: 'national-id',
         ...this.getColumnSearchProps('national-id'),
       },
+      ...(showRoles
+        ? [
+            {
+              title: t('Roles'),
+              dataIndex: 'roles',
+              key: 'roles',
+              render: roles =>
+                roles &&
+                roles.map(
+                  role =>
+                    !!role && (
+                      <Tag key={uuid()} color={role.color}>
+                        {role.name}
+                      </Tag>
+                    ),
+                ),
+            },
+          ]
+        : []),
       {
-        title: t('Roles'),
-        dataIndex: 'roles',
-        key: 'roles',
-        render: roles =>
-          roles &&
-          roles.map(
-            role =>
-              !!role && (
-                <Tag key={uuid()} color={role.color}>
-                  {role.name}
-                </Tag>
-              ),
-          ),
-      },
-      {
-        title: t('Actions'),
+        title: '',
         dataIndex: 'actions',
         key: 'actions',
         width: 100,
@@ -142,7 +146,9 @@ class UsersTable extends Component {
 
     return (
       <Table
-        pagination={{ pageSize: 10 }}
+        useFixedHeader
+        pagination={false}
+        scroll={{ y: '50vh' }}
         loading={loading}
         columns={columns}
         dataSource={data}
@@ -157,6 +163,7 @@ class UsersTable extends Component {
 UsersTable.defaultProps = {
   users: [],
   loading: false,
+  showRoles: true,
   getUsers: () => null,
   addRole: () => null,
   removeRole: () => null,
@@ -164,6 +171,7 @@ UsersTable.defaultProps = {
 
 UsersTable.propTypes = {
   t: PropTypes.func.isRequired,
+  showRoles: PropTypes.bool,
   loading: PropTypes.bool,
   getUsers: PropTypes.func,
   addRole: PropTypes.func,

@@ -15,6 +15,7 @@ class TableFilterForm extends Component {
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
+          autoFocus
         />
         <Button
           type='primary'

@@ -244,6 +244,19 @@ class AuthContextProvider extends Component {
     return undefined;
   };
 
+  resetRegistrationSuccess = callback => {
+    this.setState(
+      {
+        registerSuccess: false,
+      },
+      () => {
+        if (typeof callback === 'function') {
+          callback();
+        }
+      },
+    );
+  };
+
   state = {
     mounted: false,
     isAuth: false,
@@ -252,6 +265,7 @@ class AuthContextProvider extends Component {
     handleRegister: this.handleRegister,
     handleUserUpdate: this.updateAuthUser,
     registerSuccess: false,
+    resetRegistrationSuccess: this.resetRegistrationSuccess,
     redirectToCommonRouteIfNotInDashboard: this.redirectToCommonRouteIfNotInDashboard,
     setRegistrationStatus: this.setRegistrationStatus,
     message: '',

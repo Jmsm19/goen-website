@@ -116,7 +116,7 @@
   "AssignInstructor": "Asignar instructor",
   "ManageInstructors": "Administrar instructores",
   "MakeInstructor": "Volver instructor",
-  "RemoveAsInstructor": "Remover como instructor",
+  "RemoveAsInstructor": "Eliminar como instructor",
   "Actions": "Acciones",
   "ConfirmPaymentAcceptance": "¿Has recibido el comprobante de pago de este estudiante?",
   "ConfirmPaymentRejection": "¿Seguro que deseas rechazar este pago?",
@@ -139,5 +139,6 @@
   "GlobalSettings": "Opciones globales",
   "AllowUserSignup": "Permitir registro de nuevos usuarios",
   "InstructorName": "Nombre del instructor",
-  "AddInstructor": "Agregar nuevo instructor"
+  "AddInstructor": "Agregar nuevo instructor",
+  "AddInstructorFromExistingUser": "Agregar a partir de usuario existente"
 }
