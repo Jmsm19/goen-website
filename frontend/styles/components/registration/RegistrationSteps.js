@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Steps } from 'antd';
-import media from '../../../utils/styling';
+import { media } from '../../../utils/styling';
 
 const StyledSteps = styled(Steps)`
   padding: 20px;
