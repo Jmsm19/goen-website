@@ -243,7 +243,7 @@ const SignUpForm = ({ t, handleRegister, fieldErrors, showRoleSelector, defaultR
           </Label>
 
           {/* Submit */}
-          <StyledButtonArea showRoleSelector>
+          <StyledButtonArea showRoleSelector={showRoleSelector}>
             <Link href='/login'>
               <Button type='ghost' style={{ border: 'none', color: 'var(--light-primary-color)' }}>
                 <Icon type='arrow-left' />

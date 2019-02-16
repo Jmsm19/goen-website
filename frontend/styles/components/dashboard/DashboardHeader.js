@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Layout, Menu, Icon } from 'antd';
 
 export const StyledHeader = styled(Layout.Header)`
-  padding: 0;
+  padding: 0 10px 0 0;
   display: grid;
   justify-content: flex-end;
   background: #fff;

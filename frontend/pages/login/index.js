@@ -18,10 +18,10 @@ export class LoginPage extends Component {
         <AuthContextConsumer>
           {({ handleLogin, isAuth }) =>
             !isAuth && (
-              <>
+              <div className='page'>
                 <StyledLogo src='/static/images/goen-logo-small-trans.png' alt='GOEN Maracaibo' />
                 <LoginForm {...this.props} handleLogin={handleLogin} />
-              </>
+              </div>
             )
           }
         </AuthContextConsumer>

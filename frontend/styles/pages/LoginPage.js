@@ -6,7 +6,16 @@ export const StyledPage = styled.div`
   width: 100%;
   margin: 0 auto;
   display: grid;
-  align-content: center;
+
+  ${media.tablet`
+    padding: 15px;
+  `}
+
+  .page {
+    margin-top: 15vh;
+    display: grid;
+    align-content: center;
+  }
 
   label {
     text-transform: uppercase;
