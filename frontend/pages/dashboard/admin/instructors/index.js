@@ -119,12 +119,20 @@ class InstructorsManagementPage extends Component {
     return (
       <StyledPage>
         <div className='button-area'>
-          <StyledButtonCard type='dashed' onClick={() => this.toggleModal(null, 'CreateNewUser')}>
+          <StyledButtonCard
+            type='dashed'
+            title={t('AddInstructor')}
+            onClick={() => this.toggleModal(null, 'CreateNewUser')}
+          >
             <Icon type='user-add' />
             {t('AddInstructor')}
           </StyledButtonCard>
 
-          <StyledButtonCard type='dashed' onClick={() => this.toggleModal(null, 'CreateFromUser')}>
+          <StyledButtonCard
+            type='dashed'
+            title={t('AddInstructorFromExistingUser')}
+            onClick={() => this.toggleModal(null, 'CreateFromUser')}
+          >
             <Icon type='user-add' />
             {t('AddInstructorFromExistingUser')}
           </StyledButtonCard>

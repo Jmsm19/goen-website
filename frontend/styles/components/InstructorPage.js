@@ -10,13 +10,9 @@ export const StyledPage = styled.div`
   height: 100%;
 
   .button-area {
-    display: flex;
-    flex-wrap: wrap;
-
-    button {
-      flex: 1;
-      margin: 10px;
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 10px;
   }
 
   ${media.tablet`
@@ -55,6 +51,13 @@ export const StyledButtonCard = styled(Button)`
   font-weight: 400;
   color: var(--primary-color);
   border-color: var(--primary-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+
+  ${media.tablet`
+    height: 45px;
+  `}
 `;
 
 export const StyledInstructorCard = styled(Card)`
