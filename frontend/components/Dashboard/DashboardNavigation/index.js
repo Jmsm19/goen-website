@@ -75,6 +75,7 @@ function DashboardNavigation({
 
 DashboardNavigation.propTypes = {
   t: PropTypes.func.isRequired,
+  router: PropTypes.shape().isRequired,
   isMobile: PropTypes.bool.isRequired,
   authUser: PropTypes.shape().isRequired,
   currentPage: PropTypes.string.isRequired,

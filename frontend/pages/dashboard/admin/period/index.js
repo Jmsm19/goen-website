@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Icon, notification } from 'antd';
+import { Modal, Icon } from 'antd';
 import { Button } from 'antd/lib/radio';
 import RequireRole from '../../../../components/RequireRole';
 import { withNamespaces } from '../../../../i18n';
 import PeriodCreationForm from '../../../../components/Forms/PeriodCreationForm';
 import PeriodList from '../../../../components/Lists/PeriodList';
 import PeriodPageHeader from '../../../../components/PeriodPage/PeriodPageHeader';
-import ModuleListCard from '../../../../components/Cards/ModuleListCard';
 import PeriodUpdateForm from '../../../../components/Forms/PeriodUpdateForm';
-import { GetData } from '../../../../utils/fetch';
-import StudentPaymentStatusCard from '../../../../components/Cards/StudentPaymentStatusCard';
 import StyledPage from '../../../../styles/pages/dashboard/admin/PeriodPage';
 
 class PeriodPage extends Component {
@@ -18,26 +15,7 @@ class PeriodPage extends Component {
     visibleCreationModal: false,
     visibleListModal: false,
     visibleUpdateModal: false,
-    students: [],
   };
-
-  async componentDidMount() {
-    let periodData = null;
-
-    try {
-      const response = await GetData('/period/current/students');
-      const json = await response.json();
-      periodData = response.status === 200 ? json.data : null;
-
-      this.setState({
-        students: periodData ? periodData.students : [],
-      });
-    } catch (error) {
-      notification.error({
-        message: error,
-      });
-    }
-  }
 
   static async getInitialProps() {
     return {
@@ -74,10 +52,8 @@ class PeriodPage extends Component {
       makePeriodCurrent,
       gettingPeriods,
       periodList,
-      confirmPayment,
-      rejectPayment,
     } = institution;
-    const { students, visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
+    const { visibleCreationModal, visibleListModal, visibleUpdateModal } = this.state;
 
     return (
       <RequireRole t={t} requiredRole='admin'>
@@ -144,18 +120,6 @@ class PeriodPage extends Component {
                 createPeriod={createPeriod}
               />
             </Modal>
-
-            <div className='row'>
-              <StudentPaymentStatusCard
-                t={t}
-                period={currentPeriod}
-                students={students}
-                confirmPayment={confirmPayment}
-                rejectPayment={rejectPayment}
-              />
-
-              <ModuleListCard t={t} modules={currentPeriod ? currentPeriod.modules : []} />
-            </div>
           </StyledPage>
         )}
       </RequireRole>

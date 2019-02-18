@@ -61,12 +61,6 @@ class InstructorsManagementPage extends Component {
     );
   };
 
-  setModalView = viewName => {
-    this.setState({
-      modalView: viewName,
-    });
-  };
-
   render() {
     const { filteredInstructors, modalVisible, modalView } = this.state;
     const {

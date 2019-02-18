@@ -20,6 +20,15 @@ function AdminMenu({ t, handlePageChange, currentPage, router }) {
     >
       <SubMenu key='admin' title={<span className='submenu-title-wrapper'>{t('Admin')}</span>}>
         <StyledMenuItem
+          key='dashboard-admin-payments'
+          className={setActiveLinkClass('/dashboard/admin/payments', router)}
+        >
+          <Icon type='credit-card' />
+          <Link href='/dashboard/admin/payments'>
+            <a>{t('Payments')}</a>
+          </Link>
+        </StyledMenuItem>
+        <StyledMenuItem
           key='dashboard-admin-period'
           className={setActiveLinkClass('/dashboard/admin/period', router)}
         >
