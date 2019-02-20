@@ -4,6 +4,14 @@ import { List } from 'antd';
 import { StyledCard, StyledIcon, StyledListItem } from '../../../styles/components/ModuleListCard';
 
 function ModuleListCard({ t, modules }) {
+  let sortedModules = null;
+
+  if (modules.length) {
+    sortedModules = modules.sort((a, b) =>
+      a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1,
+    );
+  }
+
   return (
     <StyledCard title={t('Modules')}>
       <List
@@ -11,7 +19,7 @@ function ModuleListCard({ t, modules }) {
         locale={{
           emptyText: t('NoModules'),
         }}
-        dataSource={modules}
+        dataSource={sortedModules || modules}
         renderItem={module => (
           <StyledListItem>
             <List.Item.Meta title={`${module.name} - ${module.section}`} />
