@@ -60,7 +60,7 @@ class ScheduleController extends Controller
     {
         // Check if as similar Schedule already exists
         $schedule = Schedule::where([
-            'start_date' => $request->start_date,
+            'day' => $request->day,
             'from' => $request->from,
             'until' => $request->until
         ])->get();
@@ -73,7 +73,7 @@ class ScheduleController extends Controller
         }
 
         $schedule = Schedule::create([
-            'start_date' => $request->start_date,
+            'day' => $request->day,
             'from' => $request->from,
             'until' => $request->until
         ]);
@@ -138,7 +138,7 @@ class ScheduleController extends Controller
     */
     public function update(ScheduleUpdateRequest $request, Schedule $schedule)
     {
-        $schedule->update($request->only(['start_date', 'from', 'until']));
+        $schedule->update($request->only(['day', 'from', 'until']));
         return new ScheduleResource($schedule);
     }
 

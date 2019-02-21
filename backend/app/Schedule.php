@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Schema(
  *     title="Schedule",
  *     description="Modules possible schedule",
- *     required={"id", "start_date", "from", "until"}
+ *     required={"id", "day", "from", "until"}
  * )
  */
 class Schedule extends Model
@@ -22,9 +22,9 @@ class Schedule extends Model
     *     format="int64",
     * ),
     * @OA\Property(
-    *     property="start_date",
-    *     description="Day in which the class takes places. YYYY-MM-DD",
-    *     title="start_date",
+    *     property="day",
+    *     description="Day in which the class takes places",
+    *     title="day",
     *     type="string",
     *     format="date",
     * ),
@@ -43,7 +43,7 @@ class Schedule extends Model
     */
 
     protected $fillable =[
-        'start_date','from', 'until'
+        'day','from', 'until'
     ];
 
     public function modules()

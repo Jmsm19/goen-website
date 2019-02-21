@@ -23,7 +23,7 @@ class ScheduleApiTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     [
-                        'id', 'startDate', 'from', 'until'
+                        'id', 'day', 'from', 'until'
                     ]
                 ]
             ]);
@@ -44,7 +44,7 @@ class ScheduleApiTest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $schedule->id,
-                    'startDate' => $schedule->start_date,
+                    'day' => $schedule->day,
                     'from' => $schedule->from,
                     'until' => $schedule->until,
                 ]
@@ -62,7 +62,7 @@ class ScheduleApiTest extends TestCase
 
         // Successful store
         $params = [
-            'start_date' => $this->faker->date('Y-m-d'),
+            'day' => $this->faker->dayOfWeek(),
             'from' => $this->faker->time('H:i'),
             'until' => $this->faker->time('H:i')
         ];
@@ -71,7 +71,7 @@ class ScheduleApiTest extends TestCase
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'startDate', 'from', 'until'
+                    'id', 'day', 'from', 'until'
                 ]
             ]);
 
@@ -84,7 +84,7 @@ class ScheduleApiTest extends TestCase
 
         // Failed store - wrong params
         $params = [
-            'start_date' => 999,
+            'day' => 999,
             'from' => 999,
             'until' => 999
         ];
@@ -92,14 +92,14 @@ class ScheduleApiTest extends TestCase
         $this->json('POST', route('schedule.store'), $params)
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'start_date', 'from', 'until'
+                'day', 'from', 'until'
             ]);
 
         // Failed store - no params
         $this->json('POST', route('schedule.store'))
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'start_date', 'from', 'until'
+                'day', 'from', 'until'
             ]);
     }
 
@@ -115,7 +115,7 @@ class ScheduleApiTest extends TestCase
 
         // Successful update
         $params = [
-            'start_date' => $this->faker->date('Y-m-d'),
+            'day' => $this->faker->dayOfWeek(),
             'from' => $this->faker->time('H:i'),
             'until' => $this->faker->time('H:i')
         ];
@@ -129,7 +129,7 @@ class ScheduleApiTest extends TestCase
         ->assertStatus(200)
         ->assertJson([
             'data' => [
-                'startDate' => $params['start_date'],
+                'day' => $params['day'],
                 'from' => $params['from'],
                 'until' => $params['until'],
             ]
@@ -137,7 +137,7 @@ class ScheduleApiTest extends TestCase
 
         // Failed update
         $params = [
-            'start_date' => 999,
+            'day' => 999,
             'from' => 999,
             'until' => 999
         ];
@@ -150,7 +150,7 @@ class ScheduleApiTest extends TestCase
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'start_date', 'from', 'until'
+            'day', 'from', 'until'
         ]);
     }
 

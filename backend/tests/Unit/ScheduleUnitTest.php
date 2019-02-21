@@ -18,19 +18,19 @@ class ScheduleUnitTest extends TestCase
      */
     public function testCanCreateSchedule()
     {
-        $start_date = $this->faker->date('Y-m-d');
+        $day = $this->faker->dayOfWeek;
         $from = $this->faker->time('H:i');
         $until = $this->faker->time('H:i');
 
         $schedule = Schedule::create([
-            'start_date' => $start_date,
+            'day' => $day,
             'from' => $from,
             'until' => $until
             ]);
 
         $this->assertEquals(
-            [$start_date, $from, $until],
-            [$schedule->start_date, $schedule->from, $schedule->until]
+            [$day, $from, $until],
+            [$schedule->day, $schedule->from, $schedule->until]
         );
     }
 

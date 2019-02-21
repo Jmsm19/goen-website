@@ -45,7 +45,7 @@ class PaymentAcceptedNotification extends Notification implements ShouldQueue
     {
         $module = $this->module;
         $schedule = $module->schedule;
-        $date = Carbon::parse($schedule->start_date);
+        $date = Carbon::parse($schedule->day);
 
         return (new MailMessage())
             ->subject(trans('emails.payment_accepted', [], 'es'))
@@ -53,12 +53,7 @@ class PaymentAcceptedNotification extends Notification implements ShouldQueue
             ->line(trans('emails.registered_in_module_contratulation', [
                 'module_name' => "{$module->name} - {$module->section}"
             ], 'es'))
-            ->line(trans('emails.waiting_for_you_in_class', [
-                'day_name' => trans('dates.days', [], 'es')[$date->format('l')],
-                'day_date' => $date->format('d'),
-                'month' => trans('dates.months', [], 'es')[$date->format('F')],
-                'time' => Carbon::parse($schedule->from)->format('h:i A'),
-            ], 'es'))
+            ->line(trans('emails.waiting_for_you_in_class', [], 'es'))
             ->salutation(trans('emails.salutation', [], 'es'));
         ;
     }

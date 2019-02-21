@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'days' => [
+        'Monday',
+        'Tuesday' ,
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+    ],
     'period_order' => [
         '1' => 'I',
         '2' => 'II',

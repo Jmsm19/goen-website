@@ -2,14 +2,15 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
 * @OA\Schema(
 *   schema="ScheduleUpdateRequest",
 *   @OA\Property(
-*       description="Class date",
-*       property="start_date",
+*       description="Class day",
+*       property="day",
 *       type="string",
 *       format="date"
 *   ),
@@ -35,7 +36,10 @@ class ScheduleUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => 'date',
+            'day' => [
+                'string',
+                Rule::in(config('constants.days'))
+            ],
             'from' => 'date_format:H:i',
             'until' => 'date_format:H:i',
         ];
