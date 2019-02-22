@@ -46,6 +46,16 @@ class InstitutionContextProvider extends Component {
     );
   };
 
+  addModule = module => {
+    this.setState(prevState => {
+      const updatedPeriod = prevState.currentPeriod;
+      updatedPeriod.modules.push(module);
+      return {
+        currentPeriod: updatedPeriod,
+      };
+    });
+  };
+
   checkIfPeriodListEmpty = callback => {
     const { periodList } = this.state;
     if (periodList.length === 0) {
@@ -228,6 +238,7 @@ class InstitutionContextProvider extends Component {
   state = {
     loading: true,
     currentPeriod: null,
+    addModule: this.addModule,
     registrationActive: false,
     setCurrentPeriod: this.setCurrentPeriod,
     confirmPayment: this.confirmPayment,

@@ -1,4 +1,32 @@
 import moment from 'moment';
+import { notification } from 'antd';
+
+/**
+ * Capitalize the first letter of a given string
+ *
+ * @param {String} str
+ */
+export const capitalize = str => str[0].toUpperCase() + str.substring(1);
+
+export const notifyError = ({ error, message }) => {
+  notification.error({
+    message: error || message,
+  });
+};
+
+const checkAndCallFn = fn => {
+  if (typeof fn === 'function') {
+    fn();
+  }
+};
+
+export const callFunctions = fn => {
+  if (Array.isArray(fn)) {
+    fn.map(f => checkAndCallFn(fn));
+  } else {
+    checkAndCallFn(fn);
+  }
+};
 
 export const formatHoursFromDB = time => {
   const joinedTime = time.split(':').join('');
@@ -20,12 +48,12 @@ export const todayIsBetween = (date1, date2) => {
   return moment(today).isBetween(date1, date2, null, '[]');
 };
 
-/**
- * Capitalize the first letter of a given string
- *
- * @param {String} str
- */
-export const capitalize = str => str[0].toUpperCase() + str.substring(1);
+export const getDayFromDate = (date, locale = 'es') => {
+  const day = moment(new Date(date))
+    .locale(locale)
+    .format('dddd');
+  return capitalize(day);
+};
 
 /**
  * Get component's display name

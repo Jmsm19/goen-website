@@ -153,6 +153,8 @@ function UserProfileEditionForm({ t, updateUser, user, fieldErrors }) {
 
 UserProfileEditionForm.propTypes = {
   t: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  fieldErrors: PropTypes.arrayOf(PropTypes.shape).isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     birthDate: PropTypes.string.isRequired,
