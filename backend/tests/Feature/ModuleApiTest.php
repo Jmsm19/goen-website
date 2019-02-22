@@ -54,7 +54,6 @@ class ModuleApiTest extends TestCase
         $this->passportActingAs('admin');
         $period = factory(Period::class)->create();
         $schedule = factory(Schedule::class)->create();
-        $price = 132456789;
 
         // Module creation
         $number = $this->faker->randomNumber();
@@ -63,7 +62,6 @@ class ModuleApiTest extends TestCase
             'section' => strtoupper($this->faker->randomLetter),
             'clan_id' => $number == 0 ? 1 : null,
             'period_id' => $period->id,
-            'price' => $price,
             'schedule_id' => $schedule->id,
         ];
 
@@ -74,7 +72,6 @@ class ModuleApiTest extends TestCase
                     'id',
                     'name',
                     'section',
-                    'price',
                     'schedule',
                     'registeredStudents',
                     'availableSpaces',
@@ -94,12 +91,11 @@ class ModuleApiTest extends TestCase
             'period' => 999,
             'section' => 12,
             'schedule_id' => 999,
-            'price' => "not a number"
         ];
         $this->json('POST', route('module.store'), $params, $this->headers)
             ->assertStatus(422)
             ->assertJsonValidationErrors([
-                'name', 'section', 'period_id', 'schedule_id', 'price'
+                'name', 'section', 'period_id', 'schedule_id'
             ]);
 
         // Require clan_id when module name is M-0
@@ -107,7 +103,6 @@ class ModuleApiTest extends TestCase
             'name' => 'M-0',
             'section' => strtoupper($this->faker->randomLetter),
             'period_id' => $period->id,
-            'price' => $price,
             'schedule_id' => $schedule->id
         ];
 
@@ -141,7 +136,7 @@ class ModuleApiTest extends TestCase
                     'availableSpaces' => $module->getRemainingSpaces(),
                     'schedule' => [
                         'id' => $module->schedule->id,
-                        'startDate' => $module->schedule->start_date,
+                        'day' => $module->schedule->day,
                         'from' => $module->schedule->from,
                         'until' => $module->schedule->until
                     ]
@@ -173,7 +168,6 @@ class ModuleApiTest extends TestCase
             'name' => 'Test-' . $this->faker->randomNumber(),
             'period_id' => $new_period->id,
             'section' => 'Z',
-            'price' => 321654,
             'schedule_id' => $schedule->id,
         ];
         $this->put(route('module.update', ['module' => $module->id]), $params)
@@ -183,7 +177,6 @@ class ModuleApiTest extends TestCase
                     'id' => $module->id,
                     'name' => $params['name'],
                     'section' => $params['section'],
-                    'price' => $params['price'],
                     'registeredStudents' => $module->getRegisteredStudents(),
                     'availableSpaces' => $module->getRemainingSpaces(),
                     'schedule' => [
@@ -203,7 +196,6 @@ class ModuleApiTest extends TestCase
             'name' => 1,
             'period_id' => 99,
             'section' => 121,
-            'price' => 'Not a number',
             'schedule_id' => 9999
         ];
         $this->json(
@@ -214,7 +206,7 @@ class ModuleApiTest extends TestCase
         )
         ->assertStatus(422)
         ->assertJsonValidationErrors([
-            'name', 'section', 'period_id', 'price', 'schedule_id'
+            'name', 'section', 'period_id', 'schedule_id'
         ]);
     }
 
@@ -258,12 +250,13 @@ class ModuleApiTest extends TestCase
         $sections  = Config::get('constants.section_letters');
 
         // Section A should not appear
-        $this->get(route('module.availablesections', $params))
+        $available_sections = array_diff($sections, ['A']);
+        $this->get(route('module.availableSections', $params))
             ->assertStatus(200)
             ->assertJson([
                 'data' => [
                     // Removed 'A' from array
-                    'modules_available' => array_diff($sections, ['A'])
+                    'available_sections' => array_values($available_sections)
                 ]
             ]);
     }

@@ -30,8 +30,8 @@
 *   schema="AvailableSections",
 *   description="Sections available for Module creation",
 *   @OA\Property(
-*       property="modules_available",
-*       title="modules_available",
+*       property="sections_available",
+*       title="sections_available",
 *       type="array",
 *       @OA\Items(type="string")
 *   ),

@@ -11,9 +11,9 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
 
     Route::apiResource('module', 'ModuleController');
     Route::get(
-        '/module/availablesections/{period_id}/{name}',
+        '/period/{period_id}/module/{name}/sections/available',
         'ModuleController@availableSectionsFor'
-    )->name('module.availablesections');
+    )->name('module.availableSections');
 
     // Get specified (or current) year's periods
     Route::get('/period/year/{year?}', 'PeriodController@year')
@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::post('/period/{period}/make-current', 'PeriodController@makeCurrent')
         ->name('make-period-current');
 
-    // Student releated routes
+    // Student related routes
     Route::post('student/{student}/confirm-payment', 'StudentController@confirmPayment')
         ->name('confirm-student-payment');
     Route::post('student/{student}/reject-payment', 'StudentController@rejectPayment')

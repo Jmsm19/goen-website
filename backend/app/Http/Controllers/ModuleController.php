@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Price;
 use App\Module;
+use App\Setting;
 use Illuminate\Http\Request;
 use App\Http\Resources\ModuleResource;
 use Illuminate\Support\Facades\Config;
@@ -74,9 +75,22 @@ class ModuleController extends Controller
             ], 400);
         }
 
-        $price = Price::firstOrCreate([
-            'amount' => $request->price,
-        ]);
+        $settings = Setting::first();
+        // Check Module number to set price based on the Institution's Settings
+        preg_match('!\d+!', $request->name, $match);
+        $module_number = (Integer) $match[0];
+
+        if ($module_number == 0) {
+            $price = Price::findOrFail($settings->intro_module_price_id);
+        } elseif ($module_number <= 4) {
+            $price = Price::findOrFail($settings->basic_modules_price_id);
+        } elseif ($module_number <= 12) {
+            $price = Price::findOrFail($settings->intermediate_modules_price_id);
+        } elseif ($module_number <= 16) {
+            $price = Price::findOrFail($settings->advance_modules_price_id);
+        } else {
+            $price = Price::findOrFail($settings->other_activities_price_id);
+        }
 
         // Create Module
         $module = Module::create([
@@ -84,6 +98,7 @@ class ModuleController extends Controller
             'name' => $request->name,
             'section' => $request->section,
             'price_id' => $price->id,
+            'clan_id' => $request->name == 'M-0' ? $request->clan_id : null,
             'schedule_id' => $request->schedule_id,
         ]);
 
@@ -193,7 +208,7 @@ class ModuleController extends Controller
     }
 
     /**
-     * @OA\Get(path="/api/module/availablesections/{period_id}/{name}",
+     * @OA\Get(path="/api/period/{period_id}/module/{name}/sections/available'",
      *   tags={"Model: Module"},
      *   summary="Display a listing of Grades",
      *   operationId="getAvailableSectionsForPeriodModule",
@@ -241,7 +256,7 @@ class ModuleController extends Controller
 
         return response()->json([
             'data' => [
-                'modules_available' => $available_sections,
+                'available_sections' => array_values($available_sections)
             ]
         ], 200);
     }

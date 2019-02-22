@@ -5,13 +5,13 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     private $seeders = [
-        SettingsTableSeeder::class,
         PeriodTableSeeder::class,
         ClanTableSeeder::class,
         RoleTableSeeder::class,
         UserTableSeeder::class,
         ScheduleTableSeeder::class,
         PriceTableSeeder::class,
+        SettingsTableSeeder::class,
         ModuleTableSeeder::class,
         StudentSeeder::class
     ];

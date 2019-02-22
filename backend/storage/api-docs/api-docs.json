@@ -43,6 +43,16 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Successful signup",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -709,7 +719,7 @@
                 ]
             }
         },
-        "/api/module/availablesections/{period_id}/{name}": {
+        "/api/period/{period_id}/module/{name}/sections/available'": {
             "get": {
                 "tags": [
                     "Model: Module"
@@ -1240,61 +1250,6 @@
             }
         },
         "/api/users/{id}/{role}": {
-            "put": {
-                "tags": [
-                    "Model: Role",
-                    "Role: Admin"
-                ],
-                "summary": "Add Role to specified user",
-                "operationId": "addRoleToUser",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of user",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "role",
-                        "in": "path",
-                        "description": "Role name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Role added to User",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseMessage"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "User already has role",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            },
             "delete": {
                 "tags": [
                     "Model: Role",
@@ -2033,10 +1988,10 @@
                         "description": "Module's section",
                         "type": "string"
                     },
-                    "amount": {
-                        "description": "Module's price",
-                        "type": "number",
-                        "format": "double"
+                    "clan_id": {
+                        "description": "Module's clan. (Only required when creating an M-0)",
+                        "type": "integer",
+                        "format": "int64"
                     },
                     "schedule_id": {
                         "description": "Module's schedule",
@@ -2153,13 +2108,13 @@
             },
             "ScheduleStoreRequest": {
                 "required": [
-                    "start_date",
+                    "day",
                     "from",
                     "until"
                 ],
                 "properties": {
-                    "start_date": {
-                        "description": "Class date",
+                    "day": {
+                        "description": "Class day",
                         "type": "string",
                         "format": "date"
                     },
@@ -2176,8 +2131,8 @@
             },
             "ScheduleUpdateRequest": {
                 "properties": {
-                    "start_date": {
-                        "description": "Class date",
+                    "day": {
+                        "description": "Class day",
                         "type": "string",
                         "format": "date"
                     },
@@ -2233,6 +2188,10 @@
                         "description": "User's birth_date",
                         "type": "string",
                         "format": "date"
+                    },
+                    "role_name": {
+                        "description": "Role that the user will have on signup. Default: student",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -2435,7 +2394,7 @@
                 "description": "Modules possible schedule",
                 "required": [
                     "id",
-                    "start_date",
+                    "day",
                     "from",
                     "until"
                 ],
@@ -2446,9 +2405,9 @@
                         "type": "integer",
                         "format": "int64"
                     },
-                    "start_date": {
-                        "title": "start_date",
-                        "description": "Day in which the class takes places. YYYY-MM-DD",
+                    "day": {
+                        "title": "day",
+                        "description": "Day in which the class takes places",
                         "type": "string",
                         "format": "date"
                     },
@@ -2461,6 +2420,29 @@
                         "title": "until",
                         "description": "Time in which the class ends. HH:MM:SS",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Setting": {
+                "title": "Setting",
+                "description": "Setting model",
+                "required": [
+                    "id",
+                    "name",
+                    "user_signup_active"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Unique identificator",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "user_signup_active": {
+                        "title": "user_signup_active",
+                        "description": "Wheather or not new user's are allowed to signup",
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -2549,8 +2531,8 @@
             "AvailableSections": {
                 "description": "Sections available for Module creation",
                 "properties": {
-                    "modules_available": {
-                        "title": "modules_available",
+                    "sections_available": {
+                        "title": "sections_available",
                         "type": "array",
                         "items": {
                             "type": "string"

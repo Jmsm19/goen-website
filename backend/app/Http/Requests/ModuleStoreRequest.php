@@ -28,10 +28,10 @@ use Illuminate\Foundation\Http\FormRequest;
 *       type="string"
 *   ),
 *   @OA\Property(
-*       description="Module's price",
-*       property="amount",
-*       type="number",
-*       format="double"
+*       description="Module's clan. (Only required when creating an M-0)",
+*       property="clan_id",
+*       type="integer",
+*       format="int64"
 *   ),
 *   @OA\Property(
 *       description="Module's schedule",
@@ -58,7 +58,6 @@ class ModuleStoreRequest extends FormRequest
                 'string',
                 Rule::in(Config::get('constants.section_letters'))
             ],
-            'price' => 'required|numeric|min:0',
             'schedule_id' => 'required|exists:schedules,id'
         ];
 
