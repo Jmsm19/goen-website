@@ -5,9 +5,8 @@ import NProgress from 'nprogress';
 import Page from '../components/SiteGeneral/Page';
 import Meta from '../components/SiteGeneral/Meta';
 import { AuthContextProvider, AuthContextConsumer } from '../context/AuthContext';
-import '../styles/nprogress.css';
-import '../styles/antd.css';
-import '../styles/styles.css';
+import '../styles/nprogress.less';
+import '../styles/styles.less';
 import { StyledContainer } from '../styles/pages/app';
 import {
   InstitutionContextProvider,
@@ -23,19 +22,20 @@ Router.onRouteChangeError = () => NProgress.done();
 class MyApp extends App {
   static async getInitialProps({ Component, _, ctx }) {
     let pageProps = {};
+    const nodeEnv = process.env.NODE_ENV;
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps };
+    return { pageProps, nodeEnv };
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, nodeEnv } = this.props;
     return (
       <StyledContainer>
         <GlobalSettingsProvider>
-          <AuthContextProvider>
+          <AuthContextProvider nodeEnv={nodeEnv}>
             <InstitutionContextProvider>
               <InstructorsContextProvider>
                 <AuthContextConsumer>

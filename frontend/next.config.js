@@ -1,8 +1,19 @@
 const { parsed: localEnv } = require('dotenv').config();
 const withOffline = require('next-offline');
-const withCss = require('@zeit/next-css');
+const withLess = require('@zeit/next-less');
+const lessToJs = require('less-vars-to-js');
+const fs = require('fs');
+const path = require('path');
+
 const withPlugins = require('next-compose-plugins');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+const themeVariables = lessToJs(
+  fs.readFileSync(path.resolve(__dirname, './styles/a-theme.less'), 'utf8'),
+);
+// fix: prevents error when .less files are required by node
+if (typeof require !== 'undefined') {
+  require.extensions['.less'] = file => {};
+}
 
 const nextConfig = {
   publicRuntimeConfig: {
@@ -16,7 +27,7 @@ const nextConfig = {
     });
     if (config.mode === 'production') {
       if (Array.isArray(config.optimization.minimizer)) {
-        config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
+        // config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
       }
     }
     return config;
@@ -25,7 +36,15 @@ const nextConfig = {
 
 module.exports = withPlugins(
   [
-    [withCss, {}],
+    [
+      withLess,
+      {
+        lessLoaderOptions: {
+          javascriptEnabled: true,
+          modifyVars: themeVariables,
+        },
+      },
+    ],
     [
       withOffline,
       {

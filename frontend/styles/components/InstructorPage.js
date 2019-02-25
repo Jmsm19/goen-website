@@ -46,6 +46,7 @@ export const InstructorsArea = styled(({ loading, ...rest }) => <div {...rest} /
 
 export const StyledButtonCard = styled(Button)`
   height: 60px;
+  overflow-y: hidden;
   font-family: 'Lato', sans-serif;
   font-size: 1.3rem;
   font-weight: 400;
