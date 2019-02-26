@@ -20,6 +20,10 @@ class ModuleResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'section' => $this->section,
+            'period' => [
+                'year' => $this->period->year,
+                'name' => $this->period->name,
+            ],
             'price' => $this->price->amount,
             'clan' => is_null($this->clan) ? null : $this->clan->name,
             'schedule' => new ScheduleResource($this->schedule),
