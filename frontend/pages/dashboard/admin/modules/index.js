@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Modal } from 'antd';
+import { Modal, Collapse } from 'antd';
 import { withNamespaces } from '../../../../i18n';
 import ModuleCreationForm from '../../../../components/Modules/ModuleCreationForm';
 import ScheduleCreationForm from '../../../../components/Schedules/ScheduleCreationForm';
@@ -38,16 +38,18 @@ class ModulesManagementPage extends Component {
       <RequireRole t={t} requiredRole='admin'>
         {() => (
           <main className='modules-page'>
-            <Card title={t('Module.Create')}>
-              <ModuleCreationForm
-                t={t}
-                period={currentPeriod}
-                lng={lng}
-                schedules={schedules}
-                addModuleToCurrentPeriod={addModule}
-                onPlusBtnClick={this.toggleModal}
-              />
-            </Card>
+            <Collapse>
+              <Collapse.Panel header={t('Module.Create')} key={t('Module.Create')}>
+                <ModuleCreationForm
+                  t={t}
+                  period={currentPeriod}
+                  lng={lng}
+                  schedules={schedules}
+                  addModuleToCurrentPeriod={addModule}
+                  onPlusBtnClick={this.toggleModal}
+                />
+              </Collapse.Panel>
+            </Collapse>
 
             <Modal footer={null} visible={modalVisible} onCancel={this.toggleModal}>
               <ScheduleCreationForm
