@@ -53,8 +53,20 @@
   "Passed": "Passed",
   "Failed": "Failed",
   "Current": "Current",
-  "Module": "Module",
-  "Modules": "Modules",
+  "Module": {
+    "_singular": "Module",
+    "_plural": "Module",
+    "Create": "Create module",
+    "Section": "Section",
+    "Name": "Module's name",
+    "Schedule": "Schedule"
+  },
+  "Schedule": {
+    "_singular": "Schedule",
+    "From": "Start",
+    "Until": "End",
+    "Day": "Day"
+  },
   "Period": "Period",
   "Periods": "Periods",
   "Score": "Score",

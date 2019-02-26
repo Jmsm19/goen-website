@@ -103,7 +103,8 @@ class ModuleCreationForm extends Component {
               className='module'
               style={{
                 display: 'grid',
-                gridTemplateColumns: '100px 150px 100px',
+                gridTemplateColumns:
+                  'minmax(100px, max-content) minmax(150px, max-content)  minmax(100px, max-content)',
                 gridGap: 10,
               }}
             >
@@ -117,7 +118,7 @@ class ModuleCreationForm extends Component {
                   render={({ field: { name } }) => (
                     <Select
                       name={name}
-                      placeholder={t('Module')}
+                      placeholder={t('Module._singular')}
                       loading={false}
                       disabled={false}
                       onChange={value => {
@@ -205,7 +206,7 @@ class ModuleCreationForm extends Component {
             >
               <Form.Item
                 htmlFor='schedule_id'
-                label={t('Schedule')}
+                label={t('Schedule._singular')}
                 validateStatus={hasErrors('schedule_id', errors, touched) ? 'error' : 'success'}
               >
                 <Field

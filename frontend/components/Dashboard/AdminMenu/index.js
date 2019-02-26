@@ -52,7 +52,7 @@ function AdminMenu({ t, handlePageChange, currentPage, router }) {
         >
           <Icon type='team' />
           <Link href='/dashboard/admin/modules'>
-            <a>{t('Modules')}</a>
+            <a>{t('Module._plural')}</a>
           </Link>
         </StyledMenuItem>
       </SubMenu>

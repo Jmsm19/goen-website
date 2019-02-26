@@ -13,7 +13,7 @@ function ModuleListCard({ t, modules }) {
   }
 
   return (
-    <StyledCard title={t('Modules')}>
+    <StyledCard title={t('Module._plural')}>
       <List
         itemLayout='horizontal'
         locale={{

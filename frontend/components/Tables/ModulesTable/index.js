@@ -8,7 +8,7 @@ function ModulesTable({ modules, hiddenColumns, t }) {
 
   const columns = [
     !hiddenColumns.includes('moduleName') && {
-      title: t('Module'),
+      title: t('Module._singular'),
       dataIndex: 'moduleName',
       key: 'moduleName',
       width: 60,

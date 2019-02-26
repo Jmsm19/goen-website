@@ -60,8 +60,20 @@
   "Passed": "Aprobado",
   "Failed": "Fallido",
   "Current": "Activo",
-  "Module": "Módulo",
-  "Modules": "Módulos",
+  "Module": {
+    "_singular": "Módulo",
+    "_plural": "Módulos",
+    "Create": "Crear módulo",
+    "Section": "Sección",
+    "Name": "Nombre del módulo",
+    "Schedule": "Horario de clase"
+  },
+  "Schedule": {
+    "_singular": "Horario",
+    "From": "Inicio",
+    "Until": "Fin",
+    "Day": "Día"
+  },
   "Period": "Período",
   "Periods": "Períodos",
   "Score": "Nota",
