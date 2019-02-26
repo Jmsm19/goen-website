@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { media } from '../../../../utils/styling';
 
-const StyledPage = styled.div`
+const StyledPage = styled.main`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;

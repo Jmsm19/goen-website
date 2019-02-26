@@ -7,11 +7,11 @@ export const StyledLayout = styled(Layout)`
 `;
 
 export const StyledContent = styled(Layout.Content)`
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   overflow-x: hidden;
   overflow-y: auto;
 
   ${media.tablet`
-    padding: 20px 0;
+    padding: 20px 0 0;
   `}
 `;

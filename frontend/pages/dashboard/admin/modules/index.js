@@ -37,7 +37,7 @@ class ModulesManagementPage extends Component {
     return (
       <RequireRole t={t} requiredRole='admin'>
         {() => (
-          <div className='modules-page'>
+          <main className='modules-page'>
             <Card title={t('Module.Create')}>
               <ModuleCreationForm
                 t={t}
@@ -56,7 +56,7 @@ class ModulesManagementPage extends Component {
                 afterSubmit={this.toggleModal}
               />
             </Modal>
-          </div>
+          </main>
         )}
       </RequireRole>
     );

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { media } from '../../utils/styling';
 
-const StyledPage = styled(({ isEditing, ...rest }) => <div {...rest} />)`
+const StyledPage = styled(({ isEditing, ...rest }) => <main {...rest} />)`
   display: grid;
 
   ${({ isEditing }) =>

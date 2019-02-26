@@ -103,9 +103,9 @@ class ModuleCreationForm extends Component {
               className='module'
               style={{
                 display: 'grid',
-                gridTemplateColumns:
-                  'minmax(100px, max-content) minmax(150px, max-content)  minmax(100px, max-content)',
+                gridTemplateColumns: 'repeat(3, minmax(100px, max-content))',
                 gridGap: 10,
+                alignItems: 'flex-end',
               }}
             >
               <Form.Item

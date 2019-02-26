@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { media } from '../../utils/styling';
 
-export const StyledPage = styled.div`
+export const StyledPage = styled.main`
   max-width: 900px;
   width: 100%;
   margin: 0 auto;

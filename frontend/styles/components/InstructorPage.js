@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button, Card, Input } from 'antd';
 import { media } from '../../utils/styling';
 
-export const StyledPage = styled.div`
+export const StyledPage = styled.main`
   display: grid;
   grid-template-rows: auto auto 1fr;
   grid-gap: 20px;

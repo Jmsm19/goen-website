@@ -6,7 +6,7 @@ import { Layout } from 'antd';
 export const StyledFooter = styled(Layout.Footer)`
   text-align: center;
   font-size: 0.9rem;
-  padding: 0 50px 30px;
+  padding: 20px 50px 30px;
   background: #eff2f5;
 
   p {
