@@ -5,6 +5,7 @@ import { withNamespaces } from '../../../../i18n';
 import ModuleCreationForm from '../../../../components/Modules/ModuleCreationForm';
 import ScheduleCreationForm from '../../../../components/Schedules/ScheduleCreationForm';
 import withSchedules from '../../../../components/HOCs/WithSchedules';
+import RequireRole from '../../../../components/RequireRole';
 
 class ModulesManagementPage extends Component {
   state = {
@@ -34,22 +35,30 @@ class ModulesManagementPage extends Component {
     const { modalVisible } = this.state;
 
     return (
-      <div className='modules-page'>
-        <Card title={t('Module.Create')}>
-          <ModuleCreationForm
-            t={t}
-            period={currentPeriod}
-            lng={lng}
-            schedules={schedules}
-            addModuleToCurrentPeriod={addModule}
-            onPlusBtnClick={this.toggleModal}
-          />
-        </Card>
+      <RequireRole t={t} requiredRole='admin'>
+        {() => (
+          <div className='modules-page'>
+            <Card title={t('Module.Create')}>
+              <ModuleCreationForm
+                t={t}
+                period={currentPeriod}
+                lng={lng}
+                schedules={schedules}
+                addModuleToCurrentPeriod={addModule}
+                onPlusBtnClick={this.toggleModal}
+              />
+            </Card>
 
-        <Modal footer={null} visible={modalVisible} onCancel={this.toggleModal}>
-          <ScheduleCreationForm t={t} onSubmit={createSchedule} afterSubmit={this.toggleModal} />
-        </Modal>
-      </div>
+            <Modal footer={null} visible={modalVisible} onCancel={this.toggleModal}>
+              <ScheduleCreationForm
+                t={t}
+                onSubmit={createSchedule}
+                afterSubmit={this.toggleModal}
+              />
+            </Modal>
+          </div>
+        )}
+      </RequireRole>
     );
   }
 }

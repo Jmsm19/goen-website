@@ -16,6 +16,7 @@ import {
   StyledModalContent,
   StyledButtonCard,
 } from '../../../../styles/components/InstructorPage';
+import RequireRole from '../../../../components/RequireRole';
 
 class InstructorsManagementPage extends Component {
   state = {
@@ -111,57 +112,61 @@ class InstructorsManagementPage extends Component {
     };
 
     return (
-      <StyledPage>
-        <div className='button-area'>
-          <StyledButtonCard
-            type='dashed'
-            title={t('AddInstructor')}
-            onClick={() => this.toggleModal(null, 'CreateNewUser')}
-          >
-            <Icon type='user-add' />
-            {t('AddInstructor')}
-          </StyledButtonCard>
+      <RequireRole t={t} requiredRole='admin'>
+        {() => (
+          <StyledPage>
+            <div className='button-area'>
+              <StyledButtonCard
+                type='dashed'
+                title={t('AddInstructor')}
+                onClick={() => this.toggleModal(null, 'CreateNewUser')}
+              >
+                <Icon type='user-add' />
+                {t('AddInstructor')}
+              </StyledButtonCard>
 
-          <StyledButtonCard
-            type='dashed'
-            title={t('AddInstructorFromExistingUser')}
-            onClick={() => this.toggleModal(null, 'CreateFromUser')}
-          >
-            <Icon type='user-add' />
-            {t('AddInstructorFromExistingUser')}
-          </StyledButtonCard>
-        </div>
+              <StyledButtonCard
+                type='dashed'
+                title={t('AddInstructorFromExistingUser')}
+                onClick={() => this.toggleModal(null, 'CreateFromUser')}
+              >
+                <Icon type='user-add' />
+                {t('AddInstructorFromExistingUser')}
+              </StyledButtonCard>
+            </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gridGap: 10 }}>
-          <StyledSearchInput
-            autoFocus
-            placeholder={t('InstructorName')}
-            onChange={({ target }) => this.handleInstructorFilter(target.value)}
-          />
-          <Button style={{ height: '100%' }} onClick={() => getAllInstructors()}>
-            <Icon type='redo' spin={loading} />
-          </Button>
-        </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gridGap: 10 }}>
+              <StyledSearchInput
+                autoFocus
+                placeholder={t('InstructorName')}
+                onChange={({ target }) => this.handleInstructorFilter(target.value)}
+              />
+              <Button style={{ height: '100%' }} onClick={() => getAllInstructors()}>
+                <Icon type='redo' spin={loading} />
+              </Button>
+            </div>
 
-        <InstructorsArea className='instructors' loading={loading}>
-          <InstructorsFilter
-            t={t}
-            loading={loading}
-            instructors={filteredInstructors || instructors}
-            onUserCardClick={id => removeRole(id, 'instructor')}
-          />
+            <InstructorsArea className='instructors' loading={loading}>
+              <InstructorsFilter
+                t={t}
+                loading={loading}
+                instructors={filteredInstructors || instructors}
+                onUserCardClick={id => removeRole(id, 'instructor')}
+              />
 
-          <Modal
-            style={{ minWidth: 400 }}
-            visible={modalVisible}
-            footer={false}
-            onCancel={this.toggleModal}
-            bodyStyle={{ maxHeight: '80vh', overflowY: 'auto', top: 20, padding: 0 }}
-          >
-            {modalContent[modalView]}
-          </Modal>
-        </InstructorsArea>
-      </StyledPage>
+              <Modal
+                style={{ minWidth: 400 }}
+                visible={modalVisible}
+                footer={false}
+                onCancel={this.toggleModal}
+                bodyStyle={{ maxHeight: '80vh', overflowY: 'auto', top: 20, padding: 0 }}
+              >
+                {modalContent[modalView]}
+              </Modal>
+            </InstructorsArea>
+          </StyledPage>
+        )}
+      </RequireRole>
     );
   }
 }
