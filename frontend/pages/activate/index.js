@@ -107,4 +107,4 @@ AccountActivationPage.propTypes = {
   }).isRequired,
 };
 
-export default withNamespaces('commmon')(withRouter(AccountActivationPage));
+export default withNamespaces('common')(withRouter(AccountActivationPage));
