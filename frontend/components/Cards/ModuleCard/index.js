@@ -7,7 +7,7 @@ import { formatHoursFromDB, formatPrice } from '../../../utils';
 function ModuleCard({ module, lng, canRegister, toggleConfirmPopFor, t }) {
   const { name, section, price, schedule, clan, availableSpaces, id } = module;
   const clanName = clan ? clan.toLowerCase() : null;
-  const day = t(`Day${new Date(schedule.startDate).getDay()}`);
+  const day = t(schedule.day);
   const fromTime = formatHoursFromDB(schedule.from);
   const untilTime = formatHoursFromDB(schedule.until);
   const formatedPrice = formatPrice(price, lng);
