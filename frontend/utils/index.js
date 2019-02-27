@@ -72,3 +72,14 @@ export const filterArrayByName = (array, name) => {
   }
   return array;
 };
+
+/**
+ * Sort modules by name and section in descending order
+ *
+ * @param {Array} modules Array of Modules obj
+ * @returns {Array} sorted array
+ */
+export const sortModules = modules =>
+  modules.sort((a, b) =>
+    a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1,
+  );

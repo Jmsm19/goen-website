@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'antd';
 import { StyledCard, StyledIcon, StyledListItem } from '../../../styles/components/ModuleListCard';
+import { sortModules } from '../../../utils';
 
 function ModuleListCard({ t, modules }) {
   let sortedModules = null;
 
   if (modules.length) {
-    sortedModules = modules.sort((a, b) =>
-      a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1,
-    );
+    sortedModules = sortModules(modules);
   }
 
   return (
