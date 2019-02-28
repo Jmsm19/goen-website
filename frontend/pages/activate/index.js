@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { notification, Icon } from 'antd';
+import { compose } from 'recompose';
 import { GetData } from '../../utils/fetch';
 import { withNamespaces } from '../../i18n';
 import { StyledPage } from '../../styles/pages/ActivatePage';
@@ -108,4 +109,4 @@ AccountActivationPage.propTypes = {
   }).isRequired,
 };
 
-export default withNamespaces('common')(withPageRouter(AccountActivationPage));
+export default compose(withPageRouter)(withNamespaces('common')(AccountActivationPage));

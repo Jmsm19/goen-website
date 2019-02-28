@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Collapse, Card } from 'antd';
+import { compose } from 'recompose';
 import { withNamespaces } from '../../../../i18n';
 import ModuleCreationForm from '../../../../components/Modules/ModuleCreationForm';
 import ScheduleCreationForm from '../../../../components/Schedules/ScheduleCreationForm';
@@ -154,4 +155,7 @@ ModulesManagementPage.propTypes = {
   }).isRequired,
 };
 
-export default withNamespaces('common')(withModulesContext(withSchedules(ModulesManagementPage)));
+export default compose(
+  withModulesContext,
+  withSchedules,
+)(withNamespaces('common')(ModulesManagementPage));

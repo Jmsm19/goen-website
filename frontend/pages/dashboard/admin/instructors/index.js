@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Icon, notification } from 'antd';
+import { compose } from 'recompose';
 import withInstructorsContext from '../../../../components/HOCs/withInstructorsContext';
 import { filterArrayByName } from '../../../../utils';
 import InstructorsFilter from '../../../../components/InstructorPage/InstructorsFilter';
@@ -179,4 +180,4 @@ InstructorsManagementPage.propTypes = {
   }).isRequired,
 };
 
-export default withNamespaces('common')(withInstructorsContext(InstructorsManagementPage));
+export default compose(withInstructorsContext)(withNamespaces('common')(InstructorsManagementPage));
