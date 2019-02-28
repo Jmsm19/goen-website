@@ -9,11 +9,13 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::delete('/users/{id}/{role}', 'RolesController@removeRole')
         ->name('remove_role');
 
+    // Module related routes
     Route::apiResource('module', 'ModuleController');
     Route::get(
         '/period/{period_id}/module/{name}/sections/available',
         'ModuleController@availableSectionsFor'
     )->name('module.availableSections');
+    Route::get('/module/{module}/students', 'ModuleController@students')->name('module.students');
 
     // Get specified (or current) year's periods
     Route::get('/period/year/{year?}', 'PeriodController@year')

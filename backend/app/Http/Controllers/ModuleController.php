@@ -10,6 +10,7 @@ use App\Http\Resources\ModuleResource;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\ModuleStoreRequest;
 use App\Http\Requests\ModuleUpdateRequest;
+use App\Http\Resources\SimpleStudentResource;
 use App\Http\Requests\AvailableSectionsForModuleRequest;
 
 class ModuleController extends Controller
@@ -259,5 +260,10 @@ class ModuleController extends Controller
                 'available_sections' => array_values($available_sections)
             ]
         ], 200);
+    }
+
+    public function students(Module $module)
+    {
+        return SimpleStudentResource::collection($module->students);
     }
 }

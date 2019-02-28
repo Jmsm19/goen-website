@@ -21,6 +21,7 @@ class ModuleResource extends JsonResource
             'name' => $this->name,
             'section' => $this->section,
             'period' => [
+                'id' => $this->period->id,
                 'year' => $this->period->year,
                 'name' => $this->period->name,
             ],
