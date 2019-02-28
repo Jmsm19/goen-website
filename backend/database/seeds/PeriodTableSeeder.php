@@ -39,7 +39,7 @@ class PeriodTableSeeder extends Seeder
 
         Period::create([
             'year' => Carbon::now()->year,
-            'name' => 'II',
+            'name' => 'III',
             'active' => false,
             'signup_from' => '2019-03-01',
             'signup_until' => '2019-03-31'
