@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Router, { withRouter } from 'next/router';
+import Router from 'next/router';
 import NProgress from 'nprogress';
 import { notification, Icon } from 'antd';
 import { GetData } from '../../utils/fetch';
 import { withNamespaces } from '../../i18n';
 import { StyledPage } from '../../styles/pages/ActivatePage';
+import withPageRouter from '../../components/HOCs/withPageRouter';
 
 export class AccountActivationPage extends Component {
   state = {
@@ -21,8 +22,8 @@ export class AccountActivationPage extends Component {
 
   async componentDidMount() {
     const { router, t } = this.props;
-    const { query, asPath } = router;
-    const token = query.tk || asPath.split('=')[1];
+    const { query } = router;
+    const token = query.tk;
 
     try {
       NProgress.start();
@@ -107,4 +108,4 @@ AccountActivationPage.propTypes = {
   }).isRequired,
 };
 
-export default withNamespaces('common')(withRouter(AccountActivationPage));
+export default withNamespaces('common')(withPageRouter(AccountActivationPage));
