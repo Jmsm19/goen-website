@@ -146,11 +146,12 @@
   "PeriodDelitionConfirmation": "Are you sure you want to delete this period?",
   "PeriodDeletionDangerExplanation": "Be aware that deleting a period involves deleting everything associated with it: like modules, scores and student progress in this period.",
   "Update": "Update",
-  "NoInstructorAssigned": "No instructor assigned",
+  "NoInstructorAssigned": "Not assigned",
   "ChangeInstructor": "Change instructor",
   "GlobalSettings": "Global settings",
   "AllowUserSignup": "Allow new users to register",
   "InstructorName": "Instructor's name",
   "AddInstructor": "Add new instructor",
-  "AddInstructorFromExistingUser": "Add from existing user"
+  "AddInstructorFromExistingUser": "Add from existing user",
+  "FilterBy": "Filter by"
 }

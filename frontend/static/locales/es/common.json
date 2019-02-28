@@ -153,11 +153,12 @@
   "PeriodDelitionConfirmation": "¿Seguro que quieres borrar este período?",
   "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período.",
   "Update": "Actualizar",
-  "NoInstructorAssigned": "Sin instructor assignado",
+  "NoInstructorAssigned": "No asignado",
   "ChangeInstructor": "Cambiar instructor",
   "GlobalSettings": "Opciones globales",
   "AllowUserSignup": "Permitir registro de nuevos usuarios",
   "InstructorName": "Nombre del instructor",
   "AddInstructor": "Agregar nuevo instructor",
-  "AddInstructorFromExistingUser": "Agregar a partir de usuario existente"
+  "AddInstructorFromExistingUser": "Agregar a partir de usuario existente",
+  "FilterBy": "Filtrar por"
 }

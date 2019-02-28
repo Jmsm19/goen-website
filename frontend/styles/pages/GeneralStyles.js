@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Icon, Collapse, Table } from 'antd';
+import { Icon, Collapse, Table, Card } from 'antd';
 
 export const StyledFaintIcon = styled(Icon)`
   color: rgba(0, 0, 0, 0.25);

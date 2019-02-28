@@ -28,6 +28,12 @@ export const callFunctions = fn => {
   }
 };
 
+/**
+ * Takes hours from DB (hhmmss) and formats it as "hh:mm a"
+ *
+ * @param {String} time
+ * @returns {String} formatted time
+ */
 export const formatHoursFromDB = time => {
   const joinedTime = time.split(':').join('');
   return moment(joinedTime, 'HHmmss').format('hh:mm a');
@@ -74,12 +80,39 @@ export const filterArrayByName = (array, name) => {
 };
 
 /**
- * Sort modules by name and section in descending order
+ * Sort modules by name, section and, optionally, by period, in descending order.
  *
  * @param {Array} modules Array of Modules obj
  * @returns {Array} sorted array
  */
-export const sortModules = modules =>
-  modules.sort((a, b) =>
-    a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1,
-  );
+export const sortModules = (modules, byPeriod = false) => {
+  let sortedModules = [];
+
+  const sortByNameAndSection = (a, b) =>
+    a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1;
+
+  if (byPeriod) {
+    sortedModules = modules.sort((a, b) => {
+      if (a.period.id === b.period.id) {
+        return sortByNameAndSection(a, b);
+      }
+      if (a.period.id > b.period.id) {
+        return -1;
+      }
+      return 1;
+    });
+  } else {
+    sortedModules = modules.sort(sortByNameAndSection);
+  }
+
+  return sortedModules;
+};
+
+/**
+ * Return clan image address in static folder
+ *
+ * @param {String} clanName
+ * @returns {String} Clan image address
+ */
+export const getClanImageAddress = clanName =>
+  clanName ? `/static/images/clans/${clanName.toLowerCase()}.png` : null;
