@@ -7,7 +7,7 @@ function PeriodList({ t, list, setPeriodAsCurrent, deletePeriod, loading }) {
   function showDeleteConfirm(id) {
     Modal.confirm({
       width: 520,
-      title: t('PeriodDelitionConfirmation'),
+      title: t('PeriodDeletionConfirmation'),
       content: t('PeriodDeletionDangerExplanation'),
       okText: t('Yes'),
       okType: 'danger',

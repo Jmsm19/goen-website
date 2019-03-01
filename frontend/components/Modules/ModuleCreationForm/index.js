@@ -69,7 +69,7 @@ class ModuleCreationForm extends Component {
 
         addModuleToCurrentPeriod(data);
         notification.success({
-          message: t('ModuleCreated'),
+          message: t('Module.Created'),
         });
 
         this.setState(

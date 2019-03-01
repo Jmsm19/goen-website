@@ -66,13 +66,15 @@
     "Create": "Crear módulo",
     "Section": "Sección",
     "Name": "Nombre del módulo",
-    "Schedule": "Horario de clase"
+    "Schedule": "Horario de clase",
+    "Created": "Módulo creado"
   },
   "Schedule": {
     "_singular": "Horario",
     "From": "Inicio",
     "Until": "Fin",
-    "Day": "Día"
+    "Day": "Día",
+    "Created": "Horario creado"
   },
   "Period": "Período",
   "Periods": "Períodos",
@@ -150,7 +152,7 @@
   "NoModules": "No hay modulos disponibles",
   "NoPeriods": "No hay períodos disponibles",
   "PeriodCreationModuleText": "El nombre y año del período serán asignados automáticamente.",
-  "PeriodDelitionConfirmation": "¿Seguro que quieres borrar este período?",
+  "PeriodDeletionConfirmation": "¿Seguro que quieres borrar este período?",
   "PeriodDeletionDangerExplanation": "Ten en cuenta que borrar un período incluye la eliminación de todo lo relacionado con él , como: módulos, notas y el progreso de estudiantes en el período.",
   "Update": "Actualizar",
   "NoInstructorAssigned": "No asignado",
