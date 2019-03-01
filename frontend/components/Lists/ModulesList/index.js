@@ -9,6 +9,9 @@ const ModulesList = ({ t, modules, loading }) => (
     loading={loading}
     style={{ minHeight: 100, maxHeight: 500, height: '100%' }}
     dataSource={modules}
+    locale={{
+      emptyText: t('NoModules'),
+    }}
     renderItem={({ id, name, section, period, schedule, instructor }) => {
       const title = `${name} ${section}`;
       return (
