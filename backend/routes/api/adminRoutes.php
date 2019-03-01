@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
         'ModuleController@availableSectionsFor'
     )->name('module.availableSections');
     Route::get('/module/{module}/students', 'ModuleController@students')->name('module.students');
+    Route::get('/order/modules', 'ModuleController@getModuleOrder')->name('module.order');
 
     // Get specified (or current) year's periods
     Route::get('/period/year/{year?}', 'PeriodController@year')

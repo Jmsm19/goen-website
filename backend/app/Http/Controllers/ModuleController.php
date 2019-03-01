@@ -266,4 +266,13 @@ class ModuleController extends Controller
     {
         return SimpleStudentResource::collection($module->students);
     }
+
+    public function getModuleOrder()
+    {
+        config('constants.module_order');
+
+        return response()->json([
+            'data' => array_values(config('constants.module_order'))
+        ], 200);
+    }
 }
