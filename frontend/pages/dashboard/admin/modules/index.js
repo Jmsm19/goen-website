@@ -14,9 +14,10 @@ import ModulesList from '../../../../components/Lists/ModulesList';
 class ModulesManagementPage extends Component {
   state = {
     modalVisible: false,
-    filterUsed: false,
     filteredModules: null,
   };
+
+  periodSelector = React.createRef();
 
   static async getInitialProps() {
     return {
@@ -34,22 +35,22 @@ class ModulesManagementPage extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      modulesContext: { modules },
+    } = this.props;
+    const prevModules = prevProps.modulesContext.modules;
+    console.log(this.periodSelector);
+    if (modules.length !== prevModules.length) {
+      const periodSelector = this.periodSelector.current;
+      this.filterModulesByPeriod(periodSelector.value);
+    }
+  }
+
   toggleModal = () => {
     this.setState(prevState => ({
       modalVisible: !prevState.modalVisible,
     }));
-  };
-
-  onMountFilter = () => {
-    const {
-      institution: { currentPeriod },
-    } = this.props;
-    this.setState(
-      {
-        filterUsed: true,
-      },
-      () => this.filterModulesByPeriod(currentPeriod.id),
-    );
   };
 
   filterModulesByPeriod = periodId => {
@@ -70,14 +71,10 @@ class ModulesManagementPage extends Component {
   };
 
   render() {
-    const { filteredModules, filterUsed, modalVisible } = this.state;
+    const { filteredModules, modalVisible } = this.state;
     const { t, lng, schedules, createSchedule, modulesContext, institution } = this.props;
     const { currentPeriod, addModule } = institution;
-    const { modules } = modulesContext;
-
-    if (!filterUsed && modules.length) {
-      this.onMountFilter();
-    }
+    const { modules, updateModuleList } = modulesContext;
 
     return (
       <RequireRole t={t} requiredRole='admin'>
@@ -98,7 +95,10 @@ class ModulesManagementPage extends Component {
                   period={currentPeriod}
                   lng={lng}
                   schedules={schedules}
-                  addModuleToCurrentPeriod={addModule}
+                  addModuleToCurrentPeriod={module => {
+                    addModule(module);
+                    updateModuleList(module);
+                  }}
                   onPlusBtnClick={this.toggleModal}
                 />
               </Collapse.Panel>
@@ -119,6 +119,7 @@ class ModulesManagementPage extends Component {
                   <p style={{ margin: 0 }}>{t('FilterBy')}</p>
                   <PeriodSelector
                     t={t}
+                    ref={this.periodSelector}
                     style={{ marginLeft: 10 }}
                     defaultPeriod={currentPeriod.id}
                     onChange={this.filterModulesByPeriod}
@@ -148,6 +149,7 @@ ModulesManagementPage.propTypes = {
   modulesContext: PropTypes.shape({
     modules: PropTypes.arrayOf(PropTypes.shape),
     getAllModules: PropTypes.func,
+    addModule: PropTypes.func,
   }).isRequired,
   institution: PropTypes.shape({
     currentPeriod: PropTypes.shape(),

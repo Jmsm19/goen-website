@@ -5,10 +5,14 @@ import { GetData } from '../../../utils/fetch';
 import { notifyError } from '../../../utils';
 
 class PeriodSelector extends Component {
-  state = {
-    loading: false,
-    periods: [],
-  };
+  constructor(props) {
+    super(props);
+    this.value = props.defaultPeriod;
+    this.state = {
+      loading: false,
+      periods: [],
+    };
+  }
 
   componentDidMount() {
     this.setState(
@@ -43,7 +47,10 @@ class PeriodSelector extends Component {
         disabled={loading}
         placeholder={t('Period')}
         defaultValue={defaultPeriod}
-        onChange={onChange}
+        onChange={value => {
+          onChange(value);
+          this.value = value;
+        }}
         style={{ minWidth: 100, ...style }}
       >
         {periods.map(({ id, name, year }) => (

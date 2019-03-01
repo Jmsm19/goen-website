@@ -10,12 +10,15 @@ import { moduleFormValidation, hasErrors } from '../../../utils/formValidation';
 class ModuleCreationForm extends Component {
   state = {
     loadingSections: false,
+    loadingModules: false,
+    moduleNames: [],
     availableSections: [],
     clans: [],
   };
 
   componentDidMount() {
     this.getClans();
+    this.getModuleNames();
   }
 
   getClans = () => {
@@ -27,6 +30,30 @@ class ModuleCreationForm extends Component {
         });
       })
       .catch(notifyError);
+  };
+
+  getModuleNames = () => {
+    this.setState(
+      {
+        loadingModules: true,
+      },
+      () => {
+        GetData('/order/modules')
+          .then(res => res.json())
+          .then(({ data }) => {
+            this.setState({
+              loadingModules: false,
+              moduleNames: [...data],
+            });
+          })
+          .catch(error => {
+            notifyError(error);
+            this.setState({
+              loadingModules: false,
+            });
+          });
+      },
+    );
   };
 
   getAvailableSections = (periodId, moduleName) => {
@@ -84,7 +111,7 @@ class ModuleCreationForm extends Component {
 
   render() {
     const { t, period, schedules, onPlusBtnClick } = this.props;
-    const { clans, availableSections, loadingSections } = this.state;
+    const { clans, availableSections, loadingSections, loadingModules, moduleNames } = this.state;
 
     return (
       <Formik
@@ -118,16 +145,20 @@ class ModuleCreationForm extends Component {
                   render={({ field: { name } }) => (
                     <Select
                       name={name}
+                      notFoundContent={t('NoModules')}
+                      loading={loadingModules}
+                      disabled={loadingModules}
                       placeholder={t('Module._singular')}
-                      loading={false}
-                      disabled={false}
                       onChange={value => {
                         this.getAvailableSections(period.id, value);
                         setFieldValue(name, value);
                       }}
                     >
-                      <Select.Option value='M-0'>M-0</Select.Option>
-                      <Select.Option value='M-1'>M-1</Select.Option>
+                      {moduleNames.map(modName => (
+                        <Select.Option key={modName} value={modName}>
+                          {modName}
+                        </Select.Option>
+                      ))}
                     </Select>
                   )}
                 />

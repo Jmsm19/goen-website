@@ -32,10 +32,22 @@ class ModulesContextProvider extends Component {
     );
   };
 
+  addModule = module => {
+    this.setState(prevState => {
+      let updatedModules = [...prevState.modules];
+      updatedModules.push(module);
+      updatedModules = sortModules(updatedModules, true);
+      return {
+        modules: updatedModules,
+      };
+    });
+  };
+
   state = {
     modules: [],
     loading: false,
     getAllModules: this.getAllModules,
+    updateModuleList: this.addModule,
   };
 
   render() {
