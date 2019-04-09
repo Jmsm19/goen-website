@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Card } from 'antd';
+import { media } from '../../utils/styling';
 
 const StyledDualColCard = styled(Card)`
   height: 100%;
@@ -14,10 +15,14 @@ const StyledDualColCard = styled(Card)`
     &:after {
       display: none;
     }
+
+    ${media.phone`
+    grid-template-columns: max-content;
+    grid-template-rows: max-content 1fr;
+    `}
   }
 
   .first-col {
-    padding-left: 20px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -30,7 +35,12 @@ const StyledDualColCard = styled(Card)`
   }
 
   .second-col {
-    padding: 10px;
+    padding: 20px;
+    height: 100%;
+  }
+
+  .first-col,
+  .second-col {
     overflow-x: hidden;
     white-space: nowrap;
 
