@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Http\FormRequest;
@@ -38,6 +39,12 @@ use Illuminate\Foundation\Http\FormRequest;
 *       type="integer",
 *       format="int64"
 *   ),
+*   @OA\Property(
+*       description="Module's instructor",
+*       property="instructor_id",
+*       type="integer",
+*       format="int64"
+*   ),
 * )
 */
 class ModuleUpdateRequest extends FormRequest
@@ -59,7 +66,21 @@ class ModuleUpdateRequest extends FormRequest
             'clan_id' => 'exists:clans,id',
             'section' => 'string',
             'price' => 'numeric|min:0',
-            'schedule_id' => 'exists:schedules,id'
+            'schedule_id' => 'exists:schedules,id',
+            'instructor_id' => [
+                'nullable',
+                Rule::exists('role_user', 'user_id')->where(function ($query) {
+                    $role = Role::where('name', 'instructor')->first();
+                    $query->where('role_id', $role->id);
+                }),
+            ]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'instructor_id.exists' => trans('messages.user_not_instructor_or_not_exists')
         ];
     }
 }

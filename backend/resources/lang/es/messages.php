@@ -25,4 +25,5 @@ return [
     'student_registered' => 'Estudiante registrado exitosamente.',
     'reject_payment' => 'Pago rechazado.',
     'CannotDeleteActivePeriod' => 'No puedes eliminar períodos activos.',
+    'user_not_instructor_or_not_exists' => 'El usuario no es un instructor o no existe.',
 ];

@@ -101,6 +101,7 @@ class ModuleController extends Controller
             'price_id' => $price->id,
             'clan_id' => $request->name == 'M-0' ? $request->clan_id : null,
             'schedule_id' => $request->schedule_id,
+            'instructor_id' => $request->instructor_id ?: null
         ]);
 
         return new ModuleResource($module);
@@ -174,7 +175,8 @@ class ModuleController extends Controller
          'name' => $request->name ?: $module->name,
          'section' => $request->section ?: $module->section,
          'price_id' => $price->id ?: $module->price->id,
-         'schedule_id' => $request->schedule_id ?: $module->schedule->id
+         'schedule_id' => $request->schedule_id ?: $module->schedule->id,
+         'instructor_id' => $request->instructor_id ?: null
         ]);
 
         return new ModuleResource($module);

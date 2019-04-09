@@ -39,6 +39,12 @@ use Illuminate\Foundation\Http\FormRequest;
 *       type="integer",
 *       format="int64"
 *   ),
+*   @OA\Property(
+*       description="Module's instructor",
+*       property="instructor_id",
+*       type="integer",
+*       format="int64"
+*   ),
 * )
 */
 class ModuleStoreRequest extends FormRequest
@@ -58,7 +64,13 @@ class ModuleStoreRequest extends FormRequest
                 'string',
                 Rule::in(Config::get('constants.section_letters'))
             ],
-            'schedule_id' => 'required|exists:schedules,id'
+            'schedule_id' => 'required|exists:schedules,id',
+            'instructor_id' => [
+                Rule::exists('role_user', 'user_id')->where(function ($query) {
+                    $role = Role::where('name', 'instructor')->first();
+                    $query->where('role_id', $role->id);
+                }),
+            ]
         ];
 
         if (FormRequest::input('name') == 'M-0') {
@@ -72,6 +84,7 @@ class ModuleStoreRequest extends FormRequest
     {
         return [
             'section.in' => trans('messages.section_not_in_options'),
+            'instructor_id.exists' => trans('messages.user_not_instructor_or_not_exists')
         ];
     }
 }
