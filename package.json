@@ -1,9 +1,13 @@
 {
-  "name": "adonisjs-create-react-app",
+  "name": "goen_maracaibo_frontend",
   "version": "1.0.0",
+  "homepage": "*",
+  "main": "server.js",
+  "author": "Jorge Soto <Jorgemsm19@gmail.com>",
+  "license": "MIT",
+  "description": "GOEN Maracaibo's website frontend",
   "adonis-version": "1.0.0",
-  "description": "Adonisjs + Create React App Boilerplate",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node server.js",
     "front": "cd frontend && yarn",
@@ -16,13 +20,6 @@
     "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
     "styleguide": "yarn front styleguide"
   },
-  "keywords": [
-    "adonisjs",
-    "adonis-app"
-  ],
-  "author": "Thomas Blanc-Hector",
-  "license": "MIT",
-  "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
     "@adonisjs/auth": "^3.0.7",

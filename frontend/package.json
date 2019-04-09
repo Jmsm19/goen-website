@@ -1,6 +1,11 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "goen_maracaibo_frontend",
+  "version": "1.0.0",
+  "homepage": "*",
+  "main": "index.html",
+  "author": "Jorge Soto <Jorgemsm19@gmail.com>",
+  "license": "MIT",
+  "description": "GOEN Maracaibo's website frontend",
   "private": true,
   "proxy": "https://localhots:5000",
   "dependencies": {
