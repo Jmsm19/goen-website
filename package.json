@@ -13,7 +13,8 @@
     "dev:server": "adonis serve --dev",
     "clear:public": "rm -rf public/*",
     "move:build": "mv ./frontend/build/* ./public/ && rm -rf ./frontend/build",
-    "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build"
+    "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
+    "styleguide": "yarn front styleguide"
   },
   "keywords": [
     "adonisjs",
