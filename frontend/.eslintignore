@@ -1,4 +1,4 @@
 __mocks__
 node_modules
-out
-.next
+build
+public
