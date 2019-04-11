@@ -17,6 +17,7 @@ const providers = [
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
+  '@adonisjs/mail/providers/MailProvider',
 ];
 
 /*
