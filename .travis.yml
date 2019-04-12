@@ -1,0 +1,13 @@
+language: node_js
+cache: yarn
+install:
+- yarn global add codecov
+script:
+- nyc --reporter=lcov node ace test
+- codecov
+deploy:
+  provider: heroku
+  app: goen-website-test
+  run: ENV_SILENT=true node ace migration:run --force
+  api_key:
+    secure: lkJYyTbtDeP2bVA8u9ERwdlXJREhYRC8ciouzoCzHKyAtD5tLyxPvG6+CvtpOaBneQdc7g0HtyBphA69ydpaG3XX1eaQ4ZxWYjQd3z75gbguFokgVcpRtmocGQ+OPPUa6S5H0kR+E2ZHAeRinM7ZijNpjSnu2BmO/XnEFaoKuFC+B4xHFBFYrugi9FkapsjPvl1VFTBMZfOqjgar8o2gw9VdIAZ6w3iQImSMhLoeQJacUUyweTA/zRDMhUwRf8lbWcwQf2mm3nkeLZpSVlqWbIF5VnUzCkp4fhOZl+vhlvOcfh+uL4qFYL4xq8Tq3Su5T8PkwdYHR3O24jFwNk71h6q60jVUF+6yC/8bgOvXHiCpv0Qko6xjTF3OsxYfZVNN5cge5elQRFKilyqiFFMGiyBkNiqqtN0rRfh30vQTDdOHESpO6X8qHRglzgoO4w3gVedlxq7RWK4g8+vBr0QljblLgY8PaJn1SQEx87qN57e4q6L/T3dJy6Jl8p8chBF6etqzOaMwo0eullUm/qwL9wmFXiMQUwVfNOZk62Y/o6ncj9IoiDAvS1dyTW3x+gf43A4MaFoNrt+uGJczeNYFwaj830zITPB9MTgwg2K7ItvjLKcvz3O28iT4GZJGOpBCHfOXl72++45Qa5UfvuNee33MbDTYz9rs3nPvj/dRW7Q=
