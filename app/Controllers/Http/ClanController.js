@@ -1,5 +1,9 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+
+/** @type {typeof import('../../Models/Clan')} */
+const Clan = use('App/Models/Clan');
 
 /**
  * Resourceful controller for interacting with clans
@@ -13,17 +17,18 @@ class ClanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async index({ request, response }) {}
+  async index({ request, response }) {
+    const { middlewareError, middlewareErrorStatus } = request;
 
-  /**
-   * Render a form to be used for creating a new clan.
-   * GET clans/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async create({ request, response }) {}
+    if (request.middlewareError) {
+      return response.status(middlewareErrorStatus).json(middlewareError);
+    }
+
+    const clans = await Clan.all();
+    return {
+      data: clans.toJSON(),
+    };
+  }
 
   /**
    * Create/save a new clan.
@@ -33,7 +38,10 @@ class ClanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {}
+  async store({ request }) {
+    const newClan = await Clan.create(request.only(['name', 'picture']));
+    return newClan.toJSON();
+  }
 
   /**
    * Display a single clan.
@@ -43,17 +51,13 @@ class ClanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async show({ params, request, response }) {}
-
-  /**
-   * Render a form to update an existing clan.
-   * GET clans/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async edit({ params, request, response }) {}
+  async show({ params, request, response }) {
+    const { id } = params;
+    const clan = await Clan.findOrFail(id);
+    return {
+      data: clan.toJSON(),
+    };
+  }
 
   /**
    * Update clan details.
@@ -61,9 +65,15 @@ class ClanController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {}
+  async update({ params, request }) {
+    const { id } = params;
+    const clan = await Clan.findOrFail(id);
+    await clan.update(request.all());
+    return {
+      data: clan.toJSON(),
+    };
+  }
 
   /**
    * Delete a clan with id.
@@ -73,7 +83,14 @@ class ClanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, request, response }) {
+    const { id } = params;
+    const clan = await Clan.find(id);
+    await clan.delete();
+    return {
+      message: 'Clan deleted',
+    };
+  }
 }
 
 module.exports = ClanController;
