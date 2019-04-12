@@ -1,7 +1,9 @@
 language: node_js
+node_js:
+  - "7"
 cache: yarn
 install:
-- yarn global add codecov
+- yarn global add codecov nyc
 script:
 - nyc --reporter=lcov node ace test
 - codecov
