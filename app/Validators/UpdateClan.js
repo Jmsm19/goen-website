@@ -6,7 +6,7 @@ class UpdateClan {
 
   get rules() {
     return {
-      name: 'string',
+      name: 'string|unique:clans',
       picture: 'string',
     };
   }

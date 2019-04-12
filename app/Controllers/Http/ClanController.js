@@ -2,6 +2,8 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+const { forLocale } = use('Antl');
+
 /** @type {typeof import('../../Models/Clan')} */
 const Clan = use('App/Models/Clan');
 
@@ -40,7 +42,9 @@ class ClanController {
    */
   async store({ request }) {
     const newClan = await Clan.create(request.only(['name', 'picture']));
-    return newClan.toJSON();
+    return {
+      data: newClan.toJSON(),
+    };
   }
 
   /**
@@ -69,7 +73,7 @@ class ClanController {
   async update({ params, request }) {
     const { id } = params;
     const clan = await Clan.findOrFail(id);
-    await clan.update(request.all());
+    await clan.merge(request.only(['name', 'picture']));
     return {
       data: clan.toJSON(),
     };
@@ -83,12 +87,14 @@ class ClanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {
+  async destroy({ params, locale }) {
     const { id } = params;
     const clan = await Clan.find(id);
     await clan.delete();
     return {
-      message: 'Clan deleted',
+      message: forLocale(locale).formatMessage('models.deleted', {
+        model: forLocale(locale).formatMessage('models.clan'),
+      }),
     };
   }
 }

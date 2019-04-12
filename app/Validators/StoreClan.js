@@ -6,7 +6,7 @@ class StoreClan {
 
   get rules() {
     return {
-      name: 'required|string|unique',
+      name: 'required|string|unique:clans',
       picture: 'required|string',
     };
   }

@@ -11,3 +11,7 @@ tmp
 
 # The development sqlite file
 database/*.sqlite
+
+# Testing
+.nyc_output
+/coverage

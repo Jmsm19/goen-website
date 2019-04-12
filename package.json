@@ -19,7 +19,7 @@
     "move:build": "mv ./frontend/build/* ./public/ && rm -rf ./frontend/build",
     "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
     "styleguide": "yarn front styleguide",
-    "test": "adonis test"
+    "test": "nyc --reporter=lcov node ace test --bail"
   },
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
@@ -51,6 +51,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.5.0",
+    "nyc": "^13.3.0",
     "prettier": "^1.16.4",
     "sqlite3": "^4.0.6"
   },

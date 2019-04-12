@@ -15,7 +15,7 @@ module.exports = Route => {
       .as('auth.signup')
       .validator('SignupUser');
 
-    Route.post('/confirm/account', 'AuthController.activateSignup')
+    Route.post('/activate', 'AuthController.activateSignup')
       .as('auth.signup')
       .validator('SignupActivate');
   })

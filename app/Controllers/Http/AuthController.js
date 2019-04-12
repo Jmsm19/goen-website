@@ -97,8 +97,8 @@ class AuthController {
       .first();
 
     if (!user) {
-      return response.status(404).json({
-        message: forLocale(locale).formatMessage('auth.invalidActivationToken'),
+      return response.status(400).json({
+        error: forLocale(locale).formatMessage('auth.invalidActivationToken'),
       });
     }
 
@@ -145,7 +145,9 @@ class AuthController {
    */
   async getUser({ auth }) {
     const loggedInUser = await auth.getUser();
-    return loggedInUser;
+    return {
+      data: loggedInUser,
+    };
   }
 }
 

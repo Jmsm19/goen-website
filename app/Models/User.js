@@ -61,18 +61,15 @@ class User extends Model {
    * @method hasAnyRole
    */
   async hasAnyRole(roleNames) {
-    if (Array.isArray(roleNames)) {
-      for (let i = 0; i < roleNames.length; i += 1) {
-        const roleName = roleNames[i];
-        // eslint-disable-next-line no-await-in-loop
-        const hasRole = await this.hasRole(roleName);
-        if (hasRole) {
-          return true;
-        }
+    for (let i = 0; i < roleNames.length; i += 1) {
+      const roleName = roleNames[i];
+      // eslint-disable-next-line no-await-in-loop
+      const hasRole = await this.hasRole(roleName);
+      if (hasRole) {
+        return true;
       }
-    } else if (this.hasRole(roleNames)) {
-      return true;
     }
+
     return false;
   }
 

@@ -31,14 +31,6 @@ class ExceptionHandler extends BaseExceptionHandler {
       code,
     };
 
-    const setDefaultErrorJSON = err => {
-      const errorMessage = err.message.split(':');
-      return {
-        code: errorMessage[0].substr(2),
-        error: errorMessage[1].trim(),
-      };
-    };
-
     switch (code) {
       case 'E_INVALID_JWT_TOKEN':
         return response.status(status).json({
@@ -58,11 +50,7 @@ class ExceptionHandler extends BaseExceptionHandler {
           }),
         });
       default:
-        response.status(status).json({
-          ...basicError,
-          message: error.message,
-        });
-        break;
+        return super.handle(...arguments);
     }
   }
 

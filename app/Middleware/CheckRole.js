@@ -3,28 +3,22 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('../Models/User')} User */
 
-/** @type {import('@adonisjs/antl/src/Antl')} */
-const { formatMessage, forLocale } = use('Antl');
-
+/** @type {import('../Exceptions/RoleNotAllowedException')} */
+const RoleNotAllowedException = use('App/Exceptions/RoleNotAllowedException');
 class CheckRole {
   /**
    * @param {object} ctx
-   * @param {Request} ctx.request
    * @param {object} ctx.auth
    * @param {User} ctx.auth.user
-   * @param {String} ctx.locale
    * @param {Function} next
    * @param {Array} roles
    */
   // eslint-disable-next-line consistent-return
-  async handle({ auth, request, locale }, next, roles) {
+  async handle({ auth }, next, roles) {
     const { user } = auth;
     const hasRole = await user.hasAnyRole(roles);
     if (!hasRole) {
-      request.middlewareErrorStatus = 401;
-      request.middlewareError = {
-        error: forLocale(locale).formatMessage('auth.noPrivilages'),
-      };
+      throw new RoleNotAllowedException();
     }
     await next();
   }
