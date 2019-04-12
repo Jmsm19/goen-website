@@ -1,4 +1,7 @@
-import NextI18Next from 'next-i18next';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const langDetector = new LanguageDetector(null, {
@@ -6,13 +9,10 @@ const langDetector = new LanguageDetector(null, {
 });
 
 const options = {
-  defaultNS: 'common',
-  defaultLanguage: 'es',
+  fallbackLng: 'es',
   defaultLng: 'es',
   otherLanguages: ['en', 'jp'],
-  fallbackLng: 'es',
-  localeSubpaths: false,
-  use: [langDetector],
+  load: 'languageOnly',
 
   // Common namespace used around site
   saveMissing: false,
@@ -28,6 +28,10 @@ const options = {
   },
 };
 
-const I18Next = new NextI18Next(options);
-export default options;
-export const { appWithTranslation, config, withNamespaces, Link, i18n } = I18Next;
+i18n
+  .use(Backend)
+  .use(langDetector)
+  .use(initReactI18next)
+  .init(options);
+
+export default i18n;

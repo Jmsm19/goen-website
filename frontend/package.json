@@ -9,8 +9,12 @@
   "private": true,
   "proxy": "https://localhots:5000",
   "dependencies": {
+    "i18next": "^15.0.9",
+    "i18next-browser-languagedetector": "^3.0.1",
+    "i18next-xhr-backend": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-i18next": "^10.7.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -36,6 +40,7 @@
     "autoprefixer": "^9.5.0",
     "react-pose": "^4.0.7",
     "react-styleguidist": "^9.0.4",
+    "react-testing-library": "^6.1.2",
     "styled-components": "^4.1.3"
   }
 }
