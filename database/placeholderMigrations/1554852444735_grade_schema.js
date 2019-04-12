@@ -12,10 +12,21 @@ class GradeSchema extends Schema {
         .unsigned()
         .nullable();
       table.timestamps();
+
+      table
+        .foreign('user_id')
+        .references('id')
+        .inTable('users');
+      // table
+      //   .foreign('module_id')
+      //   .references('id')
+      //   .inTable('module');
     });
   }
 
   down() {
+    this.dropForeign('user_id');
+    // this.dropForeign('module_id');
     this.drop('grades');
   }
 }

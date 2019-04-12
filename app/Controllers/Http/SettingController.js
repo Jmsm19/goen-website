@@ -1,6 +1,9 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+/** @type {typeof import('../../Models/Setting')} */
+const Setting = use('App/Models/Setting');
+
 /**
  * Resourceful controller for interacting with settings
  */

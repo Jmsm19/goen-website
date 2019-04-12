@@ -21,7 +21,11 @@ class User extends Model {
   }
 
   static get hidden() {
-    return ['password', 'remember_token', 'activation_token'];
+    return ['password', 'remember_token', 'activation_token', 'created_at', 'updated_at'];
+  }
+
+  static get dates() {
+    return super.dates.concat(['birth_date', 'email_verified_at']);
   }
 
   /**
@@ -38,8 +42,88 @@ class User extends Model {
     return this.hasMany('App/Models/Token');
   }
 
+  /**
+   * Returns a BelongsToMany relationship with the Role model
+   *
+   * @memberof User
+   * @method roles
+   */
   roles() {
     return this.belongsToMany('App/Models/Role').withTimestamps();
+  }
+
+  /**
+   * Checks if the User has certain Role from an array of roles
+   *
+   * @param {Array} roleNames
+   * @returns {Boolean}
+   * @memberof User
+   * @method hasAnyRole
+   */
+  async hasAnyRole(roleNames) {
+    if (Array.isArray(roleNames)) {
+      for (let i = 0; i < roleNames.length; i += 1) {
+        const roleName = roleNames[i];
+        // eslint-disable-next-line no-await-in-loop
+        const hasRole = await this.hasRole(roleName);
+        if (hasRole) {
+          return true;
+        }
+      }
+    } else if (this.hasRole(roleNames)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Checks if the User has a given Role
+   *
+   * @param {String} roleName
+   * @returns {Boolean}
+   * @memberof User
+   * @method hasRole
+   */
+  async hasRole(roleName) {
+    const role = await this.roles()
+      .where('name', roleName)
+      .first();
+
+    if (role) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Returns a BelongsTo relationship with the Clan model
+   *
+   * @memberof User
+   * @method clan
+   */
+  clan() {
+    return this.belongsTo('App/Clan');
+  }
+
+  /**
+   * Checks if the User belongs to a Clan
+   *
+   * @returns {Boolean}
+   * @memberof User
+   * @method hasClan
+   */
+  hasClan() {
+    return !!this.clan;
+  }
+
+  /**
+   * Returns a HasMany relationship with the Grade model
+   *
+   * @memberof User
+   * @method grades
+   */
+  grades() {
+    return this.hasMany('App/Grade');
   }
 }
 

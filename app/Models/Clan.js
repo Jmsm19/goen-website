@@ -2,6 +2,10 @@
 const Model = use('Model');
 
 class Clan extends Model {
+  static get hidden() {
+    return ['created_at', 'updated_at'];
+  }
+
   /**
    * Returns a hasMany relationship with User Model
    *

@@ -1,6 +1,9 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
+/** @type {typeof import('../../Models/Role')} */
+const Role = use('App/Models/Role');
+
 /**
  * Resourceful controller for interacting with roles
  */
@@ -13,7 +16,12 @@ class RoleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async index({ request, response }) {}
+  async index({ request, response }) {
+    const roles = await Role.all();
+    return {
+      data: roles.toJSON(),
+    };
+  }
 
   /**
    * Render a form to be used for creating a new role.
