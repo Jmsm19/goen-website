@@ -23,7 +23,7 @@ module.exports = {
     <html>
       <head>
         <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet" />
         <style>
         *, *::before, *::after {
           margin: 0;
@@ -36,6 +36,10 @@ module.exports = {
           --light-primary-color: #ff4050;
           --light-obscure-primary-color: #d9091a;
           --normal-color: #f0f0f0;
+
+          --success-color: #2dce89;
+          --danger-color: #f5365c;
+          --warning-color: #fb6340;
 
           --tablet-size: 768px;
           --phone-size: 576px;

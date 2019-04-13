@@ -4,6 +4,9 @@
   --light-obscure-primary-color: #d9091a;
   --normal-color: #f0f0f0;
 
+  --success-color: #2dce89;
+  --danger-color: #f5365c;
+  --warning-color: #fb6340;
 
   --tablet-size: 768px;
   --phone-size: 576px;
