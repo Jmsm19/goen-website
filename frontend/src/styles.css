@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #bf1a21;
+  --light-primary-color: #ff4050;
+  --light-obscure-primary-color: #d9091a;
+  --normal-color: #f0f0f0;
+
+
+  --tablet-size: 768px;
+  --phone-size: 576px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
