@@ -12,7 +12,7 @@
     "start": "node server.js",
     "front": "cd frontend && yarn",
     "setup": "yarn install && yarn frontend install",
-    "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\"",
+    "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\" \"yarn styleguide\"",
     "dev:client": "cd frontend && yarn start",
     "dev:server": "adonis serve --dev",
     "clear:public": "rm -rf public/*",
