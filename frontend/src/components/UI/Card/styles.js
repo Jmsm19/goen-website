@@ -3,8 +3,10 @@ import styled from 'styled-components';
 const StyledCard = styled.div`
   &.card {
     width: 18rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template:
+      'card-img' auto
+      'card-body' 1fr;
     min-width: 0px;
     word-wrap: break-word;
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -30,6 +32,7 @@ const StyledCard = styled.div`
     }
 
     img {
+      grid-area: 'card-img';
       vertical-align: middle;
       border-style: none;
 
@@ -41,14 +44,15 @@ const StyledCard = styled.div`
     }
 
     .card-body {
+      grid-area: 'card-body';
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.5;
       text-align: left;
       color: #525f7f;
 
+      width: 100%;
       padding: 1.5rem;
-      flex: 1 1 auto;
     }
 
     .card-title {

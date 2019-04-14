@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import StyledCard from './styles';
 
-const Card = ({ children, title, image, width, fullWidth, withShadow, hoverable, className }) => {
+const Card = forwardRef((props, ref) => {
+  const { children, title, image, width, ...droppings } = props;
+  const { fullWidth, withShadow, hoverable, className, ...rest } = droppings;
+
   const localClassName = classnames(
     ['card'],
     {
@@ -16,15 +19,15 @@ const Card = ({ children, title, image, width, fullWidth, withShadow, hoverable,
   );
 
   return (
-    <StyledCard className={localClassName} style={{ width }}>
-      {image && <img src={image} alt={title} />}
+    <StyledCard ref={ref} className={localClassName} style={{ width }} {...rest}>
+      {image && <img className='card-img-top' src={image} alt={title} />}
       <div className='card-body'>
         {title && <h5 className='card-title'>{title}</h5>}
         {children}
       </div>
     </StyledCard>
   );
-};
+});
 
 Card.defaultProps = {
   className: null,

@@ -16,13 +16,13 @@
 ```jsx
 <div style={{display: 'grid', gridGap: '10px'}}>
   <p>Basic</p>
-  <Input validationStatus="success" placeholder="email@example.com" />
-  <Input validationStatus="error" placeholder="email@example.com" />
-  <Input placeholder="email@example.com" disabled />
+  <Input validationStatus="success" placeholder="Success" />
+  <Input validationStatus="error" placeholder="Error" />
+  <Input placeholder="Disabled" disabled />
 
   <p>Flat</p>
-  <Input validationStatus="success" flat placeholder="email@example.com" />
-  <Input validationStatus="error" flat placeholder="email@example.com" />
-  <Input flat placeholder="email@example.com" disabled />
+  <Input validationStatus="success" flat placeholder="Success" />
+  <Input validationStatus="error" flat placeholder="Error" />
+  <Input flat placeholder="Disabled" disabled />
 </div>
 ```
