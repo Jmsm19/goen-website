@@ -14,7 +14,7 @@
     "setup": "yarn install && yarn frontend install",
     "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\" \"yarn styleguide\"",
     "dev:client": "cd frontend && yarn start",
-    "dev:server": "adonis serve --dev",
+    "dev:server": "adonis serve --dev --ignore frontend",
     "clear:public": "rm -rf public/*",
     "move:build": "mv ./frontend/build/* ./public/ && rm -rf ./frontend/build",
     "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
