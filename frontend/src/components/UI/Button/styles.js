@@ -26,13 +26,18 @@ const StyledButton = styled.button`
       width: 100%;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       cursor: pointer;
       transform: translateY(-1px);
     }
 
     &:active {
       outline: 0;
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      box-shadow: none;
     }
 
     &-primary,
@@ -45,7 +50,7 @@ const StyledButton = styled.button`
       border-color: var(--light-obscure-primary-color);
       background-color: var(--light-obscure-primary-color);
 
-      &:active {
+      &:active:not(:disabled) {
         border-color: var(--primary-color);
         background-color: var(--primary-color);
       }
@@ -63,18 +68,19 @@ const StyledButton = styled.button`
     }
 
     &-danger {
-      border-color: #f5365c;
-      background-color: #f5365c;
+      border-color: var(--danger-color);
+      background-color: var(--danger-color);
 
-      &:active {
+      &:active:not(:disabled) {
         background-color: #ec0c38;
       }
     }
 
     &-success {
-      border-color: #2dce89;
-      background-color: #2dce89;
-      &:active {
+      border-color: var(--success-color);
+      background-color: var(--success-color);
+
+      &:active:not(:disabled) {
         background-color: #24a46d;
       }
     }
@@ -87,13 +93,13 @@ const StyledButton = styled.button`
         background-color: transparent;
         box-shadow: none;
 
-        &:hover {
+        &:hover:not(:disabled) {
           color: #fff;
           transform: translateY(-1px);
           box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
         }
 
-        &:active {
+        &:active:not(:disabled) {
           box-shadow: none;
         }
       }
@@ -102,7 +108,7 @@ const StyledButton = styled.button`
         color: var(--light-obscure-primary-color);
         border-color: var(--light-obscure-primary-color);
 
-        &:hover {
+        &:hover:not(:disabled) {
           background-color: var(--light-obscure-primary-color);
         }
       }
@@ -110,26 +116,26 @@ const StyledButton = styled.button`
       &-secondary {
         color: #f72f57;
 
-        &:hover {
+        &:hover:not(:disabled) {
           color: #212529;
         }
       }
 
       &-danger {
-        color: #f5365c;
-        border-color: #f5365c;
+        color: var(--danger-color);
+        border-color: var(--danger-color);
 
-        &:hover {
-          background-color: #f5365c;
+        &:hover:not(:disabled) {
+          background-color: var(--danger-color);
         }
       }
 
       &-success {
-        color: #2dce89;
-        border-color: #2dce89;
+        color: var(--success-color);
+        border-color: var(--success-color);
 
-        &:hover {
-          background-color: #2dce89;
+        &:hover:not(:disabled) {
+          background-color: var(--success-color);
         }
       }
     }

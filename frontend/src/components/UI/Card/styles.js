@@ -49,7 +49,7 @@ const StyledCard = styled.div`
       font-weight: 400;
       line-height: 1.5;
       text-align: left;
-      color: #525f7f;
+      color: #535353;
 
       width: 100%;
       padding: 1.5rem;
