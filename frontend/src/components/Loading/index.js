@@ -1,13 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import StyledPage from './styles';
 
-const Loading = props => (
+const Loading = ({ text }) => (
   <StyledPage>
-    <p>Loading...</p>
+    <p>{text}</p>
   </StyledPage>
 );
 
-Loading.propTypes = {};
+Loading.defaultProps = {
+  text: 'Loading...',
+};
+
+Loading.propTypes = {
+  text: PropTypes.string,
+};
 
 export default Loading;

@@ -18,3 +18,15 @@
   box-sizing: border-box;
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  color: #535353;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  color: #535353;
+}

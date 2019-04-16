@@ -38,6 +38,19 @@ export const SlideRight = (extendEnter = {}, extendExit = {}, moreOptions = {}) 
 });
 
 /**
+ * Returns an object to be used by react-pose to create a SlideLeft animation
+ *
+ * @param {{}} [extendEnter={}]
+ * @param {{}} [extendExit={}]
+ * @param {{}} [moreOptions={}]
+ */
+export const SlideLeft = (extendEnter = {}, extendExit = {}, moreOptions = {}) => ({
+  enter: { x: 0, opacity: 1, delay: 200, ...extendEnter },
+  exit: { x: 300, opacity: 0, ...extendExit },
+  ...moreOptions,
+});
+
+/**
  * Returns an object to be used by react-pose to create a FadeIn animation
  *
  * @param {{}} [extendEnter={}]

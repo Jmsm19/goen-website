@@ -7,18 +7,25 @@
   "license": "MIT",
   "description": "GOEN Maracaibo's website frontend",
   "private": true,
-  "proxy": "https://localhots:5000",
+  "proxy": "http://localhost:5000",
   "dependencies": {
+    "@kevinwolf/formal-web": "^0.1.0",
+    "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "date-fns": "^1.30.1",
+    "enquire.js": "^2.1.6",
     "i18next": "^15.0.9",
     "i18next-browser-languagedetector": "^3.0.1",
     "i18next-xhr-backend": "^2.0.1",
+    "js-cookie": "^2.2.0",
     "polished": "^3.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.0",
     "react-i18next": "^10.7.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
