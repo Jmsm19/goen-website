@@ -30,3 +30,7 @@ html, body {
   height: 100%;
   color: #535353;
 }
+
+a {
+  text-decoration: none;
+}

@@ -7,6 +7,7 @@ import Footer from '../Footer';
 
 import StyledLayout from './styles';
 import { AuthContext } from '../../../context/AuthContext';
+import AccountActivationPage from '../../../pages/activate';
 
 const PlainLayout = props => {
   const { isAuth } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const PlainLayout = props => {
     <StyledLayout className='layout'>
       <main>
         <Switch>
+          <Route exact path='/activate' component={AccountActivationPage} />
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/' component={LoginPage} />
         </Switch>
