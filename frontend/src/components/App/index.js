@@ -13,14 +13,14 @@ const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
-  const [_, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
     enquireScreen(isMob => {
       setIsMobile(!!isMob);
     });
 
-    return StopEnquireScreen();
+    return () => StopEnquireScreen();
   });
 
   return (
