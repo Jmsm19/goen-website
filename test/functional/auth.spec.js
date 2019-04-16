@@ -11,6 +11,9 @@ const Mail = use('Mail');
 const { formatMessage } = use('Antl');
 
 const User = use('App/Models/User');
+const Hashids = use('Hashids');
+
+const { getTransformedResponse } = require('../mocks');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -20,7 +23,7 @@ test('it registers an user', async ({ assert, client }) => {
 
   const userData = {
     name: 'Test User Name',
-    email: 'testEmail@gmail.com',
+    email: 'registerTestEmail@gmail.com',
     nationalId: '20689290',
     password: '20689293',
     password_confirmation: '20689293',
@@ -40,7 +43,7 @@ test('it registers an user', async ({ assert, client }) => {
 
   // Assert response
   response.assertStatus(201);
-  response.assertJSONSubset({
+  response.assertJSON({
     message: formatMessage('auth.successfulSignup'),
   });
 });
@@ -53,10 +56,10 @@ test('it gets the logged in user', async ({ client }) => {
     .loginVia(user, 'jwt')
     .end();
 
+  const expectedResponse = await getTransformedResponse(user, 'UserTransformer');
+
   response.assertStatus(200);
-  response.assertJSONSubset({
-    data: user.toJSON(),
-  });
+  response.assertJSON(expectedResponse);
 });
 
 test('it shows error on invalid activation token', async ({ assert, client }) => {
@@ -66,7 +69,7 @@ test('it shows error on invalid activation token', async ({ assert, client }) =>
     .end();
 
   response.assertStatus(400);
-  response.assertJSONSubset({
+  response.assertJSON({
     error: formatMessage('auth.invalidActivationToken'),
   });
 });
@@ -97,9 +100,11 @@ test('it handles activation token correctly', async ({ assert, client }) => {
   assert.equal(user.active, true);
   assert.equal(user.activation_token, '');
 
-  response.assertJSONSubset({
+  const expectedResponse = await getTransformedResponse(user, 'UserTransformer');
+
+  response.assertJSON({
     data: {
-      ...user.toJSON(),
+      ...expectedResponse.data,
       active: true,
     },
   });
@@ -107,7 +112,7 @@ test('it handles activation token correctly', async ({ assert, client }) => {
 
 test('it shows validations errors on missing data (name, nationalId)', async ({ client }) => {
   const userData = {
-    email: 'testEmail@gmail.com',
+    email: 'validationTestEmail@gmail.com',
     password: '20689293',
     password_confirmation: '20689293',
     birthDate: '1992-01-09',
@@ -120,11 +125,12 @@ test('it shows validations errors on missing data (name, nationalId)', async ({ 
     .end();
 
   response.assertStatus(400);
-  response.assertJSONSubset({
+  response.assertJSON({
     code: 'E_VALIDATION_FAILED',
     error: [
-      { field: 'name', validation: 'required' },
+      { message: 'required validation failed on name', field: 'name', validation: 'required' },
       {
+        message: 'required validation failed on nationalId',
         field: 'nationalId',
         validation: 'required',
       },

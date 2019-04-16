@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
 /** @typedef {import('../../Models/User')} User */
 
 /** @type {import('@adonisjs/antl/src/Antl')} */
@@ -45,6 +46,7 @@ class AuthController {
     if (userSignupActive || isAdmin) {
       const { body } = request;
       const activationToken = await Hash.make(body.email);
+
       const user = await User.create({
         name: body.name,
         email: body.email,
@@ -88,9 +90,10 @@ class AuthController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    * @param {String} ctx.locale
+   * @param {Bumblebee} ctx.transform
    * @memberof AuthController
    */
-  async activateSignup({ request, response, locale }) {
+  async activateSignup({ request, response, locale, transform }) {
     const { token } = request.all();
     const user = await User.query()
       .where('activation_token', token)
@@ -109,9 +112,7 @@ class AuthController {
 
     Event.fire('verified::user', { user: user.toJSON(), locale });
 
-    return {
-      data: user.toJSON(),
-    };
+    return transform.item(user, 'UserTransformer');
   }
 
   /**
@@ -121,17 +122,14 @@ class AuthController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    * @memberof AuthController
    */
-  async login({ auth, request, response }) {
+  async login({ auth, request, response, transform }) {
     const { email, password } = request.all();
     const token = await auth.attempt(email, password);
 
-    return {
-      data: {
-        ...token,
-      },
-    };
+    return transform.item(token, 'TokenTransformer');
   }
 
   /**
@@ -141,13 +139,13 @@ class AuthController {
    * @param {object} ctx
    * @param {object} ctx.auth
    * @param {function} ctx.auth.getUser
+   * @param {Bumblebee} ctx.transform
    * @memberof AuthController
    */
-  async getUser({ auth }) {
+  async getUser({ auth, transform }) {
     const loggedInUser = await auth.getUser();
-    return {
-      data: loggedInUser,
-    };
+
+    return transform.item(loggedInUser, 'UserTransformer');
   }
 }
 

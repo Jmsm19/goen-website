@@ -1,6 +1,8 @@
 /** @type {typeof import('@adonisjs/vow/src/Suite')} */
 const { test, trait } = use('Test/Suite')('Middleware');
 
+const Hashids = use('Hashids');
+
 /** @type {import('@adonisjs/antl/src/Antl')} */
 const { formatMessage } = use('Antl');
 
@@ -18,9 +20,11 @@ test('CheckRole: it checks for required role before request', async ({ client })
   const clan = await Factory.model('App/Models/Clan').create();
   const user = await Factory.model('App/Models/User').create();
 
+  const hashedId = Hashids.encode(clan.id);
+
   // Not allow request
   let response = await client
-    .delete(`api/clans/${clan.id}`)
+    .delete(`api/clans/${hashedId}`)
     .loginVia(user, 'jwt')
     .end();
 
@@ -33,7 +37,7 @@ test('CheckRole: it checks for required role before request', async ({ client })
   const adminRole = await Role.find(1);
   await user.roles().attach(adminRole.id);
   response = await client
-    .delete(`api/clans/${clan.id}`)
+    .delete(`api/clans/${hashedId}`)
     .loginVia(user, 'jwt')
     .end();
 

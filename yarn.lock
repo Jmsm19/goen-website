@@ -122,6 +122,14 @@
     node-exceptions "^3.0.0"
     upcast "^2.1.1"
 
+"@adonisjs/generic-exceptions@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@adonisjs/generic-exceptions/-/generic-exceptions-3.0.1.tgz#57c55a912d72911c614f528a32a4b399feaf6a99"
+  integrity sha512-AHBSvgKj17cQYkj7QL7la8KCB6WeBQPyHlgzX9nimLPY9ViWWmwozuy2skEjsh7+XNIg8vQdZphJyoIf8QzzCQ==
+  dependencies:
+    node-exceptions "^4.0.1"
+    upcast "^4.0.0"
+
 "@adonisjs/ignitor@^2.0.8":
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/@adonisjs/ignitor/-/ignitor-2.0.8.tgz#d4db4f09d8f0ee0e7f9b5030de14135a25a8bf91"
@@ -344,12 +352,25 @@ acorn@^6.0.2, acorn@^6.0.7:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
   integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
+adonis-bumblebee@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/adonis-bumblebee/-/adonis-bumblebee-2.0.0.tgz#9339f284690d4e051646107408b47ec8c8236308"
+  integrity sha512-HUvzuoU3Xb4je23Pjec1SLTA8r8GWUoE6BVCl9y32IfrqKD3o1XXWwWcHs5SK1zFgb4OLjB6NDWQmvg8MKs1tg==
+
 adonis-cache@^0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/adonis-cache/-/adonis-cache-0.3.4.tgz#101b4c2e379a3100b7ab2bd48e021a7e128d1579"
   integrity sha512-HAaEJn+vwYuvFsEv0QBjI7wTH/+B2hamInWSaIEnkS/LmEuSx0WAYqRVIv05RJZZ3BEZm+uldIfxSThXQHp6fA==
   dependencies:
     lodash "^4.17.11"
+
+adonis-hashids@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/adonis-hashids/-/adonis-hashids-1.0.5.tgz#28fbd7fc870bf7d3392d19e3a867384d5ab90a7b"
+  integrity sha512-MinmKygde4Mes41jdgTa0LJNcRfRASr3aG409DgisXs83GEbj5qhr5ong7Bz3g+rFaxevgak/NH5G5A1iTCQrw==
+  dependencies:
+    "@adonisjs/generic-exceptions" "^3.0.1"
+    hashids "^1.2.2"
 
 adonis-throttle-requests@^1.0.5:
   version "1.0.5"
@@ -1859,6 +1880,11 @@ eslint@^5.14.1:
     table "^5.2.3"
     text-table "^0.2.0"
 
+esm@^3.0.84:
+  version "3.2.22"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.22.tgz#5062c2e22fee3ccfee4e8f20da768330da90d6e3"
+  integrity sha512-z8YG7U44L82j1XrdEJcqZOLUnjxco8pO453gKOlaMD1/md1n/5QrscAmYG+oKUspsmDLuBFZrpbxI6aQ67yRxA==
+
 espree@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/espree/-/espree-5.0.1.tgz#5d6526fa4fc7f0788a5cf75b15f30323e2f81f7a"
@@ -2487,6 +2513,11 @@ hasha@^3.0.0:
   integrity sha1-UqMvq4Vp1BymmmH/GiFPjrfIvTk=
   dependencies:
     is-stream "^1.0.1"
+
+hashids@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/hashids/-/hashids-1.2.2.tgz#28635c7f2f7360ba463686078eee837479e8eafb"
+  integrity sha512-dEHCG2LraR6PNvSGxosZHIRgxF5sNLOIBFEHbj8lfP9WWmu/PWPMzsip1drdVSOFi51N2pU7gZavrgn7sbGFuw==
 
 haye@^2.0.1, haye@^2.0.2:
   version "2.0.2"
@@ -3683,6 +3714,11 @@ node-exceptions@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-3.0.0.tgz#48b8e10da71370845ef1af583778139527308d11"
   integrity sha512-pFhMAqdN1avrFwtZs66HxYiVnbnH9wjXB4m8IKs5Z9+r7U5voqxT+EDbVkRfge+V7JnkOgKhN4HfKBn1o5g9Wg==
+
+node-exceptions@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-4.0.1.tgz#70425d17a245c3c00709c72f57c4c20b39ef1a4c"
+  integrity sha512-KJI+FawYOv74x60H6+zrBPfO2vvp9m0pHZi6SH8BBBuc67Irv11DsqY4Le4EBFq1/T5aXFU3hkLrMgtW7RNXxA==
 
 node-pre-gyp@^0.11.0:
   version "0.11.0"
@@ -5613,6 +5649,13 @@ upcast@^2.1.1:
   integrity sha512-c+ueM175OVWv9vr1SYA3rI1ao0bxq6Y7l6u5Sac25Hi0yWz9Lz341zt9/sVOa5+7lYcvHMb0xxaacFy/2lVF2w==
   dependencies:
     cross-env "^5.1.0"
+
+upcast@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/upcast/-/upcast-4.0.0.tgz#30c8397a8805be1f40b176f253c78f0f53d108f6"
+  integrity sha512-LS0LmQtEPyyM3Zk4Bb7dNpDVha0xD4Z/Ne3zAqal0hCU/nYjoYU7qic2MPKB+Lu+3h5vKSe2iVqvYnZjmLrAyQ==
+  dependencies:
+    esm "^3.0.84"
 
 uri-js@^4.2.2:
   version "4.2.2"

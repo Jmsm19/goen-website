@@ -20,6 +20,8 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   'adonis-cache/providers/CacheProvider',
   'adonis-throttle-requests/providers/ThrottleRequestsProvider',
+  'adonis-hashids/providers/HashidsProvider',
+  'adonis-bumblebee/providers/BumblebeeProvider',
 ];
 
 /*
@@ -35,6 +37,7 @@ const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
   '@adonisjs/vow/providers/VowProvider',
   'adonis-cache/providers/CommandsProvider',
+  'adonis-bumblebee/providers/CommandsProvider',
 ];
 
 /*

@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
 
 const { forLocale } = use('Antl');
 
@@ -16,20 +17,12 @@ class ClanController {
    * GET clans
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {
-    const { middlewareError, middlewareErrorStatus } = request;
-
-    if (request.middlewareError) {
-      return response.status(middlewareErrorStatus).json(middlewareError);
-    }
-
+  async index({ transform }) {
     const clans = await Clan.all();
-    return {
-      data: clans.toJSON(),
-    };
+
+    return transform.collection(clans, 'ClanTransformer');
   }
 
   /**
@@ -38,13 +31,12 @@ class ClanController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async store({ request }) {
+  async store({ request, transform }) {
     const newClan = await Clan.create(request.only(['name', 'picture']));
-    return {
-      data: newClan.toJSON(),
-    };
+
+    return transform.item(newClan, 'ClanTransformer');
   }
 
   /**
@@ -53,14 +45,13 @@ class ClanController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async show({ params, request, response }) {
+  async show({ params, transform }) {
     const { id } = params;
-    const clan = await Clan.findOrFail(id);
-    return {
-      data: clan.toJSON(),
-    };
+    const clan = await Clan.findByHashOrFail(id);
+
+    return transform.item(clan, 'ClanTransformer');
   }
 
   /**
@@ -69,14 +60,17 @@ class ClanController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
+   * @param {object} ctx.params
+   * @param {String} ctx.params.id
+   * @param {Bumblebee} ctx.transform
    */
-  async update({ params, request }) {
+  async update({ params, request, transform }) {
     const { id } = params;
-    const clan = await Clan.findOrFail(id);
+    const clan = await Clan.findByHashOrFail(id);
+
     await clan.merge(request.only(['name', 'picture']));
-    return {
-      data: clan.toJSON(),
-    };
+
+    return transform.item(clan, 'ClanTransformer');
   }
 
   /**
@@ -84,13 +78,16 @@ class ClanController {
    * DELETE clans/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {object} ctx.params
+   * @param {String} ctx.params.id
+   * @param {String} ctx.locale
    */
   async destroy({ params, locale }) {
     const { id } = params;
-    const clan = await Clan.find(id);
+    const clan = await Clan.findByHashOrFail(id);
+
     await clan.delete();
+
     return {
       message: forLocale(locale).formatMessage('models.deleted', {
         model: forLocale(locale).formatMessage('models.clan'),

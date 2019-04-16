@@ -1,5 +1,7 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
 
 /** @type {typeof import('../../Models/Role')} */
 const Role = use('App/Models/Role');
@@ -13,14 +15,11 @@ class RoleController {
    * GET roles
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {
+  async index({ transform }) {
     const roles = await Role.all();
-    return {
-      data: roles.toJSON(),
-    };
+    return transform.collection(roles, 'RoleTransformer');
   }
 
   /**
