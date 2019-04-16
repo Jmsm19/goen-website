@@ -14,6 +14,7 @@ const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
   'Adonis/Middleware/AuthInit',
   'App/Middleware/ConvertEmptyStringsToNull',
+  'Adonis/Middleware/ThrottleRequests',
 ];
 
 /*
@@ -37,6 +38,7 @@ const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   guest: 'Adonis/Middleware/AllowGuestOnly',
   role: 'App/Middleware/CheckRole',
+  throttle: 'Adonis/Middleware/ThrottleRequests',
 };
 
 /*

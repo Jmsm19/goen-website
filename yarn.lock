@@ -344,6 +344,18 @@ acorn@^6.0.2, acorn@^6.0.7:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
   integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
+adonis-cache@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/adonis-cache/-/adonis-cache-0.3.4.tgz#101b4c2e379a3100b7ab2bd48e021a7e128d1579"
+  integrity sha512-HAaEJn+vwYuvFsEv0QBjI7wTH/+B2hamInWSaIEnkS/LmEuSx0WAYqRVIv05RJZZ3BEZm+uldIfxSThXQHp6fA==
+  dependencies:
+    lodash "^4.17.11"
+
+adonis-throttle-requests@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/adonis-throttle-requests/-/adonis-throttle-requests-1.0.5.tgz#a85ca09e7306c320306fa2d8e7d39399e4ad41a4"
+  integrity sha512-4gMMRPVpEVs0pJUu5XfgCeyaNTPIZoaJEMJU4+RT9J0sCO/K+oF6YE51kJqEkRUAN9cU96vXhsD9wBx4CWY5Cw==
+
 ajv@^6.5.5, ajv@^6.9.1:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.10.0.tgz#90d0d54439da587cd7e843bfb7045f50bd22bdf1"
