@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
@@ -8,7 +7,7 @@ import queryString from 'query-string';
 import useAxios from '../../hooks/useAxios';
 
 import Card from '../../components/UI/Card';
-import Button from '../../components/UI/Button';
+import LinkButton from '../../components/Navigation/LinkButton';
 
 import StyledPage from './styles';
 import ActivationMessage from './ActivationMessage';
@@ -50,9 +49,14 @@ const AccountActivationPage = ({ location }) => {
               />
 
               {isAccountActivated && (
-                <Link to='/'>
-                  <Button text={t('Login')} outline fullWidth />
-                </Link>
+                <LinkButton
+                  to='/'
+                  btnProps={{
+                    text: t('Login'),
+                    outline: true,
+                    fullWidth: true,
+                  }}
+                />
               )}
             </>
           )}

@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { PoseGroup } from 'react-pose';
 import { useTranslation } from 'react-i18next';
 
-import Button from '../../components/UI/Button';
+import LinkButton from '../../components/Navigation/LinkButton';
 
 import { StyledRegisterCard, StyledPage } from './styles';
 import RegisterForm from './registerForm';
@@ -27,9 +26,15 @@ const RegisterPage = props => {
           <StyledRegisterCard key='register-card' className='register-card' fullWidth>
             {signupSuccess ? <h1>{message}</h1> : <RegisterForm t={t} />}
 
-            <Link to='/' className='to-login-btn'>
-              <Button text={t('Login')} type='secondary' outline />
-            </Link>
+            <LinkButton
+              to='/'
+              className='to-login-btn'
+              btnProps={{
+                text: t('Login'),
+                type: 'secondary',
+                outline: true,
+              }}
+            />
           </StyledRegisterCard>
         </PoseGroup>
       </StyledPage>
