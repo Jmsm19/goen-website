@@ -15,6 +15,7 @@ const globalMiddleware = [
   'Adonis/Middleware/AuthInit',
   'App/Middleware/ConvertEmptyStringsToNull',
   'Adonis/Middleware/ThrottleRequests',
+  'App/Middleware/DelayResponse',
 ];
 
 /*
