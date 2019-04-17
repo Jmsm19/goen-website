@@ -3,6 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+/** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env');
 
 class DelayResponse {
@@ -18,7 +19,7 @@ class DelayResponse {
       await new Promise(resolve => {
         setTimeout(() => {
           resolve();
-        }, Env.get('RESPONSE_DELAY'));
+        }, Env.get('RESPONSE_DELAY', 1000));
       });
     }
 
