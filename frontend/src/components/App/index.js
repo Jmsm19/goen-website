@@ -8,6 +8,8 @@ import '../../i18n';
 import Loading from '../Loading';
 import { AuthContextProvider } from '../../context/AuthContext';
 
+import routes from '../../lib/config/routes';
+
 const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
 const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
@@ -28,10 +30,13 @@ const App = () => {
       <BrowserRouter>
         <Suspense fallback={<Loading text='Loading Dashboard...' />}>
           <Switch>
-            <Route exact path='/dashboard' render={rProps => <DashboardLayout {...rProps} />} />
+            <Route
+              path={routes.dashboard.prefix}
+              render={rProps => <DashboardLayout isMobile={isMobile} {...rProps} />}
+            />
 
             <Suspense fallback={<Loading />}>
-              <Route path='/' render={rProps => <PlainLayout {...rProps} />} />
+              <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
             </Suspense>
           </Switch>
         </Suspense>

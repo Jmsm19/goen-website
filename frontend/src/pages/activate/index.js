@@ -12,6 +12,8 @@ import LinkButton from '../../components/Navigation/LinkButton';
 import StyledPage from './styles';
 import ActivationMessage from './ActivationMessage';
 
+import routes from '../../lib/config/routes';
+
 const AccountActivationPage = ({ location }) => {
   const { t } = useTranslation();
   const { token } = queryString.parse(location.search);
@@ -50,7 +52,7 @@ const AccountActivationPage = ({ location }) => {
 
               {isAccountActivated && (
                 <LinkButton
-                  to='/'
+                  to={routes.login}
                   btnProps={{
                     text: t('Login'),
                     outline: true,

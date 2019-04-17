@@ -9,6 +9,8 @@ import LinkButton from '../../components/Navigation/LinkButton';
 import { StyledPage, StyledLoginCard } from './styles';
 import Logo from '../../assets/images/goen-logo-big.jpg';
 
+import routes from '../../lib/config/routes';
+
 const LoginPage = props => {
   const { t } = useTranslation();
 
@@ -26,7 +28,7 @@ const LoginPage = props => {
             <LoginForm t={t} />
 
             <LinkButton
-              to='/register'
+              to={routes.register}
               className='to-register-btn'
               btnProps={{
                 text: t('Register'),

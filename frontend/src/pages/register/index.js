@@ -9,6 +9,8 @@ import { StyledRegisterCard, StyledPage } from './styles';
 import RegisterForm from './registerForm';
 import { AuthContext } from '../../context/AuthContext';
 
+import routes from '../../lib/config/routes';
+
 const RegisterPage = props => {
   const { t } = useTranslation();
   const { signupSuccess, message } = useContext(AuthContext);
@@ -27,7 +29,7 @@ const RegisterPage = props => {
             {signupSuccess ? <h1>{message}</h1> : <RegisterForm t={t} />}
 
             <LinkButton
-              to='/'
+              to={routes.login}
               className='to-login-btn'
               btnProps={{
                 text: t('Login'),
