@@ -17,19 +17,18 @@ const useAxios = (url, config = { method: 'GET', body: {} }) => {
   const [response, setResponse] = useState(null);
 
   const handleResponse = res => {
-    const { REACT_APP_AXIOS_RESPONSE_DELAY } = process.env;
+    setIsRequesting(false);
 
-    setTimeout(() => {
-      setIsRequesting(false);
-      if (res.response && res.response.status >= 400) {
-        setResponse(res.response);
-      } else {
-        setResponse({
-          status: res.status,
-          data: res.data,
-        });
-      }
-    }, REACT_APP_AXIOS_RESPONSE_DELAY || 0);
+    if (res.response && res.response.status >= 400) {
+      // On Error
+      setResponse(res.response);
+    } else {
+      // On Success
+      setResponse({
+        status: res.status,
+        data: res.data,
+      });
+    }
   };
 
   useEffect(() => {
