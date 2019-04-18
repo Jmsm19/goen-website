@@ -1,0 +1,77 @@
+import styled from 'styled-components';
+
+import { AnimatedBackdrop, AnimatedSidebar } from './animations';
+
+const StyledSidebar = styled(AnimatedSidebar)`
+  &.sidebar {
+    z-index: 9000;
+
+    height: 90vh;
+    width: 100%;
+
+    &.mobile {
+      height: 100vh;
+      position: absolute;
+      top: 0;
+
+      .side-nav {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+`;
+
+export const StyledNav = styled.nav`
+  &.side-nav {
+    z-index: 1;
+    position: static;
+
+    overflow: auto;
+    height: inherit;
+    width: 100%;
+    min-width: 250px;
+    padding: 1rem;
+    padding-right: 1.3rem;
+
+    border: 0;
+
+    color: rgba(255, 255, 255, 0.7);
+    background-color: var(--black);
+
+    @media screen and (max-width: 768px) {
+      width: 70%;
+      max-width: 100vw;
+    }
+
+    a {
+      color: inherit;
+      display: block;
+      transition: all ease;
+
+      &.active {
+        color: #fff;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+`;
+
+export const StyledBackdrop = styled(AnimatedBackdrop)`
+  &.backdrop {
+    content: ' ';
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+
+    background-color: #f4f4f4;
+  }
+`;
+
+export default StyledSidebar;
