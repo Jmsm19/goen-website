@@ -9,6 +9,10 @@ module.exports = {
   dashboard: {
     prefix: '/dashboard',
     home: '/dashboard',
+    settings: '/dashboard/settings',
+    user: {
+      profile: '/dashboard/user/profile',
+    },
     admin: {
       home: 'dashboard/admin',
       instructors: '/dashboard/instructors',

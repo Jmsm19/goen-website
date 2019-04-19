@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledNavSection = styled.div`
   &.route-section {
-    margin-bottom: 25px;
+    margin: 15px 0 30px 0;
 
     .section-title {
       color: rgba(255, 255, 255, 0.7);

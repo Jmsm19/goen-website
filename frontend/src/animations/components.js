@@ -5,7 +5,7 @@ import posed from 'react-pose';
 import Card from '../components/UI/Card';
 
 // Animations
-import { SlideUp } from './index';
+import { SlideUp, FadeIn } from './index';
 
 // Animated Components
 export const SlideUpCard = posed(Card)(
@@ -13,4 +13,21 @@ export const SlideUpCard = posed(Card)(
     delay: 300,
     beforeChildren: true,
   }),
+);
+
+export const FadeInRouteContainer = posed.div(
+  FadeIn(
+    {
+      delay: 300,
+      transition: 'ease',
+      beforeChildren: true,
+    },
+    {
+      delay: 0,
+      transition: {
+        duration: 0,
+      },
+      afterChildren: true,
+    },
+  ),
 );

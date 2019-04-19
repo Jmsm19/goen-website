@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { LogOut, Menu } from 'styled-icons/feather';
 
-const StyledLayout = styled.div`
+export const StyledLayout = styled.div`
   &.dashboard-layout {
     position: relative;
     height: 100vh;
@@ -24,6 +25,56 @@ const StyledLayout = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
+      .right-nav {
+        display: flex;
+        flex-direction: row;
+        justify-items: flex-end;
+        align-items: center;
+
+        .open-sidebar-btn,
+        .logout-btn {
+          letter-spacing: normal;
+        }
+
+        .open-sidebar-btn {
+          border: none;
+          padding: 10px;
+
+          &:hover {
+            background-color: transparent;
+            transform: none;
+            box-shadow: none;
+          }
+        }
+
+        .logout-btn {
+          color: #fff;
+
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+
+        a {
+          color: rgba(255, 255, 255, 0.7);
+          padding: 15px;
+
+          &:not(:last-child) {
+            display: block;
+            margin-right: 10px;
+          }
+
+          &.active {
+            color: #fff;
+            font-weight: 600;
+          }
+
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
     }
 
     .inner-layout {
@@ -38,4 +89,12 @@ const StyledLayout = styled.div`
   }
 `;
 
-export default StyledLayout;
+export const LogoutIcon = styled(LogOut)`
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const MenuIcon = styled(Menu)`
+  color: #fff;
+  font-weight: bold;
+`;

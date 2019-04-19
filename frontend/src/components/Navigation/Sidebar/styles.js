@@ -45,13 +45,28 @@ export const StyledNav = styled.nav`
       max-width: 100vw;
     }
 
+    .logout-btn {
+      color: inherit;
+      padding: 0;
+      margin: 0.67em 0;
+      letter-spacing: normal;
+      font-weight: 400;
+
+      &:hover {
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
     a {
       color: inherit;
       display: block;
       transition: all ease;
+      margin: 15px 0;
 
       &.active {
         color: #fff;
+        font-weight: 600;
       }
 
       &:hover {
