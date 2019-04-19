@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from '../../lib/utils/styling';
 
 import { SlideUpCard } from '../../animations/components';
 

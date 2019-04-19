@@ -17,7 +17,7 @@ const LoginForm = ({ t }) => {
 
   const formalConfig = { schema, onSubmit: login };
   const formal = useFormal(initialValues, formalConfig);
-  const { getFormProps, getFieldProps, getSubmitButtonProps, submit, reset } = formal;
+  const { getFormProps, getFieldProps, getSubmitButtonProps, submit } = formal;
 
   return (
     <StyledForm className='login-form' {...getFormProps()}>
