@@ -11,7 +11,8 @@ const StyledButton = styled.button`
     vertical-align: middle;
     /* Appearance */
     width: max-content;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     padding: 0.625rem 1.25rem;
     border-radius: 0.375rem;
     border: 1px solid transparent;
@@ -20,6 +21,10 @@ const StyledButton = styled.button`
     user-select: none;
     transition: all 0.15s ease;
     will-change: transform;
+
+    svg {
+      margin: 0 5px;
+    }
 
     &.btn-block {
       display: block;
