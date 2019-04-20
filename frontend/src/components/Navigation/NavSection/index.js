@@ -15,7 +15,7 @@ const NavSection = ({ title, routes, onLinkClick }) => {
   return (
     !!routeLinks.length && (
       <StyledNavSection className='route-section'>
-        <h1 className='section-title'>{title}</h1>
+        <h3 className='section-title'>{title}</h3>
         <nav className='links'>{routeLinks}</nav>
       </StyledNavSection>
     )
