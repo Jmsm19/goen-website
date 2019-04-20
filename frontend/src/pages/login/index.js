@@ -17,9 +17,7 @@ const LoginPage = props => {
   return (
     <>
       {/* Head */}
-      <Helmet>
-        <title>GOEN | {t('Login')}</title>
-      </Helmet>
+      <Helmet title={`GOEN | ${t('Login')}`} />
 
       {/* Body */}
       <StyledPage className='login-page'>

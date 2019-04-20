@@ -18,9 +18,7 @@ const RegisterPage = props => {
   return (
     <>
       {/* Head */}
-      <Helmet>
-        <title>GOEN | {t('Register')}</title>
-      </Helmet>
+      <Helmet title={`GOEN | ${t('Register')}`} />
 
       {/* Body */}
       <StyledPage className='register-page'>
