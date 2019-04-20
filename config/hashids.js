@@ -36,7 +36,7 @@ module.exports = {
   */
 
   default: {
-    salt: 'your-salt-string',
+    salt: Env.get('HASHIDS_SALT'),
     length: 0,
     alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   },
