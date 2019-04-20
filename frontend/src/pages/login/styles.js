@@ -30,6 +30,10 @@ export const StyledLoginCard = styled(SlideUpCard)`
       display: block;
       text-align: center;
       margin-top: 20px;
+
+      .btn {
+        display: inline-block;
+      }
     }
   }
 `;
