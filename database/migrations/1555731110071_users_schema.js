@@ -1,6 +1,8 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
+const Env = use('Env');
+
 class UsersSchema extends Schema {
   up() {
     this.table('users', table => {
@@ -16,7 +18,10 @@ class UsersSchema extends Schema {
 
   down() {
     this.table('users', table => {
-      table.dropForeign('clan_id');
+      if (Env.get('DB_CONNECTION') !== 'sqlite') {
+        table.dropForeign('clan_id');
+      }
+
       table.dropColumn('clan_id');
     });
   }
