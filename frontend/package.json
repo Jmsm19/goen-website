@@ -1,7 +1,6 @@
 {
   "name": "goen_maracaibo_frontend",
   "version": "1.0.0",
-  "homepage": "*",
   "main": "index.html",
   "author": "Jorge Soto <Jorgemsm19@gmail.com>",
   "license": "MIT",
@@ -32,7 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn build-sw",
+    "build": "yarn install --production=false && yarn react-scripts build && yarn build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-sw": "node ./src/sw-build.js",

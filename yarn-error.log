@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add adonis-cache adonis-throttle-requests
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js build
 
 PATH: 
-  C:\Program Files\Cmder\bin;C:\Program Files\Cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files\Cmder\vendor\conemu-maximus5;C:\Program Files\Cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\laragon\bin\php\php-7.1.12-Win32-VC14-x64\;C:\laragon\bin\pear\;C:\ProgramData\ComposerSetup\bin;C:\Program Files (x86)\Skype\Phone\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\chromedriver.exe;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Amazon\AWSCLI\;C:\Users\J_msm\AppData\Roaming\Python\Python36\Scripts;C:\Program Files\nodejs\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Ruby25-x64\bin;C:\Users\J_msm\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\J_msm\AppData\Local\Programs\Python\Python36\;C:\Users\J_msm\AppData\Local\Microsoft\WindowsApps;C:\laragon\bin\php\php-7.1.12-Win32-VC14-x64\;C:\laragon\bin\pear\;C:\Users\J_msm\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Microsoft VS Code Insiders\bin;C:\chromedriver.exe;C:\Program Files\heroku\bin;C:\Users\J_msm\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\J_msm\AppData\Roaming\npm;C:\Users\J_msm\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Program Files\Cmder\
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\J_msm\bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\laragon\bin\php\php-7.1.12-Win32-VC14-x64;C:\laragon\bin\pear;C:\ProgramData\ComposerSetup\bin;C:\Program Files (x86)\Skype\Phone;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\chromedriver.exe;C:\Program Files (x86)\QuickTime\QTSystem;C:\Program Files\Amazon\AWSCLI;C:\Users\J_msm\AppData\Roaming\Python\Python36\Scripts;C:\Program Files\nodejs;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Ruby25-x64\bin;C:\Users\J_msm\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\J_msm\AppData\Local\Programs\Python\Python36;C:\Users\J_msm\AppData\Local\Microsoft\WindowsApps;C:\laragon\bin\php\php-7.1.12-Win32-VC14-x64;C:\laragon\bin\pear;C:\Users\J_msm\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Microsoft VS Code Insiders\bin;C:\chromedriver.exe;C:\Program Files\heroku\bin;C:\Users\J_msm\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\J_msm\AppData\Roaming\npm;C:\Users\J_msm\AppData\Local\Yarn\bin
 
 Yarn version: 
   1.15.2
@@ -14,14 +14,21 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:57:26)
+  SyntaxError: C:\laragon\www\goen-website\package.json: Unexpected token } in JSON at position 1023
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:304:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:315:13
 
 npm manifest: 
   {
     "name": "goen_maracaibo_frontend",
     "version": "1.0.0",
-    "homepage": "*",
+    "engines": {
+      "node": "10.3.0"
+    },
+    "homepage": "https://goen-website-test.herokuapp.com",
     "main": "server.js",
     "author": "Jorge Soto <Jorgemsm19@gmail.com>",
     "license": "MIT",
@@ -37,9 +44,9 @@ npm manifest:
       "dev:server": "adonis serve --dev --ignore frontend",
       "clear:public": "rm -rf public/*",
       "move:build": "mv ./frontend/build/* ./public/ && rm -rf ./frontend/build",
-      "build": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
+      "heroku-postbuild": "yarn clear:public && cd frontend && yarn build && cd .. && yarn move:build",
       "styleguide": "yarn front styleguide",
-      "test": "nyc --reporter=lcov node ace test --bail"
+      "test": "nyc --reporter=lcov node ace test --bail",
     },
     "dependencies": {
       "@adonisjs/ace": "^5.0.8",
@@ -54,6 +61,10 @@ npm manifest:
       "@adonisjs/mail": "^3.0.9",
       "@adonisjs/validator": "^5.0.6",
       "@adonisjs/vow": "^1.0.17",
+      "adonis-bumblebee": "^2.0.0",
+      "adonis-cache": "^0.3.4",
+      "adonis-hashids": "^1.0.5",
+      "adonis-throttle-requests": "^1.0.5",
       "mysql": "^2.16.0",
       "superagent": "^5.0.2"
     },
@@ -207,6 +218,14 @@ Lockfile:
     dependencies:
       node-exceptions "^3.0.0"
       upcast "^2.1.1"
+  
+  "@adonisjs/generic-exceptions@^3.0.1":
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/@adonisjs/generic-exceptions/-/generic-exceptions-3.0.1.tgz#57c55a912d72911c614f528a32a4b399feaf6a99"
+    integrity sha512-AHBSvgKj17cQYkj7QL7la8KCB6WeBQPyHlgzX9nimLPY9ViWWmwozuy2skEjsh7+XNIg8vQdZphJyoIf8QzzCQ==
+    dependencies:
+      node-exceptions "^4.0.1"
+      upcast "^4.0.0"
   
   "@adonisjs/ignitor@^2.0.8":
     version "2.0.8"
@@ -429,6 +448,31 @@ Lockfile:
     version "6.1.1"
     resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
     integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
+  
+  adonis-bumblebee@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/adonis-bumblebee/-/adonis-bumblebee-2.0.0.tgz#9339f284690d4e051646107408b47ec8c8236308"
+    integrity sha512-HUvzuoU3Xb4je23Pjec1SLTA8r8GWUoE6BVCl9y32IfrqKD3o1XXWwWcHs5SK1zFgb4OLjB6NDWQmvg8MKs1tg==
+  
+  adonis-cache@^0.3.4:
+    version "0.3.4"
+    resolved "https://registry.yarnpkg.com/adonis-cache/-/adonis-cache-0.3.4.tgz#101b4c2e379a3100b7ab2bd48e021a7e128d1579"
+    integrity sha512-HAaEJn+vwYuvFsEv0QBjI7wTH/+B2hamInWSaIEnkS/LmEuSx0WAYqRVIv05RJZZ3BEZm+uldIfxSThXQHp6fA==
+    dependencies:
+      lodash "^4.17.11"
+  
+  adonis-hashids@^1.0.5:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/adonis-hashids/-/adonis-hashids-1.0.5.tgz#28fbd7fc870bf7d3392d19e3a867384d5ab90a7b"
+    integrity sha512-MinmKygde4Mes41jdgTa0LJNcRfRASr3aG409DgisXs83GEbj5qhr5ong7Bz3g+rFaxevgak/NH5G5A1iTCQrw==
+    dependencies:
+      "@adonisjs/generic-exceptions" "^3.0.1"
+      hashids "^1.2.2"
+  
+  adonis-throttle-requests@^1.0.5:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/adonis-throttle-requests/-/adonis-throttle-requests-1.0.5.tgz#a85ca09e7306c320306fa2d8e7d39399e4ad41a4"
+    integrity sha512-4gMMRPVpEVs0pJUu5XfgCeyaNTPIZoaJEMJU4+RT9J0sCO/K+oF6YE51kJqEkRUAN9cU96vXhsD9wBx4CWY5Cw==
   
   ajv@^6.5.5, ajv@^6.9.1:
     version "6.10.0"
@@ -1933,6 +1977,11 @@ Lockfile:
       table "^5.2.3"
       text-table "^0.2.0"
   
+  esm@^3.0.84:
+    version "3.2.22"
+    resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.22.tgz#5062c2e22fee3ccfee4e8f20da768330da90d6e3"
+    integrity sha512-z8YG7U44L82j1XrdEJcqZOLUnjxco8pO453gKOlaMD1/md1n/5QrscAmYG+oKUspsmDLuBFZrpbxI6aQ67yRxA==
+  
   espree@^5.0.1:
     version "5.0.1"
     resolved "https://registry.yarnpkg.com/espree/-/espree-5.0.1.tgz#5d6526fa4fc7f0788a5cf75b15f30323e2f81f7a"
@@ -2561,6 +2610,11 @@ Lockfile:
     integrity sha1-UqMvq4Vp1BymmmH/GiFPjrfIvTk=
     dependencies:
       is-stream "^1.0.1"
+  
+  hashids@^1.2.2:
+    version "1.2.2"
+    resolved "https://registry.yarnpkg.com/hashids/-/hashids-1.2.2.tgz#28635c7f2f7360ba463686078eee837479e8eafb"
+    integrity sha512-dEHCG2LraR6PNvSGxosZHIRgxF5sNLOIBFEHbj8lfP9WWmu/PWPMzsip1drdVSOFi51N2pU7gZavrgn7sbGFuw==
   
   haye@^2.0.1, haye@^2.0.2:
     version "2.0.2"
@@ -3757,6 +3811,11 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-3.0.0.tgz#48b8e10da71370845ef1af583778139527308d11"
     integrity sha512-pFhMAqdN1avrFwtZs66HxYiVnbnH9wjXB4m8IKs5Z9+r7U5voqxT+EDbVkRfge+V7JnkOgKhN4HfKBn1o5g9Wg==
+  
+  node-exceptions@^4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-4.0.1.tgz#70425d17a245c3c00709c72f57c4c20b39ef1a4c"
+    integrity sha512-KJI+FawYOv74x60H6+zrBPfO2vvp9m0pHZi6SH8BBBuc67Irv11DsqY4Le4EBFq1/T5aXFU3hkLrMgtW7RNXxA==
   
   node-pre-gyp@^0.11.0:
     version "0.11.0"
@@ -5687,6 +5746,13 @@ Lockfile:
     integrity sha512-c+ueM175OVWv9vr1SYA3rI1ao0bxq6Y7l6u5Sac25Hi0yWz9Lz341zt9/sVOa5+7lYcvHMb0xxaacFy/2lVF2w==
     dependencies:
       cross-env "^5.1.0"
+  
+  upcast@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/upcast/-/upcast-4.0.0.tgz#30c8397a8805be1f40b176f253c78f0f53d108f6"
+    integrity sha512-LS0LmQtEPyyM3Zk4Bb7dNpDVha0xD4Z/Ne3zAqal0hCU/nYjoYU7qic2MPKB+Lu+3h5vKSe2iVqvYnZjmLrAyQ==
+    dependencies:
+      esm "^3.0.84"
   
   uri-js@^4.2.2:
     version "4.2.2"
