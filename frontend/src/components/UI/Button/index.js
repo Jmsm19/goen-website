@@ -41,6 +41,7 @@ Button.defaultProps = {
   iconPosition: 'start',
   onClick: () => null,
   outline: false,
+  text: '',
   type: 'primary',
 };
 
@@ -52,7 +53,7 @@ Button.propTypes = {
   iconPosition: PropTypes.oneOf(['start', 'end']),
   onClick: PropTypes.func,
   outline: PropTypes.bool,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   type: PropTypes.oneOf(['primary', 'secondary', 'danger', 'success', 'warning']),
 };
 
