@@ -7,10 +7,12 @@ class RoleUserSchema extends Schema {
       table.increments();
       table
         .integer('user_id')
+        .unsigned()
         .references('id')
         .inTable('users');
       table
         .integer('role_id')
+        .unsigned()
         .references('id')
         .inTable('roles');
       table.timestamps();
