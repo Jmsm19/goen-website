@@ -19,12 +19,6 @@ class UserSchema extends Schema {
       table.string('phone_number');
       table.date('birth_date');
       table
-        .integer('clan_id')
-        .unsigned()
-        .nullable()
-        .references('id')
-        .inTable('clans');
-      table
         .enum('registration_status', ['idle', 'paying', 'verifying payment', 'registered'])
         .default('idle');
       table.boolean('active').defaultTo(false);
