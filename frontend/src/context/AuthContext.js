@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 
@@ -19,6 +19,13 @@ const AuthContextProvider = ({ children }) => {
   const register = userData => RegisterUser(userData, dispatch);
   const logout = () => LogoutUser(dispatch);
   const getAuthUser = () => GetAuthUser(dispatch);
+
+  const { isAuth, authUser } = state;
+  useEffect(() => {
+    if (isAuth && !authUser) {
+      getAuthUser();
+    }
+  }, [isAuth]);
 
   return (
     <AuthContext.Provider value={{ ...state, login, register, logout, getAuthUser }}>

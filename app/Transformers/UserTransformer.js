@@ -1,4 +1,6 @@
 /* eslint-disable class-methods-use-this */
+/** @typedef {import('../Models/User')} User */
+
 const Hashids = use('Hashids');
 const BumblebeeTransformer = use('Bumblebee/Transformer');
 
@@ -11,8 +13,13 @@ const BumblebeeTransformer = use('Bumblebee/Transformer');
 class UserTransformer extends BumblebeeTransformer {
   /**
    * This method is used to transform the data.
+   * @param {User} model
    */
-  transform(model) {
+  async transform(model) {
+    const rolesArr = [];
+    const roles = await model.roles().fetch();
+    roles.toJSON().map(role => rolesArr.push(role.name));
+
     return {
       id: Hashids.encode(model.id),
       name: model.name,
@@ -23,6 +30,11 @@ class UserTransformer extends BumblebeeTransformer {
       birthDate: model.birth_date,
       registrationStatus: model.registration_status,
       active: !!model.active,
+
+      isAdmin: rolesArr.includes('admin'),
+      isInstructor: rolesArr.includes('instructor'),
+      isAssistant: rolesArr.includes('assistant'),
+      isStudent: rolesArr.includes('student'),
     };
   }
 }

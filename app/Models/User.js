@@ -93,6 +93,50 @@ class User extends Model {
   }
 
   /**
+   * Checks if the User has the Admin role
+   *
+   * @returns {Boolean}
+   * @memberof User
+   * @method isAdmin
+   */
+  async isAdmin() {
+    return await this.hasRole('admin');
+  }
+
+  /**
+   * Checks if the User has the Instructor role
+   *
+   * @returns {Boolean}
+   * @memberof User
+   * @method isInstructor
+   */
+  async isInstructor() {
+    return await this.hasRole('instructor');
+  }
+
+  /**
+   * Checks if the User has the Assistant role
+   *
+   * @returns {Boolean}
+   * @memberof User
+   * @method isAssistant
+   */
+  async isAssistant() {
+    return await this.hasRole('assistant');
+  }
+
+  /**
+   * Checks if the User has the Student role
+   *
+   * @returns {Boolean}
+   * @memberof User
+   * @method isStudent
+   */
+  async isStudent() {
+    return await this.hasRole('student');
+  }
+
+  /**
    * Returns a BelongsTo relationship with the Clan model
    *
    * @memberof User
