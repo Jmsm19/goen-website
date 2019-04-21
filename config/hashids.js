@@ -37,7 +37,7 @@ module.exports = {
 
   default: {
     salt: Env.get('HASHIDS_SALT'),
-    length: 0,
+    length: Env.get('HASHIDS_LENGTH'),
     alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   },
 
