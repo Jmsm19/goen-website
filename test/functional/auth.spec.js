@@ -53,7 +53,7 @@ test('it gets the logged in user', async ({ client }) => {
 
   const response = await client
     .get('api/auth/user')
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   const expectedResponse = await getTransformedResponse(user, 'UserTransformer');

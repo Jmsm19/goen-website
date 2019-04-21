@@ -9,9 +9,7 @@ const { formatMessage } = use('Antl');
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 
-const Clan = use('App/Models/Clan');
-const User = use('App/Models/User');
-const Role = use('App/Models/Role');
+const { getRole } = require('../../app/Utils');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -25,7 +23,7 @@ test('CheckRole: it checks for required role before request', async ({ client })
   // Not allow request
   let response = await client
     .delete(`api/clans/${hashedId}`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   response.assertStatus(401);
@@ -34,11 +32,11 @@ test('CheckRole: it checks for required role before request', async ({ client })
   });
 
   // Allow request
-  const adminRole = await Role.find(1);
-  await user.roles().attach(adminRole.id);
+  const role = await getRole('admin');
+  await user.roles().attach([role.id]);
   response = await client
     .delete(`api/clans/${hashedId}`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   response.assertStatus(200);

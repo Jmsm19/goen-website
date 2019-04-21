@@ -16,23 +16,10 @@ const Hash = use('Hash');
 /** @type {import('../../Models/User')} */
 const User = use('App/Models/User');
 
-/** @type {typeof import('../../Models/Admin')} */
-const Admin = use('App/Models/Admin');
-
-/** @type {typeof import('../../Models/Instructor')} */
-const Instructor = use('App/Models/Instructor');
-
-/** @type {typeof import('../../Models/Assistant')} */
-const Assistant = use('App/Models/Assistant');
-
-/** @type {typeof import('../../Models/Student')} */
-const Student = use('App/Models/Student');
-
-/** @type {import('../../Models/Role')} */
-const Role = use('App/Models/Role');
-
 /** @type {import('../../Models/Setting')} */
 const Setting = use('App/Models/Setting');
+
+const { getRole } = require('../../Utils');
 
 class AuthController {
   /**
@@ -59,7 +46,7 @@ class AuthController {
       const { body } = request;
       const activationToken = await Hash.make(body.email);
 
-      const userData = {
+      const user = await User.create({
         name: body.name,
         email: body.email,
         national_id: body.nationalId,
@@ -67,29 +54,17 @@ class AuthController {
         birth_date: body.birthDate,
         phone_number: body.phoneNumber,
         activation_token: activationToken,
-      };
+      });
 
-      let user;
       const { roleName } = request.all();
       if (isAdmin && roleName) {
         // Attach specific role
-        switch (roleName) {
-          case 'admin':
-            user = await Admin.create(userData);
-            break;
-          case 'instructor':
-            user = await Instructor.create(userData);
-            break;
-          case 'assistant':
-            user = await Assistant.create(userData);
-            break;
-          case 'student':
-          default:
-            user = await Student.create(userData);
-            break;
-        }
+        const role = await getRole(roleName);
+        await user.roles().attach([role.id]);
       } else {
-        user = await Student.create(userData);
+        // Attach student role
+        const role = await getRole('student');
+        await user.roles().attach([role.id]);
       }
 
       Event.fire('new::user', { user: user.toJSON(), locale });

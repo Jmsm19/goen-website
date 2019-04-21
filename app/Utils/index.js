@@ -1,3 +1,5 @@
+const Role = use('App/Models/Role');
+
 module.exports = {
   /**
     Returns an 404 error response with message
@@ -10,4 +12,9 @@ module.exports = {
     response.status(404).json({
       error: message,
     }),
+
+  getRole: async roleName =>
+    await Role.query()
+      .where('name', roleName)
+      .firstOrFail(),
 };

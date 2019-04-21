@@ -7,19 +7,17 @@ const Hashids = use('Hashids');
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 
-/** @type {typeof import('../../app/Models/Role')} */
-const Role = use('App/Models/Role');
-
 /** @type {typeof import('../../app/Models/Clan')} */
 const Clan = use('App/Models/Clan');
 
+const { getRole } = require('../../app/Utils');
 const { getTransformedResponse } = require('../mocks');
 
 const createAdminUser = async () => {
-  const adminRole = await Role.find(1);
-  const user = await Factory.model('App/Models/User').create();
-  await user.roles().attach(adminRole.id);
-  return user;
+  const admin = await Factory.model('App/Models/User').create();
+  const role = await getRole('admin');
+  await admin.roles().attach([role.id]);
+  return admin;
 };
 
 trait('Test/ApiClient');
@@ -46,7 +44,7 @@ test('it stores a new clan', async ({ client }) => {
   const response = await client
     .post('api/clans')
     .send(data)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   const expectedResponse = await getTransformedResponse(
@@ -66,7 +64,7 @@ test('it shows a single clan based on id', async ({ client }) => {
 
   const response = await client
     .get(`api/clans/${hashedId}`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   const expectedResponse = await getTransformedResponse(clan, 'ClanTransformer');
@@ -85,7 +83,7 @@ test('it updates a clan', async ({ client }) => {
   const response = await client
     .put(`api/clans/${hashedId}`)
     .send({ name: newName })
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   const expectedResponse = await getTransformedResponse(clan, 'ClanTransformer');
@@ -105,7 +103,7 @@ test('it deletes a clan', async ({ assert, client }) => {
 
   const response = await client
     .delete(`api/clans/${hashedId}`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'api')
     .end();
 
   response.assertStatus(200);
