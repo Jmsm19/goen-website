@@ -48,17 +48,37 @@ export const RegisterUser = (userData, dispatch) => {
 };
 
 export const GetAuthUser = dispatch => {
-  GetData('auth/user').then(({ data: { data } }) => {
-    dispatch({
-      type: actionTypes.AUTH_GET_USER,
-      payload: {
-        authUser: data,
-      },
+  GetData('auth/user')
+    .then(({ data: { data } }) => {
+      dispatch({
+        type: actionTypes.AUTH_GET_USER,
+        payload: {
+          authUser: data,
+        },
+      });
+    })
+    .catch(({ response }) => {
+      if (response.status === 401) {
+        dispatch({
+          type: actionTypes.AUTH_LOGIN_FAILED,
+          payload: { ...response },
+        });
+      }
     });
-  });
 };
 
 export const LogoutUser = dispatch => {
-  Cookies.remove('token');
-  dispatch({ type: actionTypes.AUTH_LOGOUT });
+  SendData('POST', 'auth/logout')
+    .then(({ data }) => {
+      Cookies.remove('token');
+      dispatch({ type: actionTypes.AUTH_LOGOUT });
+    })
+    .catch(({ response }) => {
+      if (response.status === 401) {
+        dispatch({
+          type: actionTypes.AUTH_LOGIN_FAILED,
+          payload: { ...response },
+        });
+      }
+    });
 };
