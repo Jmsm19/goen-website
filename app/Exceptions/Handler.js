@@ -32,7 +32,7 @@ class ExceptionHandler extends BaseExceptionHandler {
     };
 
     switch (code) {
-      case 'E_INVALID_JWT_TOKEN':
+      case 'E_INVALID_API_TOKEN':
         return response.status(status).json({
           ...basicError,
           error: forLocale(locale).formatMessage('auth.invalidToken'),

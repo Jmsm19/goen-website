@@ -117,16 +117,35 @@ class AuthController {
    * GET auth/login
    *
    * @param {object} ctx
+   * @param {object} ctx.auth
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
    * @param {Bumblebee} ctx.transform
    * @memberof AuthController
    */
-  async login({ auth, request, response, transform }) {
+  async login({ auth, request, transform }) {
     const { email, password } = request.all();
     const token = await auth.attempt(email, password);
 
     return transform.item(token, 'TokenTransformer');
+  }
+
+  /**
+   * Revokes API token for the authenticated user
+   * POST auth/logout
+   *
+   * @param {object} ctx
+   * @param {object} ctx.auth
+   * @param {Response} ctx.response
+   * @param {String} ctx.locale
+   * @memberof AuthController
+   */
+  async logout({ auth, response, locale }) {
+    const apiToken = auth.getAuthHeader();
+    await auth.authenticator('api').revokeTokens([apiToken], true);
+
+    return response.status(201).json({
+      message: forLocale(locale).formatMessage('auth.logout'),
+    });
   }
 
   /**

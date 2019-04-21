@@ -7,23 +7,8 @@
  */
 module.exports = Route => {
   Route.group(() => {
-    Route.post('/login', 'AuthController.login')
-      .as('auth.login')
-      .validator('LoginUser');
-
-    Route.post('/signup', 'AuthController.signup')
-      .as('auth.signup')
-      .validator('SignupUser');
-
-    Route.post('/activate', 'AuthController.activateSignup')
-      .as('auth.signup')
-      .validator('SignupActivate');
-  })
-    .prefix('api/auth/')
-    .middleware('guest');
-
-  Route.group(() => {
     Route.get('/user', 'AuthController.getUser').as('auth.user');
+    Route.post('/logout', 'AuthController.logout').as('auth.logout');
   })
     .prefix('api/auth/')
     .middleware('auth');

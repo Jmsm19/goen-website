@@ -1,13 +1,29 @@
 /** @typedef {import('@adonisjs/framework/src/Route/Manager')} Route */
 
-const User = use('App/Models/User');
-
 /**
  * Public Routes
  *
  * @param {Route} Route
  */
 module.exports = Route => {
+  /** Route prefix: api/auth */
+  Route.group(() => {
+    Route.post('/login', 'AuthController.login')
+      .as('auth.login')
+      .validator('LoginUser');
+
+    Route.post('/signup', 'AuthController.signup')
+      .as('auth.signup')
+      .validator('SignupUser');
+
+    Route.post('/activate', 'AuthController.activateSignup')
+      .as('auth.signup')
+      .validator('SignupActivate');
+  })
+    .prefix('api/auth/')
+    .middleware('guest');
+
+  /** Route prefix: api/ */
   Route.group(() => {
     Route.resource('clans', 'ClanController')
       .apiOnly()
