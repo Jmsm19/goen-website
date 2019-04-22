@@ -58,7 +58,7 @@ test('it gets the logged in user', async ({ client }) => {
     .loginVia(user, 'api')
     .end();
 
-  const expectedResponse = await getTransformedResponse(user, 'UserTransformer');
+  const expectedResponse = await getTransformedResponse(user, 'UserTransformer.withExtra');
 
   response.assertStatus(200);
   response.assertJSON(expectedResponse);
@@ -104,13 +104,11 @@ test('it handles activation token correctly', async ({ assert, client }) => {
   assert.equal(user.active, true);
   assert.equal(user.activation_token, '');
 
-  const expectedResponse = await getTransformedResponse(user, 'UserTransformer');
+  const expectedResponse = await getTransformedResponse(user, 'UserTransformer.withExtra');
 
   response.assertJSON({
-    data: {
-      ...expectedResponse.data,
-      active: true,
-    },
+    ...expectedResponse,
+    active: true,
   });
 });
 

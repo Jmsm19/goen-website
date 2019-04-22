@@ -109,7 +109,7 @@ class AuthController {
 
     Event.fire('verified::user', { user: user.toJSON(), locale });
 
-    return transform.item(user, 'UserTransformer');
+    return transform.item(user, 'UserTransformer.withExtra');
   }
 
   /**
@@ -161,7 +161,7 @@ class AuthController {
   async getUser({ auth, transform }) {
     const loggedInUser = await auth.getUser();
 
-    return transform.item(loggedInUser, 'UserTransformer');
+    return transform.item(loggedInUser, 'UserTransformer.withExtra');
   }
 }
 

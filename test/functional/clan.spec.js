@@ -52,7 +52,7 @@ test('it stores a new clan', async ({ client }) => {
     .end();
 
   const expectedResponse = await getTransformedResponse(
-    { id: Hashids.decode(response.body.data.id), ...data },
+    { id: Hashids.decode(response.body.id), ...data },
     'ClanTransformer',
   );
 
@@ -94,10 +94,8 @@ test('it updates a clan', async ({ client }) => {
 
   response.assertStatus(200);
   response.assertJSON({
-    data: {
-      ...expectedResponse.data,
-      name: newName,
-    },
+    ...expectedResponse,
+    name: newName,
   });
 });
 

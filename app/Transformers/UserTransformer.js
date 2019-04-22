@@ -16,15 +16,22 @@ class UserTransformer extends BumblebeeTransformer {
    * @param {User} model
    */
   async transform(model) {
+    return {
+      id: Hashids.encode(model.id),
+      name: model.name,
+      email: model.email,
+    };
+  }
+
+  async transformWithExtra(model) {
+    const baseUserData = await this.transform(model);
+
     const rolesArr = [];
     const roles = await model.roles().fetch();
     roles.toJSON().map(role => rolesArr.push(role.name));
 
     return {
-      id: Hashids.encode(model.id),
-      name: model.name,
-      email: model.email,
-
+      ...baseUserData,
       nationalId: model.national_id.toString(),
       phoneNumber: model.phone_number,
       birthDate: model.birth_date,
