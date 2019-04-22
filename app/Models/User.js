@@ -155,7 +155,7 @@ class User extends Model {
    * @method hasClan
    */
   hasClan() {
-    return !!this.clan;
+    return !!this.clan_id;
   }
 
   /**

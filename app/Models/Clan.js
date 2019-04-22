@@ -2,16 +2,19 @@
 const Model = use('Model');
 
 class Clan extends Model {
+  static boot() {
+    super.boot();
+    this.addTrait('FindByHash');
+  }
+
   static get hidden() {
     return ['created_at', 'updated_at'];
   }
 
   /**
-   * Returns a hasMany relationship with User Model
+   * Returns a HasMany relationship with User Model
    *
-   * @method users
-   *
-   * @return {Object}
+   * @method User
    */
   users() {
     return this.hasMany('App/Models/User');

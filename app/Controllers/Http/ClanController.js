@@ -68,7 +68,8 @@ class ClanController {
     const { id } = params;
     const clan = await Clan.findByHashOrFail(id);
 
-    await clan.merge(request.only(['name', 'picture']));
+    clan.merge(request.only(['name', 'picture']));
+    clan.save();
 
     return transform.item(clan, 'ClanTransformer');
   }
