@@ -22,13 +22,4 @@ module.exports = Route => {
   })
     .prefix('api/auth/')
     .middleware('guest');
-
-  /** Route prefix: api/ */
-  Route.group(() => {
-    Route.resource('clans', 'ClanController')
-      .apiOnly()
-      .only(['index']);
-  })
-    .prefix('api/')
-    .middleware(['guest']);
 };

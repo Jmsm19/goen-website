@@ -49,7 +49,13 @@ class ExceptionHandler extends BaseExceptionHandler {
             email: request.all().email,
           }),
         });
+      case 'E_GUEST_ONLY':
+        return response.status(status).json({
+          ...basicError,
+          error: forLocale(locale).formatMessage('auth.guestOnly'),
+        });
       default:
+        // eslint-disable-next-line prefer-rest-params
         return super.handle(...arguments);
     }
   }

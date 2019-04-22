@@ -25,8 +25,12 @@ trait('Auth/Client');
 
 test('it gets a list of clans', async ({ client }) => {
   const clans = await Clan.all();
+  const user = await createAdminUser();
 
-  const response = await client.get('api/clans').end();
+  const response = await client
+    .get('api/clans')
+    .loginVia(user, 'api')
+    .end();
   const expectedResponse = await getTransformedResponse(clans, 'ClanTransformer', true);
 
   response.assertStatus(200);

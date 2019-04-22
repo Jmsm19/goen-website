@@ -12,6 +12,8 @@ const { formatMessage } = use('Antl');
 
 const User = use('App/Models/User');
 const Hashids = use('Hashids');
+const Hash = use('Hash');
+const Factory = use('Factory');
 
 const { getTransformedResponse } = require('../mocks');
 
@@ -77,7 +79,9 @@ test('it shows error on invalid activation token', async ({ assert, client }) =>
 test('it handles activation token correctly', async ({ assert, client }) => {
   Event.fake();
 
-  let user = await User.find(1);
+  let user = await Factory.model('App/Models/User').create({
+    active: 0,
+  });
 
   // User is not active
   assert.equal(user.active, false);
@@ -95,7 +99,7 @@ test('it handles activation token correctly', async ({ assert, client }) => {
   Event.restore();
 
   // Assert response
-  user = await User.find(1);
+  user = await User.find(user.id);
   response.assertStatus(200);
   assert.equal(user.active, true);
   assert.equal(user.activation_token, '');

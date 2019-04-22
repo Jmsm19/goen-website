@@ -15,14 +15,22 @@ const Role = use('App/Models/Role');
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-Factory.blueprint('App/Models/User', async faker => ({
-  name: faker.name(),
-  email: faker.email(),
-  national_id: faker.ssn({ dashed: false }),
-  password: await Hash.make(faker.password()),
-  birth_date: faker.date(),
-  phone_number: faker.phone(),
-}));
+Factory.blueprint('App/Models/User', async (faker, i, data) => {
+  const email = faker.email();
+  const active = data.active !== undefined ? data.active : 1;
+
+  return {
+    name: faker.name(),
+    email,
+    national_id: faker.ssn({ dashed: false }),
+    password: await Hash.make(faker.password()),
+    birth_date: faker.date(),
+    phone_number: faker.phone(),
+    active,
+    email_verified_at: active ? new Date() : null,
+    activation_token: active ? '' : await Hash.make(email),
+  };
+});
 
 Factory.blueprint('App/Models/Clan', async faker => ({
   name: faker.name(),
