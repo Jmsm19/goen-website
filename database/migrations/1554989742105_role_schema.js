@@ -5,8 +5,11 @@ class RoleSchema extends Schema {
   up() {
     this.create('roles', table => {
       table.increments();
-      table.string('name').unique();
-      table.string('description');
+      table
+        .string('name')
+        .unique()
+        .notNullable();
+      table.string('description').notNullable();
       table.timestamps();
     });
   }

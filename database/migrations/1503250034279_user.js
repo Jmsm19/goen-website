@@ -1,6 +1,8 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
+const Config = use('Config');
+
 class UserSchema extends Schema {
   up() {
     this.create('users', table => {
@@ -9,20 +11,21 @@ class UserSchema extends Schema {
       table
         .integer('national_id')
         .unique()
-        .nullable();
+        .notNullable();
       table
         .string('email', 254)
         .notNullable()
         .unique();
       table.timestamp('email_verified_at').nullable();
       table.string('password', 60).notNullable();
-      table.string('phone_number');
-      table.date('birth_date');
+      table.string('phone_number').nullable();
+      table.date('birth_date').notNullable();
       table
         .enum('registration_status', ['idle', 'paying', 'verifying payment', 'registered'])
-        .default('idle');
+        .defaultTo('idle');
       table.boolean('active').defaultTo(false);
-      table.string('activation_token');
+      table.string('activation_token').nullable();
+      table.enum('preferred_locale', Config.get('constants.locale')).defaultTo('es');
       table.timestamps();
     });
   }

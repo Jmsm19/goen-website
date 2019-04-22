@@ -8,7 +8,8 @@ class PriceSchema extends Schema {
       table
         .decimal('amount', 12, 2)
         .unique()
-        .unsigned();
+        .unsigned()
+        .notNullable();
       table.timestamps();
     });
   }

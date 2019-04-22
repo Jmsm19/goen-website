@@ -1,4 +1,5 @@
 const Role = use('App/Models/Role');
+const Clan = use('App/Models/Clan');
 
 module.exports = {
   /**
@@ -15,6 +16,11 @@ module.exports = {
 
   getRole: async roleName =>
     await Role.query()
+      .where('name', roleName)
+      .firstOrFail(),
+
+  getClan: async roleName =>
+    await Clan.query()
       .where('name', roleName)
       .firstOrFail(),
 };

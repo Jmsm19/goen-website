@@ -8,9 +8,9 @@ class ScheduleSchema extends Schema {
   up() {
     this.create('schedules', table => {
       table.increments();
-      table.enum('day', Config.get('constants.days'));
-      table.time('from');
-      table.time('until');
+      table.enum('day', Config.get('constants.days')).notNullable();
+      table.time('from').notNullable();
+      table.time('until').notNullable();
       table.timestamps();
     });
   }

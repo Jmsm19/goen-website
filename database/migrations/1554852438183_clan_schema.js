@@ -5,8 +5,8 @@ class ClanSchema extends Schema {
   up() {
     this.create('clans', table => {
       table.increments();
-      table.string('name');
-      table.string('picture');
+      table.string('name').notNullable();
+      table.string('picture').nullable();
       table.timestamps();
     });
   }
