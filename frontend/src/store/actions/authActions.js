@@ -5,7 +5,7 @@ import { SendData, GetData } from '../../lib/utils/http';
 
 export const LoginUser = (loginData, dispatch) =>
   SendData('post', 'auth/login', loginData)
-    .then(({ data: { data, ...status } }) => {
+    .then(({ data }) => {
       if (data.error) {
         throw Error(data.error);
       }
@@ -49,7 +49,7 @@ export const RegisterUser = (userData, dispatch) => {
 
 export const GetAuthUser = dispatch => {
   GetData('auth/user')
-    .then(({ data: { data } }) => {
+    .then(({ data }) => {
       dispatch({
         type: actionTypes.AUTH_GET_USER,
         payload: {

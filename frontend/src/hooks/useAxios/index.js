@@ -26,7 +26,7 @@ const useAxios = (url, config = { method: 'GET', body: {} }) => {
       // On Success
       setResponse({
         status: res.status,
-        data: res.data,
+        data: res,
       });
     }
   };
