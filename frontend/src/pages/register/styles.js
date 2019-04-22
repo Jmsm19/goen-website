@@ -33,7 +33,9 @@ export const StyledRegisterCard = styled(SlideUpCard)`
 
     .to-login-btn {
       display: block;
+      width: max-content;
       text-align: center;
+      margin: 0 auto;
       margin-top: 20px;
 
       .btn {
