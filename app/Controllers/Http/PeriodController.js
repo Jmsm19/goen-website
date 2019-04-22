@@ -1,5 +1,10 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
+
+/** @type {typeof import('../../Models/Period')} */
+const Period = use('App/Models/Period');
 
 /**
  * Resourceful controller for interacting with periods
@@ -10,20 +15,13 @@ class PeriodController {
    * GET periods
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {}
+  async index({ transform }) {
+    const periods = await Period.all();
 
-  /**
-   * Render a form to be used for creating a new period.
-   * GET periods/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async create({ request, response }) {}
+    return transform.collection(periods, 'PeriodTransformer');
+  }
 
   /**
    * Create/save a new period.
@@ -43,17 +41,20 @@ class PeriodController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async show({ params, request, response }) {}
+  async show({ params, transform }) {
+    const { id } = params;
+    const period = await Period.findByHashOrFail(id);
 
-  /**
-   * Render a form to update an existing period.
-   * GET periods/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async edit({ params, request, response }) {}
+    return transform
+      .include([
+        'modules.clan',
+        'modules.price',
+        'modules.schedule',
+        'modules.instructor',
+        'modules.assistant',
+      ])
+      .item(period, 'PeriodTransformer');
+  }
 
   /**
    * Update period details.
@@ -74,6 +75,29 @@ class PeriodController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {}
+
+  /**
+   * Get the currently active Period
+   * GET periods/active
+   *
+   * @param {object} ctx
+   * @param {Bumblebee} ctx.transform
+   */
+  async getActive({ transform }) {
+    const period = await Period.query()
+      .where({ active: 1 })
+      .firstOrFail();
+
+    return transform
+      .include([
+        'modules.clan',
+        'modules.price',
+        'modules.schedule',
+        'modules.instructor',
+        'modules.assistant',
+      ])
+      .item(period, 'PeriodTransformer');
+  }
 }
 
 module.exports = PeriodController;

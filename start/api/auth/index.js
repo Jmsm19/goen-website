@@ -19,6 +19,11 @@ module.exports = Route => {
     Route.resource('clans', 'ClanController')
       .apiOnly()
       .only(['index', 'show']);
+
+    Route.get('periods/active', 'PeriodController.getActive').as('periods.active');
+    Route.resource('periods', 'PeriodController')
+      .apiOnly()
+      .except(['destroy', 'store', 'update']);
   })
     .prefix('api/')
     .middleware(['auth', 'verified']);

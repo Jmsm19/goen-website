@@ -13,6 +13,10 @@ module.exports = Route => {
       .apiOnly()
       .except(['index'])
       .validator(new Map([[['clans.store'], ['StoreClan']], [['clans.update'], ['UpdateClan']]]));
+
+    Route.resource('periods', 'PeriodController')
+      .apiOnly()
+      .only(['destroy', 'store', 'update']);
   })
     .prefix('api/')
     .middleware(['auth', 'verified', 'role:admin']);

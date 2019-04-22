@@ -6,6 +6,11 @@ class Role extends Model {
     return ['created_at', 'updated_at'];
   }
 
+  /**
+   * Returns a BelongsToMany relationship wih User
+   *
+   * @memberof Role
+   */
   users() {
     return this.belongsToMany('App/Models/User').withTimestamps();
   }
