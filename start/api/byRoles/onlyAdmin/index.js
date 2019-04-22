@@ -15,5 +15,5 @@ module.exports = Route => {
       .validator(new Map([[['clans.store'], ['StoreClan']], [['clans.update'], ['UpdateClan']]]));
   })
     .prefix('api/')
-    .middleware('auth', 'role:admin');
+    .middleware(['auth', 'verified', 'role:admin']);
 };

@@ -11,5 +11,5 @@ module.exports = Route => {
     Route.post('/logout', 'AuthController.logout').as('auth.logout');
   })
     .prefix('api/auth/')
-    .middleware('auth');
+    .middleware(['auth', 'verified']);
 };

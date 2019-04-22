@@ -40,6 +40,7 @@ const namedMiddleware = {
   guest: 'Adonis/Middleware/AllowGuestOnly',
   role: 'App/Middleware/CheckRole',
   throttle: 'Adonis/Middleware/ThrottleRequests',
+  verified: 'App/Middleware/OnlyVerifiedUser',
 };
 
 /*
