@@ -1,15 +1,14 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-const Env = use('Env');
-
 const createUnsignedIntCol = (table, name) =>
   table
     .integer(name)
     .unsigned()
-    .notNullable()
+    .nullable()
     .references('id')
-    .inTable('prices');
+    .inTable('prices')
+    .onDelete('SET NULL');
 
 class SettingSchema extends Schema {
   up() {

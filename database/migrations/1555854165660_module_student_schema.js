@@ -9,12 +9,14 @@ class ModuleStudentSchema extends Schema {
         .integer('user_id')
         .unsigned()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       table
         .integer('module_id')
         .unsigned()
         .references('id')
-        .inTable('modules');
+        .inTable('modules')
+        .onDelete('CASCADE');
       table.enum('status', ['current', 'failed', 'passed']).default('current');
       table.timestamps();
     });

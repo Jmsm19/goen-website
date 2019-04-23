@@ -16,7 +16,8 @@ class GradeSchema extends Schema {
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('modules');
+        .inTable('modules')
+        .onDelete('CASCADE');
       table
         .float('score')
         .unsigned()

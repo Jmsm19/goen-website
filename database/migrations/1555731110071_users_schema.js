@@ -12,6 +12,7 @@ class UsersSchema extends Schema {
         .nullable()
         .references('id')
         .inTable('clans')
+        .onDelete('SET NULL')
         .after('birth_date');
     });
   }

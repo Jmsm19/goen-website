@@ -9,12 +9,14 @@ class RoleUserSchema extends Schema {
         .integer('user_id')
         .unsigned()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       table
         .integer('role_id')
         .unsigned()
         .references('id')
-        .inTable('roles');
+        .inTable('roles')
+        .onDelete('CASCADE');
       table.timestamps();
     });
   }

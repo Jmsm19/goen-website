@@ -13,15 +13,17 @@ class ModuleSchema extends Schema {
       table
         .integer('period_id')
         .unsigned()
-        .notNullable()
+        .nullable()
         .references('id')
-        .inTable('periods');
+        .inTable('periods')
+        .onDelete('CASCADE');
       table
         .integer('schedule_id')
         .unsigned()
-        .notNullable()
+        .nullable()
         .references('id')
-        .inTable('schedules');
+        .inTable('schedules')
+        .onDelete('SET NULL');
       table
         .integer('price_id')
         .unsigned()
@@ -33,19 +35,22 @@ class ModuleSchema extends Schema {
         .unsigned()
         .nullable()
         .references('id')
-        .inTable('clans');
+        .inTable('clans')
+        .onDelete('SET NULL');
       table
         .integer('instructor_id')
         .unsigned()
         .nullable()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('SET NULL');
       table
         .integer('assistant_id')
         .unsigned()
         .nullable()
         .references('id')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('SET NULL');
       table.timestamps();
     });
   }
