@@ -6,7 +6,7 @@ class ModuleStudentSchema extends Schema {
     this.create('module_student', table => {
       table.increments();
       table
-        .integer('user_id')
+        .integer('student_id')
         .unsigned()
         .references('id')
         .inTable('users')
@@ -23,9 +23,7 @@ class ModuleStudentSchema extends Schema {
   }
 
   down() {
-    this.table('users', table => {
-      this.drop('module_student');
-    });
+    this.drop('module_student');
   }
 }
 

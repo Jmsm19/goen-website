@@ -23,6 +23,16 @@ class UserTransformer extends BumblebeeTransformer {
     };
   }
 
+  async transformWithStudentData(model) {
+    const baseUserData = await this.transform(model);
+
+    return {
+      ...baseUserData,
+      registrationStatus: model.registration_status,
+      active: !!model.active,
+    };
+  }
+
   async transformWithExtra(model) {
     const baseUserData = await this.transform(model);
 

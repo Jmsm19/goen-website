@@ -13,7 +13,7 @@ class ModuleTransformer extends BumblebeeTransformer {
   }
 
   static get availableInclude() {
-    return ['clan', 'price', 'period', 'schedule', 'instructor', 'assistant'];
+    return ['clan', 'price', 'period', 'schedule', 'instructor', 'assistant', 'students'];
   }
 
   /**
@@ -25,6 +25,7 @@ class ModuleTransformer extends BumblebeeTransformer {
       id: Hashids.encode(module.id),
       name: module.name,
       section: module.section,
+      fullName: `${module.name} - ${module.section}`,
     };
   }
 
@@ -50,6 +51,10 @@ class ModuleTransformer extends BumblebeeTransformer {
 
   includeAssistant(module) {
     return this.item(module.getRelated('assistant'), 'UserTransformer');
+  }
+
+  includeStudents(module) {
+    return this.collection(module.getRelated('students'), 'UserTransformer.withStudentData');
   }
 }
 

@@ -65,7 +65,7 @@ class ModuleSeeder {
 
     await createModule(0);
     await createModule(1);
-    await createModule(1);
+    await createModule(2);
   }
 }
 

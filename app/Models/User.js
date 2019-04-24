@@ -167,6 +167,18 @@ class User extends Model {
   grades() {
     return this.hasMany('App/Grade');
   }
+
+  /**
+   * Returns a BelongsToMany relationship with the Module model
+   *
+   * @memberof User
+   * @method modulesAsStudent
+   */
+  modulesAsStudent() {
+    return this.belongsToMany('App/Models/Module', 'student_id', 'module_id')
+      .pivotTable('module_student')
+      .withPivot(['status']);
+  }
 }
 
 module.exports = User;

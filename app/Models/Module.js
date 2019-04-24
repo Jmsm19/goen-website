@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
@@ -72,6 +73,17 @@ class Module extends Model {
    */
   assistant() {
     return this.belongsTo('App/Models/User', 'assistant_id');
+  }
+
+  /**
+   * Returns a BelongsToMany relationship with User/Student
+   *
+   * @memberof Module
+   */
+  students() {
+    return this.belongsToMany('App/Models/User', 'module_id', 'student_id')
+      .pivotTable('module_student')
+      .withPivot(['status']);
   }
 }
 
