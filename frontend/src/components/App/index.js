@@ -7,6 +7,7 @@ import '../../i18n';
 
 import Loading from '../Loading';
 import { AuthContextProvider } from '../../context/AuthContext';
+import { DataContextProvider } from '../../context/DataContext';
 
 import routes from '../../lib/config/routes';
 
@@ -27,20 +28,22 @@ const App = () => {
 
   return (
     <AuthContextProvider>
-      <BrowserRouter>
-        <Suspense fallback={<Loading text='Loading Dashboard...' />}>
-          <Switch>
-            <Route
-              path={routes.dashboard.prefix}
-              render={rProps => <DashboardLayout isMobile={isMobile} {...rProps} />}
-            />
+      <DataContextProvider>
+        <BrowserRouter>
+          <Suspense fallback={<Loading text='Loading Dashboard...' />}>
+            <Switch>
+              <Route
+                path={routes.dashboard.prefix}
+                render={rProps => <DashboardLayout isMobile={isMobile} {...rProps} />}
+              />
 
-            <Suspense fallback={<Loading />}>
-              <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
-            </Suspense>
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
+              <Suspense fallback={<Loading />}>
+                <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
+              </Suspense>
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </DataContextProvider>
     </AuthContextProvider>
   );
 };

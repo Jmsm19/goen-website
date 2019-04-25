@@ -11,4 +11,7 @@ module.exports = {
   AUTH_REGISTER_FAILED: 'AUTH_REGISTER_FAILED',
   // User Logout
   AUTH_LOGOUT: 'AUTH_LOGOUT',
+
+  // Period
+  GET_ACTIVE_PERIOD: 'GET_ACTIVE_PERIOD',
 };

@@ -1,37 +1,38 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Loading from '../../../../components/Loading';
 import PeriodSummary from './periodSummary';
 import ModulesAvailable from './modulesAvailable';
 
-import useAxios from '../../../../hooks/useAxios';
+import { DataContext } from '../../../../context/DataContext';
 
 import StyledPage from './styles';
 
 const AdminPeriodPage = props => {
   const { t } = useTranslation();
-  const [isRequesting, response] = useAxios('/periods/active');
+  const { activePeriod, getActivePeriod } = useContext(DataContext);
 
-  if (isRequesting) {
+  useState(() => {
+    if (!activePeriod) {
+      getActivePeriod();
+    }
+  }, []);
+
+  if (!activePeriod) {
     return <Loading />;
   }
 
-  let period;
-  if (response) {
-    period = response.data;
-  }
-
   return (
-    !!period && (
+    !!activePeriod && (
       <StyledPage className='dashboard-home'>
         <h1 className='section-title'>
-          {t('Period')} {period.name} - {period.year}
+          {t('Period')} {activePeriod.name} - {activePeriod.year}
         </h1>
 
-        <PeriodSummary t={t} period={period} />
+        <PeriodSummary t={t} period={activePeriod} />
 
-        <ModulesAvailable t={t} modules={period.modules} />
+        <ModulesAvailable t={t} modules={activePeriod.modules} />
       </StyledPage>
     )
   );
