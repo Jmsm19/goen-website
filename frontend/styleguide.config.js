@@ -17,7 +17,7 @@ module.exports = {
     },
   ],
   theme: {},
-  assetsDir: './src/assets/',
+  assetsDir: './public/',
   template: ({ css, js, title, publicPath }) => `
     <!DOCTYPE html>
     <html>

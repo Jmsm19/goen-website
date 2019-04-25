@@ -12,6 +12,7 @@ import DashboardHomePage from '../../../../pages/dashboard/home';
 
 import routes from '../../../../lib/config/routes';
 import { FadeInRouteContainer } from '../../../../animations/components';
+import AdminPeriodPage from '../../../../pages/dashboard/admin/period';
 
 const DashboardMain = ({ authUser, location }) => (
   <main className='main-content'>
@@ -19,6 +20,13 @@ const DashboardMain = ({ authUser, location }) => (
       <PoseGroup>
         <FadeInRouteContainer key={location.pathname}>
           <Route path={routes.dashboard.user.profile} component={ProfilePage} />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
+            path={routes.dashboard.admin.home}
+            component={AdminPeriodPage}
+          />
 
           <RoleRestrictedRoute
             authUser={authUser}

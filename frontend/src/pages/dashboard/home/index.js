@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 
-const DashboardHomePage = props => (
-  <div className='dashboard-home'>
-    <h1>Dashboard Home</h1>
-  </div>
-);
+import { AuthContext } from '../../../context/AuthContext';
+
+import routes from '../../../lib/config/routes';
+
+const DashboardHomePage = props => {
+  const { authUser } = useContext(AuthContext);
+  let path = routes.dashboard.student.home;
+
+  if (authUser.isAdmin) {
+    path = routes.dashboard.admin.home;
+  } else if (authUser.isInstructor) {
+    path = routes.dashboard.instructor.home;
+  } else if (authUser.isStudent) {
+    path = routes.dashboard.student.home;
+  }
+
+  return <Redirect to={path} push={false} />;
+};
 
 DashboardHomePage.propTypes = {};
 

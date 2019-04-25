@@ -1,11 +1,13 @@
+import React from 'react';
 import styled from 'styled-components';
 import { LogOut, Menu } from 'styled-icons/feather';
 
-export const StyledLayout = styled.div`
+export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} />)`
   &.dashboard-layout {
     position: relative;
     height: 100vh;
     width: 100vw;
+    ${'' /* background-color: #f0f2f5; */}
 
     display: grid;
     grid-template-rows: 10vh 90vh;
@@ -79,12 +81,13 @@ export const StyledLayout = styled.div`
 
     .inner-layout {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: ${({ isMobile }) => (isMobile ? '1fr' : 'auto 1fr')};
     }
 
     .main-content {
       padding: 15px;
       overflow-y: auto;
+      width: 100%;
     }
   }
 `;

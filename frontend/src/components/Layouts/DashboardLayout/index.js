@@ -34,7 +34,7 @@ const DashboardLayout = ({ isMobile, location }) => {
   }
 
   return (
-    <StyledLayout className='dashboard-layout'>
+    <StyledLayout className='dashboard-layout' isMobile={isMobile}>
       <TopNavigation
         t={t}
         routes={routes}

@@ -7,7 +7,7 @@ import NavSection from '../../../Navigation/NavSection';
 const AdminRoutes = ({ onLinkClick, t }) => {
   const links = [
     {
-      path: routes.dashboard.home,
+      path: routes.dashboard.admin.home,
       linkText: t('Period'),
     },
   ];

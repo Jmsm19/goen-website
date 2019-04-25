@@ -18,11 +18,13 @@ export const SlideUpCard = posed(Card)(
 export const FadeInRouteContainer = posed.div(
   FadeIn(
     {
+      height: '100%',
       delay: 300,
       transition: 'ease',
       beforeChildren: true,
     },
     {
+      height: '100%',
       delay: 0,
       transition: {
         duration: 0,

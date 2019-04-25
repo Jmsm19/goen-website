@@ -14,9 +14,9 @@ module.exports = {
       profile: '/dashboard/user/profile',
     },
     admin: {
-      home: 'dashboard/admin',
-      instructors: '/dashboard/instructors',
-      modules: '/dashboard/modules',
+      home: '/dashboard/admin',
+      instructors: '/dashboard/admin/instructors',
+      module: id => `/dashboard/admin/module/${id}`,
     },
     instructor: {
       home: '/dashboard/instructor',

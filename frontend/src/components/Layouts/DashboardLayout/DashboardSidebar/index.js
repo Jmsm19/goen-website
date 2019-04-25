@@ -11,6 +11,7 @@ import StudentRoutes from '../../RoutesSections/StudentRoutes';
 
 import routes from '../../../../lib/config/routes';
 import { LogoutIcon } from '../styles';
+import NavSection from '../../../Navigation/NavSection';
 
 const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, toggleOpen }) => {
   const delayedToggleSidebar = () => {
@@ -22,9 +23,11 @@ const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, to
   return (
     <Sidebar isMobile={isMobile} isOpen={isSidebarOpen} toggleOpen={toggleOpen}>
       {isMobile && (
-        <NavLink to={routes.dashboard.user.profile} onClick={delayedToggleSidebar}>
-          {t('Profile')}
-        </NavLink>
+        <NavSection
+          title={authUser.name}
+          routes={[{ linkText: t('Profile'), path: routes.dashboard.user.profile }]}
+          onLinkClick={delayedToggleSidebar}
+        />
       )}
 
       {/* Role based routes links */}
