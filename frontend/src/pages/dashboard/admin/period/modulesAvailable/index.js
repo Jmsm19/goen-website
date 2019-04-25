@@ -15,8 +15,8 @@ const ModulesAvailable = ({ t, modules }) => (
       {modules.map(module => {
         const { schedule } = module;
         return (
-          <Link to={routes.dashboard.admin.module(module.id)}>
-            <Card key={uuid()} title={module.fullName} hoverable fullWidth withShadow>
+          <Link to={routes.dashboard.admin.module(module.id)} key={uuid()}>
+            <Card title={module.fullName} hoverable fullWidth withShadow>
               <p>{t(schedule.day)}</p>
               <p>
                 {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
