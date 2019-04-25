@@ -22,7 +22,7 @@ Factory.blueprint('App/Models/User', async (faker, i, data) => {
   return {
     name: faker.name(),
     email,
-    national_id: faker.ssn({ dashed: false }),
+    national_id: faker.ssn({ dashes: false }),
     password: await Hash.make(faker.password()),
     birth_date: faker.date(),
     phone_number: faker.phone(),
