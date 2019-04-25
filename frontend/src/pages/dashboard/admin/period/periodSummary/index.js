@@ -26,29 +26,29 @@ const PeriodSummary = ({ t, period }) => {
         {isWithinRange(new Date(), period.signupFrom, period.signupUntil) ? (
           <div>
             <div>
-              <p>{t('ActiveModules')}:</p>
+              <p>{t('Period.AvailableModules')}:</p>
               <p>{period.modules.length}</p>
             </div>
             <div>
-              <p>{t('RegisteredStudents')}:</p>
+              <p>{t('Student.RegisteredStudents')}:</p>
               <p>
                 {getTotalRegisteredStudents(period.modules)} / {period.modules.length * 14}
               </p>
             </div>
           </div>
         ) : (
-          <h3>{t('RegistrationsClosed')}</h3>
+          <h3>{t('Period.RegistrationsClosed')}</h3>
         )}
       </Card>
 
-      <Card title={t('Income')} fullWidth>
+      <Card title={t('Period.Income')} fullWidth>
         <div>
           <div>
-            <p>{t('CurrentIncome')}:</p>
+            <p>{t('Period.CurrentIncome')}:</p>
             <p>{formatPrice(getActualIncome(period.modules))}</p>
           </div>
           <div>
-            <p>{t('OptimalIncome')}:</p>
+            <p>{t('Period.OptimalIncome')}:</p>
             <p>{formatPrice(getOptimalIncome(period.modules) * 1000)}</p>
           </div>
         </div>

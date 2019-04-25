@@ -27,7 +27,7 @@ const AdminPeriodPage = props => {
     !!activePeriod && (
       <StyledPage className='dashboard-home'>
         <h1 className='section-title'>
-          {t('Period')} {activePeriod.name} - {activePeriod.year}
+          {t('Period._singular')} {activePeriod.name} - {activePeriod.year}
         </h1>
 
         <PeriodSummary t={t} period={activePeriod} />

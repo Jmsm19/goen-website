@@ -12,7 +12,7 @@ const StudentRoutes = ({ onLinkClick, t }) => {
     },
   ];
 
-  return <NavSection title={t('Student')} routes={links} onLinkClick={onLinkClick} />;
+  return <NavSection title={t('Student._singular')} routes={links} onLinkClick={onLinkClick} />;
 };
 
 StudentRoutes.propTypes = {

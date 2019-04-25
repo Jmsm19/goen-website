@@ -12,7 +12,7 @@ const InstructorRoutes = ({ onLinkClick, t }) => {
     },
   ];
 
-  return <NavSection title={t('Instructor')} routes={links} onLinkClick={onLinkClick} />;
+  return <NavSection title={t('Instructor._singular')} routes={links} onLinkClick={onLinkClick} />;
 };
 
 InstructorRoutes.propTypes = {

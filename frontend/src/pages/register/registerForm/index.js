@@ -28,6 +28,7 @@ const RegisterForm = ({ t }) => {
     <StyledRegisterForm className='register-form'>
       <p className='form-notice'>{Object.keys(errors).length ? t('CheckForErrors') : ''}</p>
 
+      {/* TODO: Remove SlideIn animation from sections and autofocus from national_id */}
       <PoseGroup>
         <FadeInContainer key='container'>
           {activeSection === 'personal' ? (
