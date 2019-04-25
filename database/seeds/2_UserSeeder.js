@@ -9,13 +9,15 @@
 |
 */
 
-const { getRole } = require('../../app/Utils');
+const { getRole, getClan } = require('../../app/Utils');
 
 /** @type {import('../../app/Models/User')} */
 const User = use('App/Models/User');
 
 class RoleSeeder {
   async run() {
+    const kani = await getClan('Kani');
+    const kotori = await getClan('Kotori');
     const roleStudent = await getRole('student');
     const roleAdmin = await getRole('admin');
     const roleInstructor = await getRole('instructor');
@@ -30,7 +32,7 @@ class RoleSeeder {
       birth_date: '1992-01-09',
       active: 1,
       email_verified_at: new Date(),
-      clan_id: 1,
+      clan_id: kani.id,
     });
     await user.roles().attach([roleAdmin.id]);
 
@@ -43,7 +45,7 @@ class RoleSeeder {
       birth_date: '1945-04-20',
       active: 1,
       email_verified_at: new Date(),
-      clan_id: 1,
+      clan_id: kani.id,
     });
     await user.roles().attach([roleInstructor.id]);
 
@@ -56,7 +58,7 @@ class RoleSeeder {
       birth_date: '1998-10-09',
       active: 1,
       email_verified_at: new Date(),
-      clan_id: 3,
+      clan_id: kotori.id,
     });
     await user.roles().attach([roleAssistant.id]);
 
@@ -69,7 +71,7 @@ class RoleSeeder {
       birth_date: '1999-01-01',
       active: 1,
       email_verified_at: new Date(),
-      clan_id: 1,
+      clan_id: kotori.id,
     });
     await user.roles().attach([roleStudent.id]);
   }

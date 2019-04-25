@@ -30,9 +30,15 @@ class StudentSeeder {
   async run() {
     const studentRole = await getRole('student');
 
-    const module1 = await Module.find(1);
-    const module2 = await Module.find(2);
-    const module3 = await Module.find(3);
+    const module1 = await Module.query()
+      .where({ name: 'M-0' })
+      .firstOrFail();
+    const module2 = await Module.query()
+      .where({ name: 'M-1' })
+      .firstOrFail();
+    const module3 = await Module.query()
+      .where({ name: 'M-2' })
+      .firstOrFail();
 
     // Module 1
     await createStudent(studentRole, module1);

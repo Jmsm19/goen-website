@@ -24,8 +24,11 @@ const Price = use('App/Models/Price');
 /** @type {import('../../app/Models/Role')} */
 const Role = use('App/Models/Role');
 
+const { getClan } = require('../../app/Utils');
+
 class ModuleSeeder {
   async run() {
+    const clan = await getClan('Usagi');
     const currentPeriod = await Period.query()
       .where('active', true)
       .firstOrFail();
@@ -54,7 +57,7 @@ class ModuleSeeder {
       await Module.create({
         name: `M-${moduleNumber}`,
         section: 'A',
-        clan_id: moduleNumber === 0 ? 5 : null,
+        clan_id: moduleNumber === 0 ? clan.id : null,
         period_id: currentPeriod.id,
         price_id: randomPrice.id,
         schedule_id: randomSchedule.id,
