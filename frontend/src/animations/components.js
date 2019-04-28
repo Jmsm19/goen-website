@@ -33,3 +33,5 @@ export const FadeInRouteContainer = posed.div(
     },
   ),
 );
+
+export const FadeInSection = posed.section(FadeIn());

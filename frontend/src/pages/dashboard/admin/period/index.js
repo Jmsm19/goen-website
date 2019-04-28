@@ -11,7 +11,7 @@ import StyledPage from './styles';
 
 const AdminPeriodPage = props => {
   const { t } = useTranslation();
-  const { activePeriod, getActivePeriod } = useContext(DataContext);
+  const { activePeriod, activePeriodSummary, getActivePeriod } = useContext(DataContext);
 
   useState(() => {
     if (!activePeriod) {
@@ -30,7 +30,7 @@ const AdminPeriodPage = props => {
           {t('Period._singular')} {activePeriod.name} - {activePeriod.year}
         </h1>
 
-        <PeriodSummary t={t} period={activePeriod} />
+        <PeriodSummary t={t} period={activePeriod} periodSummary={activePeriodSummary} />
 
         <ModulesAvailable t={t} modules={activePeriod.modules} />
       </StyledPage>

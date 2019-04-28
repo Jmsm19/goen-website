@@ -17,6 +17,8 @@ module.exports = Route => {
     Route.resource('periods', 'PeriodController')
       .apiOnly()
       .only(['destroy', 'store', 'update']);
+
+    Route.resource('modules', 'ModuleController').apiOnly();
   })
     .prefix('api/')
     .middleware(['auth', 'verified', 'role:admin']);

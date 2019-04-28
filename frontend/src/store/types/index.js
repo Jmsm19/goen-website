@@ -14,4 +14,8 @@ module.exports = {
 
   // Period
   GET_ACTIVE_PERIOD: 'GET_ACTIVE_PERIOD',
+
+  // Module
+  GET_MODULE: 'GET_MODULE',
+  MODULE_NOT_FOUND: 'MODULE_NOT_FOUND',
 };

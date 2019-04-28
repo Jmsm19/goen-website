@@ -6,19 +6,8 @@ import Card from '../../../../../components/UI/Card';
 
 import { formatPrice } from '../../../../../lib/utils';
 
-const PeriodSummary = ({ t, period }) => {
-  const getTotalRegisteredStudents = modules =>
-    modules.reduce((total, module) => total + module.students.length, 0);
-
-  const calculateOptimalModuleIncome = module => module.price.amount * 14;
-
-  const calculateActualModuleIncome = module => module.price.amount * module.students.length;
-
-  const getOptimalIncome = modules =>
-    modules.reduce((total, module) => total + calculateOptimalModuleIncome(module), 0);
-
-  const getActualIncome = modules =>
-    modules.reduce((total, module) => total + calculateActualModuleIncome(module), 0);
+const PeriodSummary = ({ t, period, periodSummary }) => {
+  const { totalRegisteredStudents, totalStudents, actualIncome, expectedIncome } = periodSummary;
 
   return (
     <section className='summary-section'>
@@ -30,9 +19,9 @@ const PeriodSummary = ({ t, period }) => {
               <p>{period.modules.length}</p>
             </div>
             <div>
-              <p>{t('Student.RegisteredStudents')}:</p>
+              <p>{t('Student.ConfirmedStudents')}:</p>
               <p>
-                {getTotalRegisteredStudents(period.modules)} / {period.modules.length * 14}
+                {totalRegisteredStudents} / {totalStudents}
               </p>
             </div>
           </div>
@@ -45,11 +34,11 @@ const PeriodSummary = ({ t, period }) => {
         <div>
           <div>
             <p>{t('Period.CurrentIncome')}:</p>
-            <p>{formatPrice(getActualIncome(period.modules))}</p>
+            <p>{formatPrice(actualIncome)}</p>
           </div>
           <div>
-            <p>{t('Period.OptimalIncome')}:</p>
-            <p>{formatPrice(getOptimalIncome(period.modules) * 1000)}</p>
+            <p>{t('Period.ExpectedIncome')}:</p>
+            <p>{formatPrice(expectedIncome)}</p>
           </div>
         </div>
       </Card>
@@ -63,6 +52,12 @@ PeriodSummary.propTypes = {
     signupFrom: PropTypes.string,
     signupUntil: PropTypes.string,
     modules: PropTypes.arrayOf(PropTypes.shape()),
+  }).isRequired,
+  periodSummary: PropTypes.shape({
+    totalRegisteredStudents: PropTypes.number,
+    totalStudents: PropTypes.number,
+    actualIncome: PropTypes.number,
+    expectedIncome: PropTypes.number,
   }).isRequired,
 };
 
