@@ -165,7 +165,7 @@ class User extends Model {
    * @method grades
    */
   grades() {
-    return this.hasMany('App/Grade');
+    return this.hasMany('App/Models/Grade');
   }
 
   /**
