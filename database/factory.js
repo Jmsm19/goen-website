@@ -29,6 +29,7 @@ Factory.blueprint('App/Models/User', async (faker, i, data) => {
     active,
     email_verified_at: active ? new Date() : null,
     activation_token: active ? '' : await Hash.make(email),
+    ...data,
   };
 });
 
