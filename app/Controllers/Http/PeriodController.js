@@ -95,7 +95,7 @@ class PeriodController {
         'modules.schedule',
         'modules.instructor',
         'modules.assistant',
-        'modules.students',
+        'modules.students.grades',
       ])
       .item(period, 'PeriodTransformer');
   }

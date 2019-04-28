@@ -11,6 +11,10 @@ const BumblebeeTransformer = use('Bumblebee/Transformer');
  * @constructor
  */
 class UserTransformer extends BumblebeeTransformer {
+  static get availableInclude() {
+    return ['grades'];
+  }
+
   /**
    * This method is used to transform the data.
    * @param {User} model
@@ -29,7 +33,6 @@ class UserTransformer extends BumblebeeTransformer {
     return {
       ...baseUserData,
       registrationStatus: model.registration_status,
-      active: !!model.active,
     };
   }
 
@@ -53,6 +56,10 @@ class UserTransformer extends BumblebeeTransformer {
       isAssistant: rolesArr.includes('assistant'),
       isStudent: rolesArr.includes('student'),
     };
+  }
+
+  includeGrades(period) {
+    return this.collection(period.getRelated('grades'), 'GradeTransformer');
   }
 }
 

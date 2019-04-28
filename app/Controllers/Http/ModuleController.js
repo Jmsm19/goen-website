@@ -1,5 +1,10 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
+
+/** @type {typeof import('../../Models/Module')} */
+const Module = use('App/Models/Module');
 
 /**
  * Resourceful controller for interacting with modules
@@ -40,10 +45,18 @@ class ModuleController {
    * GET modules/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {object} ctx.params
+   * @param {String} ctx.params.id
+   * @param {Bumblebee} ctx.transform
    */
-  async show({ params, request, response }) {}
+  async show({ params, transform }) {
+    const { id } = params;
+    const module = await Module.findByHashOrFail(id);
+
+    return transform
+      .include(['clan', 'price', 'schedule', 'instructor', 'assistant', 'students.grades'])
+      .item(module, 'ModuleTransformer');
+  }
 
   /**
    * Render a form to update an existing module.
