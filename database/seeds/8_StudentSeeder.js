@@ -17,7 +17,24 @@ const Module = use('App/Models/Module');
 const Factory = use('Factory');
 
 const createStudent = async (studentRole, module) => {
-  const student = await Factory.model('App/Models/User').create();
+  const random = Math.floor(Math.random() * (3 - 0) + 0);
+  let registrationStatus;
+  switch (random) {
+    case 1:
+      registrationStatus = 'paying';
+      break;
+    case 2:
+      registrationStatus = 'verifying payment';
+      break;
+    case 3:
+    default:
+      registrationStatus = 'registered';
+      break;
+  }
+
+  const student = await Factory.model('App/Models/User').create({
+    registration_status: registrationStatus,
+  });
   await student.roles().attach([studentRole.id]);
   await student.modulesAsStudent().attach([module.id]);
   if (module.name === 'M-0') {
