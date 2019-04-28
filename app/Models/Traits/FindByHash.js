@@ -15,7 +15,7 @@ class FindByHash {
      */
     const findByHashOrFail = async hashedId => {
       const decodedId = Hashids.decode(hashedId)[0];
-      const model = await Model.findOrFail(decodedId);
+      const model = await Model.findOrFail(decodedId || null);
       return model;
     };
 
