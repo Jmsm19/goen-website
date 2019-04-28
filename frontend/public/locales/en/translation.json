@@ -39,7 +39,8 @@
     "Section": "Section",
     "Name": "Module's name",
     "Schedule": "Schedule",
-    "Created": "Module created"
+    "Created": "Module created",
+    "Searching": "Looking for module..."
   },
   "Schedule": {
     "_singular": "Schedule",
@@ -54,7 +55,7 @@
     "AvailableModules": "Available modules",
     "Income": "Income",
     "CurrentIncome": "Current income",
-    "OptimalIncome": "Optimal income",
+    "ExpectedIncome": "Expected income",
     "RegistrationsClosed": "Registrations closed"
   },
   "User": {
@@ -62,11 +63,24 @@
     "_plural": "Users",
     "NoUsers": "No users"
   },
+  "Status": "Status",
+  "SeeProfile": "See profile",
+  "Grade": {
+    "_singular": "Grade",
+    "_plural": "Grades"
+  },
   "Student": {
     "_singular": "Student",
     "_plural": "Students",
     "NoStudents": "No students",
-    "RegisteredStudents": "Registered students"
+    "NotGraded": "Not graded",
+    "ConfirmedStudents": "Confirmed students",
+    "Status": {
+      "idle": "Idle",
+      "paying": "Pending payment",
+      "verifying payment": "Verifying payment",
+      "registered": "Registered"
+    }
   },
   "Instructor": {
     "_singular": "Instructor",
@@ -80,5 +94,12 @@
   },
   "VerifyingAccount": "Verifying...",
   "AccountActivated": "Email confirmed",
-  "AccountActivationFailed": "Activation error"
+  "AccountActivationFailed": "Activation error",
+  "Sunday": "Sunday",
+  "Monday": "Monday",
+  "Tuesday": "Tuesday",
+  "Wednesday": "Wednesday",
+  "Thursday": "Thursday",
+  "Friday": "Friday",
+  "Saturday": "Saturday"
 }

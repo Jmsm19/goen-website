@@ -39,7 +39,8 @@
     "Section": "Sección",
     "Name": "Nombre del módulo",
     "Schedule": "Horario de clase",
-    "Created": "Módulo creado"
+    "Created": "Módulo creado",
+    "Searching": "Buscando módulo..."
   },
   "Schedule": {
     "_singular": "Horario",
@@ -54,7 +55,7 @@
     "AvailableModules": "Módulos abiertos",
     "Income": "Ingresos",
     "CurrentIncome": "Ingresos obtenidos",
-    "OptimalIncome": "Ingresos óptimos",
+    "ExpectedIncome": "Ingresos esperados",
     "RegistrationsClosed": "Inscripciones cerradas"
   },
   "User": {
@@ -62,11 +63,24 @@
     "_plural": "Usuarios",
     "NoUsers": "No hay usuarios"
   },
+  "Status": "Estado",
+  "SeeProfile": "Ver perfil",
+  "Grade": {
+    "_singular": "Puntuación",
+    "_plural": "Puntuación"
+  },
   "Student": {
     "_singular": "Estudiante",
     "_plural": "Estudiantes",
     "NoStudents": "No hay estudiantes",
-    "RegisteredStudents": "Estudiantes inscritos"
+    "NotGraded": "Pendiente",
+    "ConfirmedStudents": "Estudiantes confirmados",
+    "Status": {
+      "idle": "Inactivo",
+      "paying": "Pago pendiente",
+      "verifying payment": "Verificando pago",
+      "registered": "Inscrito"
+    }
   },
   "Instructor": {
     "_singular": "Instructor",
