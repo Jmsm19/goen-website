@@ -54,6 +54,10 @@ class ExceptionHandler extends BaseExceptionHandler {
           ...basicError,
           error: forLocale(locale).formatMessage('auth.guestOnly'),
         });
+      case 'E_MISSING_DATABASE_ROW':
+        return response.status(status).json({
+          ...basicError,
+        });
       default:
         // eslint-disable-next-line prefer-rest-params
         return super.handle(...arguments);
