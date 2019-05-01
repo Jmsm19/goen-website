@@ -7,33 +7,33 @@ import RoleRestrictedRoute from '../../../RoleRestrictedRoute';
 import ModuleRegisterPage from '../../../../pages/dashboard/student/moduleRegister';
 import InstructorModulesPage from '../../../../pages/dashboard/instructor/modules';
 import SettingsPage from '../../../../pages/dashboard/settings';
-import ProfilePage from '../../../../pages/dashboard/profile';
 import DashboardHomePage from '../../../../pages/dashboard/home';
 
 import routes from '../../../../lib/config/routes';
 import { FadeInRouteContainer } from '../../../../animations/components';
 import AdminPeriodPage from '../../../../pages/dashboard/admin/period';
 import AdminModulePage from '../../../../pages/dashboard/admin/module';
+import UserProfilePage from '../../../../pages/dashboard/user/profile';
 
 const DashboardMain = ({ authUser, location }) => (
   <main className='main-content'>
-    <Switch>
-      <PoseGroup>
-        <FadeInRouteContainer key={location.pathname}>
-          <Route path={routes.dashboard.user.profile} component={ProfilePage} />
-
-          <RoleRestrictedRoute
-            authUser={authUser}
-            requiredRole='admin'
-            path={routes.dashboard.admin.home}
-            component={AdminPeriodPage}
-          />
+    <PoseGroup>
+      <FadeInRouteContainer key={location.key} className='route-container'>
+        <Switch location={location}>
+          <Route path={routes.dashboard.user.profile()} component={UserProfilePage} />
 
           <RoleRestrictedRoute
             authUser={authUser}
             requiredRole='admin'
             path={routes.dashboard.admin.module()}
             component={AdminModulePage}
+          />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
+            path={routes.dashboard.admin.home}
+            component={AdminPeriodPage}
           />
 
           <RoleRestrictedRoute
@@ -52,16 +52,18 @@ const DashboardMain = ({ authUser, location }) => (
           <Route path={routes.dashboard.settings} component={SettingsPage} />
 
           <Route exact path={routes.dashboard.home} component={DashboardHomePage} />
-        </FadeInRouteContainer>
-      </PoseGroup>
-    </Switch>
+
+          <Route component={() => console.log('404')} />
+        </Switch>
+      </FadeInRouteContainer>
+    </PoseGroup>
   </main>
 );
 
 DashboardMain.propTypes = {
   authUser: PropTypes.shape().isRequired,
   location: PropTypes.shape({
-    pathname: PropTypes.string,
+    key: PropTypes.string,
   }).isRequired,
 };
 
