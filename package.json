@@ -2,7 +2,7 @@
   "name": "goen_maracaibo_frontend",
   "version": "1.0.0",
   "engines": {
-    "node": "10.3.0"
+    "node": ">=8"
   },
   "homepage": "https://goen-website-test.herokuapp.com",
   "main": "server.js",
@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node server.js",
     "front": "cd frontend && yarn",
-    "setup": "yarn install && yarn frontend install",
+    "setup": "yarn install && yarn front install",
     "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\" \"yarn styleguide\"",
     "dev:client": "cd frontend && yarn start",
     "dev:server": "adonis serve --dev --ignore frontend",
@@ -58,9 +58,15 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.5.0",
+    "husky": "^2.1.0",
     "nyc": "^13.3.0",
     "prettier": "^1.16.4",
     "sqlite3": "^4.0.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node ace test --bail"
+    }
   },
   "autoload": {
     "App": "./app"
