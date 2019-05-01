@@ -25,7 +25,7 @@ const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, to
       {isMobile && (
         <NavSection
           title={authUser.name}
-          routes={[{ linkText: t('Profile'), path: routes.dashboard.user.profile }]}
+          routes={[{ linkText: t('MyProfile'), path: routes.dashboard.user.profile('') }]}
           onLinkClick={delayedToggleSidebar}
         />
       )}

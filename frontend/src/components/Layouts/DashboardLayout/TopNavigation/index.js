@@ -14,7 +14,7 @@ const TopNavigation = ({ t, isMobile, toggleSidebar, logoutUser }) => (
     <nav className='right-nav'>
       {!isMobile && (
         <>
-          <NavLink to={routes.dashboard.user.profile}>{t('Profile')}</NavLink>
+          <NavLink to={routes.dashboard.user.profile('')}>{t('MyProfile')}</NavLink>
           <Button
             className='logout-btn'
             text={t('Logout')}

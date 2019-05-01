@@ -52,13 +52,13 @@ const AdminModulePage = ({ match: { params } }) => {
         <div>
           <h2 className='senpai-section-title'>{t('Instructor._singular')}</h2>
           <p className='senpai-name'>
-            <Link to={routes.dashboard.instructor.profile(instructor.id)}>{instructor.name}</Link>
+            <Link to={routes.dashboard.user.profile(instructor.id)}>{instructor.name}</Link>
           </p>
         </div>
         <div>
           <h2 className='senpai-section-title'>{t('Assistant._singular')}</h2>
           <p className='senpai-name'>
-            <Link to={routes.dashboard.assistant.profile(assistant.id)}>{assistant.name}</Link>
+            <Link to={routes.dashboard.user.profile(assistant.id)}>{assistant.name}</Link>
           </p>
         </div>
       </FadeInSection>

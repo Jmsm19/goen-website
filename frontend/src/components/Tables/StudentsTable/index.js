@@ -36,7 +36,7 @@ const StudentsTable = ({ t, students, withGradeForModule }) => {
     key: 'details',
     text: '',
     render: (_, student) => (
-      <Link to={routes.dashboard.student.profile(student.id)}>{t('SeeProfile')}</Link>
+      <Link to={routes.dashboard.user.profile(student.id)}>{t('SeeProfile')}</Link>
     ),
   });
 
