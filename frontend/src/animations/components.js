@@ -29,7 +29,6 @@ export const FadeInRouteContainer = posed.div(
       transition: {
         duration: 0,
       },
-      afterChildren: true,
     },
   ),
 );
