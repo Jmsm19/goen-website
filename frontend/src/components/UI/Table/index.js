@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import uuid from 'uuid/v4';
 
-import { SlideInTableRow } from './animations';
-import StyledTable from './styles';
+import { PoseGroup } from 'react-pose';
+import Loading from '../../Loading';
 
-const Table = ({ columns, data, noData, className }) => {
+import { FadeInTableRow, FadeInLoadingOverlay } from './animations';
+import { StyledTable, StyledTableWrapper } from './styles';
+
+const Table = ({ columns, data, noData, loading, className }) => {
   const localClassNames = classnames(['table', className]);
 
   const renderHeaders = () =>
@@ -18,24 +21,28 @@ const Table = ({ columns, data, noData, className }) => {
     ));
 
   const renderData = () => {
-    if (data.length) {
+    if (Array.isArray(data) && data.length) {
       return data.map(item => (
-        <SlideInTableRow key={uuid()} className='table-body-row'>
+        <FadeInTableRow key={uuid()} className='table-body-row'>
           {!!columns.length &&
             columns.map(({ render, key }) => (
               <td key={uuid()} className='table-body-row-item'>
                 {render ? render(item[key], item) : item[key]}
               </td>
             ))}
-        </SlideInTableRow>
+        </FadeInTableRow>
       ));
     }
 
-    return <p>{noData}</p>;
+    return (
+      <tr>
+        <td>{noData}</td>
+      </tr>
+    );
   };
 
   return (
-    <div className='table-wrapper' style={{ overflowX: 'auto', padding: '0 2px' }}>
+    <StyledTableWrapper className='table-wrapper'>
       <StyledTable className={localClassNames} key='table'>
         {/* Head */}
         <thead className='table-head'>
@@ -43,15 +50,24 @@ const Table = ({ columns, data, noData, className }) => {
         </thead>
 
         {/* Body */}
-        <tbody className='table-body'>{renderData()}</tbody>
+        <tbody className='table-body'>{!loading && renderData()}</tbody>
       </StyledTable>
-    </div>
+
+      <PoseGroup>
+        {loading && (
+          <FadeInLoadingOverlay className='overlay' key='overlay'>
+            <Loading />
+          </FadeInLoadingOverlay>
+        )}
+      </PoseGroup>
+    </StyledTableWrapper>
   );
 };
 
 Table.defaultProps = {
   className: null,
   data: null,
+  loading: false,
   noData: 'No data',
 };
 
@@ -65,6 +81,7 @@ Table.propTypes = {
     }),
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.shape()),
+  loading: PropTypes.bool,
   noData: PropTypes.string,
 };
 

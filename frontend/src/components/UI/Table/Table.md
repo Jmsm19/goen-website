@@ -4,11 +4,11 @@
 const columns = [
   {
     key: 'name',
-    colText: 'Name',
+    text: 'Name',
   },
   {
     key: 'lastName',
-    colText: 'Last Name'
+    text: 'Last Name'
   }
 ];
 
@@ -32,13 +32,30 @@ const users = [
 const columns = [
   {
     key: 'name',
-    colText: 'Name',
+    text: 'Name',
   },
   {
     key: 'lastName',
-    colText: 'Last Name'
+    text: 'Last Name'
   }
 ];
 
 <Table title='Users' columns={columns} noData='No users' />
+```
+
+### Loading data on table
+```jsx
+
+const columns = [
+  {
+    key: 'name',
+    text: 'Name',
+  },
+  {
+    key: 'lastName',
+    text: 'Last Name'
+  }
+];
+
+<Table title='Loading users' columns={columns} loading />
 ```

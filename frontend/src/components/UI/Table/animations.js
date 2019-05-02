@@ -15,4 +15,13 @@ export const FadeInTable = posed.table(
   ),
 );
 
-export const SlideInTableRow = posed.tr(FadeIn());
+export const FadeInLoadingOverlay = posed.div(
+  FadeIn(
+    {
+      transition: 'ease',
+    },
+    { transition: 'ease' },
+  ),
+);
+
+export const FadeInTableRow = posed.tr(FadeIn());

@@ -2,7 +2,29 @@ import styled from 'styled-components';
 
 import { FadeInTable } from './animations';
 
-const StyledTable = styled(FadeInTable)`
+export const StyledTableWrapper = styled.div`
+  overflow-x: auto;
+  padding: 0 2px;
+  position: relative;
+  min-height: 200px;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(244, 244, 244, 0.6);
+
+    .loading {
+      svg {
+        height: 40px;
+      }
+    }
+  }
+`;
+
+export const StyledTable = styled(FadeInTable)`
   &.table {
     width: 100%;
     color: var(---light-black);
@@ -10,7 +32,6 @@ const StyledTable = styled(FadeInTable)`
     border-collapse: separate;
     border-spacing: 0 10px;
     text-align: left;
-    min-height: 200px;
 
     .table-head {
       .table-head-row {
@@ -98,5 +119,3 @@ const StyledTable = styled(FadeInTable)`
     }
   }
 `;
-
-export default StyledTable;
