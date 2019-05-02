@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import routes from '../../../../lib/config/routes';
 import Button from '../../../UI/Button';
 
-import { LogoutIcon, MenuIcon } from '../styles';
+import { MenuIcon } from '../styles';
 
 const TopNavigation = ({ t, isMobile, toggleSidebar, logoutUser }) => (
   <nav className='top-navigation'>
@@ -18,7 +18,6 @@ const TopNavigation = ({ t, isMobile, toggleSidebar, logoutUser }) => (
           <Button
             className='logout-btn'
             text={t('Logout')}
-            icon={<LogoutIcon title={t('Logout')} size={24} />}
             type='secondary'
             outline
             onClick={logoutUser}

@@ -10,7 +10,6 @@ import InstructorRoutes from '../../RoutesSections/InstructorRoutes';
 import StudentRoutes from '../../RoutesSections/StudentRoutes';
 
 import routes from '../../../../lib/config/routes';
-import { LogoutIcon } from '../styles';
 import NavSection from '../../../Navigation/NavSection';
 
 const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, toggleOpen }) => {
@@ -40,7 +39,6 @@ const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, to
       {isMobile && (
         <Button
           className='logout-btn'
-          icon={<LogoutIcon title={t('Logout')} size={24} />}
           text={t('Logout')}
           type='secondary'
           onClick={logoutUser}

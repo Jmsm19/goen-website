@@ -6,7 +6,7 @@ const StyledSidebar = styled(AnimatedSidebar)`
   &.sidebar {
     z-index: 9000;
 
-    height: 90vh;
+    height: 92vh;
     width: 100%;
 
     &.mobile {
@@ -31,7 +31,7 @@ export const StyledNav = styled.nav`
     overflow: auto;
     height: inherit;
     width: 100%;
-    min-width: 250px;
+    min-width: 220px;
     padding: 1rem;
     padding-right: 1.3rem;
 

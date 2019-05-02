@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LogOut, Menu } from 'styled-icons/feather';
+import { Menu } from 'styled-icons/feather';
 
 export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} />)`
   &.dashboard-layout {
@@ -10,7 +10,7 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
     ${'' /* background-color: #f0f2f5; */}
 
     display: grid;
-    grid-template-rows: 10vh 90vh;
+    grid-template-rows: 8vh 92vh;
 
     .top-navigation {
       width: 100%;
@@ -51,7 +51,14 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
         }
 
         .logout-btn {
-          color: #fff;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
+
+          &:hover {
+            transform: none;
+            box-shadow: none;
+            color: #fff;
+          }
 
           &:not(:last-child) {
             margin-right: 10px;
@@ -90,11 +97,6 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
       width: 100%;
     }
   }
-`;
-
-export const LogoutIcon = styled(LogOut)`
-  color: #fff;
-  font-weight: bold;
 `;
 
 export const MenuIcon = styled(Menu)`
