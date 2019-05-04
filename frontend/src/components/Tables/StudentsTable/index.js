@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { getObjectByIdFromArray } from '../../../lib/utils';
 import routes from '../../../lib/config/routes';
 import StyledTable from './styles';
 
-const StudentsTable = ({ t, students, withGradeForModule }) => {
+const StudentsTable = ({ students, withGradeForModule, ...props }) => {
+  const { t } = useTranslation();
+
   const columns = [
     {
       key: 'name',
@@ -40,7 +43,9 @@ const StudentsTable = ({ t, students, withGradeForModule }) => {
     ),
   });
 
-  return <StyledTable columns={columns} data={students} noData={t('Student.NoStudents')} />;
+  return (
+    <StyledTable columns={columns} data={students} noData={t('Student.NoStudents')} {...props} />
+  );
 };
 
 StudentsTable.defaultProps = {
@@ -48,7 +53,6 @@ StudentsTable.defaultProps = {
 };
 
 StudentsTable.propTypes = {
-  t: PropTypes.func.isRequired,
   students: PropTypes.arrayOf(PropTypes.shape).isRequired,
   withGradeForModule: PropTypes.string,
 };
