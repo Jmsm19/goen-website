@@ -5,7 +5,7 @@
   "Enter": "Entrar",
   "Settings": "Opciones",
   "Logout": "Cerrar sesión",
-  "Profile": "Perfil",
+  "MyProfile": "Mi perfil",
   "OpenSidebar": "Abrir menu lateral",
   "ModuleRegister": "Inscripciones",
   "PersonalInfo": "Información personal",
@@ -40,7 +40,9 @@
     "Name": "Nombre del módulo",
     "Schedule": "Horario de clase",
     "Created": "Módulo creado",
-    "Searching": "Buscando módulo..."
+    "NoModules": "No hay módules",
+    "Searching": "Buscando módulo...",
+    "NotFound": "Módulo no encontrado"
   },
   "Schedule": {
     "_singular": "Horario",
@@ -61,7 +63,9 @@
   "User": {
     "_singular": "Usuario",
     "_plural": "Usuarios",
-    "NoUsers": "No hay usuarios"
+    "NoUsers": "No hay usuarios",
+    "Searching": "Buscando usuario...",
+    "YearsOld": "{{age}} años"
   },
   "Status": "Estado",
   "SeeProfile": "Ver perfil",

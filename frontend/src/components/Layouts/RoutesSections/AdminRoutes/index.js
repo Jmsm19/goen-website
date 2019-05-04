@@ -10,6 +10,10 @@ const AdminRoutes = ({ onLinkClick, t }) => {
       path: routes.dashboard.admin.home,
       linkText: t('Period._singular'),
     },
+    {
+      path: routes.dashboard.admin.modules,
+      linkText: t('Module._plural'),
+    },
   ];
 
   return <NavSection title={t('Admin')} routes={links} onLinkClick={onLinkClick} />;

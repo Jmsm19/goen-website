@@ -14,7 +14,7 @@ const DashboardHomePage = props => {
   } else if (authUser.isInstructor) {
     path = routes.dashboard.instructor.home;
   } else if (authUser.isStudent) {
-    path = routes.dashboard.student.home;
+    path = routes.dashboard.student.moduleRegister;
   }
 
   return <Redirect to={path} push={false} />;

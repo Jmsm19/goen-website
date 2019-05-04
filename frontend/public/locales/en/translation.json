@@ -5,7 +5,7 @@
   "Enter": "Enter",
   "Settings": "Settings",
   "Logout": "Logout",
-  "Profile": "Profile",
+  "MyProfile": "My profile",
   "OpenSidebar": "Open sidebar",
   "ModuleRegister": "Module Registrations",
   "PersonalInfo": "Personal information",
@@ -34,13 +34,15 @@
   "Admin": "Admin",
   "Module": {
     "_singular": "Module",
-    "_plural": "Module",
+    "_plural": "Modules",
     "Create": "Create module",
     "Section": "Section",
     "Name": "Module's name",
     "Schedule": "Schedule",
     "Created": "Module created",
-    "Searching": "Looking for module..."
+    "NoModules": "No modules",
+    "Searching": "Looking for module...",
+    "NotFound": "Module not found"
   },
   "Schedule": {
     "_singular": "Schedule",
@@ -61,7 +63,9 @@
   "User": {
     "_singular": "User",
     "_plural": "Users",
-    "NoUsers": "No users"
+    "NoUsers": "No users",
+    "Searching": "Looking for user...",
+    "YearsOld": "{{age}} years old"
   },
   "Status": "Status",
   "SeeProfile": "See profile",
