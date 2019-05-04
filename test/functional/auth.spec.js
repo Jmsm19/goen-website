@@ -58,7 +58,13 @@ test('it gets the logged in user', async ({ client }) => {
     .loginVia(user, 'api')
     .end();
 
-  const expectedResponse = await getTransformedResponse(user, 'UserTransformer.withExtra');
+  const instructorIncludes = (await user.isInstructor())
+    ? ['modulesAsInstructor.schedule', 'modulesAsInstructor.period', 'modulesAsInstructor.clan']
+    : [];
+
+  const expectedResponse = await getTransformedResponse(user, 'UserTransformer.withExtra', false, [
+    ...instructorIncludes,
+  ]);
 
   response.assertStatus(200);
   response.assertJSON(expectedResponse);

@@ -161,7 +161,13 @@ class AuthController {
   async getUser({ auth, transform }) {
     const loggedInUser = await auth.getUser();
 
-    return transform.item(loggedInUser, 'UserTransformer.withExtra');
+    const instructorIncludes = (await loggedInUser.isInstructor())
+      ? ['modulesAsInstructor.schedule', 'modulesAsInstructor.period', 'modulesAsInstructor.clan']
+      : [];
+
+    return transform
+      .include([...instructorIncludes])
+      .item(loggedInUser, 'UserTransformer.withExtra');
   }
 }
 

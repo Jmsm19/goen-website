@@ -29,6 +29,22 @@ class User extends Model {
     return super.dates.concat(['birth_date', 'email_verified_at']);
   }
 
+  static scopeHasStudentRole(query) {
+    return query()
+      .whereHas('role', builder => {
+        builder.where('name', 'student');
+      })
+      .fetch();
+  }
+
+  static scopeHasInstructorRole(query) {
+    return query()
+      .whereHas('role', builder => {
+        builder.where('name', 'instructor');
+      })
+      .fetch();
+  }
+
   /**
    * A relationship on tokens is required for auth to
    * work. Since features like `refreshTokens` or
@@ -178,6 +194,16 @@ class User extends Model {
     return this.belongsToMany('App/Models/Module', 'student_id', 'module_id')
       .pivotTable('module_student')
       .withPivot(['status']);
+  }
+
+  /**
+   * Returns a HasMany relationship with the Module model
+   *
+   * @memberof User
+   * @method modulesAsInstructor
+   */
+  modulesAsInstructor() {
+    return this.hasMany('App/Models/Module', 'id', 'instructor_id');
   }
 }
 

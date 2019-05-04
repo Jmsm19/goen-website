@@ -2,13 +2,13 @@
 const Bumblebee = use('Adonis/Addons/Bumblebee');
 
 module.exports = {
-  getTransformedResponse: async (data, transformer, isCollection = false) => {
+  getTransformedResponse: async (data, transformer, isCollection = false, includes = []) => {
     let response;
     response = await Bumblebee.create();
     if (isCollection) {
-      response = response.collection(data, transformer);
+      response = response.include(includes).collection(data, transformer);
     } else {
-      response = response.item(data, transformer);
+      response = response.include(includes).item(data, transformer);
     }
 
     return response;

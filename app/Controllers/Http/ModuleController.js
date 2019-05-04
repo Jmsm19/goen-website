@@ -15,10 +15,15 @@ class ModuleController {
    * GET modules
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {}
+  async index({ transform }) {
+    const modules = await Module.all();
+
+    return transform
+      .include(['clan', 'price', 'schedule', 'instructor', 'assistant', 'students.grades'])
+      .collection(modules, 'ModuleTransformer');
+  }
 
   /**
    * Render a form to be used for creating a new module.

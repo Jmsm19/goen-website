@@ -16,6 +16,10 @@ module.exports = Route => {
 
   /** Route prefix: api/ */
   Route.group(() => {
+    Route.resource('users', 'UserController')
+      .apiOnly()
+      .except(['destroy']);
+
     Route.resource('clans', 'ClanController')
       .apiOnly()
       .only(['index', 'show']);

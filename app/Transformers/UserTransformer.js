@@ -12,7 +12,7 @@ const BumblebeeTransformer = use('Bumblebee/Transformer');
  */
 class UserTransformer extends BumblebeeTransformer {
   static get availableInclude() {
-    return ['grades'];
+    return ['grades', 'modulesAsInstructor'];
   }
 
   /**
@@ -58,8 +58,12 @@ class UserTransformer extends BumblebeeTransformer {
     };
   }
 
-  includeGrades(period) {
-    return this.collection(period.getRelated('grades'), 'GradeTransformer');
+  includeGrades(user) {
+    return this.collection(user.getRelated('grades'), 'GradeTransformer');
+  }
+
+  includeModulesAsInstructor(user) {
+    return this.collection(user.getRelated('modulesAsInstructor'), 'ModuleTransformer');
   }
 }
 

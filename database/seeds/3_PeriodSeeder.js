@@ -49,7 +49,7 @@ class PeriodSeeder {
     await Period.create({
       year: new Date().getFullYear(),
       name: 'IV',
-      active: true,
+      active: false,
       signup_from: '2019-04-01',
       signup_until: '2019-04-30',
     });
@@ -57,7 +57,7 @@ class PeriodSeeder {
     await Period.create({
       year: new Date().getFullYear(),
       name: 'V',
-      active: false,
+      active: true,
       signup_from: '2019-05-01',
       signup_until: '2019-05-31',
     });

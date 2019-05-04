@@ -9,6 +9,13 @@ module.exports = Route => {
   // Admin routes
   Route.group(() => {
     // Require authentication
+    Route.resource('users', 'UserController')
+      .apiOnly()
+      .only(['destroy']);
+
+    Route.get('instructors', 'InstructorController.index').as('instructors.index');
+    Route.get('students', 'StudentController.index').as('students.index');
+
     Route.resource('clans', 'ClanController')
       .apiOnly()
       .except(['index'])
