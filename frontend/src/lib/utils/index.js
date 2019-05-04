@@ -84,14 +84,39 @@ export const getObjectByIdFromArray = (array, id) => {
   return null;
 };
 
+export const createDictionaryItem = object => ({
+  [object.id]: { ...object },
+});
+
 /**
  *
  * @param {Array} objectArray
  */
 export const createDictionaryOfIdsFromArray = objectArray => {
-  const obj = {};
+  let obj = {};
   objectArray.forEach(el => {
-    obj[el.id] = { ...el };
+    obj = { ...obj, ...createDictionaryItem(el) };
   });
   return obj;
+};
+
+/**
+ * Create a Map object
+ *
+ * @param {Object} [initialProperties={}]
+ * @returns {Map} map
+ */
+export const createMap = (initialProperties = {}) => {
+  const map = new Map();
+  const propertyKeys = Object.keys(initialProperties);
+  propertyKeys.forEach(key => map.set(key, initialProperties[key]));
+
+  return map;
+};
+
+export const createArrayFromMap = (map = new Map()) => {
+  const array = [];
+  map.forEach(object => array.push(object));
+
+  return array;
 };
