@@ -58,6 +58,7 @@ export const GetAuthUser = dispatch => {
       });
     })
     .catch(({ response }) => {
+      // Cookies.remove('token');
       if (response.status === 401) {
         dispatch({
           type: actionTypes.AUTH_LOGIN_FAILED,
@@ -74,6 +75,7 @@ export const LogoutUser = dispatch => {
       dispatch({ type: actionTypes.AUTH_LOGOUT });
     })
     .catch(({ response }) => {
+      Cookies.remove('token');
       if (response.status === 401) {
         dispatch({
           type: actionTypes.AUTH_LOGIN_FAILED,

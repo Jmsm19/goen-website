@@ -1,6 +1,6 @@
 import actionTypes from '../types';
 import { GetData } from '../../lib/utils/http';
-import { createDictionaryOfIdsFromArray } from '../../lib/utils';
+import { createDictionaryOfIdsFromArray, createMap, createDictionaryItem } from '../../lib/utils';
 import {
   getTotalStudents,
   getTotalRegisteredStudents,
@@ -11,7 +11,7 @@ import {
 export const GetActivePeriod = dispatch => {
   GetData('periods/active')
     .then(({ data }) => {
-      const modules = createDictionaryOfIdsFromArray(data.modules);
+      const modules = createMap(createDictionaryOfIdsFromArray(data.modules));
 
       dispatch({
         type: actionTypes.GET_ACTIVE_PERIOD,
@@ -43,7 +43,7 @@ export const GetModule = (id, dispatch) => {
       dispatch({
         type: actionTypes.GET_MODULE,
         payload: {
-          module: { ...data },
+          module: createMap(createDictionaryItem(data)),
         },
       });
     })
@@ -55,4 +55,16 @@ export const GetModule = (id, dispatch) => {
         });
       }
     });
+};
+
+export const GetAllModules = dispatch => {
+  GetData(`modules`).then(({ data }) => {
+    dispatch({
+      type: actionTypes.GET_MODULE,
+      payload: {
+        module: createMap(createDictionaryOfIdsFromArray(data)),
+        allModulesSearched: true,
+      },
+    });
+  });
 };

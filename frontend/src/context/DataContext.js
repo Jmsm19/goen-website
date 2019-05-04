@@ -1,24 +1,50 @@
-import React, { useReducer } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { AuthContext } from './AuthContext';
+
 import DataStateReducer from '../store/reducers/dataReducer';
-import { GetActivePeriod, GetModule } from '../store/actions/periodActions';
+import { GetActivePeriod, GetModule, GetAllModules } from '../store/actions/periodActions';
+import { GetUser, GetSenpaiModules } from '../store/actions/userActions';
+import { createMap } from '../lib/utils';
 
 const DataContext = React.createContext();
 
 const DataContextProvider = ({ children }) => {
-  const initialState = {};
+  const { isAuth } = useContext(AuthContext);
+
+  const initialState = {
+    activePeriod: null,
+    allModulesSearched: false,
+    modules: createMap(),
+    notFoundModules: [],
+    users: {
+      notFound: [],
+    },
+  };
 
   const [state, dispatch] = useReducer(DataStateReducer, initialState);
 
-  const getActivePeriod = () => GetActivePeriod(dispatch);
-  const getModule = id => GetModule(id, dispatch);
+  const { activePeriod } = state;
+  useEffect(() => {
+    if (isAuth && !activePeriod) {
+      GetActivePeriod(dispatch);
+    }
+  }, [isAuth]);
 
-  return (
-    <DataContext.Provider value={{ ...state, getActivePeriod, getModule }}>
-      {children}
-    </DataContext.Provider>
-  );
+  const functions = {
+    // Period
+    getActivePeriod: () => GetActivePeriod(dispatch),
+    // Module
+    getAllModules: () => GetAllModules(dispatch),
+    getModule: id => GetModule(id, dispatch),
+    // Senpai
+    getSenpaiModules: (role, id) => GetSenpaiModules(role, id, dispatch),
+    // User
+    getUser: id => GetUser(id, dispatch),
+  };
+
+  return <DataContext.Provider value={{ ...state, ...functions }}>{children}</DataContext.Provider>;
 };
 
 DataContextProvider.propTypes = {
