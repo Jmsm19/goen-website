@@ -6,11 +6,11 @@ import { DataContext } from '../../../../context/DataContext';
 
 const ModulesPage = props => {
   const { t } = useTranslation();
-  const { allModulesSearched, modules, GetAllModules } = useContext(DataContext);
+  const { allModulesSearched, modules, getAllModules } = useContext(DataContext);
 
   useEffect(() => {
     if (!allModulesSearched) {
-      GetAllModules();
+      getAllModules();
     }
   }, []);
 
