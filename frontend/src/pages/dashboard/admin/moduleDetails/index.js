@@ -13,26 +13,26 @@ import routes from '../../../../lib/config/routes';
 import StyledPage from './styles';
 import { FadeInSection } from '../../../../animations/components';
 
-const AdminModulePage = ({ match: { params } }) => {
+const ModuleDetailsPage = ({ match: { params } }) => {
   const { id } = params;
-  const { modules, getModule } = useContext(DataContext);
+  const { modules, notFoundModules, getModule } = useContext(DataContext);
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (!modules || (!!modules && !modules[id])) {
+    if (!modules.has(id)) {
       getModule(id);
     }
   }, []);
 
-  if (!modules || !modules[id]) {
-    if (modules && modules.notFound && modules.notFound.includes(id)) {
+  if (!modules.has(id)) {
+    if (notFoundModules.includes(id)) {
       return <h1>{t('Module.NotFound')}</h1>;
     }
 
     return <Loading text={t('Module.Searching')} />;
   }
 
-  const module = modules[id];
+  const module = modules.get(id);
   const { clan, schedule, instructor, assistant, students } = module;
 
   return (
@@ -66,13 +66,13 @@ const AdminModulePage = ({ match: { params } }) => {
       <FadeInSection className='students-section'>
         <h2>{t('Student._plural')}</h2>
 
-        <StudentsTable t={t} students={students} withGradeForModule={module.id} />
+        <StudentsTable students={students} withGradeForModule={module.id} />
       </FadeInSection>
     </StyledPage>
   );
 };
 
-AdminModulePage.propTypes = {
+ModuleDetailsPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
@@ -80,4 +80,4 @@ AdminModulePage.propTypes = {
   }).isRequired,
 };
 
-export default AdminModulePage;
+export default ModuleDetailsPage;

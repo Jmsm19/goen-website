@@ -5,7 +5,7 @@ const StyledPage = styled.div`
     display: grid;
 
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
     h2 {

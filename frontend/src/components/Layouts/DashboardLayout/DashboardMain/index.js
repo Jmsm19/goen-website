@@ -12,21 +12,29 @@ import DashboardHomePage from '../../../../pages/dashboard/home';
 import routes from '../../../../lib/config/routes';
 import { FadeInRouteContainer } from '../../../../animations/components';
 import AdminPeriodPage from '../../../../pages/dashboard/admin/period';
-import AdminModulePage from '../../../../pages/dashboard/admin/module';
+import ModuleDetailsPage from '../../../../pages/dashboard/admin/moduleDetails';
 import UserProfilePage from '../../../../pages/dashboard/user/profile';
+import ModulesPage from '../../../../pages/dashboard/admin/modules';
 
 const DashboardMain = ({ authUser, location }) => (
   <main className='main-content'>
     <PoseGroup>
-      <FadeInRouteContainer key={location.key} className='route-container'>
+      <FadeInRouteContainer key={location.pathname} className='route-container'>
         <Switch location={location}>
           <Route path={routes.dashboard.user.profile()} component={UserProfilePage} />
 
           <RoleRestrictedRoute
             authUser={authUser}
             requiredRole='admin'
+            path={routes.dashboard.admin.modules}
+            component={ModulesPage}
+          />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
             path={routes.dashboard.admin.module()}
-            component={AdminModulePage}
+            component={ModuleDetailsPage}
           />
 
           <RoleRestrictedRoute
