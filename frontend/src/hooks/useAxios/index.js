@@ -13,27 +13,31 @@ import { GetData, SendData } from '../../lib/utils/http';
 const useAxios = (url, config = { method: 'GET', body: {} }) => {
   const { method, body } = config;
 
-  const [isRequesting, setIsRequesting] = useState(false);
-  const [response, setResponse] = useState(null);
+  const [{ isRequesting, response }, setState] = useState({
+    isRequesting: true,
+    response: null,
+  });
 
   const handleResponse = res => {
-    setIsRequesting(false);
-
     if (res.response && res.response.status >= 400) {
       // On Error
-      setResponse(res.response);
+      setState({
+        isRequesting: false,
+        response: res.response,
+      });
     } else {
       // On Success
-      setResponse({
-        status: res.status,
-        data: res.data,
+      setState({
+        isRequesting: false,
+        response: {
+          status: res.status,
+          data: res.data,
+        },
       });
     }
   };
 
   useEffect(() => {
-    setIsRequesting(true);
-
     if (method.trim().toLocaleLowerCase() === 'get') {
       GetData(url)
         .then(handleResponse)

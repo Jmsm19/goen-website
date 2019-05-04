@@ -1,5 +1,7 @@
 import actionTypes from '../types';
 
+import { createMap } from '../../lib/utils';
+
 const DataStateReducer = (state, action) => {
   const { type, payload } = action;
 
@@ -19,34 +21,26 @@ const DataStateReducer = (state, action) => {
     case actionTypes.GET_USER:
       return {
         ...state,
-        users: {
-          ...state.users,
-          [payload.user.id]: payload.user,
-        },
+        users: new Map([...state.users, ...payload.user]),
       };
     case actionTypes.USER_NOT_FOUND:
       return {
         ...state,
-        users: {
-          ...state.users,
-          notFound: [
-            ...new Set([
-              ...(state.users && state.users.notFound ? state.users.notFound : []),
-              payload.id,
-            ]),
-          ],
-        },
+        users: new Map([...state.users]),
+        notFoundUsers: [...new Set([...state.notFoundUsers, payload.id])],
       };
     case actionTypes.GET_SENPAI_MODULES_SUCCESS:
       return {
         ...state,
-        users: {
+        users: new Map([
           ...state.users,
-          [payload.id]: {
-            ...state.users[payload.id],
-            ...payload.modules,
-          },
-        },
+          ...createMap({
+            [payload.id]: {
+              ...state.users.get(payload.id),
+              ...payload.modules,
+            },
+          }),
+        ]),
       };
     case actionTypes.GET_ACTIVE_PERIOD:
       return {

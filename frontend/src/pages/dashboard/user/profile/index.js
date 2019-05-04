@@ -13,20 +13,20 @@ import UserInfoSection from './sections/UserInfoSection';
 const UserProfilePage = ({ match: { params } }) => {
   const { id } = params;
   const { authUser } = useContext(AuthContext);
-  const { users, getUser } = useContext(DataContext);
+  const { users, notFoundUsers, getUser } = useContext(DataContext);
   const { t } = useTranslation();
-  const user = id ? users[id] : authUser;
+  const user = id ? users.get(id) : authUser;
 
   useEffect(() => {
     if (id) {
-      if (!users[id] && !users.notFound.includes(id)) {
+      if (!users.has(id) && !notFoundUsers.includes(id)) {
         getUser(id);
       }
     }
   }, []);
 
   if (!user) {
-    if (users.notFound.includes(id)) {
+    if (notFoundUsers.includes(id)) {
       return <h1>{t('User.NotFound')}</h1>;
     }
 

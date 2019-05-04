@@ -18,9 +18,8 @@ const DataContextProvider = ({ children }) => {
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
-    users: {
-      notFound: [],
-    },
+    users: createMap(),
+    notFoundUsers: [],
   };
 
   const [state, dispatch] = useReducer(DataStateReducer, initialState);
