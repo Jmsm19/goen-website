@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledPage = styled.div`
+const StyledContainer = styled.div`
   section {
     display: grid;
 
@@ -44,4 +44,4 @@ const StyledPage = styled.div`
   }
 `;
 
-export default StyledPage;
+export default StyledContainer;

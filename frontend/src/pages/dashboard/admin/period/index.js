@@ -8,16 +8,14 @@ import ModulesAvailable from './modulesAvailable';
 import { DataContext } from '../../../../context/DataContext';
 
 import StyledPage from './styles';
+import ModuleDetailsModal from '../../../../components/Modals/ModuleDetailsModal';
 
 const AdminPeriodPage = props => {
   const { t } = useTranslation();
-  const { activePeriod, activePeriodSummary, getActivePeriod } = useContext(DataContext);
+  const { activePeriod, activePeriodSummary } = useContext(DataContext);
+  const [selectedModule, setSelectedModule] = useState(null);
 
-  useState(() => {
-    if (!activePeriod) {
-      getActivePeriod();
-    }
-  }, []);
+  const deselectModule = () => setSelectedModule(null);
 
   if (!activePeriod) {
     return <Loading />;
@@ -32,7 +30,14 @@ const AdminPeriodPage = props => {
 
         <PeriodSummary t={t} period={activePeriod} periodSummary={activePeriodSummary} />
 
-        <ModulesAvailable t={t} modules={activePeriod.modules} />
+        <ModulesAvailable t={t} modules={activePeriod.modules} selectModule={setSelectedModule} />
+
+        {/* Modal */}
+        <ModuleDetailsModal
+          isVisible={!!selectedModule}
+          module={selectedModule}
+          onClose={deselectModule}
+        />
       </StyledPage>
     )
   );

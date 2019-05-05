@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import Card from '../../../../../components/UI/Card';
 
-import routes from '../../../../../lib/config/routes';
+// import routes from '../../../../../lib/config/routes';
 import { formatHoursFromDB } from '../../../../../lib/utils';
 
-const ModulesAvailable = ({ t, modules }) => (
+const ModulesAvailable = ({ t, modules, selectModule }) => (
   <>
     <h2 className='section-title'>{t('Module._plural')}</h2>
     <section className='modules-section'>
       {modules.map(module => {
         const { schedule } = module;
         return (
-          <Link to={routes.dashboard.admin.module(module.id)} key={uuid()}>
-            <Card title={module.fullName} hoverable fullWidth>
-              <p>{t(schedule.day)}</p>
-              <p>
-                {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
-              </p>
-            </Card>
-          </Link>
+          <Card
+            key={uuid()}
+            title={module.fullName}
+            hoverable
+            fullWidth
+            onClick={() => selectModule(module)}
+          >
+            <p>{t(schedule.day)}</p>
+            <p>
+              {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
+            </p>
+          </Card>
         );
       })}
     </section>
@@ -35,6 +39,7 @@ ModulesAvailable.defaultProps = {
 
 ModulesAvailable.propTypes = {
   t: PropTypes.func.isRequired,
+  selectModule: PropTypes.func.isRequired,
   modules: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

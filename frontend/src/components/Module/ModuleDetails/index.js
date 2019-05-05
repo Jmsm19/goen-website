@@ -1,42 +1,22 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import Loading from '../../../../components/Loading';
-import StudentsTable from '../../../../components/Tables/StudentsTable';
+import StudentsTable from '../../Tables/StudentsTable';
 
-import { getClanImageAddress, formatHoursFromDB } from '../../../../lib/utils';
-import { DataContext } from '../../../../context/DataContext';
+import routes from '../../../lib/config/routes';
+import { getClanImageAddress, formatHoursFromDB } from '../../../lib/utils';
 
-import routes from '../../../../lib/config/routes';
-import StyledPage from './styles';
-import { FadeInSection } from '../../../../animations/components';
+import { FadeInSection } from '../../../animations/components';
+import StyledContainer from './styles';
 
-const ModuleDetailsPage = ({ match: { params } }) => {
-  const { id } = params;
-  const { modules, notFoundModules, getModule } = useContext(DataContext);
+const ModuleDetails = ({ module }) => {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (!modules.has(id)) {
-      getModule(id);
-    }
-  }, []);
-
-  if (!modules.has(id)) {
-    if (notFoundModules.includes(id)) {
-      return <h1>{t('Module.NotFound')}</h1>;
-    }
-
-    return <Loading text={t('Module.Searching')} />;
-  }
-
-  const module = modules.get(id);
   const { clan, schedule, instructor, assistant, students } = module;
 
   return (
-    <StyledPage className='module-page'>
+    <StyledContainer>
       <FadeInSection className='module-summary-section'>
         {!!clan && <img src={getClanImageAddress(clan.name)} alt={clan.name} />}
         <div className='module-info'>
@@ -68,16 +48,12 @@ const ModuleDetailsPage = ({ match: { params } }) => {
 
         <StudentsTable students={students} withGradeForModule={module.id} />
       </FadeInSection>
-    </StyledPage>
+    </StyledContainer>
   );
 };
 
-ModuleDetailsPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
+ModuleDetails.propTypes = {
+  module: PropTypes.shape().isRequired,
 };
 
-export default ModuleDetailsPage;
+export default ModuleDetails;
