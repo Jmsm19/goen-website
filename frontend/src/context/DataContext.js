@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext';
 
 import DataStateReducer from '../store/reducers/dataReducer';
 import { GetActivePeriod, GetModule, GetAllModules } from '../store/actions/periodActions';
-import { GetUser, GetSenpaiModules } from '../store/actions/userActions';
+import { GetUser, GetAllUsers, GetSenpaiModules } from '../store/actions/userActions';
 import { createMap } from '../lib/utils';
 
 const DataContext = React.createContext();
@@ -18,6 +18,7 @@ const DataContextProvider = ({ children }) => {
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
+    allUsersSearched: false,
     users: createMap(),
     notFoundUsers: [],
   };
@@ -40,6 +41,7 @@ const DataContextProvider = ({ children }) => {
     // Senpai
     getSenpaiModules: (role, id) => GetSenpaiModules(role, id, dispatch),
     // User
+    getAllUsers: () => GetAllUsers(dispatch),
     getUser: id => GetUser(id, dispatch),
   };
 

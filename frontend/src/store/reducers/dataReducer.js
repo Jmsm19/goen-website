@@ -10,7 +10,7 @@ const DataStateReducer = (state, action) => {
       return {
         ...state,
         modules: new Map([...state.modules, ...payload.module]),
-        allModulesSearched: !!payload.allModulesSearched,
+        allModulesSearched: state.allModulesSearched || !!payload.allModulesSearched,
       };
     case actionTypes.MODULE_NOT_FOUND:
       return {
@@ -22,6 +22,7 @@ const DataStateReducer = (state, action) => {
       return {
         ...state,
         users: new Map([...state.users, ...payload.user]),
+        allUsersSearched: state.allUsersSearched || !!payload.allUsersSearched,
       };
     case actionTypes.USER_NOT_FOUND:
       return {

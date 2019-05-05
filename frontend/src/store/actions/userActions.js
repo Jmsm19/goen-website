@@ -1,7 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 import actionTypes from '../types';
 import { GetData } from '../../lib/utils/http';
-import { capitalize, createMap, createDictionaryItem } from '../../lib/utils';
+import {
+  capitalize,
+  createMap,
+  createDictionaryItem,
+  createDictionaryOfIdsFromArray,
+} from '../../lib/utils';
 
 export const GetUser = (id, dispatch) => {
   GetData(`users/${id}`)
@@ -21,6 +26,18 @@ export const GetUser = (id, dispatch) => {
         });
       }
     });
+};
+
+export const GetAllUsers = dispatch => {
+  GetData(`users`).then(({ data }) => {
+    dispatch({
+      type: actionTypes.GET_USER,
+      payload: {
+        user: createMap(createDictionaryOfIdsFromArray(data)),
+        allUsersSearched: true,
+      },
+    });
+  });
 };
 
 export const GetSenpaiModules = (role, id, dispatch) => {

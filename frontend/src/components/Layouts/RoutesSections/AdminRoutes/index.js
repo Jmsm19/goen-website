@@ -14,6 +14,10 @@ const AdminRoutes = ({ onLinkClick, t }) => {
       path: routes.dashboard.admin.modules,
       linkText: t('Module._plural'),
     },
+    {
+      path: routes.dashboard.admin.users,
+      linkText: t('User._plural'),
+    },
   ];
 
   return <NavSection title={t('Admin')} routes={links} onLinkClick={onLinkClick} />;

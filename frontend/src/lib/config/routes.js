@@ -18,6 +18,7 @@ module.exports = {
       instructors: '/dashboard/admin/instructors',
       modules: '/dashboard/admin/modules',
       module: (id = ':id') => `/dashboard/admin/module/${id}`,
+      users: '/dashboard/admin/user',
     },
     instructor: {
       home: '/dashboard/instructor',

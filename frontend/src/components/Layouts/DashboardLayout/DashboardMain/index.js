@@ -15,6 +15,7 @@ import AdminPeriodPage from '../../../../pages/dashboard/admin/period';
 import ModuleDetailsPage from '../../../../pages/dashboard/admin/moduleDetails';
 import UserProfilePage from '../../../../pages/dashboard/user/profile';
 import ModulesPage from '../../../../pages/dashboard/admin/modules';
+import UsersListPage from '../../../../pages/dashboard/admin/users';
 
 const DashboardMain = ({ authUser, location }) => (
   <main className='main-content'>
@@ -35,6 +36,13 @@ const DashboardMain = ({ authUser, location }) => (
             requiredRole='admin'
             path={routes.dashboard.admin.module()}
             component={ModuleDetailsPage}
+          />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
+            path={routes.dashboard.admin.users}
+            component={UsersListPage}
           />
 
           <RoleRestrictedRoute
