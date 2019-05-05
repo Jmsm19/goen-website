@@ -6,11 +6,11 @@ export const FadeInTable = posed.table(
   FadeIn(
     {
       beforeChildren: true,
-      staggerChildren: 150,
+      staggerChildren: 60,
     },
     {
       afterChildren: true,
-      staggerChildren: 150,
+      staggerChildren: 60,
     },
   ),
 );
