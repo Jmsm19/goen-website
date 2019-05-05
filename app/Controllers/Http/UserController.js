@@ -18,9 +18,11 @@ class UserController {
    * @param {Bumblebee} ctx.transform
    */
   async index({ transform }) {
-    const users = await User.all();
+    const users = await User.query()
+      .orderBy('name', 'asc')
+      .fetch();
 
-    return transform.collection(users, 'UserTransformer');
+    return transform.collection(users, 'UserTransformer.withExtra');
   }
 
   /**
