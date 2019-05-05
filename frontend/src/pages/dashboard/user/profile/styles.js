@@ -7,6 +7,10 @@ export const StyledPage = styled.div`
         margin-bottom: 2rem;
       }
 
+      div {
+        display: grid;
+      }
+
       h2 {
         font-size: 1rem;
       }

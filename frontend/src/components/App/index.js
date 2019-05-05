@@ -1,7 +1,5 @@
-import React, { useState, useLayoutEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-import { enquireScreen, StopEnquireScreen } from '../../lib/utils/enquire';
 
 import '../../i18n';
 
@@ -10,23 +8,13 @@ import { AuthContextProvider } from '../../context/AuthContext';
 import { DataContextProvider } from '../../context/DataContext';
 
 import routes from '../../lib/config/routes';
+import { LayoutContextProvider } from '../../context/LayoutContext';
 
 const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
 const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
-const App = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [isMobile, setIsMobile] = useState(false);
-
-  useLayoutEffect(() => {
-    enquireScreen(isMob => {
-      setIsMobile(!!isMob);
-    });
-
-    return () => StopEnquireScreen();
-  });
-
-  return (
+const App = () => (
+  <LayoutContextProvider>
     <AuthContextProvider>
       <DataContextProvider>
         <BrowserRouter>
@@ -34,7 +22,7 @@ const App = () => {
             <Switch>
               <Route
                 path={routes.dashboard.prefix}
-                render={rProps => <DashboardLayout isMobile={isMobile} {...rProps} />}
+                render={rProps => <DashboardLayout {...rProps} />}
               />
 
               <Suspense fallback={<Loading />}>
@@ -45,7 +33,7 @@ const App = () => {
         </BrowserRouter>
       </DataContextProvider>
     </AuthContextProvider>
-  );
-};
+  </LayoutContextProvider>
+);
 
 export default App;

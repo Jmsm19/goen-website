@@ -13,10 +13,12 @@ import DashboardMain from './DashboardMain';
 import DashboardSidebar from './DashboardSidebar';
 
 import { StyledLayout } from './styles';
+import { LayoutContext } from '../../../context/LayoutContext';
 
-const DashboardLayout = ({ isMobile, location }) => {
+const DashboardLayout = ({ location }) => {
   const { t } = useTranslation();
   const { isAuth, authUser, logout } = useContext(AuthContext);
+  const { isMobile } = useContext(LayoutContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -60,7 +62,6 @@ const DashboardLayout = ({ isMobile, location }) => {
 };
 
 DashboardLayout.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

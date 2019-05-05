@@ -4,7 +4,7 @@ import { AnimatedBackdrop, AnimatedSidebar } from './animations';
 
 const StyledSidebar = styled(AnimatedSidebar)`
   &.sidebar {
-    z-index: 9000;
+    z-index: 1;
 
     height: 92vh;
     width: 100%;
@@ -85,7 +85,7 @@ export const StyledBackdrop = styled(AnimatedBackdrop)`
     position: absolute;
     top: 0;
 
-    background-color: #f4f4f4;
+    background-color: rgba(67, 67, 67, 0.4);
   }
 `;
 
