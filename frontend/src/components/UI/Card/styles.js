@@ -23,6 +23,7 @@ const StyledCard = styled.div`
       transition: all 0.15s ease;
 
       &:hover {
+        cursor: pointer;
         transform: translateY(-1px);
       }
     }

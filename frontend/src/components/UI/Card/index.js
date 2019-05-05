@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import StyledCard from './styles';
 
 const Card = forwardRef((props, ref) => {
-  const { children, title, image, width, ...droppings } = props;
+  const { children, title, image, width, onClick, ...droppings } = props;
   const { fullWidth, withShadow, hoverable, className, ...rest } = droppings;
 
   const localClassName = classnames(
@@ -19,7 +19,7 @@ const Card = forwardRef((props, ref) => {
   );
 
   return (
-    <StyledCard ref={ref} className={localClassName} style={{ width }} {...rest}>
+    <StyledCard ref={ref} className={localClassName} style={{ width }} onClick={onClick} {...rest}>
       {image && <img className='card-img-top' src={image} alt={title} />}
       <div className='card-body'>
         {title && <h5 className='card-title'>{title}</h5>}
@@ -35,6 +35,7 @@ Card.defaultProps = {
   hoverable: false,
   image: null,
   title: null,
+  onClick: () => null,
   width: null,
   withShadow: false,
 };
@@ -45,6 +46,7 @@ Card.propTypes = {
   fullWidth: PropTypes.bool,
   hoverable: PropTypes.bool,
   image: PropTypes.string,
+  onClick: PropTypes.func,
   title: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   withShadow: PropTypes.bool,
