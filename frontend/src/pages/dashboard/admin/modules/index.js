@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import ModulesTable from '../../../../components/Tables/ModulesTable';
 import { DataContext } from '../../../../context/DataContext';
 
+import StyledPage from './styles';
+
 const ModulesPage = props => {
   const { t } = useTranslation();
   const { allModulesSearched, modules, getAllModules } = useContext(DataContext);
@@ -15,11 +17,13 @@ const ModulesPage = props => {
   }, []);
 
   return (
-    <div>
+    <StyledPage>
       <h1>{t('Module._plural')}</h1>
 
-      <ModulesTable modules={[...modules.values()]} loading={!allModulesSearched} />
-    </div>
+      <section>
+        <ModulesTable modules={[...modules.values()]} loading={!allModulesSearched} />
+      </section>
+    </StyledPage>
   );
 };
 
