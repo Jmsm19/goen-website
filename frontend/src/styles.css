@@ -35,9 +35,14 @@ html, body {
 }
 
 #root {
+  z-index: 0;
   height: 100%;
   color: #535353;
   min-width: 400px
+}
+
+#portal {
+  z-index: 1;
 }
 
 a {
