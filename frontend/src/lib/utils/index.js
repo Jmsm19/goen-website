@@ -120,3 +120,5 @@ export const createArrayFromMap = (map = new Map()) => {
 
   return array;
 };
+
+export const formatNationalId = nationalId => new Intl.NumberFormat('es').format(nationalId);

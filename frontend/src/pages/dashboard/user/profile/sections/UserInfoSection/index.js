@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { differenceInCalendarYears } from 'date-fns';
 
+import { formatNationalId } from '../../../../../../lib/utils';
+
 const UserInfoSection = ({ t, user }) => (
   <section className='user-info'>
     <h1 className='user-name'>{user.name}</h1>
-    <p className='user-national-id'>{user.nationalId}</p>
+    <p className='user-national-id'>{formatNationalId(user.nationalId)}</p>
     <p className='user-email'>{user.email}</p>
     <p className='user-phone-number'>{user.phoneNumber}</p>
     <p className='user-age'>
