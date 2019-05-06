@@ -25,7 +25,6 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
       border-radius: 0.375rem;
       min-height: 200px;
       min-width: 50%;
-      padding: 1.5rem;
 
       z-index: 1;
       width: 80vw;
@@ -34,9 +33,8 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
       ${({ isMobile }) =>
         isMobile &&
         `
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
+        width: 95vw;
+        height: 95vh;
       `}
 
       display: grid;
@@ -44,13 +42,16 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
         'header'
         'content'
         'footer';
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: 50px 1fr auto;
 
       .modal-header {
         grid-area: 'header';
       }
       .modal-content {
         grid-area: 'content';
+        padding: ${({ isMobile }) => (isMobile ? '1rem' : '1.5rem')};
+        padding-top: 0;
+        overflow-y: auto;
       }
       .modal-footer {
         grid-area: 'footer';
@@ -63,7 +64,7 @@ export const StyledCloseBtn = styled(X)`
   &.close-btn {
     width: 3rem;
     position: absolute;
-    top: 0.25rem;
+    top: 0.5rem;
     right: 0.5rem;
 
     color: #343434;

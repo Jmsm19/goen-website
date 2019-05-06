@@ -8,7 +8,7 @@ import { LayoutContext } from '../../../context/LayoutContext';
 import { FadeInModalContent, SlideUpModal } from './animations';
 import { StyledModal, StyledCloseBtn } from './styles';
 
-const Modal = ({ isVisible, title, footerContent, children, onClose }) => {
+const Modal = ({ isVisible, title, headerContent, footerContent, children, onClose }) => {
   const modalRef = createRef();
   const { isMobile } = useContext(LayoutContext);
   // eslint-disable-next-line consistent-return
@@ -53,9 +53,13 @@ const Modal = ({ isVisible, title, footerContent, children, onClose }) => {
         onClick={onClose}
       >
         <SlideUpModal className='modal' onClick={e => e.stopPropagation()}>
+          {/* Close Btn */}
           <StyledCloseBtn className='close-btn' onClick={onClose} />
-          {title && <div className='modal-header'>{title}</div>}
+          {/* Header */}
+          <div className='modal-header'>{title || headerContent}</div>
+          {/* Content */}
           <FadeInModalContent className='modal-content'>{children}</FadeInModalContent>
+          {/* Footer */}
           {footerContent && <div className='modal-footer'>{footerContent}</div>}
         </SlideUpModal>
       </StyledModal>
@@ -67,6 +71,7 @@ const Modal = ({ isVisible, title, footerContent, children, onClose }) => {
 
 Modal.defaultProps = {
   footerContent: null,
+  headerContent: null,
   isVisible: false,
   title: null,
 };
@@ -74,6 +79,7 @@ Modal.defaultProps = {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   footerContent: PropTypes.node,
+  headerContent: PropTypes.node,
   isVisible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
