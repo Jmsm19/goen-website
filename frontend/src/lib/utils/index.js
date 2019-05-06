@@ -122,3 +122,8 @@ export const createArrayFromMap = (map = new Map()) => {
 };
 
 export const formatNationalId = nationalId => new Intl.NumberFormat('es').format(nationalId);
+
+export const snakeCaseToCamelCase = string => {
+  const splitText = string.split('_');
+  return splitText.map((word, index) => (index === 0 ? word : capitalize(word))).join('');
+};
