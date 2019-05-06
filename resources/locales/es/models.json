@@ -1,4 +1,7 @@
 {
   "clan": "Clan",
-  "deleted": "{model} fue borrado"
+  "setting": "Configuración",
+  "settingUpdated": "Configuración actualizada",
+  "deleted": "{model} fue borrado",
+  "updated": "{model} fue actualizado"
 }

@@ -26,6 +26,10 @@ module.exports = Route => {
       .only(['destroy', 'store', 'update']);
 
     Route.resource('modules', 'ModuleController').apiOnly();
+
+    Route.put('settings', 'SettingController.update')
+      .validator('UpdateSetting')
+      .as('settings.update');
   })
     .prefix('api/')
     .middleware(['auth', 'verified', 'role:admin']);

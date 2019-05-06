@@ -1,4 +1,7 @@
 {
   "clan": "Clan",
-  "deleted": "{model} deleted"
+  "setting": "Setting",
+  "settingUpdated": "Settings were updated",
+  "deleted": "{model} deleted",
+  "updated": "{model} updated"
 }

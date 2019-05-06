@@ -1,5 +1,10 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+
+const { forLocale } = use('Antl');
+
+const { camelCaseToSnakeCase } = require('../../Utils');
 
 /** @type {typeof import('../../Models/Setting')} */
 const Setting = use('App/Models/Setting');
@@ -13,70 +18,33 @@ class SettingController {
    * GET settings
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {}
+  async index({ transform }) {
+    const settings = await Setting.firstOrFail();
 
-  /**
-   * Render a form to be used for creating a new setting.
-   * GET settings/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async create({ request, response }) {}
-
-  /**
-   * Create/save a new setting.
-   * POST settings
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store({ request, response }) {}
-
-  /**
-   * Display a single setting.
-   * GET settings/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async show({ params, request, response }) {}
-
-  /**
-   * Render a form to update an existing setting.
-   * GET settings/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async edit({ params, request, response }) {}
+    return transform.item(settings, 'SettingTransformer');
+  }
 
   /**
    * Update setting details.
-   * PUT or PATCH settings/:id
+   * PUT or PATCH settings
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {String} ctx.locale
    */
-  async update({ params, request, response }) {}
+  async update({ request, locale }) {
+    const { settingName, value } = request.all();
+    const setting = await Setting.firstOrFail();
 
-  /**
-   * Delete a setting with id.
-   * DELETE settings/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy({ params, request, response }) {}
+    setting.merge({ [camelCaseToSnakeCase(settingName)]: value });
+    await setting.save();
+
+    return {
+      message: forLocale(locale).formatMessage('models.settingUpdated'),
+    };
+  }
 }
 
 module.exports = SettingController;

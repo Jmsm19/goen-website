@@ -23,4 +23,13 @@ module.exports = {
     await Clan.query()
       .where('name', roleName)
       .firstOrFail(),
+
+  /**
+    Converts a string from camelCase to snake_case
+
+    @param {String} camelCaseString
+    @return {String} snake_case_string
+  */
+  camelCaseToSnakeCase: camelCaseString =>
+    camelCaseString.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase(),
 };
