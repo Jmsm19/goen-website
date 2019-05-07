@@ -10,7 +10,7 @@
       value: 'en',
     },
     {
-      text: t('Language.Japanese'),
+      text: 'Japanese',
       value: 'jpn',
       disabled: true,
     },
