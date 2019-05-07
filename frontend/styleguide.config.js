@@ -41,6 +41,15 @@ module.exports = {
           --danger-color: #f5365c;
           --warning-color: #fb6340;
 
+          --black: #242424;
+          --light-black: #434343;
+
+          --border-radius: 0.375rem;
+          --input-box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+          --input-box-shadow-on-focus: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+          --drop-shadow: 0px 0px 2rem 0px rgba(136, 152, 170, 0.15);
+          --shadow-color: rgba(136, 152, 170, 0.15);
+
           --tablet-size: 768px;
           --phone-size: 576px;
         }
