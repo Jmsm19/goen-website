@@ -34,8 +34,11 @@ const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, to
       {!!authUser.isInstructor && <InstructorRoutes t={t} onLinkClick={delayedToggleSidebar} />}
       {!!authUser.isStudent && <StudentRoutes t={t} onLinkClick={delayedToggleSidebar} />}
 
-      {/* Settings route link and logout btn */}
-      <NavLink to={routes.dashboard.settings}>{t('Settings')}</NavLink>
+      <NavLink to={routes.dashboard.settings} onClick={delayedToggleSidebar}>
+        {t('Settings')}
+      </NavLink>
+
+      {/* User Logout btn */}
       {isMobile && (
         <Button
           className='logout-btn'
