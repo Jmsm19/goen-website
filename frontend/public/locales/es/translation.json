@@ -105,5 +105,6 @@
   "Wednesday": "Miércoles",
   "Thursday": "Jueves",
   "Friday": "Viernes",
-  "Saturday": "Sábado"
+  "Saturday": "Sábado",
+  "CheckInternetConnection": "Parece que no tienes conexión a internet."
 }

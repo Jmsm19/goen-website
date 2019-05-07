@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import '../../i18n';
 
@@ -14,9 +16,9 @@ const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
 const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
 const App = () => (
-  <LayoutContextProvider>
-    <AuthContextProvider>
-      <DataContextProvider>
+  <AuthContextProvider>
+    <DataContextProvider>
+      <LayoutContextProvider>
         <BrowserRouter>
           <Suspense fallback={<Loading text='Loading Dashboard...' />}>
             <Switch>
@@ -31,9 +33,11 @@ const App = () => (
             </Switch>
           </Suspense>
         </BrowserRouter>
-      </DataContextProvider>
-    </AuthContextProvider>
-  </LayoutContextProvider>
+
+        <ToastContainer hideProgressBar />
+      </LayoutContextProvider>
+    </DataContextProvider>
+  </AuthContextProvider>
 );
 
 export default App;

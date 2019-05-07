@@ -105,5 +105,6 @@
   "Wednesday": "Wednesday",
   "Thursday": "Thursday",
   "Friday": "Friday",
-  "Saturday": "Saturday"
+  "Saturday": "Saturday",
+  "CheckInternetConnection": "You seem to be offline. Check your internet connection."
 }

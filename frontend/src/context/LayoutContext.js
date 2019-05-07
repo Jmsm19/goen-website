@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Detector as ConnectivityDetector } from 'react-detect-offline';
 
 import { enquireScreen, StopEnquireScreen } from '../lib/utils/enquire';
+import OfflineNotification from '../components/OfflineNotification';
 
 const LayoutContext = React.createContext();
 
@@ -21,7 +23,18 @@ const LayoutContextProvider = ({ children }) => {
     isMobile,
   };
 
-  return <LayoutContext.Provider value={{ ...state }}>{children}</LayoutContext.Provider>;
+  return (
+    <LayoutContext.Provider value={{ ...state }}>
+      <ConnectivityDetector
+        render={({ online }) => (
+          <>
+            <OfflineNotification isOnline={online} />
+            {children}
+          </>
+        )}
+      />
+    </LayoutContext.Provider>
+  );
 };
 
 LayoutContextProvider.propTypes = {
