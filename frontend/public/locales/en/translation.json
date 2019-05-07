@@ -115,5 +115,12 @@
   "Payment": {
     "PendingQty": "{{ count }} payment pending",
     "PendingQty_plural": "{{ count }} payments pending"
+  },
+  "Search": {
+    "ByNationalId": "Search by national identification number",
+    "ByName": "Search by name"
+  },
+  "Filter": {
+    "Clear": "Clear"
   }
 }

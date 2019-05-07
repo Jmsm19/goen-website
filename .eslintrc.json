@@ -47,6 +47,7 @@
     "no-return-await": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": 0,
     "prettier/prettier": [

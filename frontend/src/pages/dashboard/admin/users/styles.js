@@ -8,10 +8,31 @@ const StyledPage = styled.div`
 
   section {
     display: grid;
+    align-items: flex-start;
   }
 
   .table-wrapper {
-    height: 60%;
+    height: 100%;
+    max-height: 73vh;
+  }
+
+  .users-section {
+    grid-template-rows: auto 1fr;
+    grid-gap: 1rem;
+
+    .users-search-area {
+      display: flex;
+      justify-items: space-between;
+
+      input {
+        margin-right: 10px;
+
+        & + .btn {
+          font-size: 0.8rem;
+          padding: 0.625rem;
+        }
+      }
+    }
   }
 `;
 

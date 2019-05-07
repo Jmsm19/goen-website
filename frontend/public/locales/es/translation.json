@@ -115,5 +115,12 @@
   "Payment": {
     "PendingQty": "{{ count }} pago pendiente",
     "PendingQty_plural": "{{ count }} pagos pendientes"
+  },
+  "Search": {
+    "ByNationalId": "Buscar por cédula de identidad",
+    "ByName": "Buscar por nombre"
+  },
+  "Filter": {
+    "Clear": "Limpiar"
   }
 }

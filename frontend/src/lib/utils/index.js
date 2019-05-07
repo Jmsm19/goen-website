@@ -60,13 +60,16 @@ export const getClanImageAddress = clanName =>
   clanName ? `/images/clans/${clanName.toLowerCase()}.png` : null;
 
 /**
- * Filter a given array of objects by the name property
+ * Filter a given array of objects by a property
  * @param {Array} array
- * @param {String} name
+ * @param {String} key
+ * @param {String|Number} value
+ * @param {Array} array
+ * @returns {Array}
  */
-export const filterArrayByName = (array, name) => {
-  if (array.length) {
-    return array.filter(item => RegExp(`${name}`, 'i').test(item.name));
+export const filterArrayBy = (key, value, array) => {
+  if (array.length && !!value) {
+    return array.filter(item => RegExp(`${value}`, 'i').test(item[key]));
   }
   return array;
 };
