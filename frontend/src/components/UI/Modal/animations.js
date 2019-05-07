@@ -4,9 +4,7 @@ import { FadeIn, SlideUp } from '../../../animations';
 
 export const FadeInBackdrop = posed.div(
   FadeIn(
-    {
-      beforeChildren: true,
-    },
+    {},
     {
       delay: 3000,
       afterChildren: true,
