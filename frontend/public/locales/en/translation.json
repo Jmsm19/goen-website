@@ -106,5 +106,14 @@
   "Thursday": "Thursday",
   "Friday": "Friday",
   "Saturday": "Saturday",
-  "CheckInternetConnection": "You seem to be offline. Check your internet connection."
+  "CheckInternetConnection": "You seem to be offline. Check your internet connection.",
+  "Language": {
+    "Spanish": "Spanish",
+    "English": "English",
+    "Japanese": "Japanese"
+  },
+  "Payment": {
+    "PendingQty": "{{ count }} payment pending",
+    "PendingQty_plural": "{{ count }} payments pending"
+  }
 }

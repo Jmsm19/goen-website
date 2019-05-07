@@ -106,5 +106,14 @@
   "Thursday": "Jueves",
   "Friday": "Viernes",
   "Saturday": "Sábado",
-  "CheckInternetConnection": "Parece que no tienes conexión a internet."
+  "CheckInternetConnection": "Parece que no tienes conexión a internet.",
+  "Language": {
+    "Spanish": "Español",
+    "English": "Inglés",
+    "Japanese": "Japonés"
+  },
+  "Payment": {
+    "PendingQty": "{{ count }} pago pendiente",
+    "PendingQty_plural": "{{ count }} pagos pendientes"
+  }
 }

@@ -4,17 +4,11 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-const langDetector = new LanguageDetector(null, {
-  cookieMinutes: 10080, // 7 days
-});
-
 const options = {
   fallbackLng: 'es',
-  defaultLng: 'es',
-  otherLanguages: ['en', 'jp'],
+  lngs: ['es', 'en', 'jpn'],
   load: 'languageOnly',
 
-  // Common namespace used around site
   saveMissing: false,
 
   debug: false,
@@ -26,11 +20,17 @@ const options = {
   react: {
     wait: true,
   },
+
+  detection: {
+    caches: ['cookie'],
+    lookupCookie: 'language',
+    cookieMinutes: 10080, // 7 days
+  },
 };
 
 i18n
   .use(Backend)
-  .use(langDetector)
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init(options);
 
