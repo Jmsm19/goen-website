@@ -48,23 +48,10 @@ const StyledPage = styled.div`
     }
 
     &.modules-section {
+      margin-top: 30px;
       margin-bottom: 30px;
-      grid-gap: 20px;
+      grid-gap: 30px 20px;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-
-      .card {
-        box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
-
-        &:hover {
-          border-color: var(--light-primary-color);
-          transition: all 150ms ease;
-
-          .card-title {
-            color: var(--light-primary-color);
-            transition: all 150ms ease;
-          }
-        }
-      }
     }
   }
 `;

@@ -1,34 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-// import { Link } from 'react-router-dom';
 
-import Card from '../../../../../components/UI/Card';
-
-// import routes from '../../../../../lib/config/routes';
-import { formatHoursFromDB } from '../../../../../lib/utils';
+import ModuleSummaryCard from '../../../../../components/Cards/ModuleSummaryCard';
 
 const ModulesAvailable = ({ t, modules, selectModule }) => (
   <>
     <h2 className='section-title'>{t('Module._plural')}</h2>
     <section className='modules-section'>
-      {modules.map(module => {
-        const { schedule } = module;
-        return (
-          <Card
-            key={uuid()}
-            title={module.fullName}
-            hoverable
-            fullWidth
-            onClick={() => selectModule(module)}
-          >
-            <p>{t(schedule.day)}</p>
-            <p>
-              {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
-            </p>
-          </Card>
-        );
-      })}
+      {modules.map(module => (
+        <ModuleSummaryCard key={uuid()} module={module} onClick={selectModule} />
+      ))}
     </section>
   </>
 );
