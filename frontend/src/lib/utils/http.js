@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const TokenType = 'Bearer ';
 
-const setLocalizationHeader = () => Cookies.get('i18next') || 'es';
+const setLocalizationHeader = () => Cookies.get('language') || 'es';
 
 const setAuthorizationHeader = () => {
   const TOKEN = Cookies.get('token'); // undefined if not present
