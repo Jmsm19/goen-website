@@ -19,7 +19,7 @@ const StyledCard = styled(Card)`
     .bubble {
       position: absolute;
       top: -16px;
-      right: 16px;
+      right: 8px;
       background: var(--light-obscure-primary-color);
       color: #fff;
       padding: 2px 6px;

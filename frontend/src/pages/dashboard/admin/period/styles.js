@@ -51,7 +51,7 @@ const StyledPage = styled.div`
       margin-top: 30px;
       margin-bottom: 30px;
       grid-gap: 30px 20px;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     }
   }
 `;

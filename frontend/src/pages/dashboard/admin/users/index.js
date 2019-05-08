@@ -34,6 +34,7 @@ const UsersListPage = props => {
       <section className='users-section'>
         <div className='users-search-area'>
           <Input
+            flat
             type='text'
             name='nationalId'
             inputMode='numeric'
