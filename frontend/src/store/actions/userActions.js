@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import actionTypes from '../types';
 import { GetData } from '../../lib/utils/http';
 import {

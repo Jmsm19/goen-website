@@ -25,7 +25,7 @@ const AuthContextProvider = ({ children }) => {
     if (isAuth && !authUser) {
       getAuthUser();
     }
-  }, [isAuth]);
+  }, [authUser, isAuth]);
 
   return (
     <AuthContext.Provider value={{ ...state, login, register, logout, getAuthUser }}>

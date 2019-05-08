@@ -6,9 +6,10 @@ import Loading from '../components/Loading';
 import { AuthContext } from './AuthContext';
 
 import DataStateReducer from '../store/reducers/dataReducer';
-import { GetActivePeriod, GetModule, GetAllModules } from '../store/actions/periodActions';
-import { GetUser, GetAllUsers, GetSenpaiModules } from '../store/actions/userActions';
-import { GetSettings, UpdateSettings } from '../store/actions/settingActions';
+import * as periodActions from '../store/actions/periodActions';
+import * as moduleActions from '../store/actions/moduleActions';
+import * as userActions from '../store/actions/userActions';
+import * as settingsActions from '../store/actions/settingActions';
 import { createMap } from '../lib/utils';
 
 const DataContext = React.createContext();
@@ -30,31 +31,30 @@ const DataContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(DataStateReducer, initialState);
 
   const { activePeriod, settings } = state;
+
+  // OnMount
   useEffect(() => {
     if (!settings) {
-      GetSettings(dispatch);
+      settingsActions.GetSettings(dispatch);
+    } else if (isAuth && !activePeriod) {
+      periodActions.GetActivePeriod(dispatch);
     }
-  }, []);
-
-  useEffect(() => {
-    if (isAuth && !activePeriod) {
-      GetActivePeriod(dispatch);
-    }
-  }, [isAuth]);
+  }, [activePeriod, isAuth, settings, state]);
 
   const functions = {
     // Period
-    getActivePeriod: () => GetActivePeriod(dispatch),
+    getActivePeriod: () => periodActions.GetActivePeriod(dispatch),
     // Module
-    getAllModules: () => GetAllModules(dispatch),
-    getModule: id => GetModule(id, dispatch),
+    getAllModules: () => moduleActions.GetAllModules(dispatch),
+    getModule: id => moduleActions.GetModule(id, dispatch),
     // Senpai
-    getSenpaiModules: (role, id) => GetSenpaiModules(role, id, dispatch),
+    getSenpaiModules: (role, id) => userActions.GetSenpaiModules(role, id, dispatch),
     // User
-    getAllUsers: () => GetAllUsers(dispatch),
-    getUser: id => GetUser(id, dispatch),
+    getAllUsers: () => userActions.GetAllUsers(dispatch),
+    getUser: id => userActions.GetUser(id, dispatch),
     // Settings
-    updateSetting: (settingName, value) => UpdateSettings(settingName, value, dispatch),
+    updateSetting: (settingName, value) =>
+      settingsActions.UpdateSettings(settingName, value, dispatch),
   };
 
   return (

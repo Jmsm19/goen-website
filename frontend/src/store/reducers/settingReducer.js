@@ -14,7 +14,7 @@ const SettingStateReducer = (state, action) => {
     case actionTypes.UPDATE_SETTINGS:
       return {
         ...state,
-        modules: {
+        settings: {
           ...state.settings,
           ...payload.settings,
         },
