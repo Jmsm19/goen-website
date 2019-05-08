@@ -1,24 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataContext } from '../../../../../../context/DataContext';
 import ModulesTable from '../../../../../../components/Tables/ModulesTable';
+import useSenpaiModules from '../../../../../../hooks/useSenpaiModules';
 
 const AssistantSection = ({ t, assistant }) => {
-  const { modulesAsAssistant: modules } = assistant;
-  const [isSearchingModules, setIsSearchingModules] = useState(false);
-  const { getSenpaiModules } = useContext(DataContext);
-
-  useEffect(() => {
-    if (!isSearchingModules && !modules) {
-      setIsSearchingModules(true);
-      getSenpaiModules('assistant', assistant.id);
-    }
-
-    if (isSearchingModules && modules) {
-      setIsSearchingModules(false);
-    }
-  }, [assistant.id, getSenpaiModules, isSearchingModules, modules]);
+  const { isSearchingModules, modules } = useSenpaiModules(assistant, 'assistant');
 
   return (
     <section>
