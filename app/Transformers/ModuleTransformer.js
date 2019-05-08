@@ -9,11 +9,11 @@ const Hashids = use('Hashids');
  */
 class ModuleTransformer extends BumblebeeTransformer {
   static get defaultInclude() {
-    return [];
+    return ['schedule', 'clan'];
   }
 
   static get availableInclude() {
-    return ['clan', 'price', 'period', 'schedule', 'instructor', 'assistant', 'students'];
+    return ['price', 'period', 'instructor', 'assistant', 'students'];
   }
 
   /**

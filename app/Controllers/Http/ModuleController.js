@@ -21,7 +21,7 @@ class ModuleController {
     const modules = await Module.all();
 
     return transform
-      .include(['clan', 'price', 'schedule', 'instructor', 'assistant', 'students.grades'])
+      .include(['price', 'period', 'instructor', 'assistant', 'students.grades'])
       .collection(modules, 'ModuleTransformer');
   }
 
@@ -59,7 +59,7 @@ class ModuleController {
     const module = await Module.findByHashOrFail(id);
 
     return transform
-      .include(['clan', 'price', 'schedule', 'instructor', 'assistant', 'students.grades'])
+      .include(['price', 'instructor', 'assistant', 'students.grades'])
       .item(module, 'ModuleTransformer');
   }
 
