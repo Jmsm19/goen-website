@@ -11,35 +11,33 @@ const StyledAlertIcon = styled(Warning)`
   vertical-align: middle;
 `;
 
-const OfflineNotification = ({ isOnline }) => {
+const OfflineNotification = ({ isOnline, isMobile }) => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
 
   const notificationId = 'NoInternetConnection';
-  const notifyOffline = () =>
-    toast.error(
-      <>
-        <StyledAlertIcon size={24} /> {t('CheckInternetConnection')}
-      </>,
-      {
-        autoClose: false,
-        toastId: notificationId,
-        closeButton: false,
-        closeOnClick: true,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        transition: Flip,
-      },
-    );
 
   useEffect(() => {
     if (!isOnline) {
-      notifyOffline();
+      toast.error(
+        <>
+          <StyledAlertIcon size={24} /> {t('CheckInternetConnection')}
+        </>,
+        {
+          autoClose: false,
+          toastId: notificationId,
+          closeButton: false,
+          closeOnClick: true,
+          position: isMobile ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+          transition: Flip,
+        },
+      );
     } else if (toast.isActive(notificationId)) {
       toast.dismiss(notificationId);
     }
-  }, [isOnline, language]);
+  }, [isMobile, isOnline, language, t]);
 
   return null;
 };

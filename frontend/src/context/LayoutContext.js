@@ -28,7 +28,7 @@ const LayoutContextProvider = ({ children }) => {
       <ConnectivityDetector
         render={({ online }) => (
           <>
-            <OfflineNotification isOnline={online} />
+            <OfflineNotification isOnline={online} isMobile={isMobile} />
             {children}
           </>
         )}
