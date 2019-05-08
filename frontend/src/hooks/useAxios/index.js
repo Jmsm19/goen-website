@@ -47,7 +47,7 @@ const useAxios = (url, config = { method: 'GET', body: {} }) => {
         .then(handleResponse)
         .catch(handleResponse);
     }
-  }, []);
+  }, [body, method, url]);
 
   return [isRequesting, response];
 };

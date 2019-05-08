@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
@@ -13,17 +13,21 @@ import UserInfoSection from './sections/UserInfoSection';
 const UserProfilePage = ({ match: { params } }) => {
   const { id } = params;
   const { authUser } = useContext(AuthContext);
+  const [isSearchingUser, setIsSearchingUser] = useState(false);
   const { users, notFoundUsers, getUser } = useContext(DataContext);
   const { t } = useTranslation();
   const user = id ? users.get(id) : authUser;
 
   useEffect(() => {
     if (id) {
-      if (!users.has(id) && !notFoundUsers.includes(id)) {
+      if (!isSearchingUser && !users.has(id) && !notFoundUsers.includes(id)) {
+        setIsSearchingUser(true);
         getUser(id);
+      } else if (isSearchingUser && (users.has(id) || notFoundUsers.includes(id))) {
+        setIsSearchingUser(false);
       }
     }
-  }, []);
+  }, [getUser, id, isSearchingUser, notFoundUsers, users]);
 
   if (!user) {
     if (notFoundUsers.includes(id)) {

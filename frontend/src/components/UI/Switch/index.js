@@ -23,7 +23,7 @@ const Switch = ({ enabled, className, disabled, onChange }) => {
     if (isOn !== wasOn && wasOn !== undefined) {
       onChange(isOn);
     }
-  }, [isOn, wasOn]);
+  }, [isOn, onChange, wasOn]);
 
   return (
     <StyledSwitch

@@ -18,7 +18,7 @@ const InstructorsSection = ({ t, instructor }) => {
     if (isSearchingModules && modules) {
       setIsSearchingModules(false);
     }
-  }, [isSearchingModules, modules]);
+  }, [instructor.id, getSenpaiModules, isSearchingModules, modules]);
 
   return (
     <section>

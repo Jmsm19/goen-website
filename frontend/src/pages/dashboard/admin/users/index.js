@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Input from '../../../../components/UI/Input';

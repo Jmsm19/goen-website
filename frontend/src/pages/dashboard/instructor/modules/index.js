@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { DataContext } from '../../../../context/DataContext';
@@ -17,7 +16,7 @@ const InstructorModulesPage = props => {
 
   return (
     <div className='dashboard-instructor-modules'>
-      <h1>My modules as Instructor</h1>
+      <h1>{t('Instructor.MyModules')}</h1>
 
       <ModulesTable modules={currentPeriodModules} loading={!activePeriod} />
     </div>

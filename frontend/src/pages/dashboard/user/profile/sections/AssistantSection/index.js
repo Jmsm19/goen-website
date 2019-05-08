@@ -18,7 +18,7 @@ const AssistantSection = ({ t, assistant }) => {
     if (isSearchingModules && modules) {
       setIsSearchingModules(false);
     }
-  }, [isSearchingModules, modules]);
+  }, [assistant.id, getSenpaiModules, isSearchingModules, modules]);
 
   return (
     <section>
