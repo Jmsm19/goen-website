@@ -62,3 +62,22 @@ a {
     transform: rotate(360deg);
   }
 }
+
+/* Toastify styles */
+.Toastify__toast {
+  box-shadow: var(--input-box-shadow);
+  padding: 0.625rem 1rem;
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Toastify__toast--success {
+  background-color: var(--success-color);
+}
+
+.Toastify__toast--error {
+  background-color: var(--danger-color);
+}
+
+.Toastify__toast--warning {
+  background-color: var(--warning-color);
+}
