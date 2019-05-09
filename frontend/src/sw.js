@@ -28,19 +28,26 @@ if (typeof importScripts === 'function') {
         ],
       }),
     );
-    // Cache http requests
-    // workbox.routing.registerRoute(
-    //   new RegExp('.+/movies?'),
-    //   new workbox.strategies.NetworkFirst({
-    //     cacheName: 'movieCache',
-    //   }),
-    // );
 
     // Cache main files
     workbox.routing.registerRoute(/\.(?:js|css|html)$/, new workbox.strategies.NetworkFirst());
 
     // Cache main route
     workbox.routing.registerRoute('/', new workbox.strategies.NetworkFirst());
+
+    // Cache auth user route
+    workbox.routing.registerRoute(
+      '/api/auth/user',
+      new workbox.strategies.NetworkFirst({
+        cacheName: 'auth-user',
+        plugins: [
+          new workbox.expiration.Plugin({
+            maxEntries: 1,
+            maxAgeSeconds: 7 * 24 * 60 * 60, // 7 Days
+          }),
+        ],
+      }),
+    );
   } else {
     console.log('Workbox could not be loaded. No Offline support');
   }
