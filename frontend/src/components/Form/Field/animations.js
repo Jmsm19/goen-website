@@ -1,14 +1,18 @@
 import posed from 'react-pose';
 
 import ErrorText from '../ErrorText';
+import HelpText from '../HelpText';
 
-import { SlideDown } from '../../../animations';
+import { SlideDown, FadeIn } from '../../../animations';
 
-const SlideDownErrorText = posed(ErrorText)(
-  SlideDown(null, {
-    y: -24,
-    opacity: 1,
-  }),
+export const SlideDownErrorText = posed(ErrorText)(
+  SlideDown(
+    { delay: 300 },
+    {
+      y: -24,
+      opacity: 1,
+    },
+  ),
 );
 
-export default SlideDownErrorText;
+export const FadeInHelpText = posed(HelpText)(FadeIn({ delay: 200 }, { duration: 0 }));

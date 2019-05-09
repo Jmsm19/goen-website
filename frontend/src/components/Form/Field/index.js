@@ -5,17 +5,18 @@ import { PoseGroup } from 'react-pose';
 import Input from '../../UI/Input';
 import HelpText from '../HelpText';
 
-import SlideDownErrorField from './animations';
+import { SlideDownErrorText, FadeInHelpText } from './animations';
 import StyledFormField from './styles';
 
 const FormField = ({ type, error, help, ...props }) => (
   <StyledFormField className='form-field'>
     <Input type={type} validationStatus={error ? 'error' : null} {...props} />
+    {console.log(help && !error)}
     <PoseGroup>
       {error ? (
-        <SlideDownErrorField key='error-field' error={error} />
+        <SlideDownErrorText key='error-field' error={error} />
       ) : (
-        help && <HelpText key='help-field' text={help} />
+        help && <FadeInHelpText key='help-field' text={help} />
       )}
     </PoseGroup>
   </StyledFormField>
@@ -24,12 +25,14 @@ const FormField = ({ type, error, help, ...props }) => (
 FormField.defaultProps = {
   error: '',
   help: '',
+  value: undefined,
 };
 
 FormField.propTypes = {
   type: PropTypes.string.isRequired,
   error: PropTypes.string,
   help: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default FormField;
