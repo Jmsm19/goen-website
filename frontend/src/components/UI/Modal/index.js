@@ -1,6 +1,7 @@
-import React, { useEffect, useContext, createRef } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import { PoseGroup } from 'react-pose';
 import { LayoutContext } from '../../../context/LayoutContext';
@@ -8,29 +9,22 @@ import { LayoutContext } from '../../../context/LayoutContext';
 import { FadeInModalContent, SlideUpModal } from './animations';
 import { StyledModal, StyledCloseBtn } from './styles';
 
-const Modal = ({ isVisible, title, headerContent, footerContent, children, onClose }) => {
-  const modalRef = createRef();
+const Modal = props => {
+  const {
+    isVisible,
+    title,
+    headerContent,
+    footerContent,
+    children,
+    onClose,
+    className,
+    withCloseButton,
+  } = props;
+
   const { isMobile } = useContext(LayoutContext);
-  // eslint-disable-next-line consistent-return
-  const handleTabKey = e => {
-    const focusableModalElements = modalRef.current.querySelectorAll(
-      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
-    );
-    const firstElement = focusableModalElements[0];
-    const lastElement = focusableModalElements[focusableModalElements.length - 1];
 
-    if (!e.shiftKey && document.activeElement !== firstElement) {
-      firstElement.focus();
-      return e.preventDefault();
-    }
-
-    if (e.shiftKey && document.activeElement !== lastElement) {
-      lastElement.focus();
-      e.preventDefault();
-    }
-  };
-
-  const keyListenersMap = new Map([[27, onClose], [9, handleTabKey]]);
+  const keyListenersMap = new Map([[27, onClose]]);
+  const modalClassName = classnames('backdrop', className);
 
   useEffect(() => {
     function keyListener(e) {
@@ -47,14 +41,14 @@ const Modal = ({ isVisible, title, headerContent, footerContent, children, onClo
       <StyledModal
         key='modal'
         isMobile={isMobile}
-        className='backdrop'
+        className={modalClassName}
         role='dialog'
         aria-modal='true'
         onClick={onClose}
       >
         <SlideUpModal className='modal' onClick={e => e.stopPropagation()}>
           {/* Close Btn */}
-          <StyledCloseBtn className='close-btn' onClick={onClose} />
+          {withCloseButton && <StyledCloseBtn className='close-btn' onClick={onClose} />}
           {/* Header */}
           <div className='modal-header'>{title || headerContent}</div>
           {/* Content */}
@@ -74,6 +68,7 @@ Modal.defaultProps = {
   headerContent: null,
   isVisible: false,
   title: null,
+  withCloseButton: true,
 };
 
 Modal.propTypes = {
@@ -83,6 +78,7 @@ Modal.propTypes = {
   isVisible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
+  withCloseButton: PropTypes.bool,
 };
 
 export default Modal;

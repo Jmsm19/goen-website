@@ -27,15 +27,10 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
       min-width: 50%;
 
       z-index: 1;
-      width: 80vw;
-      height: 80vh;
-
-      ${({ isMobile }) =>
-        isMobile &&
-        `
-        width: 95vw;
-        height: 95vh;
-      `}
+      width: ${({ isMobile }) => (isMobile ? '100%' : 'max-content')};
+      max-width: ${({ isMobile }) => (isMobile ? '95vw' : '80vw')};
+      height: max-content;
+      max-height: ${({ isMobile }) => (isMobile ? '95vh' : '80vh')};
 
       display: grid;
       grid-template-areas:
@@ -46,6 +41,7 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
 
       .modal-header {
         grid-area: 'header';
+        padding: 1rem;
       }
       .modal-content {
         grid-area: 'content';
@@ -55,6 +51,7 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
       }
       .modal-footer {
         grid-area: 'footer';
+        padding: 1rem;
       }
     }
   }
