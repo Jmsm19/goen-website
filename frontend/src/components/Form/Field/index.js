@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { PoseGroup } from 'react-pose';
 
 import Input from '../../UI/Input';
-import HelpText from '../HelpText';
 
 import { SlideDownErrorText, FadeInHelpText } from './animations';
 import StyledFormField from './styles';
@@ -11,7 +10,6 @@ import StyledFormField from './styles';
 const FormField = ({ type, error, help, ...props }) => (
   <StyledFormField className='form-field'>
     <Input type={type} validationStatus={error ? 'error' : null} {...props} />
-    {console.log(help && !error)}
     <PoseGroup>
       {error ? (
         <SlideDownErrorText key='error-field' error={error} />
