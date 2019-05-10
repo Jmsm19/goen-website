@@ -4,6 +4,12 @@
   "Register": "Registrarse",
   "Enter": "Entrar",
   "Settings": "Opciones",
+  "Setting": {
+    "GlobalSettings": "Configuraciones globales",
+    "UserPreferences": "Configuaciones personales",
+    "Language": "Idioma",
+    "RegistrationsEnabled": "Registro de usuarios habilitado"
+  },
   "Logout": "Cerrar sesión",
   "MyProfile": "Mi perfil",
   "OpenSidebar": "Abrir menu lateral",
@@ -12,6 +18,7 @@
   "AccountInfo": "Información de la cuenta",
   "CheckForErrors": "El formulario contiene errores",
   "Name": "Nombre completo",
+  "NameUsedInCertificateWarning": "Este será usado en su certificado",
   "NationalId": "Número de cédula",
   "NationalIdFormat": "Ej: 20689293",
   "WrongNationalIdFormat": "Formato inválido, solo use números",
@@ -42,7 +49,8 @@
     "Created": "Módulo creado",
     "NoModules": "No hay módules",
     "Searching": "Buscando módulo...",
-    "NotFound": "Módulo no encontrado"
+    "NotFound": "Módulo no encontrado",
+    "Qty": "Módulos ofertados"
   },
   "Schedule": {
     "_singular": "Horario",
@@ -54,11 +62,20 @@
   "Period": {
     "_singular": "Período",
     "_plural": "Períodos",
+    "Name": "Nombre",
+    "IsActive": "Estado",
+    "Over": "Culminado",
+    "Active": "Activo",
     "AvailableModules": "Módulos abiertos",
     "Income": "Ingresos",
     "CurrentIncome": "Ingresos obtenidos",
     "ExpectedIncome": "Ingresos esperados",
-    "RegistrationsClosed": "Inscripciones cerradas"
+    "RegistrationsClosed": "Inscripciones cerradas",
+    "SignupFrom": "Inicio de inscripciones",
+    "SignupUntil": "Fin de inscripciones",
+    "Summary": "Período actual",
+    "Manage": "Administrar períodos",
+    "Create": "Nuevo período"
   },
   "User": {
     "_singular": "Usuario",
@@ -121,6 +138,13 @@
     "ByName": "Buscar por nombre"
   },
   "Filter": {
-    "Clear": "Limpiar"
+    "Clear": "Limpiar",
+    "ShowOnly": "Mostrar solo",
+    "ShowAll": "Todos"
+  },
+  "Yes": "Sí",
+  "No": "No",
+  "Confirmation": {
+    "Warning": "¿Estás seguro de esto?"
   }
 }

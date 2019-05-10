@@ -4,6 +4,12 @@
   "Register": "Register",
   "Enter": "Enter",
   "Settings": "Settings",
+  "Setting": {
+    "GlobalSettings": "Global settings",
+    "UserPreferences": "User preferences",
+    "Language": "Language",
+    "RegistrationsEnabled": "User registrations enabled"
+  },
   "Logout": "Logout",
   "MyProfile": "My profile",
   "OpenSidebar": "Open sidebar",
@@ -12,6 +18,7 @@
   "AccountInfo": "Account information",
   "CheckForErrors": "Form contains errors",
   "Name": "Full name",
+  "NameUsedInCertificateWarning": "This will be used in your certificate",
   "NationalId": "National identification number",
   "NationalIdFormat": "Ex: 20689293",
   "WrongNationalIdFormat": "Invalid format, type numbers only",
@@ -42,7 +49,8 @@
     "Created": "Module created",
     "NoModules": "No modules",
     "Searching": "Looking for module...",
-    "NotFound": "Module not found"
+    "NotFound": "Module not found",
+    "Qty": "Open modules"
   },
   "Schedule": {
     "_singular": "Schedule",
@@ -54,11 +62,20 @@
   "Period": {
     "_singular": "Period",
     "_plural": "Periods",
+    "Name": "Name",
+    "IsActive": "Status",
+    "Over": "Over",
+    "Active": "Active",
     "AvailableModules": "Available modules",
     "Income": "Income",
     "CurrentIncome": "Current income",
     "ExpectedIncome": "Expected income",
-    "RegistrationsClosed": "Registrations closed"
+    "RegistrationsClosed": "Registrations closed",
+    "SignupFrom": "Sign ups open from",
+    "SignupUntil": "Sign ups open until",
+    "Summary": "Current period",
+    "Manage": "Manage periods",
+    "Create": "New period"
   },
   "User": {
     "_singular": "User",
@@ -121,6 +138,13 @@
     "ByName": "Search by name"
   },
   "Filter": {
-    "Clear": "Clear"
-  }
+    "Clear": "Clear",
+    "ShowOnly": "Show only",
+    "ShowAll": "All"
+  },
+  "Yes": "Yes",
+  "No": "No",
+  "Confirmation": {
+    "Warning": "Are you sure about this?"
+  },
 }
