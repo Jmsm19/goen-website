@@ -88,7 +88,7 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
 
     .inner-layout {
       display: grid;
-      grid-template-columns: ${({ isMobile }) => (isMobile ? '1fr' : 'auto 1fr')};
+      grid-template-columns: ${({ isMobile }) => (isMobile ? '1fr' : '240px 1fr')};
     }
 
     .main-content {

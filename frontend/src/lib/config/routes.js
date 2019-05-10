@@ -15,6 +15,8 @@ module.exports = {
     },
     admin: {
       home: '/dashboard/admin',
+      managePeriods: '/dashboard/admin/periods',
+      periodDetails: (id = ':id') => `/dashboard/period/${id}`,
       instructors: '/dashboard/admin/instructors',
       modules: '/dashboard/admin/modules',
       module: (id = ':id') => `/dashboard/admin/module/${id}`,

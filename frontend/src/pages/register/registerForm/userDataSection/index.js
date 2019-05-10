@@ -19,7 +19,6 @@ const UserDataSection = forwardRef((props, ref) => {
         placeholder={t('Email')}
         title={t('Email')}
         autoComplete='username'
-        autoFocus={!formal.values.email}
       />
       <FormField
         {...getFieldProps('password')}

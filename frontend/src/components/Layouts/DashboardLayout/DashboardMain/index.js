@@ -11,7 +11,9 @@ import DashboardHomePage from '../../../../pages/dashboard/home';
 
 import routes from '../../../../lib/config/routes';
 import { FadeInRouteContainer } from '../../../../animations/components';
-import AdminPeriodPage from '../../../../pages/dashboard/admin/period';
+import AdminPeriodPage from '../../../../pages/dashboard/admin/activePeriodSummary';
+import ManagePeriods from '../../../../pages/dashboard/admin/periods';
+import PeriodDetails from '../../../../pages/dashboard/admin/periodDetails';
 import UserProfilePage from '../../../../pages/dashboard/user/profile';
 import ModulesPage from '../../../../pages/dashboard/admin/modules';
 import UsersListPage from '../../../../pages/dashboard/admin/users';
@@ -35,6 +37,20 @@ const DashboardMain = ({ authUser, location }) => (
             requiredRole='admin'
             path={routes.dashboard.admin.users}
             component={UsersListPage}
+          />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
+            path={routes.dashboard.admin.periodDetails()}
+            component={PeriodDetails}
+          />
+
+          <RoleRestrictedRoute
+            authUser={authUser}
+            requiredRole='admin'
+            path={routes.dashboard.admin.managePeriods}
+            component={ManagePeriods}
           />
 
           <RoleRestrictedRoute

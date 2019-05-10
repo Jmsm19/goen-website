@@ -8,7 +8,11 @@ const AdminRoutes = ({ onLinkClick, t }) => {
   const links = [
     {
       path: routes.dashboard.admin.home,
-      linkText: t('Period._singular'),
+      linkText: t('Period.Summary'),
+    },
+    {
+      path: routes.dashboard.admin.managePeriods,
+      linkText: t('Period.Manage'),
     },
     {
       path: routes.dashboard.admin.modules,

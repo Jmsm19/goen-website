@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Input from '../../../../components/UI/Input';
@@ -11,20 +11,24 @@ import { filterArrayBy } from '../../../../lib/utils';
 
 const UsersListPage = props => {
   const { t } = useTranslation();
+  const [isSearchingUsers, setIsSearchingUsers] = useState(false);
   const { allUsersSearched, users, getAllUsers } = useContext(DataContext);
   const [valueToFilter, setValueToFilter] = useState('');
   const [filteredUsers, setFilteredUsers] = useState(null);
+  const usersArray = useMemo(() => [...users.values()], [users]);
 
   useEffect(() => {
-    if (!allUsersSearched) {
+    if (!isSearchingUsers && !allUsersSearched) {
+      setIsSearchingUsers(true);
       getAllUsers();
+    } else if (isSearchingUsers && allUsersSearched) {
+      setIsSearchingUsers(false);
     }
-  }, [allUsersSearched, getAllUsers]);
+  }, [allUsersSearched, getAllUsers, isSearchingUsers]);
 
   useEffect(() => {
-    const usersArray = [...users.values()];
     setFilteredUsers(filterArrayBy('nationalId', valueToFilter, usersArray));
-  }, [users, valueToFilter]);
+  }, [users, usersArray, valueToFilter]);
 
   return (
     <StyledPage className='users-lists-page'>
@@ -50,7 +54,7 @@ const UsersListPage = props => {
           />
         </div>
 
-        <UsersTable users={filteredUsers || []} loading={!allUsersSearched} />
+        <UsersTable users={filteredUsers || usersArray} loading={!allUsersSearched} />
       </section>
     </StyledPage>
   );
