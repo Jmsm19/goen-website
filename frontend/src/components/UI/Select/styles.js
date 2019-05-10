@@ -27,7 +27,7 @@ const StyledSelect = styled.select`
       outline: 0;
     }
 
-    &:focus {
+    &:hover {
       box-shadow: var(--input-box-shadow-on-focus);
     }
 
