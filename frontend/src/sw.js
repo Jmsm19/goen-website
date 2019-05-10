@@ -35,17 +35,34 @@ if (typeof importScripts === 'function') {
     // Cache main route
     workbox.routing.registerRoute('/', new workbox.strategies.NetworkFirst());
 
+    // Cache settings files
+    workbox.routing.registerRoute('/api/settings', new workbox.strategies.NetworkFirst());
+
+    // Cache translation files
+    const pluginConfig = {
+      maxEntries: 1,
+      maxAgeSeconds: 7 * 24 * 60 * 60, // 7 Days
+    };
+
+    workbox.routing.registerRoute(
+      /\/locales\//,
+      new workbox.strategies.NetworkFirst({
+        cacheName: 'translations',
+        plugins: [
+          new workbox.expiration.Plugin({
+            ...pluginConfig,
+            maxEntries: 3,
+          }),
+        ],
+      }),
+    );
+
     // Cache auth user route
     workbox.routing.registerRoute(
       '/api/auth/user',
       new workbox.strategies.NetworkFirst({
         cacheName: 'auth-user',
-        plugins: [
-          new workbox.expiration.Plugin({
-            maxEntries: 1,
-            maxAgeSeconds: 7 * 24 * 60 * 60, // 7 Days
-          }),
-        ],
+        plugins: [new workbox.expiration.Plugin(pluginConfig)],
       }),
     );
   } else {
