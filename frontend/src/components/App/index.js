@@ -16,28 +16,30 @@ const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
 const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
 const App = () => (
-  <AuthContextProvider>
-    <DataContextProvider>
-      <LayoutContextProvider>
-        <BrowserRouter>
-          <Suspense fallback={<Loading text='Loading Dashboard...' />}>
-            <Switch>
-              <Route
-                path={routes.dashboard.prefix}
-                render={rProps => <DashboardLayout {...rProps} />}
-              />
+  <Suspense fallback={<Loading text='Loading Config...' />}>
+    <AuthContextProvider>
+      <DataContextProvider>
+        <LayoutContextProvider>
+          <BrowserRouter>
+            <Suspense fallback={<Loading text='Loading Dashboard...' />}>
+              <Switch>
+                <Route
+                  path={routes.dashboard.prefix}
+                  render={rProps => <DashboardLayout {...rProps} />}
+                />
 
-              <Suspense fallback={<Loading />}>
-                <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
-              </Suspense>
-            </Switch>
-          </Suspense>
-        </BrowserRouter>
+                <Suspense fallback={<Loading />}>
+                  <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
+                </Suspense>
+              </Switch>
+            </Suspense>
+          </BrowserRouter>
 
-        <ToastContainer hideProgressBar />
-      </LayoutContextProvider>
-    </DataContextProvider>
-  </AuthContextProvider>
+          <ToastContainer hideProgressBar />
+        </LayoutContextProvider>
+      </DataContextProvider>
+    </AuthContextProvider>
+  </Suspense>
 );
 
 export default App;

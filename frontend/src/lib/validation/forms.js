@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import * as Yup from 'yup';
-import { subYears, format } from 'date-fns';
+import { addDays, subYears, isDate, format } from 'date-fns';
 // import { days } from '../config/constants';
 
 export const getLoginValidationProps = t => ({
@@ -24,7 +24,7 @@ export const getSignupValidationProps = t => {
   const initialValues = {
     name: '',
     nationalId: '',
-    birthDate: new Date(),
+    birthDate: undefined,
     phoneNumber: '',
     email: '',
     password: '',
@@ -59,18 +59,24 @@ export const getSignupValidationProps = t => {
   };
 };
 
-// export const periodFormValidation = t =>
-//   Yup.object().shape({
-//     signup_from: Yup.date().required(t('Required')),
-//     signup_until: Yup.date()
-//       .when('signup_from', (value, _) => {
-//         const dayAfter = moment(value)
-//           .add(1, 'days')
-//           .toDate();
-//         return Yup.date().min(dayAfter, t('MustBeAfterSignupFrom'));
-//       })
-//       .required(t('Required')),
-//   });
+export const getPeriodFormValidation = t => ({
+  initialValues: {},
+  schema: Yup.object().shape({
+    signup_from: Yup.string().required(t('Required')),
+    signup_until: Yup.date()
+      .required(t('Required'))
+      .when('signup_from', (value, schema, selfRef) => {
+        // TODO: Recheck this validation once Formal updates -> validateOnChange, onBlur, etc.
+        if (value && selfRef.parent && isDate(selfRef.parent.signup_until)) {
+          const dayAfter = addDays(value, 1);
+          return Yup.date()
+            .required(t('Required'))
+            .min(dayAfter, t('MustBeAfterSignupFrom'));
+        }
+        return schema;
+      }),
+  }),
+});
 
 // export const moduleFormValidation = t =>
 //   Yup.object().shape({

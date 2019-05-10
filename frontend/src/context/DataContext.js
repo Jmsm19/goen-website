@@ -1,5 +1,6 @@
 import React, { useContext, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import Loading from '../components/Loading';
 
@@ -15,10 +16,13 @@ import { createMap } from '../lib/utils';
 const DataContext = React.createContext();
 
 const DataContextProvider = ({ children }) => {
+  const { t } = useTranslation();
   const { isAuth } = useContext(AuthContext);
 
   const initialState = {
     activePeriod: null,
+    periods: createMap(),
+    allPeriodsSearched: false,
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
@@ -41,9 +45,14 @@ const DataContextProvider = ({ children }) => {
     }
   }, [activePeriod, isAuth, settings, state]);
 
+  const helpers = { t, dispatch };
   const functions = {
     // Period
     getActivePeriod: () => periodActions.GetActivePeriod(dispatch),
+    getPeriod: id => periodActions.GetPeriod(id, helpers),
+    getAllPeriods: () => periodActions.GetAllPeriods(helpers),
+    createPeriod: (periodData, cb) => periodActions.CreatePeriod(periodData, helpers, cb),
+    deletePeriod: id => periodActions.DeletePeriod(id, helpers),
     // Module
     getAllModules: () => moduleActions.GetAllModules(dispatch),
     getModule: id => moduleActions.GetModule(id, dispatch),
@@ -59,7 +68,7 @@ const DataContextProvider = ({ children }) => {
 
   return (
     <DataContext.Provider value={{ ...state, ...functions }}>
-      {!settings ? <Loading /> : children}
+      {!settings ? <Loading text='Loading Config...' /> : children}
     </DataContext.Provider>
   );
 };

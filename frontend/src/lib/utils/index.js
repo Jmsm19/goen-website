@@ -15,7 +15,7 @@ export const capitalize = (string = '') => string[0].toUpperCase() + string.subs
 
 export const callFunctions = fn => {
   if (Array.isArray(fn)) {
-    fn.map(f => checkAndCallFn(fn));
+    fn.map(f => checkAndCallFn(f));
   } else {
     checkAndCallFn(fn);
   }

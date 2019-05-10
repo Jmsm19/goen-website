@@ -4,6 +4,7 @@ import { createMap } from '../../lib/utils';
 
 const DataStateReducer = (state, action) => {
   const { type, payload } = action;
+  const { periods } = state;
 
   switch (type) {
     case actionTypes.GET_MODULE:
@@ -49,6 +50,25 @@ const DataStateReducer = (state, action) => {
         ...payload,
         modules: new Map([...state.modules, ...payload.modules]),
       };
+    case actionTypes.GET_ALL_PERIODS:
+      return {
+        ...state,
+        periods: new Map([...state.periods, ...payload.periods]),
+        allPeriodsSearched: payload.allPeriodsSearched,
+      };
+    case actionTypes.GET_PERIOD:
+      return {
+        ...state,
+        periods: new Map([...state.periods, ...payload.period]),
+      };
+    case actionTypes.CREATE_PERIOD:
+      return {
+        ...state,
+        periods: new Map([...state.periods, ...payload.period]),
+      };
+    case actionTypes.DELETE_PERIOD:
+      periods.delete(payload.periodId);
+      return { ...state, periods: new Map([...periods]) };
     // Default responses
     default:
       return { ...state, ...payload };
