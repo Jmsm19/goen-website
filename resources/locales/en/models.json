@@ -3,5 +3,7 @@
   "setting": "Setting",
   "settingUpdated": "Settings were updated",
   "deleted": "{model} deleted",
-  "updated": "{model} updated"
+  "updated": "{model} updated",
+  "period": "Period",
+  "periodLimitReached": "You have reached the limit of periods per year."
 }

@@ -21,7 +21,7 @@ class PeriodTransformer extends BumblebeeTransformer {
       id: Hashids.encode(period.id),
       name: period.name,
       year: period.year,
-      active: period.active,
+      active: !!period.active,
       signupFrom: period.signup_from,
       signupUntil: period.signup_until,
     };

@@ -23,7 +23,7 @@ module.exports = Route => {
 
     Route.resource('periods', 'PeriodController')
       .apiOnly()
-      .only(['destroy', 'store', 'update']);
+      .validator(new Map([[['periods.store'], ['StorePeriod']]]));
 
     Route.resource('modules', 'ModuleController').apiOnly();
 

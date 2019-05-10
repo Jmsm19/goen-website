@@ -3,5 +3,7 @@
   "setting": "Configuración",
   "settingUpdated": "Configuración actualizada",
   "deleted": "{model} fue borrado",
-  "updated": "{model} fue actualizado"
+  "updated": "{model} fue actualizado",
+  "period": "Período",
+  "periodLimitReached": "Has alcanzado el límite de períodos por año."
 }
