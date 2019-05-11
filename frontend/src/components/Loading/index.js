@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spinner } from 'styled-icons/fa-solid/Spinner';
+import { Spinner3 as Spinner } from 'styled-icons/evil/Spinner3';
 
 import StyledPage from './styles';
 
 const Loading = ({ text }) => (
   <StyledPage className='loading'>
     <div>
-      {/* TODO: Look for a better icon */}
       <Spinner size={80} className='spinner' />
       <p>{text}</p>
     </div>
