@@ -7,10 +7,9 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
     position: relative;
     height: 100vh;
     width: 100vw;
-    ${'' /* background-color: #f0f2f5; */}
 
     display: grid;
-    grid-template-rows: 8vh 92vh;
+    grid-template-rows: 70px 1fr;
 
     .top-navigation {
       width: 100%;
@@ -89,6 +88,7 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
     .inner-layout {
       display: grid;
       grid-template-columns: ${({ isMobile }) => (isMobile ? '1fr' : '240px 1fr')};
+      overflow-y: auto;
     }
 
     .main-content {
