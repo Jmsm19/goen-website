@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Trash2 } from 'styled-icons/feather/Trash2';
+import { TrashAlt as Trash } from 'styled-icons/fa-solid/TrashAlt';
 
 import Button from '../../UI/Button';
 
@@ -50,7 +50,7 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
         <Button
           outline
           type='primary'
-          icon={<Trash2 size={20} />}
+          icon={<Trash size={20} />}
           onClick={() => {
             if (onDelete && typeof onDelete === 'function') {
               onDelete(period.id);

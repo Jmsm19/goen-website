@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Warning } from 'styled-icons/material/Warning';
+import { Alert as Warning } from 'styled-icons/octicons/Alert';
 import { toast, Flip } from 'react-toastify';
 import styled from 'styled-components';
 

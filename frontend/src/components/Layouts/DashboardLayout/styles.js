@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Menu } from 'styled-icons/feather';
+import { Menu } from 'styled-icons/material/Menu';
 
 export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} />)`
   &.dashboard-layout {

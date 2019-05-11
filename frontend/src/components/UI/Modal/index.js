@@ -48,7 +48,7 @@ const Modal = props => {
       >
         <SlideUpModal className='modal' onClick={e => e.stopPropagation()}>
           {/* Close Btn */}
-          {withCloseButton && <StyledCloseBtn className='close-btn' onClick={onClose} />}
+          {withCloseButton && <StyledCloseBtn size={40} className='close-btn' onClick={onClose} />}
           {/* Header */}
           <div className='modal-header'>{title || headerContent}</div>
           {/* Content */}

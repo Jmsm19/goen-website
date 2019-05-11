@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { X } from 'styled-icons/feather/X';
+import { Close as X } from 'styled-icons/evil/Close';
 
 import { FadeInBackdrop } from './animations';
 
