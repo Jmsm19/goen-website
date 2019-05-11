@@ -27,6 +27,11 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
       text: t('Year'),
     },
     {
+      key: 'modules',
+      text: t('Module.Qty'),
+      render: modules => t('Module.Count', { count: modules.length }),
+    },
+    {
       key: 'active',
       text: t('Period.IsActive'),
       render: active => (
@@ -34,11 +39,6 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
           {t(`Period.${active ? 'Active' : 'Over'}`)}
         </span>
       ),
-    },
-    {
-      key: 'modules',
-      text: t('Module.Qty'),
-      render: modules => modules.length,
     },
   ];
 

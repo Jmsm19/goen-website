@@ -50,7 +50,9 @@
     "NoModules": "No hay módules",
     "Searching": "Buscando módulo...",
     "NotFound": "Módulo no encontrado",
-    "Qty": "Módulos ofertados"
+    "Qty": "Módulos ofertados",
+    "Count": "{{ count }} módulo",
+    "Count_plural": "{{ count }} módulos"
   },
   "Schedule": {
     "_singular": "Horario",

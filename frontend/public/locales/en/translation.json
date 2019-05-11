@@ -50,7 +50,9 @@
     "NoModules": "No modules",
     "Searching": "Looking for module...",
     "NotFound": "Module not found",
-    "Qty": "Open modules"
+    "Qty": "Open modules",
+    "Count": "{{ count }} module",
+    "Count_plural": "{{ count }} modules"
   },
   "Schedule": {
     "_singular": "Schedule",
@@ -146,5 +148,5 @@
   "No": "No",
   "Confirmation": {
     "Warning": "Are you sure about this?"
-  },
+  }
 }
