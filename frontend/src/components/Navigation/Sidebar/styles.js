@@ -6,7 +6,7 @@ const StyledSidebar = styled(AnimatedSidebar)`
   &.sidebar {
     z-index: 1;
 
-    height: 92vh;
+    height: calc(100vh - 70px);
     width: 100%;
 
     &.mobile {
