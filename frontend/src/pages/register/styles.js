@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../../lib/utils/styling';
+import media from '../../lib/utils/styling';
 
 import { SlideUpCard } from '../../animations/components';
 
@@ -16,13 +16,13 @@ export const StyledRegisterCard = styled(SlideUpCard)`
   &.card.register-card {
     position: relative;
     width: 900px;
-    max-width: 95vw;
+    max-width: 400px;
     min-height: 615px;
     justify-items: center;
     grid-template-rows: 1fr;
 
     ${media.phone`
-      max-width: 400px;
+      max-width: 95vw;
     `}
 
     .card-body {
