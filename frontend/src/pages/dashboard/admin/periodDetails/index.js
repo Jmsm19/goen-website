@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 import { DataContext } from '../../../../context/DataContext';
 import Loading from '../../../../components/Loading';
+import PeriodDetails from '../../../../components/Period/PeriodDetails';
 
-const PeriodDetails = ({ match: { params } }) => {
+const PeriodDetailsPage = ({ match: { params } }) => {
   const { id } = params;
   const [isSearchingUser, setIsSearchingUser] = useState(false);
-  const { periods, getPeriod } = useContext(DataContext);
+  const { periods, getPeriod, deletePeriod } = useContext(DataContext);
   const { t } = useTranslation();
   const period = periods.get(id);
 
@@ -25,17 +26,14 @@ const PeriodDetails = ({ match: { params } }) => {
     return <Loading text={t('Period.Searching')} />;
   }
 
-  const { name, year } = period;
   return (
-    <div>
-      <h1>
-        {name} - {year}
-      </h1>
+    <div className='period-details-age'>
+      <PeriodDetails period={period} deletePeriod={deletePeriod} />
     </div>
   );
 };
 
-PeriodDetails.propTypes = {
+PeriodDetailsPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
@@ -43,4 +41,4 @@ PeriodDetails.propTypes = {
   }).isRequired,
 };
 
-export default PeriodDetails;
+export default PeriodDetailsPage;

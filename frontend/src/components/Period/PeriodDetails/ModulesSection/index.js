@@ -1,25 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
+import classnames from 'classnames';
 
-import ModuleSummaryCard from '../../../../../components/Cards/ModuleSummaryCard';
+import ModuleSummaryCard from '../../../Cards/ModuleSummaryCard';
 
-const ModulesAvailable = ({ t, modules, selectModule }) => (
-  <>
-    <h2 className='section-title'>{t('Module._plural')}</h2>
-    <section className='modules-section'>
+const ModulesSection = ({ t, modules, selectModule, className, ...props }) => {
+  const sectionClassNames = classnames(['modules-section', className]);
+
+  return (
+    <section className={sectionClassNames} {...props}>
       {modules.map(module => (
         <ModuleSummaryCard key={uuid()} module={module} onClick={selectModule} />
       ))}
     </section>
-  </>
-);
-
-ModulesAvailable.defaultProps = {
-  modules: [],
+  );
 };
 
-ModulesAvailable.propTypes = {
+ModulesSection.defaultProps = {
+  modules: [],
+  className: null,
+};
+
+ModulesSection.propTypes = {
+  className: PropTypes.string,
   t: PropTypes.func.isRequired,
   selectModule: PropTypes.func.isRequired,
   modules: PropTypes.arrayOf(
@@ -34,4 +38,4 @@ ModulesAvailable.propTypes = {
   ),
 };
 
-export default ModulesAvailable;
+export default ModulesSection;

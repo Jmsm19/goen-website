@@ -13,6 +13,7 @@ const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props })
 
   return (
     <Modal
+      withCloseButton={false}
       className='confirmation-modal'
       isVisible={isVisible}
       onClose={onCancel}
