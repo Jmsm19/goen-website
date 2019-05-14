@@ -35,6 +35,7 @@ class PeriodController {
         'modules.schedule',
         'modules.instructor',
         'modules.assistant',
+        'modules.students.grades',
       ])
       .collection(periods, 'PeriodTransformer');
   }
@@ -86,6 +87,7 @@ class PeriodController {
         'modules.schedule',
         'modules.instructor',
         'modules.assistant',
+        'modules.students.grades',
       ])
       .item(period, 'PeriodTransformer');
   }
@@ -109,6 +111,7 @@ class PeriodController {
         'modules.schedule',
         'modules.instructor',
         'modules.assistant',
+        'modules.students.grades',
       ])
       .item(period, 'PeriodTransformer');
   }
@@ -119,9 +122,25 @@ class PeriodController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async update({ params, request, response }) {}
+  async update({ params, request, transform }) {
+    const { id } = params;
+    const period = await Period.findByHashOrFail(id);
+    period.merge(request.only(['name', 'year', 'signup_from', 'signup_until']));
+    period.save();
+
+    return transform
+      .include([
+        'modules.clan',
+        'modules.price',
+        'modules.schedule',
+        'modules.instructor',
+        'modules.assistant',
+        'modules.students.grades',
+      ])
+      .item(period, 'PeriodTransformer');
+  }
 
   /**
    * Delete a period with id.
