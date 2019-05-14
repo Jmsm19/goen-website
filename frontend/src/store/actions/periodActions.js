@@ -16,7 +16,8 @@ export const GetActivePeriod = dispatch => {
       dispatch({
         type: actionTypes.GET_ACTIVE_PERIOD,
         payload: {
-          activePeriod: { ...data },
+          activePeriod: data.id,
+          periods: createMap(createDictionaryItem(data)),
           modules,
         },
       });
@@ -59,6 +60,18 @@ export const CreatePeriod = (periodData, { dispatch, t }, cb) => {
     callFunctions([() => toast.success(t('Period.Created')), cb]);
     dispatch({
       type: actionTypes.CREATE_PERIOD,
+      payload: {
+        period: createMap(createDictionaryItem(data)),
+      },
+    });
+  });
+};
+
+export const UpdatePeriod = (id, periodData, { dispatch, t }, cb) => {
+  SendData('PUT', `periods/${id}`, periodData).then(({ data }) => {
+    callFunctions([() => toast.success(t('Period.Updated')), cb]);
+    dispatch({
+      type: actionTypes.UPDATE_PERIOD,
       payload: {
         period: createMap(createDictionaryItem(data)),
       },

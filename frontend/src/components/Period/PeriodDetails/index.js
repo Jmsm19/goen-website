@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import ModuleDetailsModal from '../../Modals/ModuleDetailsModal';
+import UpdatePeriodModal from '../../Modals/UpdatePeriodModal';
 import ConfirmationModal from '../../Modals/ConfirmationModal';
 
 import {
@@ -15,6 +16,7 @@ import {
 const PeriodDetails = ({ period, deletePeriod }) => {
   const { t } = useTranslation();
   const [selectedModule, setSelectedModule] = useState(null);
+  const [isEditingPeriod, setIsEditingPeriod] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const deselectModule = () => setSelectedModule(null);
@@ -22,7 +24,11 @@ const PeriodDetails = ({ period, deletePeriod }) => {
   return (
     <StyledContainer>
       {/* Content */}
-      <StyledHeaderSection period={period} deletePeriod={() => setShowConfirmationModal(true)} />
+      <StyledHeaderSection
+        period={period}
+        deletePeriod={() => setShowConfirmationModal(true)}
+        updatePeriod={() => setIsEditingPeriod(true)}
+      />
 
       <StyledSummarySection t={t} period={period} />
 
@@ -35,6 +41,11 @@ const PeriodDetails = ({ period, deletePeriod }) => {
         isVisible={!!selectedModule}
         module={selectedModule}
         onClose={deselectModule}
+      />
+      <UpdatePeriodModal
+        period={period}
+        isVisible={isEditingPeriod}
+        onClose={() => setIsEditingPeriod(false)}
       />
       <ConfirmationModal
         isVisible={showConfirmationModal}

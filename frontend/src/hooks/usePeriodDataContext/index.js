@@ -13,6 +13,7 @@ const usePeriodDataContext = () => {
     getPeriod,
     getAllPeriods,
     createPeriod,
+    updatePeriod,
     deletePeriod,
   } = useContext(DataContext);
 
@@ -24,6 +25,7 @@ const usePeriodDataContext = () => {
     getPeriod,
     getAllPeriods,
     createPeriod,
+    updatePeriod,
     deletePeriod,
   };
 };

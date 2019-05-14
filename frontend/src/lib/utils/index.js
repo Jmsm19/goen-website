@@ -45,9 +45,14 @@ export const formatPrice = (price, locale = 'es') =>
     minimumFractionDigits: 2,
   }).format(price)}`;
 
-export const localizeDate = (USDateString, locale = 'es') => {
+export const localizeDate = (USDateString, locale = 'es', options = {}) => {
   const date = new Date(Date.parse(USDateString));
-  return new Intl.DateTimeFormat(locale).format(date);
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    ...options,
+  }).format(date);
 };
 
 /**

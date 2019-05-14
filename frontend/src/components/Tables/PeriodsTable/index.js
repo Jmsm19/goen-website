@@ -24,7 +24,7 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
     },
     {
       key: 'year',
-      text: t('Year'),
+      text: t('Period.Year'),
     },
     {
       key: 'modules',

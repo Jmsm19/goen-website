@@ -65,6 +65,8 @@
     "_singular": "Period",
     "_plural": "Periods",
     "Name": "Name",
+    "Number": "Period number",
+    "Year": "Year",
     "IsActive": "Status",
     "Over": "Over",
     "Active": "Ongoing",
@@ -78,7 +80,10 @@
     "SignupUntil": "Sign ups open until",
     "Summary": "Current period",
     "Manage": "Manage periods",
-    "Create": "New period"
+    "Create": "New period",
+    "Created": "Period created.",
+    "Update": "Update period",
+    "Updated": "Period updated."
   },
   "User": {
     "_singular": "User",

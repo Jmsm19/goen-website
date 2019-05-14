@@ -62,6 +62,7 @@ const DataStateReducer = (state, action) => {
         periods: new Map([...state.periods, ...payload.period]),
       };
     case actionTypes.CREATE_PERIOD:
+    case actionTypes.UPDATE_PERIOD:
       return {
         ...state,
         periods: new Map([...state.periods, ...payload.period]),

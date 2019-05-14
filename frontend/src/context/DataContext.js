@@ -51,6 +51,7 @@ const DataContextProvider = ({ children }) => {
     getPeriod: id => periodActions.GetPeriod(id, helpers),
     getAllPeriods: () => periodActions.GetAllPeriods(helpers),
     createPeriod: (periodData, cb) => periodActions.CreatePeriod(periodData, helpers, cb),
+    updatePeriod: (id, periodData, cb) => periodActions.UpdatePeriod(id, periodData, helpers, cb),
     deletePeriod: id => periodActions.DeletePeriod(id, helpers),
     // Module
     getAllModules: () => moduleActions.GetAllModules(dispatch),

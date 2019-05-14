@@ -10,7 +10,7 @@ import Card from '../../../UI/Card';
 
 import { localizeDate } from '../../../../lib/utils';
 
-const HeaderSection = ({ period, deletePeriod, className, ...props }) => {
+const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props }) => {
   const { t, i18n } = useTranslation();
   const sectionClassNames = classnames(['details-header', className]);
 
@@ -24,8 +24,8 @@ const HeaderSection = ({ period, deletePeriod, className, ...props }) => {
           {t('Period._singular')} {period.name} - {period.year}
         </h1>
         <div className='btn-area'>
-          <EditButton iconSize={15} onClick={() => console.log('EDIT')} />
-          <DeleteButton iconSize={15} onClick={deletePeriod} />
+          <EditButton iconSize={15} onClick={updatePeriod} />
+          {!isCurrentPeriod && <DeleteButton iconSize={15} onClick={deletePeriod} />}
         </div>
       </div>
 
@@ -58,6 +58,7 @@ HeaderSection.propTypes = {
   className: PropTypes.string,
   period: PropTypes.shape().isRequired,
   deletePeriod: PropTypes.func.isRequired,
+  updatePeriod: PropTypes.func.isRequired,
 };
 
 export default HeaderSection;

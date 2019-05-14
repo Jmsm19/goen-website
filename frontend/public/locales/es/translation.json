@@ -65,6 +65,8 @@
     "_singular": "Período",
     "_plural": "Períodos",
     "Name": "Nombre",
+    "Number": "Número del período",
+    "Year": "Año",
     "IsActive": "Estado",
     "Over": "Culminado",
     "Active": "En curso",
@@ -78,7 +80,10 @@
     "SignupUntil": "Fin de inscripciones",
     "Summary": "Período actual",
     "Manage": "Administrar períodos",
-    "Create": "Nuevo período"
+    "Create": "Nuevo período",
+    "Created": "Período creado.",
+    "Update": "Editar período",
+    "Updated": "Período actualizado."
   },
   "User": {
     "_singular": "Usuario",

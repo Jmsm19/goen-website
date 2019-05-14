@@ -8,9 +8,11 @@ import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
 
 const PeriodDetailsPage = ({ match: { params } }) => {
   const { id } = params;
-  const [isSearchingUser, setIsSearchingUser] = useState(false);
-  const { periods, getPeriod, deletePeriod } = usePeriodDataContext();
   const { t } = useTranslation();
+  const { periods, getPeriod, updatePeriod, deletePeriod } = usePeriodDataContext();
+
+  const [isSearchingUser, setIsSearchingUser] = useState(false);
+
   const period = periods.get(id);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const PeriodDetailsPage = ({ match: { params } }) => {
 
   return (
     <div className='period-details-age'>
-      <PeriodDetails period={period} deletePeriod={deletePeriod} />
+      <PeriodDetails period={period} deletePeriod={deletePeriod} updatePeriod={updatePeriod} />
     </div>
   );
 };

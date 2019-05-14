@@ -78,6 +78,30 @@ export const getPeriodFormValidation = t => ({
   }),
 });
 
+export const getPeriodUpdateValidation = t => ({
+  initialValues: {},
+  schema: Yup.object().shape({
+    year: Yup.string()
+      .required(t('Required'))
+      .min(4)
+      .max(4),
+    name: Yup.string().required(t('Required')),
+    signup_from: Yup.string().required(t('Required')),
+    signup_until: Yup.date()
+      .required(t('Required'))
+      .when('signup_from', (value, schema, selfRef) => {
+        // TODO: Recheck this validation once Formal updates -> validateOnChange, onBlur, etc.
+        if (value && selfRef.parent && isDate(selfRef.parent.signup_until)) {
+          const dayAfter = addDays(value, 1);
+          return Yup.date()
+            .required(t('Required'))
+            .min(dayAfter, t('MustBeAfterSignupFrom'));
+        }
+        return schema;
+      }),
+  }),
+});
+
 // export const moduleFormValidation = t =>
 //   Yup.object().shape({
 //     name: Yup.string().required(t('Required')),

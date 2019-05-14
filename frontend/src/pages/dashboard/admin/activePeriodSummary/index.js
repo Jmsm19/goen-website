@@ -6,15 +6,17 @@ import PeriodDetails from '../../../../components/Period/PeriodDetails';
 import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
 
 const AdminPeriodPage = props => {
-  const { activePeriod, deletePeriod } = usePeriodDataContext();
+  const { activePeriod, periods, deletePeriod } = usePeriodDataContext();
 
   if (!activePeriod) {
     return <Loading />;
   }
 
+  const period = periods.get(activePeriod);
+
   return (
     <div className='dashboard-home'>
-      <PeriodDetails period={activePeriod} deletePeriod={deletePeriod} />
+      <PeriodDetails period={period} deletePeriod={deletePeriod} />
     </div>
   );
 };
