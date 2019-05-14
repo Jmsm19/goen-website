@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
+const daysToSeconds = days => days * 24 * 60 * 60;
+
 if (typeof importScripts === 'function') {
   // eslint-disable-next-line no-undef
   importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-sw.js');
@@ -23,7 +25,7 @@ if (typeof importScripts === 'function') {
         plugins: [
           new workbox.expiration.Plugin({
             maxEntries: 60,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+            maxAgeSeconds: daysToSeconds(30), // 30 Days
           }),
         ],
       }),
@@ -36,22 +38,30 @@ if (typeof importScripts === 'function') {
     workbox.routing.registerRoute('/', new workbox.strategies.NetworkFirst());
 
     // Cache settings files
-    workbox.routing.registerRoute('/api/settings', new workbox.strategies.NetworkFirst());
+    workbox.routing.registerRoute(
+      '/api/settings',
+      new workbox.strategies.NetworkFirst({
+        cacheName: 'settings',
+      }),
+    );
 
-    // Cache translation files
-    const pluginConfig = {
-      maxEntries: 1,
-      maxAgeSeconds: 7 * 24 * 60 * 60, // 7 Days
+    // Cache data requests
+    const cacheConfig = {
+      cacheName: 'Data requests',
     };
+    workbox.routing.registerRoute('/api/periods', new workbox.strategies.NetworkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/modules', new workbox.strategies.NetworkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/users', new workbox.strategies.NetworkFirst(cacheConfig));
 
+    // Cache translations
     workbox.routing.registerRoute(
       /\/locales\//,
       new workbox.strategies.NetworkFirst({
         cacheName: 'translations',
         plugins: [
           new workbox.expiration.Plugin({
-            ...pluginConfig,
             maxEntries: 3,
+            maxAgeSeconds: daysToSeconds(7),
           }),
         ],
       }),
@@ -62,7 +72,12 @@ if (typeof importScripts === 'function') {
       '/api/auth/user',
       new workbox.strategies.NetworkFirst({
         cacheName: 'auth-user',
-        plugins: [new workbox.expiration.Plugin(pluginConfig)],
+        plugins: [
+          new workbox.expiration.Plugin({
+            maxEntries: 1,
+            maxAgeSeconds: daysToSeconds(7),
+          }),
+        ],
       }),
     );
   } else {
