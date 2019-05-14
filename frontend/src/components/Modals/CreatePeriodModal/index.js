@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '../../UI/Modal';
 import PeriodCreateForm from '../../Period/PeriodCreateForm';
-import { DataContext } from '../../../context/DataContext';
+import usePeriodDataContext from '../../../hooks/usePeriodDataContext';
 
 const CreatePeriodModal = ({ isVisible, onClose, ...props }) => {
   const { t } = useTranslation();
-  const { createPeriod } = useContext(DataContext);
+  const { createPeriod } = usePeriodDataContext();
   const handleSubmit = values => createPeriod(values, onClose);
 
   return (

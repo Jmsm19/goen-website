@@ -1,10 +1,8 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Loading from '../components/Loading';
-
-import { AuthContext } from './AuthContext';
 
 import DataStateReducer from '../store/reducers/dataReducer';
 import * as periodActions from '../store/actions/periodActions';
@@ -12,12 +10,13 @@ import * as moduleActions from '../store/actions/moduleActions';
 import * as userActions from '../store/actions/userActions';
 import * as settingsActions from '../store/actions/settingActions';
 import { createMap } from '../lib/utils';
+import useAuthContext from '../hooks/useAuthContext';
 
 const DataContext = React.createContext();
 
 const DataContextProvider = ({ children }) => {
   const { t } = useTranslation();
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth } = useAuthContext();
 
   const initialState = {
     activePeriod: null,
@@ -33,6 +32,7 @@ const DataContextProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(DataStateReducer, initialState);
+  const helpers = { t, dispatch };
 
   const { activePeriod, settings } = state;
 
@@ -45,7 +45,6 @@ const DataContextProvider = ({ children }) => {
     }
   }, [activePeriod, isAuth, settings, state]);
 
-  const helpers = { t, dispatch };
   const functions = {
     // Period
     getActivePeriod: () => periodActions.GetActivePeriod(dispatch),

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { formatHoursFromDB } from '../../../lib/utils';
 import StyledCard from './styles';
-import { getRegisteredStudentsInModule } from '../../../store/actions/fns';
+import { getRegisteredStudentsInModule } from '../../Period/PeriodDetails/fns';
 
 const ModuleSummaryCard = ({ module, onClick, ...props }) => {
   const { t } = useTranslation();

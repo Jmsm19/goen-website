@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import routes from '../../../lib/config/routes';
+import useAuthContext from '../../../hooks/useAuthContext';
 
 import LoginPage from '../../../pages/login';
 import RegisterPage from '../../../pages/register';
+import AccountActivationPage from '../../../pages/activate';
 import Footer from '../Footer';
 
+import routes from '../../../lib/config/routes';
 import StyledLayout from './styles';
-import { AuthContext } from '../../../context/AuthContext';
-import AccountActivationPage from '../../../pages/activate';
 
 const PlainLayout = props => {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth } = useAuthContext();
 
   if (isAuth) {
     return <Redirect to={routes.dashboard.home} />;

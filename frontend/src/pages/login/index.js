@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { PoseGroup } from 'react-pose';
 
+import useSettingDataContext from '../../hooks/useSettingDataContext';
+
 import LoginForm from './loginForm';
 import LinkButton from '../../components/Navigation/LinkButton';
-import { DataContext } from '../../context/DataContext';
 
 import routes from '../../lib/config/routes';
 import Logo from '../../assets/images/goen-logo-big.jpg';
@@ -13,7 +14,7 @@ import { StyledPage, StyledLoginCard } from './styles';
 
 const LoginPage = props => {
   const { t } = useTranslation();
-  const { settings } = useContext(DataContext);
+  const { settings } = useSettingDataContext();
   const { userSignupActive } = settings;
 
   return (

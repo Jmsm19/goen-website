@@ -1,14 +1,14 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { DataContext } from '../../context/DataContext';
+import useInstructorDataContext from '../useInstructorDataContext';
 
 import { capitalize } from '../../lib/utils';
 
 const useSenpaiModules = (senpai, role) => {
   const modules = senpai[`modulesAs${capitalize(role.toLowerCase())}`];
   const [isSearchingModules, setIsSearchingModules] = useState(false);
-  const { getSenpaiModules } = useContext(DataContext);
+  const { getSenpaiModules } = useInstructorDataContext();
 
   useEffect(() => {
     if (!isSearchingModules && !modules) {

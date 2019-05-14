@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Detector as ConnectivityDetector } from 'react-detect-offline';
 
@@ -19,12 +19,15 @@ const LayoutContextProvider = ({ children }) => {
     return () => StopEnquireScreen();
   });
 
-  const state = {
-    isMobile,
-  };
+  const state = useMemo(
+    () => ({
+      isMobile,
+    }),
+    [isMobile],
+  );
 
   return (
-    <LayoutContext.Provider value={{ ...state }}>
+    <LayoutContext.Provider value={state}>
       <ConnectivityDetector
         render={({ online }) => (
           <>

@@ -1,24 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { AuthContext } from '../../../context/AuthContext';
+import useAuthContext from '../../../hooks/useAuthContext';
+import useLayoutContext from '../../../hooks/useLayoutContext';
 
-import routes from '../../../lib/config/routes';
 import Loading from '../../Loading';
-
 import TopNavigation from './TopNavigation';
 import DashboardMain from './DashboardMain';
 import DashboardSidebar from './DashboardSidebar';
 
+import routes from '../../../lib/config/routes';
 import { StyledLayout } from './styles';
-import { LayoutContext } from '../../../context/LayoutContext';
 
 const DashboardLayout = ({ location }) => {
   const { t } = useTranslation();
-  const { isAuth, authUser, logout } = useContext(AuthContext);
-  const { isMobile } = useContext(LayoutContext);
+  const { isAuth, authUser, logout } = useAuthContext();
+  const { isMobile } = useLayoutContext();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {

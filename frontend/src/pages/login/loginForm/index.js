@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useFormal from '@kevinwolf/formal-web';
+
+import useAuthContext from '../../../hooks/useAuthContext';
 
 import FormField from '../../../components/Form/Field';
 import Button from '../../../components/UI/Button';
 
-import { AuthContext } from '../../../context/AuthContext';
 import { getLoginValidationProps } from '../../../lib/validation/forms';
 
 import StyledForm from './styles';
 
 const LoginForm = ({ t }) => {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuthContext();
 
   const { initialValues, schema } = getLoginValidationProps(t);
 

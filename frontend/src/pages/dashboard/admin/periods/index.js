@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DataContext } from '../../../../context/DataContext';
 import Button from '../../../../components/UI/Button';
 import PeriodsTable from '../../../../components/Tables/PeriodsTable';
 import PeriodYearSelector from '../../../../components/Selector/PeriodYearSelector';
@@ -9,17 +8,19 @@ import PeriodYearSelector from '../../../../components/Selector/PeriodYearSelect
 import { filterArrayBy } from '../../../../lib/utils';
 import StyledPage from './styles';
 import CreatePeriodModal from '../../../../components/Modals/CreatePeriodModal';
-import { LayoutContext } from '../../../../context/LayoutContext';
 import ConfirmationModal from '../../../../components/Modals/ConfirmationModal';
+import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
+import useLayoutContext from '../../../../hooks/useLayoutContext';
 
 const ManagePeriods = props => {
   const { t } = useTranslation();
+  const { isMobile } = useLayoutContext();
+  const { allPeriodsSearched, periods, getAllPeriods, deletePeriod } = usePeriodDataContext();
+
   const [showCreatePeriodForm, setShowCreatePeriodForm] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [isSearchingPeriods, setIsSearchingPeriods] = useState(false);
   const [periodToDelete, setPeriodToDelete] = useState(null);
-  const { isMobile } = useContext(LayoutContext);
-  const { allPeriodsSearched, periods, getAllPeriods, deletePeriod } = useContext(DataContext);
   const [yearToFilter, setYearToFilter] = useState(String(new Date().getFullYear()));
   const [filteredPeriods, setFilteredPeriods] = useState(null);
 

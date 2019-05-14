@@ -1,20 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import Loading from '../../../../components/Loading';
-import { AuthContext } from '../../../../context/AuthContext';
-import { DataContext } from '../../../../context/DataContext';
+import useUserDataContext from '../../../../hooks/useUserDataContext';
+import useAuthContext from '../../../../hooks/useAuthContext';
 
-import { StyledPage } from './styles';
+import Loading from '../../../../components/Loading';
 import SectionSelector from './sections';
 import UserInfoSection from './sections/UserInfoSection';
 
+import { StyledPage } from './styles';
+
 const UserProfilePage = ({ match: { params } }) => {
   const { id } = params;
-  const { authUser } = useContext(AuthContext);
+  const { authUser } = useAuthContext();
   const [isSearchingUser, setIsSearchingUser] = useState(false);
-  const { users, notFoundUsers, getUser } = useContext(DataContext);
+  const { users, notFoundUsers, getUser } = useUserDataContext();
   const { t } = useTranslation();
   const user = id ? users.get(id) : authUser;
 

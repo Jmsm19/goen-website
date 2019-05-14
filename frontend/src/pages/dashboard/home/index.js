@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { AuthContext } from '../../../context/AuthContext';
+import useAuthContext from '../../../hooks/useAuthContext';
 
 import routes from '../../../lib/config/routes';
 
 const DashboardHomePage = props => {
-  const { authUser } = useContext(AuthContext);
+  const { authUser } = useAuthContext();
   let path = routes.dashboard.student.home;
 
   if (authUser.isAdmin) {

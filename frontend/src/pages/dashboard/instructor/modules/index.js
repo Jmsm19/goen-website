@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DataContext } from '../../../../context/DataContext';
-import { AuthContext } from '../../../../context/AuthContext';
+import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
+import useAuthContext from '../../../../hooks/useAuthContext';
+
 import ModulesTable from '../../../../components/Tables/ModulesTable';
 
 const InstructorModulesPage = props => {
-  const { activePeriod } = useContext(DataContext);
-  const { authUser } = useContext(AuthContext);
+  const { activePeriod } = usePeriodDataContext();
+  const { authUser } = useAuthContext();
   const { t } = useTranslation();
 
   const currentPeriodModules = activePeriod

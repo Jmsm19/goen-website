@@ -1,9 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { PoseGroup } from 'react-pose';
 import useFormal from '@kevinwolf/formal-web';
-
-import { AuthContext } from '../../../context/AuthContext';
 
 import { getSignupValidationProps } from '../../../lib/validation/forms';
 
@@ -14,10 +12,11 @@ import {
   FadeInContainer,
 } from './animations';
 import { StyledRegisterForm, StyledButtonArea } from './styles';
+import useAuthContext from '../../../hooks/useAuthContext';
 
 const RegisterForm = ({ t }) => {
   const [activeSection, setActiveSection] = useState('personal');
-  const { register } = useContext(AuthContext);
+  const { register } = useAuthContext();
 
   const { initialValues, schema } = getSignupValidationProps(t);
   const formalConfig = { schema, onSubmit: register };

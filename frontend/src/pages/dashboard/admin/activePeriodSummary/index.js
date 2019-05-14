@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Loading from '../../../../components/Loading';
 
-import { DataContext } from '../../../../context/DataContext';
-
 import PeriodDetails from '../../../../components/Period/PeriodDetails';
+import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
 
 const AdminPeriodPage = props => {
-  const { activePeriod, deletePeriod } = useContext(DataContext);
+  const { activePeriod, deletePeriod } = usePeriodDataContext();
 
   if (!activePeriod) {
     return <Loading />;

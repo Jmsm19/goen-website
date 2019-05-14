@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Input from '../../../../components/UI/Input';
 import Button from '../../../../components/UI/Button';
 import UsersTable from '../../../../components/Tables/UsersTable';
-import { DataContext } from '../../../../context/DataContext';
+import useUserDataContext from '../../../../hooks/useUserDataContext';
 
 import StyledPage from './styles';
 import { filterArrayBy } from '../../../../lib/utils';
@@ -12,7 +12,7 @@ import { filterArrayBy } from '../../../../lib/utils';
 const UsersListPage = props => {
   const { t } = useTranslation();
   const [isSearchingUsers, setIsSearchingUsers] = useState(false);
-  const { allUsersSearched, users, getAllUsers } = useContext(DataContext);
+  const { allUsersSearched, users, getAllUsers } = useUserDataContext();
   const [valueToFilter, setValueToFilter] = useState('');
   const [filteredUsers, setFilteredUsers] = useState(null);
   const usersArray = useMemo(() => [...users.values()], [users]);

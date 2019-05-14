@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Switch from '../../../components/UI/Switch';
+import useAuthContext from '../../../hooks/useAuthContext';
+import useSettingDataContext from '../../../hooks/useSettingDataContext';
 
-import { AuthContext } from '../../../context/AuthContext';
-import { DataContext } from '../../../context/DataContext';
+import Switch from '../../../components/UI/Switch';
 import LanguageSelector from '../../../components/LanguageSelector';
 
 import { StyledSection, StyledPage, StyledSetting } from './styles';
 
 const SettingsPage = props => {
   const { t } = useTranslation();
-  const { authUser } = useContext(AuthContext);
-  const { settings, updateSetting } = useContext(DataContext);
+  const { authUser } = useAuthContext();
+  const { settings, updateSetting } = useSettingDataContext();
   const { userSignupActive } = settings;
 
   return (
