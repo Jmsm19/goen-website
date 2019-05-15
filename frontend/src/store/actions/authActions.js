@@ -7,7 +7,7 @@ export const LoginUser = (loginData, dispatch) =>
   SendData('post', 'auth/login', loginData)
     .then(({ data }) => {
       if (data.error) {
-        throw Error(data.error);
+        throw new Error(data.error);
       }
 
       const { token } = data;
@@ -31,7 +31,7 @@ export const RegisterUser = (userData, dispatch) => {
   SendData('post', 'auth/signup', userData)
     .then(({ data, response }) => {
       if (response) {
-        throw Error(response);
+        throw new Error(response);
       }
 
       dispatch({
@@ -53,13 +53,13 @@ export const GetAuthUser = dispatch => {
       dispatch({
         type: actionTypes.AUTH_GET_USER,
         payload: {
-          authUser: data,
+          user: data,
         },
       });
     })
     .catch(({ response }) => {
-      // Cookies.remove('token');
       if (response.status === 401) {
+        Cookies.remove('token');
         dispatch({
           type: actionTypes.AUTH_LOGIN_FAILED,
           payload: { ...response },

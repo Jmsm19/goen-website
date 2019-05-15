@@ -42,7 +42,7 @@ export const GetAllUsers = dispatch => {
 export const GetSenpaiModules = (role, id, dispatch) => {
   GetData(`/${role}/${id}/modules`).then(({ data }) => {
     dispatch({
-      type: actionTypes.GET_SENPAI_MODULES_SUCCESS,
+      type: actionTypes.GET_SENPAI_MODULES,
       payload: {
         id,
         modules: {

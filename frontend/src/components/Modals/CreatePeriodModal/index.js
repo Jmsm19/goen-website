@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '../../UI/Modal';
-import usePeriodDataContext from '../../../hooks/usePeriodDataContext';
+import { usePeriods } from '../../../context/PeriodsContext';
 import ModalForm from '../ModalForm';
 import PeriodFormFields from '../../Period/PeriodFormFields';
 
@@ -11,7 +11,7 @@ import { getPeriodFormValidation } from '../../../lib/validation/forms';
 
 const CreatePeriodModal = ({ isVisible, onClose, ...props }) => {
   const { t } = useTranslation();
-  const { createPeriod } = usePeriodDataContext();
+  const { createPeriod } = usePeriods();
   const handleSubmit = values => createPeriod(values, onClose);
 
   const { initialValues, schema } = getPeriodFormValidation(t);

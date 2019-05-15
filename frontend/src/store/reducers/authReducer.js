@@ -4,6 +4,13 @@ const AuthStateReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actionTypes.AUTH_GET_USER:
+      return {
+        ...state,
+        authUser: {
+          ...payload.user,
+        },
+      };
     // User Login
     case actionTypes.AUTH_LOGIN_SUCCESS:
       return { ...state, isAuth: true };
@@ -22,7 +29,7 @@ const AuthStateReducer = (state, action) => {
 
     // Default responses
     default:
-      return { ...state, ...payload };
+      throw new Error(`Unsupported action type: ${action.type}`);
   }
 };
 

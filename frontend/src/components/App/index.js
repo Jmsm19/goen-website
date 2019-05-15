@@ -5,41 +5,55 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import '../../i18n';
 
+import { useSettings } from '../../context/SettingsContext';
+import { useAuth } from '../../context/AuthContext';
+import { LayoutContextProvider } from '../../context/LayoutContext';
+
 import Loading from '../Loading';
-import { AuthContextProvider } from '../../context/AuthContext';
-import { DataContextProvider } from '../../context/DataContext';
 
 import routes from '../../lib/config/routes';
-import { LayoutContextProvider } from '../../context/LayoutContext';
 
 const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
 const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
 
-const App = () => (
-  <Suspense fallback={<Loading text='Loading Config...' />}>
-    <AuthContextProvider>
-      <DataContextProvider>
-        <LayoutContextProvider>
-          <BrowserRouter>
-            <Suspense fallback={<Loading text='Loading Dashboard...' />}>
-              <Switch>
-                <Route
-                  path={routes.dashboard.prefix}
-                  render={rProps => <DashboardLayout {...rProps} />}
-                />
+const App = () => {
+  const { isAuth, authUser, getAuthUser } = useAuth();
+  const { settings, getSettings } = useSettings();
 
-                <Suspense fallback={<Loading />}>
-                  <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
-                </Suspense>
-              </Switch>
-            </Suspense>
-          </BrowserRouter>
+  React.useEffect(() => {
+    if (!settings) {
+      getSettings();
+    } else if (isAuth && !authUser) {
+      getAuthUser();
+    }
+  }, [authUser, getAuthUser, getSettings, isAuth, settings]);
 
-          <ToastContainer hideProgressBar />
-        </LayoutContextProvider>
-      </DataContextProvider>
-    </AuthContextProvider>
-  </Suspense>
-);
+  if (!settings) {
+    return <Loading text='Loading config...' />;
+  }
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <LayoutContextProvider>
+        <BrowserRouter>
+          <Suspense fallback={<Loading text='Loading Dashboard...' />}>
+            <Switch>
+              <Route
+                path={routes.dashboard.prefix}
+                render={rProps => <DashboardLayout {...rProps} />}
+              />
+
+              <Suspense fallback={<Loading />}>
+                <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
+              </Suspense>
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+
+        <ToastContainer hideProgressBar />
+      </LayoutContextProvider>
+    </Suspense>
+  );
+};
 
 export default App;

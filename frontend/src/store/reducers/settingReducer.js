@@ -21,7 +21,7 @@ const SettingStateReducer = (state, action) => {
       };
     // Default responses
     default:
-      return { ...state, ...payload };
+      throw new Error(`Unsupported action type: ${action.type}`);
   }
 };
 

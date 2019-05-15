@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { isWithinRange } from 'date-fns';
 import classnames from 'classnames';
 
+import { useAuth } from '../../../../context/AuthContext';
+
 import DeleteButton from '../../../Buttons/DeleteButton';
 import EditButton from '../../../Buttons/EditButton';
 import Card from '../../../UI/Card';
@@ -12,6 +14,7 @@ import { localizeDate } from '../../../../lib/utils';
 
 const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props }) => {
   const { t, i18n } = useTranslation();
+  const { authUser } = useAuth();
   const sectionClassNames = classnames(['details-header', className]);
 
   const isCurrentPeriod = period.active;
@@ -23,10 +26,12 @@ const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props
         <h1 className='section-title period-name'>
           {t('Period._singular')} {period.name} - {period.year}
         </h1>
-        <div className='btn-area'>
-          <EditButton iconSize={15} onClick={updatePeriod} />
-          {!isCurrentPeriod && <DeleteButton iconSize={15} onClick={deletePeriod} />}
-        </div>
+        {authUser.isAdmin && (
+          <div className='btn-area'>
+            <EditButton iconSize={15} onClick={updatePeriod} />
+            {!isCurrentPeriod && <DeleteButton iconSize={15} onClick={deletePeriod} />}
+          </div>
+        )}
       </div>
 
       <Card

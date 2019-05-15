@@ -12,13 +12,11 @@ import {
 export const GetActivePeriod = dispatch => {
   GetData('periods/active')
     .then(({ data }) => {
-      const modules = createMap(createDictionaryOfIdsFromArray(data.modules));
       dispatch({
         type: actionTypes.GET_ACTIVE_PERIOD,
         payload: {
           activePeriod: data.id,
           periods: createMap(createDictionaryItem(data)),
-          modules,
         },
       });
     })

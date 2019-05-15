@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { PoseGroup } from 'react-pose';
 import useFormal from '@kevinwolf/formal-web';
 
+import { useAuth } from '../../../context/AuthContext';
+
 import { getSignupValidationProps } from '../../../lib/validation/forms';
 
 import {
@@ -12,11 +14,10 @@ import {
   FadeInContainer,
 } from './animations';
 import { StyledRegisterForm, StyledButtonArea } from './styles';
-import useAuthContext from '../../../hooks/useAuthContext';
 
 const RegisterForm = ({ t }) => {
+  const { register } = useAuth();
   const [activeSection, setActiveSection] = useState('personal');
-  const { register } = useAuthContext();
 
   const { initialValues, schema } = getSignupValidationProps(t);
   const formalConfig = { schema, onSubmit: register };

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { usePeriods } from '../../../../context/PeriodsContext';
+
 import Loading from '../../../../components/Loading';
 import PeriodDetails from '../../../../components/Period/PeriodDetails';
-import usePeriodDataContext from '../../../../hooks/usePeriodDataContext';
 
 const PeriodDetailsPage = ({ match: { params } }) => {
   const { id } = params;
   const { t } = useTranslation();
-  const { periods, getPeriod, updatePeriod, deletePeriod } = usePeriodDataContext();
+  const { periods, getPeriod, updatePeriod, deletePeriod } = usePeriods();
 
   const [isSearchingUser, setIsSearchingUser] = useState(false);
 

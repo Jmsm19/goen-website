@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import useAuthContext from '../../../hooks/useAuthContext';
+import { useAuth } from '../../../context/AuthContext';
+import { PeriodsProvider } from '../../../context/PeriodsContext';
+import { ModulesProvider } from '../../../context/ModulesContext';
+import { UsersProvider } from '../../../context/UsersContext';
 import useLayoutContext from '../../../hooks/useLayoutContext';
 
 import Loading from '../../Loading';
@@ -16,7 +19,7 @@ import { StyledLayout } from './styles';
 
 const DashboardLayout = ({ location }) => {
   const { t } = useTranslation();
-  const { isAuth, authUser, logout } = useAuthContext();
+  const { isAuth, authUser, logout } = useAuth();
   const { isMobile } = useLayoutContext();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -55,7 +58,13 @@ const DashboardLayout = ({ location }) => {
           toggleOpen={toggleSidebar}
         />
 
-        <DashboardMain location={location} authUser={authUser} />
+        <PeriodsProvider>
+          <ModulesProvider>
+            <UsersProvider>
+              <DashboardMain location={location} authUser={authUser} />
+            </UsersProvider>
+          </ModulesProvider>
+        </PeriodsProvider>
       </div>
     </StyledLayout>
   );

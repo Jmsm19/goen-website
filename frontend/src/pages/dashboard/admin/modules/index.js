@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useModules } from '../../../../context/ModulesContext';
+
 import ModulesTable from '../../../../components/Tables/ModulesTable';
-import useModuleDataContext from '../../../../hooks/useModuleDataContext';
 
 import StyledPage from './styles';
 
 const ModulesPage = props => {
   const { t } = useTranslation();
+  const { allModulesSearched, modules, getAllModules } = useModules();
   const [isSearchingModules, setIsSearchingModules] = useState(false);
-  const { allModulesSearched, modules, getAllModules } = useModuleDataContext();
 
   useEffect(() => {
     if (!isSearchingModules && !allModulesSearched) {

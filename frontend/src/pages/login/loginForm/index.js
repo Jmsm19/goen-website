@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useFormal from '@kevinwolf/formal-web';
 
-import useAuthContext from '../../../hooks/useAuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 import FormField from '../../../components/Form/Field';
 import Button from '../../../components/UI/Button';
@@ -12,7 +12,7 @@ import { getLoginValidationProps } from '../../../lib/validation/forms';
 import StyledForm from './styles';
 
 const LoginForm = ({ t }) => {
-  const { login } = useAuthContext();
+  const { login } = useAuth();
 
   const { initialValues, schema } = getLoginValidationProps(t);
 

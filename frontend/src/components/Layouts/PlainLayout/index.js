@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import useAuthContext from '../../../hooks/useAuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 import LoginPage from '../../../pages/login';
 import RegisterPage from '../../../pages/register';
@@ -12,7 +12,7 @@ import routes from '../../../lib/config/routes';
 import StyledLayout from './styles';
 
 const PlainLayout = props => {
-  const { isAuth } = useAuthContext();
+  const { isAuth } = useAuth();
 
   if (isAuth) {
     return <Redirect to={routes.dashboard.home} />;

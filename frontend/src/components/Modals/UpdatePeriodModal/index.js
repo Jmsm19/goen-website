@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 
-import usePeriodDataContext from '../../../hooks/usePeriodDataContext';
+import { usePeriods } from '../../../context/PeriodsContext';
 
 import Modal from '../../UI/Modal';
 import ModalForm from '../ModalForm';
@@ -13,7 +13,7 @@ import { getPeriodUpdateValidation } from '../../../lib/validation/forms';
 
 const UpdatePeriodModal = ({ isVisible, onClose, period, ...props }) => {
   const { t } = useTranslation();
-  const { updatePeriod } = usePeriodDataContext();
+  const { updatePeriod } = usePeriods();
   const handleSubmit = values => updatePeriod(period.id, values, onClose);
 
   const { name, year, signupFrom, signupUntil } = period;

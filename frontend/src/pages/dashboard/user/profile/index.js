@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import useUserDataContext from '../../../../hooks/useUserDataContext';
-import useAuthContext from '../../../../hooks/useAuthContext';
+import { useAuth } from '../../../../context/AuthContext';
+import { useUsers } from '../../../../context/UsersContext';
 
 import Loading from '../../../../components/Loading';
 import SectionSelector from './sections';
@@ -13,9 +13,9 @@ import { StyledPage } from './styles';
 
 const UserProfilePage = ({ match: { params } }) => {
   const { id } = params;
-  const { authUser } = useAuthContext();
+  const { authUser } = useAuth();
   const [isSearchingUser, setIsSearchingUser] = useState(false);
-  const { users, notFoundUsers, getUser } = useUserDataContext();
+  const { users, notFoundUsers, getUser } = useUsers();
   const { t } = useTranslation();
   const user = id ? users.get(id) : authUser;
 

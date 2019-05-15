@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import Cookies from 'js-cookie';
 
 import AuthStateReducer from '../store/reducers/authReducer';
@@ -7,35 +6,47 @@ import { LoginUser, RegisterUser, LogoutUser, GetAuthUser } from '../store/actio
 
 const AuthContext = React.createContext();
 
-const AuthContextProvider = ({ children }) => {
+const AuthProvider = props => {
   const initialState = {
     isAuth: !!Cookies.get('token'),
     authUser: null,
   };
 
-  const [state, dispatch] = useReducer(AuthStateReducer, initialState);
-
-  const login = loginData => LoginUser(loginData, dispatch);
-  const register = userData => RegisterUser(userData, dispatch);
-  const logout = () => LogoutUser(dispatch);
-  const getAuthUser = () => GetAuthUser(dispatch);
-
+  const [state, dispatch] = React.useReducer(AuthStateReducer, initialState);
   const { isAuth, authUser } = state;
-  useEffect(() => {
-    if (isAuth && !authUser) {
-      getAuthUser();
-    }
-  }, [authUser, isAuth]);
 
-  return (
-    <AuthContext.Provider value={{ ...state, login, register, logout, getAuthUser }}>
-      {children}
-    </AuthContext.Provider>
+  const value = React.useMemo(
+    () => ({
+      isAuth,
+      authUser,
+      dispatch,
+    }),
+    [isAuth, authUser],
   );
+
+  return <AuthContext.Provider value={value} {...props} />;
 };
 
-AuthContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+const useAuth = () => {
+  const context = React.useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+
+  const { dispatch, ...contextRest } = context;
+
+  const actions = {
+    login: loginData => LoginUser(loginData, dispatch),
+    register: userData => RegisterUser(userData, dispatch),
+    logout: () => LogoutUser(dispatch),
+    getAuthUser: () => GetAuthUser(dispatch),
+  };
+
+  return {
+    ...contextRest,
+    ...actions,
+  };
 };
 
-export { AuthContext, AuthContextProvider };
+export { AuthProvider, useAuth };

@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { PoseGroup } from 'react-pose';
 
-import useSettingDataContext from '../../hooks/useSettingDataContext';
+import { useSettings } from '../../context/SettingsContext';
 
 import LoginForm from './loginForm';
 import LinkButton from '../../components/Navigation/LinkButton';
@@ -14,7 +14,7 @@ import { StyledPage, StyledLoginCard } from './styles';
 
 const LoginPage = props => {
   const { t } = useTranslation();
-  const { settings } = useSettingDataContext();
+  const { settings } = useSettings();
   const { userSignupActive } = settings;
 
   return (

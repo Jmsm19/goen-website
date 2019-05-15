@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { useAuth } from '../../../context/AuthContext';
+
 import ModuleDetailsModal from '../../Modals/ModuleDetailsModal';
 import UpdatePeriodModal from '../../Modals/UpdatePeriodModal';
 import ConfirmationModal from '../../Modals/ConfirmationModal';
+import CreateModuleModal from '../../Modals/CreateModuleModal';
 
 import {
   StyledContainer,
@@ -15,8 +18,10 @@ import {
 
 const PeriodDetails = ({ period, deletePeriod }) => {
   const { t } = useTranslation();
+  const { authUser } = useAuth();
   const [selectedModule, setSelectedModule] = useState(null);
   const [isEditingPeriod, setIsEditingPeriod] = useState(false);
+  const [showModuleCreateModal, setShowModuleCreateModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const deselectModule = () => setSelectedModule(null);
@@ -33,7 +38,13 @@ const PeriodDetails = ({ period, deletePeriod }) => {
       <StyledSummarySection t={t} period={period} />
 
       <h2 className='section-title'>{t('Module._plural')}</h2>
-      <StyledModulesSection t={t} modules={period.modules} selectModule={setSelectedModule} />
+      <StyledModulesSection
+        t={t}
+        modules={period.modules}
+        selectModule={setSelectedModule}
+        showCreateCard={authUser.isAdmin}
+        onCreateCardClick={() => setShowModuleCreateModal(true)}
+      />
       {/* End of content */}
 
       {/* Modals */}
@@ -56,6 +67,10 @@ const PeriodDetails = ({ period, deletePeriod }) => {
         onCancel={() => {
           setShowConfirmationModal(false);
         }}
+      />
+      <CreateModuleModal
+        isVisible={showModuleCreateModal}
+        onClose={() => setShowModuleCreateModal(false)}
       />
     </StyledContainer>
   );
