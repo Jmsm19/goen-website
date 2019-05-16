@@ -23,6 +23,10 @@ module.exports = {
   // Module
   GET_MODULE: 'GET_MODULE',
   MODULE_NOT_FOUND: 'MODULE_NOT_FOUND',
+  CREATE_MODULE: 'CREATE_MODULE',
+
+  // Schedule
+  GET_ALL_SCHEDULES: 'GET_ALL_SCHEDULES',
 
   // User
   GET_USER: 'GET_USER',

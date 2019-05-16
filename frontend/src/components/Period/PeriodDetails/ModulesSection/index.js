@@ -6,6 +6,8 @@ import classnames from 'classnames';
 import ModuleSummaryCard from '../../../Cards/ModuleSummaryCard';
 import ModuleCreateCard from '../../../Cards/ModuleCreateCard';
 
+import { sortModules } from '../../../../lib/utils';
+
 const ModulesSection = ({
   t,
   modules,
@@ -17,11 +19,13 @@ const ModulesSection = ({
 }) => {
   const sectionClassNames = classnames(['modules-section', className]);
 
+  const sortedModules = React.useMemo(() => sortModules(modules), [modules]);
+
   return (
     <section className={sectionClassNames} {...props}>
       {showCreateCard && <ModuleCreateCard onClick={onCreateCardClick} />}
 
-      {modules.map(module => (
+      {sortedModules.map(module => (
         <ModuleSummaryCard key={uuid()} module={module} onClick={selectModule} />
       ))}
     </section>

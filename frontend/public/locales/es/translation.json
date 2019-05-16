@@ -44,6 +44,8 @@
     "_plural": "Módulos",
     "Create": "Crear módulo",
     "Section": "Sección",
+    "Clan": "Clan",
+    "OnlyForM-0": "Solo para M-0",
     "Name": "Nombre del módulo",
     "Schedule": "Horario de clase",
     "Created": "Módulo creado",
@@ -83,14 +85,15 @@
     "Create": "Nuevo período",
     "Created": "Período creado.",
     "Update": "Editar período",
-    "Updated": "Período actualizado."
+    "Updated": "Período actualizado.",
+    "NoPeriods": "No hay períodos"
   },
   "User": {
     "_singular": "Usuario",
     "_plural": "Usuarios",
     "NoUsers": "No hay usuarios",
     "Searching": "Buscando usuario...",
-    "YearsOld": "{{age}} años"
+    "YearsOld": "{{ age }} años"
   },
   "Status": "Estado",
   "SeeProfile": "Ver perfil",

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Select from '../../UI/Select';
 
-const PeriodYearSelector = ({ periods, onChange, ...props }) => {
+const PeriodYearSelector = ({ name, periods, onChange, ...props }) => {
   const { t } = useTranslation();
 
   const yearOptions = useMemo(() => {
@@ -22,12 +22,13 @@ const PeriodYearSelector = ({ periods, onChange, ...props }) => {
     ];
   }, [periods, t]);
 
-  return <Select name='year' options={yearOptions} onChange={onChange} {...props} />;
+  return <Select name={name} options={yearOptions} onChange={onChange} {...props} />;
 };
 
 PeriodYearSelector.propTypes = {
   onChange: PropTypes.func.isRequired,
   periods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default PeriodYearSelector;

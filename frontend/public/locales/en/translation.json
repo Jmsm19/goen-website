@@ -44,6 +44,8 @@
     "_plural": "Modules",
     "Create": "Create module",
     "Section": "Section",
+    "Clan": "Clan",
+    "OnlyForM-0": "Only for M-0",
     "Name": "Module's name",
     "Schedule": "Schedule",
     "Created": "Module created",
@@ -83,14 +85,15 @@
     "Create": "New period",
     "Created": "Period created.",
     "Update": "Update period",
-    "Updated": "Period updated."
+    "Updated": "Period updated.",
+    "NoPeriods": "No periods"
   },
   "User": {
     "_singular": "User",
     "_plural": "Users",
     "NoUsers": "No users",
     "Searching": "Looking for user...",
-    "YearsOld": "{{age}} years old"
+    "YearsOld": "{{ age }} years old"
   },
   "Status": "Status",
   "SeeProfile": "See profile",

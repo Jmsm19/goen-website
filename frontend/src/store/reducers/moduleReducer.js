@@ -16,6 +16,16 @@ const PeriodReducer = (state, action) => {
         modules: new Map([...state.modules]),
         notFoundModules: [...new Set([...state.notFoundModules, payload.id])],
       };
+    case actionTypes.CREATE_MODULE:
+      return {
+        ...state,
+        modules: new Map([...state.modules, ...payload.module]),
+      };
+    case actionTypes.GET_ALL_SCHEDULES:
+      return {
+        ...state,
+        schedules: new Map([...state.schedules, ...payload.schedules]),
+      };
     // Default responses
     default:
       throw new Error(`Unsupported action type: ${action.type}`);

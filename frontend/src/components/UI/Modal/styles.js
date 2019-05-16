@@ -19,16 +19,16 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
     background-color: rgba(67, 67, 67, 0.7);
 
     .modal {
+      z-index: 1;
       position: relative;
       background: #fff;
       box-shadow: var(--drop-shadow);
       border-radius: 0.375rem;
-      min-height: 200px;
-      min-width: 50%;
 
-      z-index: 1;
-      width: ${({ isMobile }) => (isMobile ? '100%' : 'max-content')};
+      min-width: max-content;
       max-width: ${({ isMobile }) => (isMobile ? '95vw' : '80vw')};
+
+      min-height: 200px;
       height: max-content;
       max-height: ${({ isMobile }) => (isMobile ? '95vh' : '80vh')};
 

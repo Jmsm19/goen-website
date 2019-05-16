@@ -1,6 +1,13 @@
+import { toast } from 'react-toastify';
+
 import actionTypes from '../types';
-import { GetData } from '../../lib/utils/http';
-import { createDictionaryOfIdsFromArray, createMap, createDictionaryItem } from '../../lib/utils';
+import { GetData, SendData } from '../../lib/utils/http';
+import {
+  createDictionaryOfIdsFromArray,
+  createMap,
+  createDictionaryItem,
+  callFunctions,
+} from '../../lib/utils';
 
 export const GetModule = (id, dispatch) => {
   GetData(`modules/${id}`)
@@ -23,12 +30,38 @@ export const GetModule = (id, dispatch) => {
 };
 
 export const GetAllModules = dispatch => {
-  GetData(`modules`).then(({ data }) => {
+  GetData('modules').then(({ data }) => {
     dispatch({
       type: actionTypes.GET_MODULE,
       payload: {
         module: createMap(createDictionaryOfIdsFromArray(data)),
         allModulesSearched: true,
+      },
+    });
+  });
+};
+
+export const CreateModule = (moduleData, { t, dispatch }, cb) => {
+  SendData('POST', 'modules', moduleData).then(({ data }) => {
+    toast.success(t('Module.Created'));
+
+    callFunctions(cb);
+
+    dispatch({
+      type: actionTypes.CREATE_MODULE,
+      payload: {
+        module: createMap(createDictionaryItem(data)),
+      },
+    });
+  });
+};
+
+export const GetAllSchedules = ({ dispatch }) => {
+  GetData('schedules').then(({ data }) => {
+    dispatch({
+      type: actionTypes.GET_ALL_SCHEDULES,
+      payload: {
+        schedules: createMap(createDictionaryOfIdsFromArray(data)),
       },
     });
   });

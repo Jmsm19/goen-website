@@ -42,7 +42,7 @@ const PeriodDetails = ({ period, deletePeriod }) => {
         t={t}
         modules={period.modules}
         selectModule={setSelectedModule}
-        showCreateCard={authUser.isAdmin}
+        showCreateCard={authUser.isAdmin && period.active}
         onCreateCardClick={() => setShowModuleCreateModal(true)}
       />
       {/* End of content */}
@@ -69,6 +69,7 @@ const PeriodDetails = ({ period, deletePeriod }) => {
         }}
       />
       <CreateModuleModal
+        period={period}
         isVisible={showModuleCreateModal}
         onClose={() => setShowModuleCreateModal(false)}
       />

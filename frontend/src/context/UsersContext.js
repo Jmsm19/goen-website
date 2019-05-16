@@ -83,6 +83,7 @@ const useInstructors = () => {
   }, [users]);
 
   const actions = {
+    getAllUsers: () => UA.GetAllUsers(dispatch),
     getSenpaiModules: (role, id) => UA.GetSenpaiModules(role, id, dispatch),
   };
 

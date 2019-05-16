@@ -57,6 +57,7 @@ const ManagePeriods = props => {
             <div className='period-filter'>
               <p>{t('Filter.ShowOnly')}: </p>
               <PeriodYearSelector
+                name='year'
                 periods={periodsArray}
                 onChange={setYearToFilter}
                 defaultSelected={String(new Date().getFullYear())}

@@ -1,8 +1,10 @@
 import React from 'react';
-import { createMap } from '../lib/utils';
+import { useTranslation } from 'react-i18next';
 
 import ModuleReducer from '../store/reducers/moduleReducer';
 import * as MA from '../store/actions/moduleActions';
+
+import { createMap } from '../lib/utils';
 
 const ModulesContext = React.createContext();
 
@@ -12,40 +14,37 @@ const ModulesProvider = props => {
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
+    schedules: createMap(),
   };
 
   const [state, dispatch] = React.useReducer(ModuleReducer, initialState);
-  const { allModulesSearched, modules, notFoundModules } = state;
 
-  const value = React.useMemo(
-    () => ({
-      allModulesSearched,
-      modules,
-      notFoundModules,
-      dispatch,
-    }),
-    [allModulesSearched, modules, notFoundModules],
-  );
+  const value = React.useMemo(() => ({ state, dispatch }), [state]);
+
   return <ModulesContext.Provider value={value} {...props} />;
 };
 
 // HOOK
 const useModules = () => {
+  const { t } = useTranslation();
   const context = React.useContext(ModulesContext);
 
   if (!context) {
     throw new Error('useModules must be used within ModulesProvider');
   }
 
-  const { dispatch, ...contextRest } = context;
+  const { dispatch, state } = context;
+  const helpers = { t, dispatch };
 
   const actions = {
     getAllModules: () => MA.GetAllModules(dispatch),
     getModule: id => MA.GetModule(id, dispatch),
+    createModule: (moduleData, cb) => MA.CreateModule(moduleData, helpers, cb),
+    getAllSchedules: () => MA.GetAllSchedules(helpers),
   };
 
   return {
-    ...contextRest,
+    ...state,
     ...actions,
   };
 };

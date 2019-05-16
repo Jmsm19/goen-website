@@ -102,18 +102,22 @@ export const getPeriodUpdateValidation = t => ({
   }),
 });
 
-// export const moduleFormValidation = t =>
-//   Yup.object().shape({
-//     name: Yup.string().required(t('Required')),
-//     section: Yup.string().required(t('Required')),
-//     schedule_id: Yup.number().required(t('Required')),
-//     clan_id: Yup.number().when('name', (value, _) => {
-//       if (value === 'M-0') {
-//         return Yup.number().required(t('Required'));
-//       }
-//       return Yup.number();
-//     }),
-//   });
+export const getModuleFormValidation = t => ({
+  initialValues: {},
+  schema: Yup.object().shape({
+    name: Yup.string().required(t('Required')),
+    section: Yup.string().required(t('Required')),
+    schedule_id: Yup.string().required(t('Required')),
+    instructor_id: Yup.string().required(t('Required')),
+    assistant_id: Yup.string().required(t('Required')),
+    clan: Yup.number().when('name', (value, _) => {
+      if (value === 'M-0') {
+        return Yup.string().required(t('Required'));
+      }
+      return Yup.string();
+    }),
+  }),
+});
 
 // export const scheduleFormValidation = t =>
 //   Yup.object().shape({
