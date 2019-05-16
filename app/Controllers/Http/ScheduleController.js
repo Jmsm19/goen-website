@@ -1,5 +1,10 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
+/** @typedef {import('adonis-bumblebee/src/Bumblebee')} Bumblebee */
+
+/** @type {typeof import('../../Models/Schedule')} */
+const Schedule = use('App/Models/Schedule');
 
 /**
  * Resourceful controller for interacting with schedules
@@ -10,10 +15,13 @@ class ScheduleController {
    * GET schedules
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Bumblebee} ctx.transform
    */
-  async index({ request, response }) {}
+  async index({ transform }) {
+    const schedules = await Schedule.all();
+
+    return transform.collection(schedules, 'ScheduleTransformer');
+  }
 
   /**
    * Render a form to be used for creating a new schedule.

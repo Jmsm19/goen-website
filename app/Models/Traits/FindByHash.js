@@ -19,6 +19,13 @@ class FindByHash {
       return model;
     };
 
+    const findByHash = async hashedId => {
+      const decodedId = Hashids.decode(hashedId)[0];
+      const model = await Model.find(decodedId || null);
+      return model;
+    };
+
+    Model.findByHash = findByHash;
     Model.findByHashOrFail = findByHashOrFail;
   }
 }

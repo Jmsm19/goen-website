@@ -13,7 +13,7 @@ class ModuleSchema extends Schema {
       table
         .integer('period_id')
         .unsigned()
-        .nullable()
+        .notNullable()
         .references('id')
         .inTable('periods')
         .onDelete('CASCADE');

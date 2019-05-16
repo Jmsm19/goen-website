@@ -21,13 +21,22 @@ module.exports = Route => {
       .except(['index'])
       .validator(new Map([[['clans.store'], ['StoreClan']], [['clans.update'], ['UpdateClan']]]));
 
+    Route.resource('schedules', 'ScheduleController').only(['index']);
+
     Route.resource('periods', 'PeriodController')
       .apiOnly()
       .validator(
         new Map([[['periods.store'], ['StorePeriod']], [['periods.update'], ['UpdatePeriod']]]),
       );
 
-    Route.resource('modules', 'ModuleController').apiOnly();
+    Route.get('modules/order', 'ModuleController.getModuleOrder').as('modules.order');
+    Route.resource('modules', 'ModuleController')
+      .apiOnly()
+      .validator(new Map([[['modules.store'], ['StoreModule']]]));
+    Route.get(
+      'period/:id/module/:name/sections/availability',
+      'ModuleController.getAvailableSections',
+    ).as('modules.sections.available');
 
     Route.put('settings', 'SettingController.update')
       .validator('UpdateSetting')
