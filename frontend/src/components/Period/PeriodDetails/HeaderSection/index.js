@@ -11,6 +11,7 @@ import EditButton from '../../../Buttons/EditButton';
 import Card from '../../../UI/Card';
 
 import { localizeDate } from '../../../../lib/utils';
+import UpdatesButtonArea from '../../../Buttons/UpdatesButtonArea';
 
 const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props }) => {
   const { t, i18n } = useTranslation();
@@ -26,12 +27,12 @@ const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props
         <h1 className='section-title period-name'>
           {t('Period._singular')} {period.name} - {period.year}
         </h1>
-        {authUser.isAdmin && (
-          <div className='btn-area'>
-            <EditButton iconSize={15} onClick={updatePeriod} />
-            {!isCurrentPeriod && <DeleteButton iconSize={15} onClick={deletePeriod} />}
-          </div>
-        )}
+
+        <UpdatesButtonArea
+          onEditClick={updatePeriod}
+          onDeleteClick={deletePeriod}
+          hideDelete={isCurrentPeriod}
+        />
       </div>
 
       <Card

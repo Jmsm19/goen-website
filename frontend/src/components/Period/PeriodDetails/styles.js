@@ -52,12 +52,6 @@ export const StyledHeaderSection = styled(HeaderSection)`
       margin-bottom: 10px;
     }
 
-    .btn-area {
-      display: grid;
-      grid-gap: 1rem;
-      grid-template-columns: repeat(2, max-content);
-    }
-
     .card {
       ${media.tablet`
       width: 100%;
