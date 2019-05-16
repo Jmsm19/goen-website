@@ -27,12 +27,15 @@ const StyledSelect = styled.select`
       outline: 0;
     }
 
-    &:hover {
+    &:hover:disabled {
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
       box-shadow: var(--input-box-shadow-on-focus);
     }
 
-    &:disabled,
-    &.disabled {
+    &:disabled {
       opacity: 1;
       color: #8898aa;
       background-color: #e9ecef;
