@@ -41,6 +41,8 @@ const useModules = () => {
     getModule: id => MA.GetModule(id, dispatch),
     createModule: (moduleData, cb) => MA.CreateModule(moduleData, helpers, cb),
     getAllSchedules: () => MA.GetAllSchedules(helpers),
+    updateModule: (id, moduleData, cb) => MA.UpdateModule(id, moduleData, helpers, cb),
+    deleteModule: (id, cb) => MA.DeleteModule(id, helpers, cb),
   };
 
   return {

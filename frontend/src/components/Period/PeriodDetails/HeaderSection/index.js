@@ -4,10 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { isWithinRange } from 'date-fns';
 import classnames from 'classnames';
 
-import { useAuth } from '../../../../context/AuthContext';
-
-import DeleteButton from '../../../Buttons/DeleteButton';
-import EditButton from '../../../Buttons/EditButton';
 import Card from '../../../UI/Card';
 
 import { localizeDate } from '../../../../lib/utils';
@@ -15,7 +11,6 @@ import UpdatesButtonArea from '../../../Buttons/UpdatesButtonArea';
 
 const HeaderSection = ({ period, deletePeriod, updatePeriod, className, ...props }) => {
   const { t, i18n } = useTranslation();
-  const { authUser } = useAuth();
   const sectionClassNames = classnames(['details-header', className]);
 
   const isCurrentPeriod = period.active;

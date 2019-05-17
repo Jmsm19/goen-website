@@ -25,6 +25,7 @@ const ModuleFormFields = ({ formalInstance }) => {
   const instructorCount = instructors.size;
   const assistantsCount = assistants.size;
   const schedulesCount = schedules.size;
+  const section = getFieldProps('section').value;
 
   React.useEffect(() => {
     if (!instructorCount || !assistantsCount) {
@@ -46,17 +47,19 @@ const ModuleFormFields = ({ formalInstance }) => {
           help={t('Module._singular')}
           selectComponent={ModuleNameSelector}
         />
-        <FormField
-          {...getFieldProps('section')}
-          onChange={value => change('section', value)}
-          name='section'
-          type='select'
-          title={t('Module.Section')}
-          help={t('Module.Section')}
-          selectComponent={ModuleSectionSelector}
-          moduleName={values.name}
-          disabled={!values || !values.name || values.name === '--'}
-        />
+        {!section && (
+          <FormField
+            {...getFieldProps('section')}
+            onChange={value => change('section', value)}
+            name='section'
+            type='select'
+            title={t('Module.Section')}
+            help={t('Module.Section')}
+            selectComponent={ModuleSectionSelector}
+            moduleName={values.name}
+            disabled={!values || !values.name || values.name === '--'}
+          />
+        )}
       </div>
 
       <div className='module-schedule'>

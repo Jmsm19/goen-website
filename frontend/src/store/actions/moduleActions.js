@@ -66,3 +66,30 @@ export const GetAllSchedules = ({ dispatch }) => {
     });
   });
 };
+
+export const UpdateModule = (id, moduleData, { dispatch, t }, cb) => {
+  SendData('PUT', `modules/${id}`, moduleData).then(({ data }) => {
+    toast.success(t('Module.Updated'));
+    callFunctions(cb);
+    dispatch({
+      type: actionTypes.UPDATE_MODULE,
+      payload: {
+        module: createMap(createDictionaryItem(data)),
+      },
+    });
+  });
+};
+
+export const DeleteModule = (id, { dispatch }, cb) => {
+  SendData('DELETE', `modules/${id}`).then(({ data }) => {
+    toast.success(data.message);
+    callFunctions(cb);
+
+    dispatch({
+      type: actionTypes.DELETE_MODULE,
+      payload: {
+        moduleId: id,
+      },
+    });
+  });
+};

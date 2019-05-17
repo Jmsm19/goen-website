@@ -11,7 +11,7 @@ class StoreModule {
 
     return {
       name: 'required|string',
-      clan_id: 'required_when:name,M-0|exists:clans,id',
+      clan: 'required_when:name,M-0|string',
       period_id: 'required|exists:periods,id',
       section: `required|string|in:${sectionLetters}`,
       schedule_id: 'required|exists:schedules,id',

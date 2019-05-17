@@ -27,6 +27,10 @@ const StyledContainer = styled.div`
         .module-name {
           margin-bottom: 0.5rem;
         }
+
+        .module-schedule {
+          margin-bottom: 1rem;
+        }
       }
     }
 

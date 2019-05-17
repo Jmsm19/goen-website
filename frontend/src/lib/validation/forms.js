@@ -106,7 +106,25 @@ export const getModuleFormValidation = t => ({
   initialValues: {},
   schema: Yup.object().shape({
     name: Yup.string().required(t('Required')),
-    section: Yup.string().required(t('Required')),
+    section: Yup.string()
+      .matches(RegExp(/--/), t('Required'))
+      .required(t('Required')),
+    schedule_id: Yup.string().required(t('Required')),
+    instructor_id: Yup.string().required(t('Required')),
+    assistant_id: Yup.string().required(t('Required')),
+    clan: Yup.number().when('name', (value, _) => {
+      if (value === 'M-0') {
+        return Yup.string().required(t('Required'));
+      }
+      return Yup.string();
+    }),
+  }),
+});
+
+export const getModuleUpdateValidation = t => ({
+  initialValues: {},
+  schema: Yup.object().shape({
+    name: Yup.string().required(t('Required')),
     schedule_id: Yup.string().required(t('Required')),
     instructor_id: Yup.string().required(t('Required')),
     assistant_id: Yup.string().required(t('Required')),

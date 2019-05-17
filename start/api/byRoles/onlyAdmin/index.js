@@ -32,7 +32,9 @@ module.exports = Route => {
     Route.get('modules/order', 'ModuleController.getModuleOrder').as('modules.order');
     Route.resource('modules', 'ModuleController')
       .apiOnly()
-      .validator(new Map([[['modules.store'], ['StoreModule']]]));
+      .validator(
+        new Map([[['modules.store'], ['StoreModule']], [['modules.update'], ['UpdateModule']]]),
+      );
     Route.get(
       'period/:id/module/:name/sections/availability',
       'ModuleController.getAvailableSections',

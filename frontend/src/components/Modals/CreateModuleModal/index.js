@@ -31,7 +31,7 @@ const CreateModuleModal = ({ isVisible, onClose, period, ...props }) => {
       <ModalForm
         initialValues={{
           ...initialValues,
-          periodId: period.id,
+          period_id: period.id,
         }}
         validationSchema={schema}
         onSubmit={handleSubmit}

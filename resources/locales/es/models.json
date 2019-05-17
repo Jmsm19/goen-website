@@ -5,5 +5,6 @@
   "deleted": "{model} fue borrado",
   "updated": "{model} fue actualizado",
   "period": "Período",
-  "periodLimitReached": "Has alcanzado el límite de períodos por año."
+  "periodLimitReached": "Has alcanzado el límite de períodos por año.",
+  "module": "Módulo"
 }

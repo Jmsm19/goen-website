@@ -6,7 +6,7 @@ import ModuleDetails from '../../Module/ModuleDetails';
 
 const ModuleDetailsModal = ({ module, isVisible, onClose }) => (
   <Modal isVisible={isVisible} onClose={onClose}>
-    {!!module && <ModuleDetails module={module} />}
+    {!!module && <ModuleDetails module={module} deselectModule={onClose} />}
   </Modal>
 );
 

@@ -5,6 +5,7 @@
 
 const Hashids = use('Hashids');
 const Config = use('Config');
+const { forLocale } = use('Antl');
 
 /** @type {typeof import('../../Models/Module')} */
 const Module = use('App/Models/Module');
@@ -71,8 +72,8 @@ class ModuleController {
   async store({ request, transform }) {
     const {
       name,
-      periodId,
       clan: clanName,
+      period_id: periodId,
       instructor_id: instructorId,
       assistant_id: assistantId,
       schedule_id: scheduleId,
@@ -124,7 +125,33 @@ class ModuleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {}
+  async update({ params, request, transform }) {
+    const { id } = params;
+    const module = await Module.findByHashOrFail(id);
+    const {
+      name,
+      clan: clanName,
+      schedule_id: scheduleId,
+      instructor_id: instructorId,
+      assistant_id: assistantId,
+    } = request.all();
+
+    const isM0 = name === 'M-0';
+    const clan = isM0 ? await Clan.findBy({ name: clanName }) : null;
+
+    module.merge({
+      name,
+      schedule_id: Hashids.decode(scheduleId)[0],
+      instructor_id: Hashids.decode(instructorId)[0],
+      assistant_id: Hashids.decode(assistantId)[0],
+      clan_id: isM0 ? clan.id : null,
+    });
+    module.save();
+
+    return transform
+      .include(['price', 'instructor', 'assistant', 'students.grades'])
+      .item(module, 'ModuleTransformer');
+  }
 
   /**
    * Delete a module with id.
@@ -134,7 +161,18 @@ class ModuleController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, locale }) {
+    const { id } = params;
+    const module = await Module.findByHashOrFail(id);
+
+    await module.delete();
+
+    return {
+      message: forLocale(locale).formatMessage('models.deleted', {
+        model: forLocale(locale).formatMessage('models.module'),
+      }),
+    };
+  }
 
   /**
    * Get the order of the modules

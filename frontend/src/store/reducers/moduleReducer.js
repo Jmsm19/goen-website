@@ -17,9 +17,16 @@ const PeriodReducer = (state, action) => {
         notFoundModules: [...new Set([...state.notFoundModules, payload.id])],
       };
     case actionTypes.CREATE_MODULE:
+    case actionTypes.UPDATE_MODULE:
       return {
         ...state,
         modules: new Map([...state.modules, ...payload.module]),
+      };
+    case actionTypes.DELETE_MODULE:
+      state.modules.delete(payload.moduleId);
+      return {
+        ...state,
+        modules: new Map([...state.modules]),
       };
     case actionTypes.GET_ALL_SCHEDULES:
       return {
