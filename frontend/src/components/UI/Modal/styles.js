@@ -28,7 +28,6 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
       min-width: max-content;
       max-width: ${({ isMobile }) => (isMobile ? '95vw' : '80vw')};
 
-      min-height: 200px;
       height: max-content;
       max-height: ${({ isMobile }) => (isMobile ? '95vh' : '80vh')};
 
