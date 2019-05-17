@@ -23,7 +23,7 @@ const Table = ({ columns, data, noData, loading, className }) => {
   const renderData = () => {
     if (Array.isArray(data) && data.length) {
       return data.map(item => (
-        <FadeInTableRow key={uuid()} className='table-body-row'>
+        <FadeInTableRow key={item.id || uuid()} className='table-body-row'>
           {!!columns.length &&
             columns.map(({ render, key }) => (
               <td key={uuid()} className='table-body-row-item'>
