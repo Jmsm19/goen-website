@@ -1,0 +1,42 @@
+# Use the latest 2.1 version of CircleCI pipeline processing engine,
+# see https://circleci.com/docs/2.0/configuration-reference/
+version: 2.1
+
+orbs:
+  # Declare a dependency on the welcome-orb
+  heroku: circleci/heroku@1.0.0
+
+jobs:
+  setup:
+    executor: default
+    steps:
+      - run: yarn setup
+  lint-front:
+    executor: default
+    steps:
+      - attach_workspace:
+        at: ~/
+      - run: mkdir -p reports/eslint
+      - run: yarn front eslint ./src --format junit --output-file ../reports/eslint/eslint.xml
+      - store_test_results:
+          path: reports/eslint
+      - store_artifacts:
+          path: reports/eslint
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          only-branch: master
+
+workflows:
+  push:
+    jobs:
+      - setup
+      - lint-front:
+        requires:
+          - setup
+      - deploy:
+        requires:
+          - lint-front
