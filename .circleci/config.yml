@@ -3,21 +3,58 @@
 version: 2.1
 
 orbs:
-  # Declare a dependency on the welcome-orb
-  heroku: circleci/heroku@1.0.0
+  # react: 'thefrontside/react@dev:alpha'
+  heroku: circleci/heroku@0.0.6
+
+executors:
+  default:
+    description: |
+      Node 10 runtime environment
+    docker:
+    - image: circleci/node:10
 
 jobs:
-  setup:
-    executor: default
-    steps:
-      - run: yarn setup
-  lint-front:
+  install_back:
     executor: default
     steps:
       - attach_workspace:
-        at: ~/
+          at: ~/
+      - checkout
+      - restore_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - persist_to_workspace:
+          paths:
+            - project
+          root: ~/
+      - save_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+          paths:
+          - ~/project/backend/node_modules
+  install_front:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/frontend
+      - restore_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - persist_to_workspace:
+          paths:
+            - project
+          root: ~/
+      - save_cache:
+          key: v1-node-modules-{{ checksum "yarn.lock" }}
+          paths:
+          - ~/project/frontend/node_modules
+  lint:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn setup
       - run: mkdir -p reports/eslint
-      - run: yarn front eslint ./src --format junit --output-file ../reports/eslint/eslint.xml
+      - run: yarn eslint ./frontend/src --format junit --output-file ./reports/eslint/eslint.xml
       - store_test_results:
           path: reports/eslint
       - store_artifacts:
@@ -33,10 +70,13 @@ jobs:
 workflows:
   push:
     jobs:
-      - setup
-      - lint-front:
-        requires:
-          - setup
+      - install_back
+      - install_front:
+          requires:
+            - install_back
+      - lint:
+          requires:
+            - install_front
       - deploy:
-        requires:
-          - lint-front
+          requires:
+            - lint
