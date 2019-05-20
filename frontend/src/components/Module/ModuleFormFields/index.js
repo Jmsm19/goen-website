@@ -15,7 +15,7 @@ import ScheduleSelector from '../../Selector/ScheduleSelector';
 
 import StyledFormFields from './styles';
 
-const ModuleFormFields = ({ formalInstance }) => {
+const ModuleFormFields = ({ formalInstance, formType }) => {
   const { schedules, getAllSchedules } = useModules();
   const { instructors, assistants, getAllUsers } = useInstructors();
   const { t } = useTranslation();
@@ -25,7 +25,6 @@ const ModuleFormFields = ({ formalInstance }) => {
   const instructorCount = instructors.size;
   const assistantsCount = assistants.size;
   const schedulesCount = schedules.size;
-  const section = getFieldProps('section').value;
 
   React.useEffect(() => {
     if (!instructorCount || !assistantsCount) {
@@ -47,7 +46,7 @@ const ModuleFormFields = ({ formalInstance }) => {
           help={t('Module._singular')}
           selectComponent={ModuleNameSelector}
         />
-        {!section && (
+        {formType === 'create' && (
           <FormField
             {...getFieldProps('section')}
             onChange={value => change('section', value)}
@@ -109,10 +108,15 @@ const ModuleFormFields = ({ formalInstance }) => {
   );
 };
 
+ModuleFormFields.defaultProps = {
+  formType: 'create',
+};
+
 ModuleFormFields.propTypes = {
   formalInstance: PropTypes.shape({
     getFieldProps: PropTypes.func,
   }).isRequired,
+  formType: PropTypes.oneOf(['create', 'update']),
 };
 
 export default ModuleFormFields;

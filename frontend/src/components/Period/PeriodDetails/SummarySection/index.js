@@ -1,47 +1,45 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import Card from '../../../UI/Card';
+import { useModules } from '../../../../context/ModulesContext';
 
-import { getTotalStudents, getTotalRegisteredStudents, getActualIncome } from '../fns';
-import { formatPrice } from '../../../../lib/utils';
+import ConfirmedStudentsCard from '../../../Cards/ConfirmedStudentsCard';
+import PeriodIncomeCard from '../../../Cards/PeriodIncomeCard';
 
 const SummarySection = ({ t, period, className, ...props }) => {
+  const { searchedPeriods, modules, students, getStudentsForModule } = useModules();
+
   const sectionClassNames = classnames(['summary-section', className]);
 
-  const income = useMemo(() => {
-    const total = getActualIncome(period.modules);
-    return formatPrice(total);
-  }, [period.modules]);
+  const modulesArr = React.useMemo(() => {
+    const arr = [];
+    if (searchedPeriods.includes(period.id)) {
+      modules.forEach(module => {
+        if (module.period.id === period.id) {
+          arr.push(module);
+        }
+      });
+    }
+    return arr;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchedPeriods]);
 
-  const totalStudents = useMemo(() => getTotalStudents(period.modules), [period.modules]);
-
-  const totalRegisteredStudents = useMemo(() => getTotalRegisteredStudents(period.modules), [
-    period.modules,
-  ]);
+  React.useEffect(() => {
+    if (searchedPeriods.includes(period.id)) {
+      modules.forEach(module => {
+        if (module.period.id === period.id && !students.has(module.id)) {
+          getStudentsForModule(module.id);
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchedPeriods]);
 
   return (
     <section className={sectionClassNames} {...props}>
-      <Card title={t('ModuleRegister')} fullWidth>
-        <div>
-          <div>
-            <p>{t('Student.ConfirmedStudents')}:</p>
-            <p>
-              {totalRegisteredStudents} / {totalStudents}
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      <Card title={t('Period.Income')} fullWidth>
-        <div>
-          <div>
-            <p>{t('Period.CurrentIncome')}:</p>
-            <p>{income}</p>
-          </div>
-        </div>
-      </Card>
+      <ConfirmedStudentsCard modules={modulesArr} />
+      <PeriodIncomeCard modules={modulesArr} students={students} />
     </section>
   );
 };

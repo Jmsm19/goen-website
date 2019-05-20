@@ -49,10 +49,10 @@
     "Name": "Nombre del módulo",
     "Schedule": "Horario de clase",
     "Created": "Módulo creado",
+    "Updated": "Módulo actualizado",
     "NoModules": "No hay módules",
     "Searching": "Buscando módulo...",
     "NotFound": "Módulo no encontrado",
-    "Qty": "Módulos ofertados",
     "Count": "{{ count }} módulo",
     "Count_plural": "{{ count }} módulos"
   },
@@ -157,5 +157,8 @@
   "No": "No",
   "Confirmation": {
     "Warning": "¿Estás seguro de esto?"
-  }
+  },
+  "Create": "Crear",
+  "Cancel": "Cancelar",
+  "Update": "Actualizar"
 }

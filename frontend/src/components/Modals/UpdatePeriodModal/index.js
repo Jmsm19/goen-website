@@ -46,6 +46,7 @@ const UpdatePeriodModal = ({ isVisible, onClose, period, ...props }) => {
         }}
         onCancel={onClose}
         formFields={PeriodFormFields}
+        formType='update'
       />
     </Modal>
   );

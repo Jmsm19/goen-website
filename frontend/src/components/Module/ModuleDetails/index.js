@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useModules } from '../../../context/ModulesContext';
-import { usePeriods } from '../../../context/PeriodsContext';
 
 import StudentsTable from '../../Tables/StudentsTable';
 import UpdatesButtonArea from '../../Buttons/UpdatesButtonArea';
@@ -18,14 +17,13 @@ import StyledContainer from './styles';
 
 const ModuleDetails = ({ module, deselectModule }) => {
   const { t } = useTranslation();
-  const { deleteModule } = useModules();
-  const { getPeriod, activePeriod } = usePeriods();
+  const { deleteModule, students } = useModules();
 
-  const handleModuleDelete = () => getPeriod(module.period || activePeriod);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [isEditingModule, setIsEditingModule] = useState(false);
 
-  const { clan, schedule, instructor, assistant, students } = module;
+  const { clan, schedule, instructor, assistant } = module;
+  const moduleStudents = students.get(module.id) || [];
 
   return (
     <>
@@ -63,7 +61,7 @@ const ModuleDetails = ({ module, deselectModule }) => {
         <FadeInSection className='students-section'>
           <h2>{t('Student._plural')}</h2>
 
-          <StudentsTable students={students} withGradeForModule={module.id} />
+          <StudentsTable students={moduleStudents} withGradeForModule={module.id} />
         </FadeInSection>
       </StyledContainer>
 
@@ -71,11 +69,7 @@ const ModuleDetails = ({ module, deselectModule }) => {
       <ConfirmationModal
         isVisible={showConfirmationModal}
         onAccept={() =>
-          deleteModule(module.id, [
-            () => setShowConfirmationModal(false),
-            handleModuleDelete,
-            deselectModule,
-          ])
+          deleteModule(module.id, [() => setShowConfirmationModal(false), deselectModule])
         }
         onCancel={() => setShowConfirmationModal(false)}
       />

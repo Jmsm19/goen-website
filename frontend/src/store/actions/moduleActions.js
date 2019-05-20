@@ -93,3 +93,29 @@ export const DeleteModule = (id, { dispatch }, cb) => {
     });
   });
 };
+
+export const GetModulesForPeriod = (id, { dispatch }) => {
+  GetData(`periods/${id}/modules`).then(({ data }) => {
+    dispatch({
+      type: actionTypes.GET_MODULES_FOR_PERIOD,
+      payload: {
+        periodId: id,
+        modules: createMap(createDictionaryOfIdsFromArray(data)),
+      },
+    });
+  });
+};
+
+export const GetStudentsForModule = (id, { dispatch }) => {
+  GetData(`/modules/${id}/students`).then(({ data }) => {
+    dispatch({
+      type: actionTypes.GET_STUDENTS_FOR_MODULE,
+      payload: {
+        moduleId: id,
+        students: createMap({
+          [id]: [...data],
+        }),
+      },
+    });
+  });
+};

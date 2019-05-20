@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { TrashAlt as Trash } from 'styled-icons/fa-solid/TrashAlt';
-
-import Button from '../../UI/Button';
 
 import routes from '../../../lib/config/routes';
 import StyledTable from './styles';
+import DeleteButton from '../../Buttons/DeleteButton';
 
 const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
   const { t } = useTranslation();
@@ -27,11 +25,6 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
       text: t('Period.Year'),
     },
     {
-      key: 'modules',
-      text: t('Module.Qty'),
-      render: modules => t('Module.Count', { count: modules.length }),
-    },
-    {
       key: 'active',
       text: t('Period.IsActive'),
       render: active => (
@@ -46,18 +39,7 @@ const PeriodsTable = ({ periods, deleteCol, onDelete, ...props }) => {
     columns.push({
       key: 'delete',
       text: '',
-      render: (_, period) => (
-        <Button
-          outline
-          type='primary'
-          icon={<Trash size={20} />}
-          onClick={() => {
-            if (onDelete && typeof onDelete === 'function') {
-              onDelete(period.id);
-            }
-          }}
-        />
-      ),
+      render: (_, period) => <DeleteButton iconSize={15} onClick={() => onDelete(period.id)} />,
     });
   }
 

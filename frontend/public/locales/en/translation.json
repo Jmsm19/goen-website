@@ -49,10 +49,10 @@
     "Name": "Module's name",
     "Schedule": "Schedule",
     "Created": "Module created",
+    "Updated": "Module updated",
     "NoModules": "No modules",
     "Searching": "Looking for module...",
     "NotFound": "Module not found",
-    "Qty": "Open modules",
     "Count": "{{ count }} module",
     "Count_plural": "{{ count }} modules"
   },
@@ -157,5 +157,8 @@
   "No": "No",
   "Confirmation": {
     "Warning": "Are you sure about this?"
-  }
+  },
+  "Create": "Create",
+  "Cancel": "Cancel",
+  "Update": "Update"
 }

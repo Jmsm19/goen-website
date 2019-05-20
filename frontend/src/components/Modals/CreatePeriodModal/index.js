@@ -30,6 +30,7 @@ const CreatePeriodModal = ({ isVisible, onClose, ...props }) => {
         onSubmit={handleSubmit}
         onCancel={onClose}
         formFields={PeriodFormFields}
+        formType='create'
       />
     </Modal>
   );

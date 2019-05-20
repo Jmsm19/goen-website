@@ -101,14 +101,15 @@ export const StyledModulesSection = styled(ModulesSection)`
 
 export const StyledSummarySection = styled(SummarySection)`
   &.summary-section {
-    grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+    grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
+    grid-gap: 10px 0;
 
     .card {
       background-color: transparent;
       border: none;
 
       &:not(:last-child) {
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
       }
 
       .card-body {

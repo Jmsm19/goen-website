@@ -107,7 +107,7 @@ export const getModuleFormValidation = t => ({
   schema: Yup.object().shape({
     name: Yup.string().required(t('Required')),
     section: Yup.string()
-      .matches(RegExp(/--/), t('Required'))
+      .matches(RegExp(/^[A-Z]{1}$/), t('Required'))
       .required(t('Required')),
     schedule_id: Yup.string().required(t('Required')),
     instructor_id: Yup.string().required(t('Required')),

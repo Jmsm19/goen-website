@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { useModules } from '../../../context/ModulesContext';
-import { usePeriods } from '../../../context/PeriodsContext';
 
 import Modal from '../../UI/Modal';
 import ModalForm from '../ModalForm';
@@ -14,10 +13,7 @@ import { getModuleUpdateValidation } from '../../../lib/validation/forms';
 const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...props }) => {
   const { t } = useTranslation();
   const { updateModule } = useModules();
-  const { activePeriod, getPeriod } = usePeriods();
-  const handleModuleUpdate = () => getPeriod(module.period || activePeriod);
-  const handleSubmit = values =>
-    updateModule(module.id, values, [onClose, handleModuleUpdate, deselectModule]);
+  const handleSubmit = values => updateModule(module.id, values, [onClose, deselectModule]);
 
   // eslint-disable-next-line camelcase
   const { name, section, clan, schedule, instructor, assistant } = module;
@@ -52,6 +48,7 @@ const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...prop
         }}
         onCancel={onClose}
         formFields={ModuleFormFields}
+        formType='update'
       />
     </Modal>
   );

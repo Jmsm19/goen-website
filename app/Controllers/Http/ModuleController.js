@@ -56,9 +56,7 @@ class ModuleController {
   async index({ transform }) {
     const modules = await Module.all();
 
-    return transform
-      .include(['price', 'period', 'instructor', 'assistant', 'students.grades'])
-      .collection(modules, 'ModuleTransformer');
+    return transform.collection(modules, 'ModuleTransformer');
   }
 
   /**
@@ -94,9 +92,7 @@ class ModuleController {
       assistant_id: Hashids.decode(assistantId)[0],
     });
 
-    return transform
-      .include(['price', 'period', 'instructor', 'assistant', 'students.grades'])
-      .item(module, 'ModuleTransformer');
+    return transform.item(module, 'ModuleTransformer');
   }
 
   /**
@@ -112,9 +108,7 @@ class ModuleController {
     const { id } = params;
     const module = await Module.findByHashOrFail(id);
 
-    return transform
-      .include(['price', 'instructor', 'assistant', 'students.grades'])
-      .item(module, 'ModuleTransformer');
+    return transform.item(module, 'ModuleTransformer');
   }
 
   /**
@@ -148,9 +142,7 @@ class ModuleController {
     });
     module.save();
 
-    return transform
-      .include(['price', 'instructor', 'assistant', 'students.grades'])
-      .item(module, 'ModuleTransformer');
+    return transform.item(module, 'ModuleTransformer');
   }
 
   /**
@@ -210,6 +202,23 @@ class ModuleController {
     return {
       availableSections,
     };
+  }
+
+  /**
+   * Get students for Module
+   * GET modules/:id/students
+   *
+   * @param {object} ctx
+   */
+  async getStudents({ params, transform }) {
+    const { id } = params;
+    const module = await Module.findByHashOrFail(id);
+    const students = await module
+      .students()
+      .orderBy('name', 'asc')
+      .fetch();
+
+    return transform.include(['grades']).collection(students, 'UserTransformer.withStudentData');
   }
 }
 

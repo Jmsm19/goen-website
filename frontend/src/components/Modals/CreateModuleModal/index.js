@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { useModules } from '../../../context/ModulesContext';
-import { usePeriods } from '../../../context/PeriodsContext';
 
 import Modal from '../../UI/Modal';
 import ModalForm from '../ModalForm';
@@ -14,9 +13,7 @@ import { getModuleFormValidation } from '../../../lib/validation/forms';
 const CreateModuleModal = ({ isVisible, onClose, period, ...props }) => {
   const { t } = useTranslation();
   const { createModule } = useModules();
-  const { getPeriod, getActivePeriod } = usePeriods();
-  const handlePeriodUpdate = () => (period.active ? getActivePeriod() : getPeriod(period.id));
-  const handleSubmit = values => createModule(values, [onClose, handlePeriodUpdate]);
+  const handleSubmit = values => createModule(values, [onClose]);
 
   const { initialValues, schema } = getModuleFormValidation(t);
 
@@ -37,6 +34,7 @@ const CreateModuleModal = ({ isVisible, onClose, period, ...props }) => {
         onSubmit={handleSubmit}
         onCancel={onClose}
         formFields={ModuleFormFields}
+        formType='create'
       />
     </Modal>
   );

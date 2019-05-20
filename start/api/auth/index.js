@@ -25,6 +25,7 @@ module.exports = Route => {
       .only(['index', 'show']);
 
     Route.get('periods/active', 'PeriodController.getActive').as('periods.active');
+    Route.get('periods/:id/modules', 'PeriodController.getModules').as('periods.modules');
   })
     .prefix('api/')
     .middleware(['auth', 'verified']);

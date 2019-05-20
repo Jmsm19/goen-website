@@ -14,6 +14,7 @@ const ModalForm = ({
   onSubmit,
   onCancel,
   formFields: FormFieldsComponent,
+  formType,
 }) => {
   const { t } = useTranslation();
 
@@ -23,13 +24,13 @@ const ModalForm = ({
 
   return (
     <StyledForm className='period-create-form'>
-      <FormFieldsComponent formalInstance={formal} />
+      <FormFieldsComponent formalInstance={formal} formType={formType} />
 
       <div className='button-area'>
         <Button
           {...getSubmitButtonProps()}
           type='primary'
-          text={t('Create')}
+          text={formType === 'create' ? t('Create') : t('Update')}
           onClick={submit}
           {...submitBtnProps}
         />
@@ -48,6 +49,7 @@ const ModalForm = ({
 };
 
 ModalForm.defaultProps = {
+  formType: 'create',
   submitBtnProps: {},
 };
 
@@ -55,6 +57,7 @@ ModalForm.propTypes = {
   initialValues: PropTypes.shape().isRequired,
   validationSchema: PropTypes.shape().isRequired,
   formFields: PropTypes.func.isRequired,
+  formType: PropTypes.oneOf(['create', 'update']),
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   submitBtnProps: PropTypes.shape({

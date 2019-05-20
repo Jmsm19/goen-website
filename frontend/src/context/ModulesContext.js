@@ -14,6 +14,8 @@ const ModulesProvider = props => {
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
+    searchedPeriods: [],
+    students: createMap(),
     schedules: createMap(),
   };
 
@@ -21,7 +23,7 @@ const ModulesProvider = props => {
 
   const value = React.useMemo(() => ({ state, dispatch }), [state]);
 
-  return <ModulesContext.Provider value={value} {...props} />;
+  return <ModulesContext.Provider value={{ ...value }} {...props} />;
 };
 
 // HOOK
@@ -43,6 +45,8 @@ const useModules = () => {
     getAllSchedules: () => MA.GetAllSchedules(helpers),
     updateModule: (id, moduleData, cb) => MA.UpdateModule(id, moduleData, helpers, cb),
     deleteModule: (id, cb) => MA.DeleteModule(id, helpers, cb),
+    getModulesForPeriod: id => MA.GetModulesForPeriod(id, helpers),
+    getStudentsForModule: id => MA.GetStudentsForModule(id, helpers),
   };
 
   return {

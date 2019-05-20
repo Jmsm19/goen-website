@@ -2,22 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import PendingPaymentsBadge from '../../Badges/PendingPaymentsBadge';
+
 import { formatHoursFromDB } from '../../../lib/utils';
 import StyledCard from './styles';
-import { getRegisteredStudentsInModule } from '../../Period/PeriodDetails/fns';
 
-const ModuleSummaryCard = ({ module, onClick, ...props }) => {
+const ModuleSummaryCard = ({
+  module,
+  onClick,
+  showPendingPayments,
+  showAvailableSlots,
+  ...props
+}) => {
   const { t } = useTranslation();
 
   const { schedule } = module;
   const handleClick = () => onClick(module);
-  const qtyOfSsWithPendingPayment = module.students.length - getRegisteredStudentsInModule(module);
 
   return (
     <StyledCard title={module.fullName} hoverable fullWidth onClick={handleClick} {...props}>
-      {qtyOfSsWithPendingPayment > 0 && (
-        <p className='bubble'>{t('Payment.PendingQty', { count: qtyOfSsWithPendingPayment })}</p>
-      )}
+      {showPendingPayments && !showAvailableSlots && <PendingPaymentsBadge module={module} />}
       <p>{t(schedule.day)}</p>
       <p>
         {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
@@ -28,6 +32,11 @@ const ModuleSummaryCard = ({ module, onClick, ...props }) => {
 
 ModuleSummaryCard.defaultProps = {
   onClick: () => null,
+  module: {
+    students: [],
+  },
+  showPendingPayments: false,
+  showAvailableSlots: false,
 };
 
 ModuleSummaryCard.propTypes = {
@@ -38,8 +47,10 @@ ModuleSummaryCard.propTypes = {
       from: PropTypes.string,
       until: PropTypes.string,
     }).isRequired,
-    students: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  }).isRequired,
+    students: PropTypes.arrayOf(PropTypes.shape()),
+  }),
+  showPendingPayments: PropTypes.bool,
+  showAvailableSlots: PropTypes.bool,
 };
 
 export default ModuleSummaryCard;

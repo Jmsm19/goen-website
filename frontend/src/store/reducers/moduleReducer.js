@@ -1,6 +1,6 @@
 import actionTypes from '../types';
 
-const PeriodReducer = (state, action) => {
+const ModuleReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -33,10 +33,21 @@ const PeriodReducer = (state, action) => {
         ...state,
         schedules: new Map([...state.schedules, ...payload.schedules]),
       };
+    case actionTypes.GET_MODULES_FOR_PERIOD:
+      return {
+        ...state,
+        searchedPeriods: [...state.searchedPeriods, payload.periodId],
+        modules: new Map([...state.modules, ...payload.modules]),
+      };
+    case actionTypes.GET_STUDENTS_FOR_MODULE:
+      return {
+        ...state,
+        students: new Map([...state.students, ...payload.students]),
+      };
     // Default responses
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
 };
 
-export default PeriodReducer;
+export default ModuleReducer;

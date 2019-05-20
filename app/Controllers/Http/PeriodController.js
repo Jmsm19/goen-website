@@ -28,16 +28,7 @@ class PeriodController {
       .orderBy('created_at', 'desc')
       .fetch();
 
-    return transform
-      .include([
-        'modules.clan',
-        'modules.price',
-        'modules.schedule',
-        'modules.instructor',
-        'modules.assistant',
-        'modules.students.grades',
-      ])
-      .collection(periods, 'PeriodTransformer');
+    return transform.collection(periods, 'PeriodTransformer');
   }
 
   /**
@@ -80,16 +71,7 @@ class PeriodController {
     };
     const period = await Period.create(periodData);
 
-    return transform
-      .include([
-        'modules.clan',
-        'modules.price',
-        'modules.schedule',
-        'modules.instructor',
-        'modules.assistant',
-        'modules.students.grades',
-      ])
-      .item(period, 'PeriodTransformer');
+    return transform.item(period, 'PeriodTransformer');
   }
 
   /**
@@ -104,16 +86,7 @@ class PeriodController {
     const { id } = params;
     const period = await Period.findByHashOrFail(id);
 
-    return transform
-      .include([
-        'modules.clan',
-        'modules.price',
-        'modules.schedule',
-        'modules.instructor',
-        'modules.assistant',
-        'modules.students.grades',
-      ])
-      .item(period, 'PeriodTransformer');
+    return transform.item(period, 'PeriodTransformer');
   }
 
   /**
@@ -130,16 +103,7 @@ class PeriodController {
     period.merge(request.only(['name', 'year', 'signup_from', 'signup_until']));
     period.save();
 
-    return transform
-      .include([
-        'modules.clan',
-        'modules.price',
-        'modules.schedule',
-        'modules.instructor',
-        'modules.assistant',
-        'modules.students.grades',
-      ])
-      .item(period, 'PeriodTransformer');
+    return transform.item(period, 'PeriodTransformer');
   }
 
   /**
@@ -168,23 +132,35 @@ class PeriodController {
    * GET periods/active
    *
    * @param {object} ctx
+   * @param {Response} ctx.response
    * @param {Bumblebee} ctx.transform
    */
-  async getActive({ transform }) {
+  async getActive({ response, transform }) {
     const period = await Period.query()
       .where({ active: 1 })
-      .firstOrFail();
+      .first();
 
-    return transform
-      .include([
-        'modules.clan',
-        'modules.price',
-        'modules.schedule',
-        'modules.instructor',
-        'modules.assistant',
-        'modules.students.grades',
-      ])
-      .item(period, 'PeriodTransformer');
+    if (!period) {
+      return response.status(404);
+    }
+
+    return transform.item(period, 'PeriodTransformer');
+  }
+
+  /**
+   * Get Modules from Period
+   * GET periods/:id/modules
+   *
+   * @param {object} ctx
+   * @param {{id: String}} ctx.params
+   * @param {Bumblebee} ctx.transform
+   */
+  async getModules({ params, transform }) {
+    const { id } = params;
+    const period = await Period.findByHashOrFail(id);
+    const modules = await period.modules().fetch();
+
+    return transform.collection(modules, 'ModuleTransformer');
   }
 }
 

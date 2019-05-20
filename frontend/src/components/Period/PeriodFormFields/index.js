@@ -6,14 +6,14 @@ import FormField from '../../Form/Field';
 
 import StyledFormFields from './styles';
 
-const PeriodFormFields = ({ formalInstance }) => {
+const PeriodFormFields = ({ formalInstance, formType }) => {
   const { t } = useTranslation();
 
   const { getFieldProps } = formalInstance;
 
   return (
     <StyledFormFields className='form-fields'>
-      {getFieldProps('name').value && (
+      {formType === 'update' && (
         <div className='name-year'>
           <FormField
             {...getFieldProps('name')}
@@ -55,10 +55,15 @@ const PeriodFormFields = ({ formalInstance }) => {
   );
 };
 
+PeriodFormFields.defaultProps = {
+  formType: 'create',
+};
+
 PeriodFormFields.propTypes = {
   formalInstance: PropTypes.shape({
     getFieldProps: PropTypes.func,
   }).isRequired,
+  formType: PropTypes.oneOf(['create', 'update']),
 };
 
 export default PeriodFormFields;

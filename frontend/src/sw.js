@@ -8,6 +8,8 @@ if (typeof importScripts === 'function') {
   /* global workbox */
   if (workbox) {
     console.log('Workbox is loaded');
+    const networkFirst = config => new workbox.strategies.NetworkFirst(config);
+    const cacheFirst = config => new workbox.strategies.CacheFirst(config);
 
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute([]);
@@ -20,7 +22,7 @@ if (typeof importScripts === 'function') {
     // Cache images
     workbox.routing.registerRoute(
       /\.(?:png|gif|jpg|jpeg)$/,
-      new workbox.strategies.CacheFirst({
+      cacheFirst({
         cacheName: 'images',
         plugins: [
           new workbox.expiration.Plugin({
@@ -32,15 +34,15 @@ if (typeof importScripts === 'function') {
     );
 
     // Cache main files
-    workbox.routing.registerRoute(/\.(?:js|css|html)$/, new workbox.strategies.NetworkFirst());
+    workbox.routing.registerRoute(/\.(?:js|css|html)$/, networkFirst());
 
     // Cache main route
-    workbox.routing.registerRoute('/', new workbox.strategies.NetworkFirst());
+    workbox.routing.registerRoute('/', networkFirst());
 
     // Cache settings files
     workbox.routing.registerRoute(
       '/api/settings',
-      new workbox.strategies.NetworkFirst({
+      networkFirst({
         cacheName: 'settings',
       }),
     );
@@ -49,14 +51,16 @@ if (typeof importScripts === 'function') {
     const cacheConfig = {
       cacheName: 'Data requests',
     };
-    workbox.routing.registerRoute('/api/periods', new workbox.strategies.NetworkFirst(cacheConfig));
-    workbox.routing.registerRoute('/api/modules', new workbox.strategies.NetworkFirst(cacheConfig));
-    workbox.routing.registerRoute('/api/users', new workbox.strategies.NetworkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/periods', networkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/modules', networkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/users', networkFirst(cacheConfig));
+    workbox.routing.registerRoute('/api/periods/active', networkFirst(cacheConfig));
+    workbox.routing.registerRoute(/(\/api\/periods\/)\w+(\/modules)$/, networkFirst(cacheConfig));
 
     // Cache translations
     workbox.routing.registerRoute(
       /\/locales\//,
-      new workbox.strategies.NetworkFirst({
+      networkFirst({
         cacheName: 'translations',
         plugins: [
           new workbox.expiration.Plugin({
@@ -70,7 +74,7 @@ if (typeof importScripts === 'function') {
     // Cache auth user route
     workbox.routing.registerRoute(
       '/api/auth/user',
-      new workbox.strategies.NetworkFirst({
+      networkFirst({
         cacheName: 'auth-user',
         plugins: [
           new workbox.expiration.Plugin({
