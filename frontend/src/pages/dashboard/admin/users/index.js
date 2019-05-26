@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useUsers } from '../../../../context/UsersContext';
+import useDebounce from '../../../../hooks/useDebounce';
 
 import Input from '../../../../components/UI/Input';
 import Button from '../../../../components/UI/Button';
@@ -17,6 +18,7 @@ const UsersListPage = props => {
   const [valueToFilter, setValueToFilter] = useState('');
   const [filteredUsers, setFilteredUsers] = useState(null);
   const usersArray = useMemo(() => [...users.values()], [users]);
+  const debounceValueToFilter = useDebounce(valueToFilter);
 
   useEffect(() => {
     if (!isSearchingUsers && !allUsersSearched) {
@@ -28,8 +30,8 @@ const UsersListPage = props => {
   }, [allUsersSearched, getAllUsers, isSearchingUsers]);
 
   useEffect(() => {
-    setFilteredUsers(filterArrayBy('nationalId', valueToFilter, usersArray));
-  }, [users, usersArray, valueToFilter]);
+    setFilteredUsers(filterArrayBy('nationalId', debounceValueToFilter, usersArray));
+  }, [debounceValueToFilter, users, usersArray]);
 
   return (
     <StyledPage className='users-lists-page'>
