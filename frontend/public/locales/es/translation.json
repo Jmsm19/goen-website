@@ -54,7 +54,10 @@
     "Searching": "Buscando módulo...",
     "NotFound": "Módulo no encontrado",
     "Count": "{{ count }} módulo",
-    "Count_plural": "{{ count }} módulos"
+    "Count_plural": "{{ count }} módulos",
+    "Filled": "Módulo lleno",
+    "AvailableSlots": "{{ count }} cupo disponible",
+    "AvailableSlots_plural": "{{ count }} cupos disponibles"
   },
   "Schedule": {
     "_singular": "Horario",

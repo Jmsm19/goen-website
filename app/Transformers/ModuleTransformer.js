@@ -1,5 +1,6 @@
 const BumblebeeTransformer = use('Bumblebee/Transformer');
 const Hashids = use('Hashids');
+const Config = use('Config');
 
 /**
  * ModuleTransformer class
@@ -20,16 +21,26 @@ class ModuleTransformer extends BumblebeeTransformer {
    * This method is used to transform the data.
    */
   // eslint-disable-next-line class-methods-use-this
-  transform(module) {
+  async transform(module) {
+    const studentCount = await module.students().getCount();
+    const maxStudentsPerModule = Config.get('constants.maxStudentsPerModule');
+
     return {
       id: Hashids.encode(module.id),
       name: module.name,
       section: module.section,
       fullName: `${module.name} - ${module.section}`,
-      instructorId: Hashids.encode(module.instructor_id),
-      assistantId: Hashids.encode(module.assistant_id),
+      availableSlots: maxStudentsPerModule - studentCount,
     };
   }
+
+  // async transformWithStudentCount(module) {
+
+  //   return {
+  //     ...this.transform(module),
+  //     availableSlots: studentCount - maxStudentsPerModule,
+  //   };
+  // }
 
   includeClan(module) {
     return this.item(module.getRelated('clan'), 'ClanTransformer');

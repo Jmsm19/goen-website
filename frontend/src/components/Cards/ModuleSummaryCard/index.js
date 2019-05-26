@@ -6,6 +6,7 @@ import PendingPaymentsBadge from '../../Badges/PendingPaymentsBadge';
 
 import { formatHoursFromDB } from '../../../lib/utils';
 import StyledCard from './styles';
+import AvailableSlotsBadge from '../../Badges/AvailableSlotsBadge';
 
 const ModuleSummaryCard = ({
   module,
@@ -22,6 +23,9 @@ const ModuleSummaryCard = ({
   return (
     <StyledCard title={module.fullName} hoverable fullWidth onClick={handleClick} {...props}>
       {showPendingPayments && !showAvailableSlots && <PendingPaymentsBadge module={module} />}
+
+      {showAvailableSlots && !showPendingPayments && <AvailableSlotsBadge module={module} />}
+
       <p>{t(schedule.day)}</p>
       <p>
         {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}

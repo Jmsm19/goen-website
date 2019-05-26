@@ -11,6 +11,7 @@ const AuthStateReducer = (state, action) => {
           ...payload.user,
         },
       };
+
     // User Login
     case actionTypes.AUTH_LOGIN_SUCCESS:
       return { ...state, isAuth: true };
@@ -26,6 +27,27 @@ const AuthStateReducer = (state, action) => {
     // User Logout
     case actionTypes.AUTH_LOGOUT:
       return { ...state, isAuth: false, authUser: null };
+
+    // Module register
+    case actionTypes.REGISTER_IN_MODULE:
+      return {
+        ...state,
+        isRegisteringInModule: true,
+      };
+    case actionTypes.REGISTER_IN_MODULE_SUCCESS:
+      return {
+        ...state,
+        isRegisteringInModule: false,
+        authUser: {
+          ...state.authUser,
+          registrationStatus: 'paying',
+        },
+      };
+    case actionTypes.REGISTER_IN_MODULE_FAILED:
+      return {
+        ...state,
+        isRegisteringInModule: false,
+      };
 
     // Default responses
     default:

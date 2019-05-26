@@ -1,0 +1,8 @@
+{
+  "isStudentInModule": "You are already a student in this module.",
+  "notWithinRegistrationThreshold": "The registration time frame for this period is over.",
+  "onlyOneModulePerPeriod": "You can only register in one module per period.",
+  "wrongNextModule": "Your next module should be {correctModuleName} not {module}.",
+  "moduleFull": "Module full.",
+  "moduleSlotSaved": "You have saved you place in this module."
+}

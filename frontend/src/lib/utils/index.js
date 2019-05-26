@@ -146,3 +146,14 @@ export const sortModules = modules =>
   modules.sort((a, b) =>
     a.name > b.name || (a.name === b.name && a.section > b.section) ? 1 : -1,
   );
+
+export const filterModulesByNumber = (modules = [], min = 0, max = 0) => {
+  let filteredModules = [];
+  if (modules) {
+    filteredModules = modules.filter(module => {
+      const moduleNumber = +RegExp(/M-(\d+)/).exec(module.name)[1];
+      return moduleNumber >= min && moduleNumber <= max;
+    });
+  }
+  return filteredModules;
+};

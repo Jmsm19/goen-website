@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '../../UI/Modal';
-
-import StyledButtonArea from './styles';
+import ConfirmationButtonArea from '../../Buttons/ConfirmationButtonArea';
 
 const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props }) => {
   const { t } = useTranslation();
@@ -16,7 +15,7 @@ const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props })
       className='confirmation-modal'
       isVisible={isVisible}
       onClose={onCancel}
-      footerContent={<StyledButtonArea onAccept={onAccept} onCancel={onCancel} />}
+      footerContent={<ConfirmationButtonArea onYes={onAccept} onNo={onCancel} />}
       {...props}
     >
       <p className='warning'>{warningText}</p>

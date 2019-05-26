@@ -54,7 +54,10 @@
     "Searching": "Looking for module...",
     "NotFound": "Module not found",
     "Count": "{{ count }} module",
-    "Count_plural": "{{ count }} modules"
+    "Count_plural": "{{ count }} modules",
+    "Filled": "Module full",
+    "AvailableSlots": "{{ count }} slot available",
+    "AvailableSlots_plural": "{{ count }} slots available"
   },
   "Schedule": {
     "_singular": "Schedule",

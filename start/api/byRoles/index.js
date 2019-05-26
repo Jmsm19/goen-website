@@ -2,6 +2,7 @@
 
 const adminRoutes = require('./onlyAdmin');
 const instructorRoutes = require('./instructor');
+const studentRoutes = require('./student');
 
 /**
  * Routes that require roles (and authentication)
@@ -14,4 +15,7 @@ module.exports = Route => {
 
   // Instructor routes
   instructorRoutes(Route);
+
+  // Student routes
+  studentRoutes(Route);
 };

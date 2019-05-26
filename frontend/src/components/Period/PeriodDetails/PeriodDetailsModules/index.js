@@ -12,8 +12,8 @@ import ModuleCreateCard from '../../../Cards/ModuleCreateCard';
 import { sortModules } from '../../../../lib/utils';
 import Loading from '../../../Loading';
 
-const ModulesSection = props => {
-  const { periodId, selectModule, className, showCreateCard, onCreateCardClick, ...rest } = props;
+const PeriodDetailsModules = props => {
+  const { periodId, onCardClick, className, showCreateCard, onCreateCardClick, ...rest } = props;
   const { modules, searchedPeriods, getModulesForPeriod } = useModules();
 
   const sectionClassNames = classnames(['modules-section', className]);
@@ -42,12 +42,7 @@ const ModulesSection = props => {
       {showCreateCard && <ModuleCreateCard onClick={onCreateCardClick} />}
 
       {sortedModules.map(module => (
-        <ModuleSummaryCard
-          key={uuid()}
-          module={module}
-          onClick={selectModule}
-          showPendingPayments
-        />
+        <ModuleSummaryCard key={uuid()} module={module} onClick={onCardClick} showPendingPayments />
       ))}
     </section>
   ) : (
@@ -55,18 +50,18 @@ const ModulesSection = props => {
   );
 };
 
-ModulesSection.defaultProps = {
+PeriodDetailsModules.defaultProps = {
   className: null,
   showCreateCard: false,
   onCreateCardClick: () => null,
 };
 
-ModulesSection.propTypes = {
+PeriodDetailsModules.propTypes = {
   className: PropTypes.string,
-  selectModule: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func.isRequired,
   showCreateCard: PropTypes.bool,
   onCreateCardClick: PropTypes.func,
   periodId: PropTypes.string.isRequired,
 };
 
-export default ModulesSection;
+export default PeriodDetailsModules;

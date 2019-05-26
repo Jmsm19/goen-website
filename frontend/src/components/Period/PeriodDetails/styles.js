@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import media from '../../../lib/utils/styling';
 
-import HeaderSection from './HeaderSection';
+import PeriodDetailsHeader from './PeriodDetailsHeader';
 import SummarySection from './SummarySection';
-import ModulesSection from './ModulesSection';
+import PeriodDetailsModules from './PeriodDetailsModules';
 
 export const StyledContainer = styled.div`
   .section-title {
@@ -32,7 +32,7 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const StyledHeaderSection = styled(HeaderSection)`
+export const StyledHeaderSection = styled(PeriodDetailsHeader)`
   &.details-header {
     display: grid;
     grid-gap: 1rem;
@@ -86,7 +86,7 @@ export const StyledHeaderSection = styled(HeaderSection)`
   }
 `;
 
-export const StyledModulesSection = styled(ModulesSection)`
+export const StyledModulesSection = styled(PeriodDetailsModules)`
   &.modules-section {
     margin-top: 30px;
     margin-bottom: 30px;

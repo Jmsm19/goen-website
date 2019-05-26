@@ -1,8 +1,9 @@
 import React from 'react';
 import Cookies from 'js-cookie';
+import { useTranslation } from 'react-i18next';
 
 import AuthStateReducer from '../store/reducers/authReducer';
-import { LoginUser, RegisterUser, LogoutUser, GetAuthUser } from '../store/actions/authActions';
+import * as AA from '../store/actions/authActions';
 
 const AuthContext = React.createContext();
 
@@ -28,6 +29,7 @@ const AuthProvider = props => {
 };
 
 const useAuth = () => {
+  const { t } = useTranslation();
   const context = React.useContext(AuthContext);
 
   if (!context) {
@@ -35,12 +37,14 @@ const useAuth = () => {
   }
 
   const { dispatch, ...contextRest } = context;
+  const helpers = { t, dispatch };
 
   const actions = {
-    login: loginData => LoginUser(loginData, dispatch),
-    register: userData => RegisterUser(userData, dispatch),
-    logout: () => LogoutUser(dispatch),
-    getAuthUser: () => GetAuthUser(dispatch),
+    login: loginData => AA.LoginUser(loginData, dispatch),
+    register: userData => AA.RegisterUser(userData, dispatch),
+    logout: () => AA.LogoutUser(dispatch),
+    getAuthUser: () => AA.GetAuthUser(dispatch),
+    registerInModule: id => AA.RegisterInModule(id, helpers),
   };
 
   return {

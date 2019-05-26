@@ -40,7 +40,7 @@ const PeriodDetails = ({ period, deletePeriod }) => {
       <h2 className='section-title'>{t('Module._plural')}</h2>
       <StyledModulesSection
         periodId={period.id}
-        selectModule={setSelectedModule}
+        onCardClick={setSelectedModule}
         showCreateCard={authUser.isAdmin && period.active}
         onCreateCardClick={() => setShowModuleCreateModal(true)}
       />

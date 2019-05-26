@@ -1,0 +1,8 @@
+{
+  "isStudentInModule": "Ya eres estudiante de este módulo.",
+  "notWithinRegistrationThreshold": "El período de inscripciones ya ha culminado.",
+  "onlyOneModulePerPeriod": "Solo puedes inscribirte en un módulo por período.",
+  "wrongNextModule": "Tu próximo módule es {correctModuleName}, no {module}.",
+  "moduleFull": "Módulo lleno.",
+  "moduleSlotSaved": "Te has preinscrito exitosamente en este módulo."
+}

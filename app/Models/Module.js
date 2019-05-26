@@ -2,6 +2,8 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
+const Config = use('Config');
+
 class Module extends Model {
   static boot() {
     super.boot();
@@ -82,8 +84,13 @@ class Module extends Model {
    */
   students() {
     return this.belongsToMany('App/Models/User', 'module_id', 'student_id')
-      .pivotTable('module_student')
+      .pivotTable('module_students')
       .withPivot(['status']);
+  }
+
+  async hasSpace() {
+    const studentCount = await this.students().getCount();
+    return Config.get('constants.maxStudentsPerModule') - studentCount > 0;
   }
 }
 

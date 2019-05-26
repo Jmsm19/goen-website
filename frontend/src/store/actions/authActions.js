@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 
+import { toast } from 'react-toastify';
 import actionTypes from '../types';
 import { SendData, GetData } from '../../lib/utils/http';
 
@@ -83,4 +84,19 @@ export const LogoutUser = dispatch => {
         });
       }
     });
+};
+
+export const RegisterInModule = async (moduleId, { dispatch }) => {
+  dispatch({ type: actionTypes.REGISTER_IN_MODULE });
+
+  try {
+    const { data } = await SendData('POST', `/modules/${moduleId}/register`, { id: moduleId });
+    dispatch({ type: actionTypes.REGISTER_IN_MODULE_SUCCESS });
+    toast.success(data.message);
+  } catch ({ response: { data } }) {
+    dispatch({ type: actionTypes.REGISTER_IN_MODULE_FAILED });
+    if (data.message) {
+      toast.error(data.message);
+    }
+  }
 };
