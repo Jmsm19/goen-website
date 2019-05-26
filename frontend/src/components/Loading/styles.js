@@ -4,14 +4,13 @@ const StyledPage = styled.div`
   height: 100%;
 
   display: grid;
+  grid-template-rows: auto 60px;
   align-items: center;
   justify-content: center;
 
   font-size: 2rem;
 
   div {
-    /* width: 350px; */
-
     .spinner {
       display: block;
       margin: 0 auto;
@@ -19,6 +18,11 @@ const StyledPage = styled.div`
       color: var(--primary-color);
 
       animation: 2s linear infinite rotation;
+    }
+
+    .text {
+      color: var(--light-black);
+      opacity: 0.7;
     }
   }
 `;

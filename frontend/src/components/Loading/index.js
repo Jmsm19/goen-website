@@ -8,7 +8,7 @@ const Loading = ({ text }) => (
   <StyledPage className='loading'>
     <div>
       <Spinner size={80} className='spinner' />
-      <p>{text}</p>
+      <p className='text'>{text}</p>
     </div>
   </StyledPage>
 );
