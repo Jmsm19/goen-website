@@ -22,19 +22,11 @@ export const StyledRegisterForm = styled.form`
 `;
 
 export const StyledButtonArea = styled(FadeInButtonArea)`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
   align-items: center;
   margin-top: 10px;
-
-  .btn {
-    margin-bottom: 10px;
-    @media screen and (max-width: 350px) {
-      width: 100%;
-    }
-  }
 
   .btn-primary {
     &:disabled {

@@ -19,7 +19,7 @@ const PeriodsProvider = props => {
   };
 
   const [state, dispatch] = React.useReducer(PeriodReducer, initialState);
-  const { activePeriod, periods, allPeriodsSearched } = state;
+  const { activePeriod } = state;
 
   React.useEffect(() => {
     if (isAuth && !activePeriod) {
@@ -27,15 +27,8 @@ const PeriodsProvider = props => {
     }
   }, [activePeriod, isAuth]);
 
-  const value = React.useMemo(
-    () => ({
-      activePeriod,
-      periods,
-      allPeriodsSearched,
-      dispatch,
-    }),
-    [activePeriod, periods, allPeriodsSearched],
-  );
+  const value = React.useMemo(() => ({ state, dispatch }), [state]);
+
   return <PeriodsContext.Provider value={value} {...props} />;
 };
 
@@ -48,7 +41,7 @@ const usePeriods = () => {
     throw new Error('useInstructor must be used within PeriodsProvider');
   }
 
-  const { dispatch, ...contextRest } = context;
+  const { dispatch, state } = context;
   const helpers = { t, dispatch };
 
   const actions = {
@@ -61,7 +54,7 @@ const usePeriods = () => {
   };
 
   return {
-    ...contextRest,
+    ...state,
     ...actions,
   };
 };

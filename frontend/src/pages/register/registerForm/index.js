@@ -16,7 +16,7 @@ import {
 import { StyledRegisterForm, StyledButtonArea } from './styles';
 
 const RegisterForm = ({ t }) => {
-  const { register } = useAuth();
+  const { register, isRegistering } = useAuth();
   const [activeSection, setActiveSection] = useState('personal');
 
   const { initialValues, schema } = getSignupValidationProps(t);
@@ -58,6 +58,7 @@ const RegisterForm = ({ t }) => {
               type='primary'
               text={t('Register')}
               onClick={submit}
+              isLoading={isRegistering}
             />
           </StyledButtonArea>
         )}

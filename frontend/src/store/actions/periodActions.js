@@ -9,40 +9,43 @@ import {
   callFunctions,
 } from '../../lib/utils';
 
-export const GetActivePeriod = dispatch => {
-  GetData('periods/active')
-    .then(({ data }) => {
-      dispatch({
-        type: actionTypes.GET_ACTIVE_PERIOD,
-        payload: {
-          activePeriod: data.id,
-          periods: createMap(createDictionaryItem(data)),
-        },
-      });
-    })
-    .catch(({ response }) => {
-      if (response.status === 401) {
-        dispatch({
-          type: actionTypes.AUTH_LOGIN_FAILED,
-          payload: { ...response },
-        });
-      }
+export const GetActivePeriod = async dispatch => {
+  try {
+    const { data } = await GetData('periods/active');
+    dispatch({
+      type: actionTypes.GET_ACTIVE_PERIOD,
+      payload: {
+        activePeriod: data.id,
+        periods: createMap(createDictionaryItem(data)),
+      },
     });
+  } catch ({ response }) {
+    if (response.status === 401) {
+      dispatch({
+        type: actionTypes.AUTH_LOGIN_FAILED,
+        payload: { ...response },
+      });
+    }
+  }
 };
 
-export const GetPeriod = (id, { dispatch }) => {
-  GetData(`periods/${id}`).then(({ data }) => {
+export const GetPeriod = async (id, { dispatch }) => {
+  try {
+    const { data } = await GetData(`periods/${id}`);
     dispatch({
       type: actionTypes.GET_PERIOD,
       payload: {
         period: createMap(createDictionaryItem(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: GetPeriod -> response', response);
+  }
 };
 
-export const GetAllPeriods = ({ dispatch }) => {
-  GetData('periods').then(({ data }) => {
+export const GetAllPeriods = async ({ dispatch }) => {
+  try {
+    const { data } = await GetData('periods');
     dispatch({
       type: actionTypes.GET_ALL_PERIODS,
       payload: {
@@ -50,11 +53,14 @@ export const GetAllPeriods = ({ dispatch }) => {
         allPeriodsSearched: true,
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: GetPeriod -> response', response);
+  }
 };
 
-export const CreatePeriod = (periodData, { dispatch, t }, cb) => {
-  SendData('POST', 'periods', periodData).then(({ data }) => {
+export const CreatePeriod = async (periodData, { dispatch, t }, cb) => {
+  try {
+    const { data } = await SendData('POST', 'periods', periodData);
     callFunctions([() => toast.success(t('Period.Created')), cb]);
     dispatch({
       type: actionTypes.CREATE_PERIOD,
@@ -62,11 +68,14 @@ export const CreatePeriod = (periodData, { dispatch, t }, cb) => {
         period: createMap(createDictionaryItem(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: GetPeriod -> response', response);
+  }
 };
 
-export const UpdatePeriod = (id, periodData, { dispatch, t }, cb) => {
-  SendData('PUT', `periods/${id}`, periodData).then(({ data }) => {
+export const UpdatePeriod = async (id, periodData, { dispatch, t }, cb) => {
+  try {
+    const { data } = await SendData('PUT', `periods/${id}`, periodData);
     callFunctions([() => toast.success(t('Period.Updated')), cb]);
     dispatch({
       type: actionTypes.UPDATE_PERIOD,
@@ -74,11 +83,14 @@ export const UpdatePeriod = (id, periodData, { dispatch, t }, cb) => {
         period: createMap(createDictionaryItem(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: GetPeriod -> response', response);
+  }
 };
 
-export const DeletePeriod = (id, { dispatch }) => {
-  SendData('DELETE', `periods/${id}`).then(({ data }) => {
+export const DeletePeriod = async (id, { dispatch }) => {
+  try {
+    const { data } = await SendData('DELETE', `periods/${id}`);
     toast.success(data.message);
     dispatch({
       type: actionTypes.DELETE_PERIOD,
@@ -86,5 +98,7 @@ export const DeletePeriod = (id, { dispatch }) => {
         periodId: id,
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: GetPeriod -> response', response);
+  }
 };

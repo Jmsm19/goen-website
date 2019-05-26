@@ -7,28 +7,28 @@ import {
   createDictionaryOfIdsFromArray,
 } from '../../lib/utils';
 
-export const GetUser = (id, dispatch) => {
-  GetData(`users/${id}`)
-    .then(({ data }) => {
-      dispatch({
-        type: actionTypes.GET_USER,
-        payload: {
-          user: createMap(createDictionaryItem(data)),
-        },
-      });
-    })
-    .catch(({ response }) => {
-      if (response.status === 404) {
-        dispatch({
-          type: actionTypes.USER_NOT_FOUND,
-          payload: { id },
-        });
-      }
+export const GetUser = async (id, dispatch) => {
+  try {
+    const { data } = await GetData(`users/${id}`);
+    dispatch({
+      type: actionTypes.GET_USER,
+      payload: {
+        user: createMap(createDictionaryItem(data)),
+      },
     });
+  } catch ({ response }) {
+    if (response.status === 404) {
+      dispatch({
+        type: actionTypes.USER_NOT_FOUND,
+        payload: { id },
+      });
+    }
+  }
 };
 
-export const GetAllUsers = dispatch => {
-  GetData(`users`).then(({ data }) => {
+export const GetAllUsers = async dispatch => {
+  try {
+    const { data } = await GetData(`users`);
     dispatch({
       type: actionTypes.GET_USER,
       payload: {
@@ -36,11 +36,14 @@ export const GetAllUsers = dispatch => {
         allUsersSearched: true,
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };
 
-export const GetSenpaiModules = (role, id, dispatch) => {
-  GetData(`/${role}/${id}/modules`).then(({ data }) => {
+export const GetSenpaiModules = async (role, id, dispatch) => {
+  try {
+    const { data } = await GetData(`/${role}/${id}/modules`);
     dispatch({
       type: actionTypes.GET_SENPAI_MODULES,
       payload: {
@@ -50,5 +53,7 @@ export const GetSenpaiModules = (role, id, dispatch) => {
         },
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };

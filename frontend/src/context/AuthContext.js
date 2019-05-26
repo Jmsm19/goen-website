@@ -14,16 +14,8 @@ const AuthProvider = props => {
   };
 
   const [state, dispatch] = React.useReducer(AuthStateReducer, initialState);
-  const { isAuth, authUser } = state;
 
-  const value = React.useMemo(
-    () => ({
-      isAuth,
-      authUser,
-      dispatch,
-    }),
-    [isAuth, authUser],
-  );
+  const value = React.useMemo(() => ({ state, dispatch }), [state]);
 
   return <AuthContext.Provider value={value} {...props} />;
 };
@@ -36,7 +28,7 @@ const useAuth = () => {
     throw new Error('useAuth must be used within AuthProvider');
   }
 
-  const { dispatch, ...contextRest } = context;
+  const { dispatch, state } = context;
   const helpers = { t, dispatch };
 
   const actions = {
@@ -48,7 +40,7 @@ const useAuth = () => {
   };
 
   return {
-    ...contextRest,
+    ...state,
     ...actions,
   };
 };

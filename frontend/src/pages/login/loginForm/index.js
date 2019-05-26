@@ -12,7 +12,7 @@ import { getLoginValidationProps } from '../../../lib/validation/forms';
 import StyledForm from './styles';
 
 const LoginForm = ({ t }) => {
-  const { login } = useAuth();
+  const { login, isLoggingIn } = useAuth();
 
   const { initialValues, schema } = getLoginValidationProps(t);
 
@@ -39,6 +39,7 @@ const LoginForm = ({ t }) => {
         htmlType='submit'
         type='primary'
         onClick={submit}
+        isLoading={isLoggingIn}
       />
     </StyledForm>
   );

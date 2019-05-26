@@ -15,17 +15,8 @@ const UsersProvider = props => {
   };
 
   const [state, dispatch] = React.useReducer(UserReducer, initialState);
-  const { allUsersSearched, users, notFoundUsers } = state;
 
-  const value = React.useMemo(
-    () => ({
-      allUsersSearched,
-      users,
-      notFoundUsers,
-      dispatch,
-    }),
-    [allUsersSearched, users, notFoundUsers],
-  );
+  const value = React.useMemo(() => ({ state, dispatch }), [state]);
 
   return <UsersContext.Provider value={value} {...props} />;
 };
@@ -38,7 +29,7 @@ const useUsers = () => {
     throw new Error('useUsers must be used within UsersProvider');
   }
 
-  const { dispatch, ...contextRest } = context;
+  const { dispatch, state } = context;
 
   const actions = {
     getUser: id => UA.GetUser(id, dispatch),
@@ -46,7 +37,7 @@ const useUsers = () => {
   };
 
   return {
-    ...contextRest,
+    ...state,
     ...actions,
   };
 };
@@ -59,7 +50,8 @@ const useInstructors = () => {
     throw new Error('useInstructors must be used within UsersProvider');
   }
 
-  const { dispatch, users, ...contextRest } = context;
+  const { dispatch, state } = context;
+  const { users, ...stateRest } = state;
 
   const { instructors, assistants } = React.useMemo(() => {
     const instructorsMap = createMap();
@@ -90,7 +82,7 @@ const useInstructors = () => {
   return {
     instructors,
     assistants,
-    ...contextRest,
+    ...stateRest,
     ...actions,
   };
 };

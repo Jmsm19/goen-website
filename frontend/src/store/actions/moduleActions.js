@@ -9,28 +9,28 @@ import {
   callFunctions,
 } from '../../lib/utils';
 
-export const GetModule = (id, dispatch) => {
-  GetData(`modules/${id}`)
-    .then(({ data }) => {
-      dispatch({
-        type: actionTypes.GET_MODULE,
-        payload: {
-          module: createMap(createDictionaryItem(data)),
-        },
-      });
-    })
-    .catch(({ response }) => {
-      if (response.status === 404) {
-        dispatch({
-          type: actionTypes.MODULE_NOT_FOUND,
-          payload: { ...response, id },
-        });
-      }
+export const GetModule = async (id, dispatch) => {
+  try {
+    const { data } = await GetData(`modules/${id}`);
+    dispatch({
+      type: actionTypes.GET_MODULE,
+      payload: {
+        module: createMap(createDictionaryItem(data)),
+      },
     });
+  } catch ({ response }) {
+    if (response.status === 404) {
+      dispatch({
+        type: actionTypes.MODULE_NOT_FOUND,
+        payload: { ...response, id },
+      });
+    }
+  }
 };
 
-export const GetAllModules = dispatch => {
-  GetData('modules').then(({ data }) => {
+export const GetAllModules = async dispatch => {
+  try {
+    const { data } = await GetData('modules');
     dispatch({
       type: actionTypes.GET_MODULE,
       payload: {
@@ -38,11 +38,14 @@ export const GetAllModules = dispatch => {
         allModulesSearched: true,
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };
 
-export const CreateModule = (moduleData, { t, dispatch }, cb) => {
-  SendData('POST', 'modules', moduleData).then(({ data }) => {
+export const CreateModule = async (moduleData, { t, dispatch }, cb) => {
+  try {
+    const { data } = await SendData('POST', 'modules', moduleData);
     toast.success(t('Module.Created'));
 
     callFunctions(cb);
@@ -53,22 +56,28 @@ export const CreateModule = (moduleData, { t, dispatch }, cb) => {
         module: createMap(createDictionaryItem(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };
 
-export const GetAllSchedules = ({ dispatch }) => {
-  GetData('schedules').then(({ data }) => {
+export const GetAllSchedules = async ({ dispatch }) => {
+  try {
+    const { data } = await GetData('schedules');
     dispatch({
       type: actionTypes.GET_ALL_SCHEDULES,
       payload: {
         schedules: createMap(createDictionaryOfIdsFromArray(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };
 
-export const UpdateModule = (id, moduleData, { dispatch, t }, cb) => {
-  SendData('PUT', `modules/${id}`, moduleData).then(({ data }) => {
+export const UpdateModule = async (id, moduleData, { dispatch, t }, cb) => {
+  try {
+    const { data } = await SendData('PUT', `modules/${id}`, moduleData);
     toast.success(t('Module.Updated'));
     callFunctions(cb);
     dispatch({
@@ -77,11 +86,14 @@ export const UpdateModule = (id, moduleData, { dispatch, t }, cb) => {
         module: createMap(createDictionaryItem(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: response', response);
+  }
 };
 
-export const DeleteModule = (id, { dispatch }, cb) => {
-  SendData('DELETE', `modules/${id}`).then(({ data }) => {
+export const DeleteModule = async (id, { dispatch }, cb) => {
+  try {
+    const { data } = await SendData('DELETE', `modules/${id}`);
     toast.success(data.message);
     callFunctions(cb);
 
@@ -91,11 +103,14 @@ export const DeleteModule = (id, { dispatch }, cb) => {
         moduleId: id,
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: DeleteModule -> response', response);
+  }
 };
 
-export const GetModulesForPeriod = (id, { dispatch }) => {
-  GetData(`periods/${id}/modules`).then(({ data }) => {
+export const GetModulesForPeriod = async (id, { dispatch }) => {
+  try {
+    const { data } = await GetData(`periods/${id}/modules`);
     dispatch({
       type: actionTypes.GET_MODULES_FOR_PERIOD,
       payload: {
@@ -103,11 +118,14 @@ export const GetModulesForPeriod = (id, { dispatch }) => {
         modules: createMap(createDictionaryOfIdsFromArray(data)),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: DeleteModule -> response', response);
+  }
 };
 
-export const GetStudentsForModule = (id, { dispatch }) => {
-  GetData(`/modules/${id}/students`).then(({ data }) => {
+export const GetStudentsForModule = async (id, { dispatch }) => {
+  try {
+    const { data } = await GetData(`/modules/${id}/students`);
     dispatch({
       type: actionTypes.GET_STUDENTS_FOR_MODULE,
       payload: {
@@ -117,5 +135,7 @@ export const GetStudentsForModule = (id, { dispatch }) => {
         }),
       },
     });
-  });
+  } catch ({ response }) {
+    console.error('TCL: DeleteModule -> response', response);
+  }
 };
