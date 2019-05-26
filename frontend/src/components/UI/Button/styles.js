@@ -49,6 +49,16 @@ const StyledButton = styled.button`
     &-success,
     &-danger {
       color: #fff;
+
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+
+        .spinner {
+          color: #fff;
+          text-align: center;
+        }
+      }
     }
 
     &-primary {
