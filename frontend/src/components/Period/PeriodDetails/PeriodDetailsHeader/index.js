@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isWithinRange } from 'date-fns';
 import classnames from 'classnames';
 
-import { useAuth } from '../../../../context/AuthContext';
+import { useAuth } from '../../../../store/context/AuthContext';
 
 import Card from '../../../UI/Card';
 import PeriodName from '../../PeriodName';

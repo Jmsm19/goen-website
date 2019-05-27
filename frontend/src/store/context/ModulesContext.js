@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ModuleReducer from '../store/reducers/moduleReducer';
-import * as MA from '../store/actions/moduleActions';
+import ModuleReducer from '../reducers/moduleReducer';
+import * as MA from '../actions/moduleActions';
 
-import { createMap } from '../lib/utils';
+import { createMap } from '../../lib/utils';
 
 const ModulesContext = React.createContext();
 

@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Detector as ConnectivityDetector } from 'react-detect-offline';
 
-import { enquireScreen, StopEnquireScreen } from '../lib/utils/enquire';
-import OfflineNotification from '../components/OfflineNotification';
+import { enquireScreen, StopEnquireScreen } from '../../lib/utils/enquire';
+import OfflineNotification from '../../components/OfflineNotification';
 
 const LayoutContext = React.createContext();
 

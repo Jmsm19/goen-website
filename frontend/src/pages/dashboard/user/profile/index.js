@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../../../context/AuthContext';
-import { useUsers } from '../../../../context/UsersContext';
+import { useAuth } from '../../../../store/context/AuthContext';
+import { useUsers } from '../../../../store/context/UsersContext';
 
 import Loading from '../../../../components/Loading';
 import SectionSelector from './sections';

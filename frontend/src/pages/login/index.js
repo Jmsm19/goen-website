@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { PoseGroup } from 'react-pose';
 
-import { useSettings } from '../../context/SettingsContext';
+import { useSettings } from '../../store/context/SettingsContext';
 
 import LoginForm from './loginForm';
 import LinkButton from '../../components/Navigation/LinkButton';

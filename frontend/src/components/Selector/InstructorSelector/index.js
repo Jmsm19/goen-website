@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Select from '../../UI/Select';
 
-import { useInstructors } from '../../../context/UsersContext';
+import { useInstructors } from '../../../store/context/UsersContext';
 
 const InstructorSelector = ({ name, onChange, ...props }) => {
   const { instructors, allUsersSearched } = useInstructors();

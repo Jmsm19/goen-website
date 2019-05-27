@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 
-import { usePeriods } from '../../../context/PeriodsContext';
+import { usePeriods } from '../../../store/context/PeriodsContext';
 
 import Modal from '../../UI/Modal';
 import ModalForm from '../ModalForm';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useModules } from '../../../../context/ModulesContext';
+import { useModules } from '../../../../store/context/ModulesContext';
 
 import ModulesTable from '../../../../components/Tables/ModulesTable';
 

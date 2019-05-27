@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useFormal from '@kevinwolf/formal-web';
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../store/context/AuthContext';
 
 import FormField from '../../../components/Form/Field';
 import Button from '../../../components/UI/Button';

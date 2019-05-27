@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAuth } from '../../../../context/AuthContext';
+import { useAuth } from '../../../../store/context/AuthContext';
 import useActivePeriod from '../../../../hooks/useActivePeriod';
 import useModal from '../../../../hooks/useModal';
 

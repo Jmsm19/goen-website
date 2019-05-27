@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { useInstructors } from '../../../context/UsersContext';
-import { useModules } from '../../../context/ModulesContext';
+import { useInstructors } from '../../../store/context/UsersContext';
+import { useModules } from '../../../store/context/ModulesContext';
 
 import FormField from '../../Form/Field';
 import AssistantSelector from '../../Selector/AssistantSelector';

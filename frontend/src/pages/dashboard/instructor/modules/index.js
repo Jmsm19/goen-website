@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../../../context/AuthContext';
-import { usePeriods } from '../../../../context/PeriodsContext';
+import { useAuth } from '../../../../store/context/AuthContext';
+import { usePeriods } from '../../../../store/context/PeriodsContext';
 
 import ModulesTable from '../../../../components/Tables/ModulesTable';
 

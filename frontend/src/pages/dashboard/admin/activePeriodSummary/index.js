@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePeriods } from '../../../../context/PeriodsContext';
+import { usePeriods } from '../../../../store/context/PeriodsContext';
 
 import Loading from '../../../../components/Loading';
 import PeriodDetails from '../../../../components/Period/PeriodDetails';

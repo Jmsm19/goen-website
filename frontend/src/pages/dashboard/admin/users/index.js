@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useUsers } from '../../../../context/UsersContext';
+import { useUsers } from '../../../../store/context/UsersContext';
 import useDebounce from '../../../../hooks/useDebounce';
 
 import Input from '../../../../components/UI/Input';

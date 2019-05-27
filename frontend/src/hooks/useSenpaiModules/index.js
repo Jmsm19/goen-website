@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { useInstructors } from '../../context/UsersContext';
+import { useInstructors } from '../../store/context/UsersContext';
 
 import { capitalize } from '../../lib/utils';
 

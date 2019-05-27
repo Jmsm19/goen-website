@@ -5,9 +5,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import '../../i18n';
 
-import { useSettings } from '../../context/SettingsContext';
-import { useAuth } from '../../context/AuthContext';
-import { LayoutContextProvider } from '../../context/LayoutContext';
+import { useSettings } from '../../store/context/SettingsContext';
+import { useAuth } from '../../store/context/AuthContext';
+import { LayoutContextProvider } from '../../store/context/LayoutContext';
 
 import Loading from '../Loading';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { usePeriods } from '../../../../context/PeriodsContext';
+import { usePeriods } from '../../../../store/context/PeriodsContext';
 import useLayoutContext from '../../../../hooks/useLayoutContext';
 
 import Button from '../../../../components/UI/Button';

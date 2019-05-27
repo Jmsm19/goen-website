@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../../context/AuthContext';
-import { useSettings } from '../../../context/SettingsContext';
+import { useAuth } from '../../../store/context/AuthContext';
+import { useSettings } from '../../../store/context/SettingsContext';
 
 import Switch from '../../../components/UI/Switch';
 import LanguageSelector from '../../../components/LanguageSelector';

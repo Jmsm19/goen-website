@@ -1,8 +1,8 @@
 import React from 'react';
-import { createMap } from '../lib/utils';
 
-import UserReducer from '../store/reducers/userReducer';
-import * as UA from '../store/actions/userActions';
+import UserReducer from '../reducers/userReducer';
+import * as UA from '../actions/userActions';
+import { createMap } from '../../lib/utils';
 
 const UsersContext = React.createContext();
 

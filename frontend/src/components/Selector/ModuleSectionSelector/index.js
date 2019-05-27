@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { usePeriods } from '../../../context/PeriodsContext';
+import { usePeriods } from '../../../store/context/PeriodsContext';
 import Select from '../../UI/Select';
 
 import { GetData } from '../../../lib/utils/http';

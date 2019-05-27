@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { useModules } from '../../../context/ModulesContext';
+import { useModules } from '../../../store/context/ModulesContext';
 
 import Select from '../../UI/Select';
 import { formatHoursFromDB } from '../../../lib/utils';

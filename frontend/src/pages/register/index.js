@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { PoseGroup } from 'react-pose';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../context/AuthContext';
-import { useSettings } from '../../context/SettingsContext';
+import { useAuth } from '../../store/context/AuthContext';
+import { useSettings } from '../../store/context/SettingsContext';
 
 import RegisterForm from './registerForm';
 import LinkButton from '../../components/Navigation/LinkButton';

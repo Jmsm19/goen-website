@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { PoseGroup } from 'react-pose';
-import { LayoutContext } from '../../../context/LayoutContext';
+import { LayoutContext } from '../../../store/context/LayoutContext';
 
 import { FadeInModalContent, SlideUpModal } from './animations';
 import { StyledModal, StyledCloseBtn } from './styles';

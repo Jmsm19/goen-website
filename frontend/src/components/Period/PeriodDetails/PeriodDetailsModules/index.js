@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import classnames from 'classnames';
 
-import { useModules } from '../../../../context/ModulesContext';
+import { useModules } from '../../../../store/context/ModulesContext';
 import useEffectOnce from '../../../../hooks/useEffectOnce';
 
 import ModuleSummaryCard from '../../../Cards/ModuleSummaryCard';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useModules } from '../../context/ModulesContext';
+import { useModules } from '../../store/context/ModulesContext';
 
 import { sortModules } from '../../lib/utils';
 

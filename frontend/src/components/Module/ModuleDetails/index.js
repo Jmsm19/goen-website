@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useModules } from '../../../context/ModulesContext';
+import { useModules } from '../../../store/context/ModulesContext';
 
 import StudentsTable from '../../Tables/StudentsTable';
 import UpdatesButtonArea from '../../Buttons/UpdatesButtonArea';

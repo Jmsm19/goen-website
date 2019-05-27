@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { GetData, SendData } from '../lib/utils/http';
-import { snakeCaseToCamelCase } from '../lib/utils';
+import { GetData, SendData } from '../../lib/utils/http';
+import { snakeCaseToCamelCase } from '../../lib/utils';
 
 const SettingsContext = React.createContext();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import { useModules } from '../../../../context/ModulesContext';
+import { useModules } from '../../../../store/context/ModulesContext';
 
 import ConfirmedStudentsCard from '../../../Cards/ConfirmedStudentsCard';
 import PeriodIncomeCard from '../../../Cards/PeriodIncomeCard';

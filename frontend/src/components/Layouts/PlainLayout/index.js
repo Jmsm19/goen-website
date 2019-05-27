@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../store/context/AuthContext';
 
 import LoginPage from '../../../pages/login';
 import RegisterPage from '../../../pages/register';

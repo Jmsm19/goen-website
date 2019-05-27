@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { PoseGroup } from 'react-pose';
 import useFormal from '@kevinwolf/formal-web';
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../store/context/AuthContext';
 
 import { getSignupValidationProps } from '../../../lib/validation/forms';
 

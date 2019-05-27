@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../../context/AuthContext';
-import { PeriodsProvider } from '../../../context/PeriodsContext';
-import { ModulesProvider } from '../../../context/ModulesContext';
-import { UsersProvider } from '../../../context/UsersContext';
+import { useAuth } from '../../../store/context/AuthContext';
+import { PeriodsProvider } from '../../../store/context/PeriodsContext';
+import { ModulesProvider } from '../../../store/context/ModulesContext';
+import { UsersProvider } from '../../../store/context/UsersContext';
 import useLayoutContext from '../../../hooks/useLayoutContext';
 
 import Loading from '../../Loading';

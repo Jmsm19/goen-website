@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth } from './AuthContext';
-import PeriodReducer from '../store/reducers/periodReducer';
-import * as PA from '../store/actions/periodActions';
+import PeriodReducer from '../reducers/periodReducer';
+import * as PA from '../actions/periodActions';
 
-import { createMap } from '../lib/utils';
+import { createMap } from '../../lib/utils';
 
 const PeriodsContext = React.createContext();
 

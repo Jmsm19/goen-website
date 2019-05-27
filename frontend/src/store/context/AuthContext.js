@@ -2,8 +2,8 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { useTranslation } from 'react-i18next';
 
-import AuthStateReducer from '../store/reducers/authReducer';
-import * as AA from '../store/actions/authActions';
+import AuthStateReducer from '../reducers/authReducer';
+import * as AA from '../actions/authActions';
 
 const AuthContext = React.createContext();
 

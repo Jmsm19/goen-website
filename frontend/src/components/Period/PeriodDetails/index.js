@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../store/context/AuthContext';
 
 import ModuleDetailsModal from '../../Modals/ModuleDetailsModal';
 import UpdatePeriodModal from '../../Modals/UpdatePeriodModal';
