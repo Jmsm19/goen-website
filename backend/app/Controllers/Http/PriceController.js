@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
@@ -14,16 +15,6 @@ class PriceController {
    * @param {Response} ctx.response
    */
   async index({ request, response }) {}
-
-  /**
-   * Render a form to be used for creating a new price.
-   * GET prices/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async create({ request, response }) {}
 
   /**
    * Create/save a new price.
@@ -44,16 +35,6 @@ class PriceController {
    * @param {Response} ctx.response
    */
   async show({ params, request, response }) {}
-
-  /**
-   * Render a form to update an existing price.
-   * GET prices/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async edit({ params, request, response }) {}
 
   /**
    * Update price details.

@@ -24,16 +24,6 @@ class ScheduleController {
   }
 
   /**
-   * Render a form to be used for creating a new schedule.
-   * GET schedules/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async create({ request, response }) {}
-
-  /**
    * Create/save a new schedule.
    * POST schedules
    *
@@ -52,16 +42,6 @@ class ScheduleController {
    * @param {Response} ctx.response
    */
   async show({ params, request, response }) {}
-
-  /**
-   * Render a form to update an existing schedule.
-   * GET schedules/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async edit({ params, request, response }) {}
 
   /**
    * Update schedule details.
