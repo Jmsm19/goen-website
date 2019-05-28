@@ -1,18 +1,6 @@
-# Node modules
+# Dependencies
 node_modules
-/public/*
-!/public/.gitkeep
 
-# Adonis directory for storing tmp files
-tmp
-
-# Environment variables
-.env
-.env.testing
-
-# The development sqlite file
-database/*.sqlite
-
-# Testing
-.nyc_output
-/coverage
+# Misc
+yarn-debug.log*
+yarn-error.log*

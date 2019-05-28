@@ -4,15 +4,10 @@ const { test, trait } = use('Test/Suite')('Auth');
 /** @type {import('@adonisjs/framework/src/Event')} */
 const Event = use('Event');
 
-/** @type {import('@adonisjs/mail/src/Mail')} */
-const Mail = use('Mail');
-
 /** @type {import('@adonisjs/antl/src/Antl')} */
 const { formatMessage } = use('Antl');
 
 const User = use('App/Models/User');
-const Hashids = use('Hashids');
-const Hash = use('Hash');
 const Factory = use('Factory');
 
 const { getTransformedResponse } = require('../mocks');

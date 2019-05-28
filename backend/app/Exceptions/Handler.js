@@ -3,7 +3,7 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
 
 /** @type {import('@adonisjs/antl/src/Antl')} */
-const { formatMessage, forLocale } = use('Antl');
+const { forLocale } = use('Antl');
 
 /**
  * This class handles all exceptions thrown during

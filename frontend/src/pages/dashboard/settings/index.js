@@ -27,7 +27,7 @@ const SettingsPage = props => {
               <p>{t('Setting.RegistrationsEnabled')}: </p>
               <Switch
                 enabled={userSignupActive}
-                className='language-switch'
+                className='user-signup-switch'
                 onChange={() => updateSetting('userSignupActive', !userSignupActive)}
               />
             </StyledSetting>

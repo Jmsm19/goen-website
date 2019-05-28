@@ -34,6 +34,7 @@ const useSettings = () => {
         setSettings({ ...data });
       }),
     updateSetting: (settingName, value) => {
+      console.log('TCL: useSettings -> value', value);
       SendData('PUT', 'settings', { settingName, value }).then(() => {
         setSettings({
           ...settings,

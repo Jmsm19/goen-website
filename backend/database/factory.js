@@ -11,8 +11,6 @@
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash');
 
-const Role = use('App/Models/Role');
-
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 Factory.blueprint('App/Models/User', async (faker, i, data) => {

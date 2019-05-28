@@ -1,0 +1,18 @@
+# Node modules
+node_modules
+/public/*
+!/public/.gitkeep
+
+# Adonis directory for storing tmp files
+tmp
+
+# Environment variables
+.env
+.env.testing
+
+# The development sqlite file
+database/*.sqlite
+
+# Testing
+.nyc_output
+/coverage
