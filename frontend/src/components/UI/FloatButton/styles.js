@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
-  &.btn {
+const StyledFloatButton = styled.button`
+  &.float-btn {
     /* Font */
     font-weight: 600;
     line-height: 1.5;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.15em;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -26,7 +26,7 @@ const StyledButton = styled.button`
       margin: 0 5px;
     }
 
-    &.btn-block {
+    &.float-btn-block {
       display: block;
       width: 100%;
     }
@@ -157,4 +157,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export default StyledButton;
+export default StyledFloatButton;

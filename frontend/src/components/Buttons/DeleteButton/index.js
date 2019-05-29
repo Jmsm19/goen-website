@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TrashAlt as Trash } from 'styled-icons/fa-solid/TrashAlt';
 import classnames from 'classnames';
-
-import Button from '../../UI/Button';
+import { TrashAlt as Trash } from 'styled-icons/fa-solid/TrashAlt';
+import { Button } from 'shards-react';
 
 const DeleteButton = ({ onClick, iconSize, className, ...props }) => (
   <Button
-    outline
-    type='danger'
-    icon={<Trash size={iconSize} />}
+    theme='danger'
     className={classnames(['delete-btn', className])}
     onClick={onClick}
     {...props}
-  />
+  >
+    <Trash size={iconSize} />
+  </Button>
 );
 
 DeleteButton.defaultProps = {

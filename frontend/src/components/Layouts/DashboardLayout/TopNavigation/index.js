@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import routes from '../../../../lib/config/routes';
-import Button from '../../../UI/Button';
+import FloatButton from '../../../UI/FloatButton';
 
 import { MenuIcon } from '../styles';
 
@@ -17,22 +17,15 @@ const TopNavigation = ({ t, isMobile, toggleSidebar, logoutUser }) => (
           <NavLink exact to={routes.dashboard.user.profile('')}>
             {t('MyProfile')}
           </NavLink>
-          <Button
-            className='logout-btn'
-            text={t('Logout')}
-            type='secondary'
-            outline
-            onClick={logoutUser}
-          />
+          <FloatButton className='logout-btn' theme='secondary' onClick={logoutUser}>
+            {t('Logout')}
+          </FloatButton>
         </>
       )}
       {isMobile && (
-        <Button
-          className='open-sidebar-btn'
-          icon={<MenuIcon title={t('OpenSidebar')} size={36} />}
-          onClick={toggleSidebar}
-          outline
-        />
+        <FloatButton className='open-sidebar-btn' onClick={toggleSidebar}>
+          <MenuIcon title={t('OpenSidebar')} size={36} />
+        </FloatButton>
       )}
     </nav>
   </nav>

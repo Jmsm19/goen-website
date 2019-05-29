@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 import { PoseGroup } from 'react-pose';
 import { useTranslation } from 'react-i18next';
+import { CardBody } from 'shards-react';
 
 import { useAuth } from '../../store/context/AuthContext';
 import { useSettings } from '../../store/context/SettingsContext';
@@ -31,18 +32,14 @@ const RegisterPage = props => {
       {/* Body */}
       <StyledPage className='register-page'>
         <PoseGroup animateOnMount>
-          <StyledRegisterCard key='register-card' className='register-card' fullWidth>
-            {signupSuccess ? <h1>{message}</h1> : <RegisterForm t={t} />}
+          <StyledRegisterCard key='register-card' className='register-card'>
+            <CardBody>
+              {signupSuccess ? <h1>{message}</h1> : <RegisterForm t={t} />}
 
-            <LinkButton
-              to={routes.login}
-              className='to-login-btn'
-              btnProps={{
-                text: t('Login'),
-                type: 'secondary',
-                outline: true,
-              }}
-            />
+              <LinkButton to={routes.login} className='to-login-btn' theme='secondary'>
+                {t('Login')}
+              </LinkButton>
+            </CardBody>
           </StyledRegisterCard>
         </PoseGroup>
       </StyledPage>

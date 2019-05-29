@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from 'shards-react';
 
 import { usePeriods } from '../../../../store/context/PeriodsContext';
 import useLayoutContext from '../../../../hooks/useLayoutContext';
 
-import Button from '../../../../components/UI/Button';
 import PeriodsTable from '../../../../components/Tables/PeriodsTable';
 import PeriodYearSelector from '../../../../components/Selector/PeriodYearSelector';
 import CreatePeriodModal from '../../../../components/Modals/CreatePeriodModal';
@@ -46,13 +46,9 @@ const ManagePeriods = props => {
 
       <section>
         <div className='period-search-area'>
-          <Button
-            type='success'
-            fullWidth={isMobile}
-            iconPosition='start'
-            text={t('Period.Create')}
-            onClick={() => setShowCreatePeriodForm(true)}
-          />
+          <Button theme='success' block={isMobile} onClick={() => setShowCreatePeriodForm(true)}>
+            {t('Period.Create')}
+          </Button>
           {!!periodsArray.length && (
             <div className='period-filter'>
               <p>{t('Filter.ShowOnly')}: </p>

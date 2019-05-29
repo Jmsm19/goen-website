@@ -18,12 +18,10 @@ export const StyledLoginCard = styled(SlideUpCard)`
     max-width: 400px;
 
     .card-img-top {
+      min-height: 160px;
       width: 90%;
       display: block;
-    }
-
-    .card-body {
-      padding-top: 0;
+      margin: 0 auto;
     }
 
     .to-register-btn {

@@ -1,9 +1,9 @@
 import 'jest-dom/extend-expect';
 import React from 'react';
 import { cleanup, render, waitForElement, fireEvent } from 'react-testing-library';
+import { Button } from 'shards-react';
 
 import Card from './index';
-import Button from '../Button';
 
 afterEach(cleanup);
 
@@ -30,7 +30,7 @@ describe('Card', () => {
     const mockOnClick = jest.fn();
     const { getByText } = render(
       <Card>
-        <Button text={btnText} onClick={mockOnClick} />
+        <Button onClick={mockOnClick}>{btnText}</Button>
       </Card>,
     );
 

@@ -5,14 +5,12 @@ import useFormal from '@kevinwolf/formal-web';
 
 import { useAuth } from '../../../store/context/AuthContext';
 
+import PersonalDataSection from './personalDataSection';
+import UserDataSection from './userDataSection';
+
 import { getSignupValidationProps } from '../../../lib/validation/forms';
 
-import {
-  SlideRightPersonalSection,
-  SlideLeftUserSection,
-  FadeInButton,
-  FadeInContainer,
-} from './animations';
+import { FadeInButton, FadeInContainer } from './animations';
 import { StyledRegisterForm, StyledButtonArea } from './styles';
 
 const RegisterForm = ({ t }) => {
@@ -32,34 +30,31 @@ const RegisterForm = ({ t }) => {
       <PoseGroup>
         <FadeInContainer key='container'>
           {activeSection === 'personal' ? (
-            <SlideRightPersonalSection key='personal' t={t} formal={formal} />
+            <PersonalDataSection key='personal' t={t} formal={formal} />
           ) : (
-            <SlideLeftUserSection key='user' t={t} formal={formal} />
+            <UserDataSection key='user' t={t} formal={formal} />
           )}
         </FadeInContainer>
 
         {activeSection === 'personal' ? (
           <StyledButtonArea key='user-btn'>
-            <FadeInButton
-              type='primary'
-              text={t('Next')}
-              onClick={() => setActiveSection('user')}
-            />
+            <FadeInButton theme='primary' onClick={() => setActiveSection('user')}>
+              {t('Next')}
+            </FadeInButton>
           </StyledButtonArea>
         ) : (
           <StyledButtonArea key='personal-btn'>
-            <FadeInButton
-              type='secondary'
-              text={t('Return')}
-              onClick={() => setActiveSection('personal')}
-            />
+            <FadeInButton outline theme='light' onClick={() => setActiveSection('personal')}>
+              {t('Return')}
+            </FadeInButton>
             <FadeInButton
               {...getSubmitButtonProps()}
-              type='primary'
-              text={t('Register')}
+              theme='primary'
               onClick={submit}
-              isLoading={isRegistering}
-            />
+              type='button'
+            >
+              {t('Register')}
+            </FadeInButton>
           </StyledButtonArea>
         )}
       </PoseGroup>

@@ -2,11 +2,12 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { PoseGroup } from 'react-pose';
+import { CardBody, CardImg } from 'shards-react';
 
 import { useSettings } from '../../store/context/SettingsContext';
 
-import LoginForm from './loginForm';
 import LinkButton from '../../components/Navigation/LinkButton';
+import LoginForm from './loginForm';
 
 import routes from '../../lib/config/routes';
 import Logo from '../../assets/images/goen-logo-big.jpg';
@@ -25,20 +26,17 @@ const LoginPage = props => {
       {/* Body */}
       <StyledPage className='login-page'>
         <PoseGroup animateOnMount>
-          <StyledLoginCard key='login-card' className='login-card' image={Logo} fullWidth>
-            <LoginForm t={t} />
+          <StyledLoginCard key='login-card' className='login-card' style={{ maxWidth: 400 }}>
+            <CardBody>
+              <CardImg top src={Logo} style={{ width: '90%' }} />
+              <LoginForm t={t} />
 
-            {userSignupActive && (
-              <LinkButton
-                to={routes.register}
-                className='to-register-btn'
-                btnProps={{
-                  text: t('Register'),
-                  type: 'secondary',
-                  outline: true,
-                }}
-              />
-            )}
+              {userSignupActive && (
+                <LinkButton to={routes.register} theme='secondary' className='to-register-btn'>
+                  {t('Register')}
+                </LinkButton>
+              )}
+            </CardBody>
           </StyledLoginCard>
         </PoseGroup>
       </StyledPage>

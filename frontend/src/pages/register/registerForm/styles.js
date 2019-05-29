@@ -26,7 +26,7 @@ export const StyledButtonArea = styled(FadeInButtonArea)`
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px;
 
   .btn-primary {
     &:disabled {

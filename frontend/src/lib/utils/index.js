@@ -13,6 +13,11 @@ const checkAndCallFn = fn => {
  */
 export const capitalize = (string = '') => string[0].toUpperCase() + string.substr(1);
 
+/**
+ * Calls the provided function or array of functions
+ *
+ * @param {function | function[]} fn
+ */
 export const callFunctions = fn => {
   if (Array.isArray(fn)) {
     fn.map(f => checkAndCallFn(f));

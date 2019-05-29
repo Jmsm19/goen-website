@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useFormal from '@kevinwolf/formal-web';
+import { Button } from 'shards-react';
 
 import { useAuth } from '../../../store/context/AuthContext';
 
 import FormField from '../../../components/Form/Field';
-import Button from '../../../components/UI/Button';
+import LoadingIcon from '../../../components/UI/LoadingIcon';
 
 import { getLoginValidationProps } from '../../../lib/validation/forms';
 
@@ -32,15 +33,9 @@ const LoginForm = ({ t }) => {
         />
       </div>
 
-      <Button
-        {...getSubmitButtonProps()}
-        fullWidth
-        text={t('Enter')}
-        htmlType='submit'
-        type='primary'
-        onClick={submit}
-        isLoading={isLoggingIn}
-      />
+      <Button {...getSubmitButtonProps()} block theme='primary' onClick={submit} type='button'>
+        {isLoggingIn ? <LoadingIcon size={18} style={{ color: '#FFF' }} /> : t('Enter')}
+      </Button>
     </StyledForm>
   );
 };

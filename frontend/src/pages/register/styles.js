@@ -17,7 +17,7 @@ export const StyledRegisterCard = styled(SlideUpCard)`
     position: relative;
     width: 900px;
     max-width: 400px;
-    min-height: 615px;
+    min-height: 576px;
     justify-items: center;
     grid-template-rows: 1fr;
 
@@ -28,7 +28,7 @@ export const StyledRegisterCard = styled(SlideUpCard)`
     .card-body {
       height: 100%;
       display: grid;
-      grid-template-rows: 1fr auto;
+      grid-template-rows: 460px auto;
     }
 
     .to-login-btn {

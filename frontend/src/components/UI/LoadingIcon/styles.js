@@ -5,7 +5,6 @@ const StyledIcon = styled(Spinner)`
   &.spinner {
     display: block;
     margin: 0 auto;
-    margin-bottom: 10px;
     color: var(--primary-color);
 
     animation: 2s linear infinite rotation;

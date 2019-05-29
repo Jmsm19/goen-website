@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import Button from '../../../UI/Button';
+import FloatButton from '../../../UI/FloatButton';
 import Sidebar from '../../../Navigation/Sidebar';
 
 import AdminRoutes from '../../RoutesSections/AdminRoutes';
@@ -40,13 +40,9 @@ const DashboardSidebar = ({ t, isMobile, logoutUser, authUser, isSidebarOpen, to
 
       {/* User Logout btn */}
       {isMobile && (
-        <Button
-          className='logout-btn'
-          text={t('Logout')}
-          type='secondary'
-          onClick={logoutUser}
-          outline
-        />
+        <FloatButton className='logout-btn' theme='secondary' onClick={logoutUser}>
+          {t('Logout')}
+        </FloatButton>
       )}
     </Sidebar>
   );

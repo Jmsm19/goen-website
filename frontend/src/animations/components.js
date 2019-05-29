@@ -1,14 +1,13 @@
-/* eslint-disable import/prefer-default-export */
 import posed from 'react-pose';
 
-// Components
-import Card from '../components/UI/Card';
+import ButtonWithRef from '../forwardRefComponents/ButtonWithRef';
+import CardWithRef from '../forwardRefComponents/CardWithRef';
 
 // Animations
 import { SlideUp, FadeIn } from './index';
 
 // Animated Components
-export const SlideUpCard = posed(Card)(
+export const SlideUpCard = posed(CardWithRef)(
   SlideUp({
     delay: 300,
     beforeChildren: true,
@@ -34,3 +33,4 @@ export const FadeInRouteContainer = posed.div(
 );
 
 export const FadeInSection = posed.section(FadeIn());
+export const FadeInButton = posed(ButtonWithRef)(FadeIn());

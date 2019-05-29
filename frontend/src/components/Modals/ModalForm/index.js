@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import useFormal from '@kevinwolf/formal-web';
 
-import Button from '../../UI/Button';
+import { Button } from 'shards-react';
 
 import StyledForm from './styles';
+import { callFunctions } from '../../../lib/utils';
 
 const ModalForm = ({
   initialValues,
@@ -27,22 +28,12 @@ const ModalForm = ({
       <FormFieldsComponent formalInstance={formal} formType={formType} />
 
       <div className='button-area'>
-        <Button
-          {...getSubmitButtonProps()}
-          type='primary'
-          text={formType === 'create' ? t('Create') : t('Update')}
-          onClick={submit}
-          {...submitBtnProps}
-        />
-        <Button
-          outline
-          type='secondary'
-          text={t('Cancel')}
-          onClick={() => {
-            reset();
-            onCancel();
-          }}
-        />
+        <Button {...getSubmitButtonProps()} theme='primary' onClick={submit} {...submitBtnProps}>
+          {formType === 'create' ? t('Create') : t('Update')}
+        </Button>
+        <Button outline theme='secondary' onClick={() => callFunctions([reset, onCancel])}>
+          {t('Cancel')}
+        </Button>
       </div>
     </StyledForm>
   );

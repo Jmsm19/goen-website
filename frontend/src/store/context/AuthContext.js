@@ -11,6 +11,10 @@ const AuthProvider = props => {
   const initialState = {
     isAuth: !!Cookies.get('token'),
     authUser: null,
+    isLoggingIn: false,
+    isRegistering: false,
+    signupSuccess: false,
+    isRegisteringInModule: false,
   };
 
   const [state, dispatch] = React.useReducer(AuthStateReducer, initialState);

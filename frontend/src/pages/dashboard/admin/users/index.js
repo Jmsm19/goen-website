@@ -5,7 +5,7 @@ import { useUsers } from '../../../../store/context/UsersContext';
 import useDebounce from '../../../../hooks/useDebounce';
 
 import Input from '../../../../components/UI/Input';
-import Button from '../../../../components/UI/Button';
+import FloatButton from '../../../../components/UI/FloatButton';
 import UsersTable from '../../../../components/Tables/UsersTable';
 
 import { filterArrayBy } from '../../../../lib/utils';
@@ -48,13 +48,13 @@ const UsersListPage = props => {
             placeholder={t('Search.ByNationalId')}
             onChange={({ target: { value } }) => setValueToFilter(value)}
           />
-          <Button
-            outline
-            type='primary'
-            text={t('Filter.Clear')}
+          <FloatButton
+            theme='primary'
             onClick={() => setValueToFilter('')}
             disabled={!valueToFilter}
-          />
+          >
+            {t('Filter.Clear')}
+          </FloatButton>
         </div>
 
         <UsersTable users={filteredUsers || usersArray} loading={!allUsersSearched} />

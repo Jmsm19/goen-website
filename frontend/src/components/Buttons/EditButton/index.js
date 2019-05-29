@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Edit } from 'styled-icons/fa-solid/Edit';
 import classnames from 'classnames';
-
-import Button from '../../UI/Button';
+import { Edit } from 'styled-icons/fa-solid/Edit';
+import { Button } from 'shards-react';
 
 const EditButton = ({ onClick, iconSize, className, ...props }) => (
   <Button
-    type='secondary'
-    icon={<Edit size={iconSize} />}
+    theme='secondary'
     className={classnames(['edit-btn', className])}
     onClick={onClick}
     {...props}
-  />
+  >
+    <Edit size={iconSize} />
+  </Button>
 );
 
 EditButton.defaultProps = {

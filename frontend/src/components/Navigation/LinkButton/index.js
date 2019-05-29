@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Button from '../../UI/Button';
+import FloatButton from '../../UI/FloatButton';
 
-const LinkButton = ({ to, btnProps, ...props }) => (
+const LinkButton = ({ to, theme, children, ...props }) => (
   <Link to={to} {...props}>
-    <Button {...btnProps} />
+    <FloatButton theme={theme}>{children}</FloatButton>
   </Link>
 );
 
 LinkButton.propTypes = {
   to: PropTypes.string.isRequired,
-  btnProps: PropTypes.shape({
-    ...Button.propTypes,
-  }).isRequired,
+  theme: FloatButton.propTypes.theme.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default LinkButton;

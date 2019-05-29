@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
-
-import Button from '../../UI/Button';
+import { useTranslation } from 'react-i18next';
+import { Button } from 'shards-react';
 
 import StyledButtonArea from './styles';
 
@@ -11,8 +10,12 @@ const ConfirmationButtonArea = ({ onYes, onNo, className, ...props }) => {
   const { t } = useTranslation();
   return (
     <StyledButtonArea className={classnames(['btn-area', className])} {...props}>
-      <Button type='primary' text={t('Yes')} onClick={onYes} fullWidth />
-      <Button outline type='secondary' text={t('No')} onClick={onNo} fullWidth />
+      <Button theme='primary' onClick={onYes} block>
+        {t('Yes')}
+      </Button>
+      <Button outline theme='secondary' onClick={onNo} block>
+        {t('No')}
+      </Button>
     </StyledButtonArea>
   );
 };
