@@ -46,7 +46,6 @@ export const StyledTable = styled(FadeInTable)`
           white-space: nowrap;
           vertical-align: middle;
           padding: 0.65rem;
-          padding-bottom: 0;
           letter-spacing: 1px;
           text-transform: uppercase;
         }
