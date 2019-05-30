@@ -6,7 +6,6 @@ const StyledContainer = styled.div`
   width: max-content;
 
   .overlay {
-    padding-top: 10px;
     position: absolute;
     top: 0;
     left: 0;

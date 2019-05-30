@@ -11,7 +11,7 @@ const StyledPage = styled.div`
 
   .loading-container {
     display: grid;
-    grid-template-rows: auto 50px;
+    grid-template-rows: auto auto;
 
     .text {
       color: var(--light-black);
