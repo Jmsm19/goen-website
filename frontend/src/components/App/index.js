@@ -7,7 +7,7 @@ import '../../i18n';
 
 import { useSettings } from '../../store/context/SettingsContext';
 import { useAuth } from '../../store/context/AuthContext';
-import { LayoutContextProvider } from '../../store/context/LayoutContext';
+import { LayoutProvider } from '../../store/context/LayoutContext';
 
 import Loading from '../Loading';
 
@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <LayoutContextProvider>
+      <LayoutProvider>
         <BrowserRouter>
           <Suspense fallback={<Loading text='Loading Dashboard...' />}>
             <Switch>
@@ -51,7 +51,7 @@ const App = () => {
         </BrowserRouter>
 
         <ToastContainer hideProgressBar />
-      </LayoutContextProvider>
+      </LayoutProvider>
     </Suspense>
   );
 };

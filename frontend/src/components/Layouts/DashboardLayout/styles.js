@@ -22,9 +22,10 @@ export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} /
       align-items: center;
       justify-content: space-between;
 
-      h1 {
+      .site-title {
         overflow: hidden;
         text-overflow: ellipsis;
+        color: #fff;
       }
 
       .right-nav {

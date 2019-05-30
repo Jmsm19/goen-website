@@ -7,7 +7,7 @@ import { useAuth } from '../../../store/context/AuthContext';
 import { PeriodsProvider } from '../../../store/context/PeriodsContext';
 import { ModulesProvider } from '../../../store/context/ModulesContext';
 import { UsersProvider } from '../../../store/context/UsersContext';
-import useLayoutContext from '../../../hooks/useLayoutContext';
+import { useLayout } from '../../../store/context/LayoutContext';
 
 import Loading from '../../Loading';
 import TopNavigation from './TopNavigation';
@@ -20,7 +20,7 @@ import { StyledLayout } from './styles';
 const DashboardLayout = ({ location }) => {
   const { t } = useTranslation();
   const { isAuth, authUser, logout } = useAuth();
-  const { isMobile } = useLayoutContext();
+  const { isMobile } = useLayout();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

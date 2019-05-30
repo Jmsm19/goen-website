@@ -9,7 +9,7 @@ import { MenuIcon } from '../styles';
 
 const TopNavigation = ({ t, isMobile, toggleSidebar, logoutUser }) => (
   <nav className='top-navigation'>
-    <h1>GOEN Maracaibo</h1>
+    <h1 className='site-title'>GOEN Maracaibo</h1>
 
     <nav className='right-nav'>
       {!isMobile && (

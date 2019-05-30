@@ -7,8 +7,7 @@ import OfflineNotification from '../../components/OfflineNotification';
 
 const LayoutContext = React.createContext();
 
-const LayoutContextProvider = ({ children }) => {
-  // eslint-disable-next-line no-unused-vars
+const LayoutProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
@@ -19,12 +18,7 @@ const LayoutContextProvider = ({ children }) => {
     return () => StopEnquireScreen();
   });
 
-  const state = useMemo(
-    () => ({
-      isMobile,
-    }),
-    [isMobile],
-  );
+  const state = useMemo(() => ({ isMobile }), [isMobile]);
 
   return (
     <LayoutContext.Provider value={state}>
@@ -40,8 +34,18 @@ const LayoutContextProvider = ({ children }) => {
   );
 };
 
-LayoutContextProvider.propTypes = {
+LayoutProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { LayoutContext, LayoutContextProvider };
+const useLayout = () => {
+  const context = React.useContext(LayoutContext);
+
+  if (!context) {
+    throw new Error('useLayout must be used within LayoutProvider');
+  }
+
+  return { ...context };
+};
+
+export { LayoutProvider, useLayout };

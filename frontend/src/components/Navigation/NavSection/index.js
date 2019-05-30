@@ -15,14 +15,14 @@ const NavSection = ({ title, routes, onLinkClick }) => {
   return (
     !!routeLinks.length && (
       <StyledNavSection className='route-section'>
-        <h3 className='section-title'>{title}</h3>
+        <h5 className='section-title'>{title}</h5>
         <nav className='links'>{routeLinks}</nav>
       </StyledNavSection>
     )
   );
 };
 
-NavSection.defaultPRops = {
+NavSection.defaultProps = {
   onLinkClick: () => null,
 };
 

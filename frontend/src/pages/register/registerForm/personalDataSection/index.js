@@ -20,7 +20,6 @@ const PersonalDataSection = forwardRef((props, ref) => {
         inputMode='numeric'
         title={t('NationalId')}
         help={t('NationalIdFormat')}
-        autoFocus={!formal.values.nationalId}
       />
       <FormField
         {...getFieldProps('name')}
@@ -29,6 +28,7 @@ const PersonalDataSection = forwardRef((props, ref) => {
         placeholder={t('Name')}
         title={t('Name')}
         help={t('NameUsedInCertificateWarning')}
+        autocomplete='name'
       />
       <FormField
         {...getFieldProps('birthDate')}
@@ -37,6 +37,7 @@ const PersonalDataSection = forwardRef((props, ref) => {
         placeholder={t('BirthDate')}
         title={t('BirthDate')}
         help={t('BirthDate')}
+        autocomplete='bday'
       />
       <FormField
         {...getFieldProps('phoneNumber')}
@@ -45,6 +46,7 @@ const PersonalDataSection = forwardRef((props, ref) => {
         placeholder={t('PhoneNumber')}
         title={t('PhoneNumber')}
         help={t('PhoneFormat')}
+        autocomplete='tel'
       />
     </StyledSection>
   );

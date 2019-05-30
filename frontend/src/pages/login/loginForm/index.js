@@ -30,6 +30,9 @@ const LoginForm = ({ t }) => {
           name='password'
           type='password'
           placeholder={t('Password')}
+          onKeyPress={({ key }) => {
+            if (key === 'Enter') submit();
+          }}
         />
       </div>
 

@@ -1,15 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledPage = styled.div`
-  h1 {
-    margin-bottom: 1.5rem;
-  }
-`;
-
 export const StyledSection = styled.section`
   margin-bottom: 2.5rem;
 
-  h2 {
+  .section-title {
     margin-bottom: 1rem;
   }
 `;

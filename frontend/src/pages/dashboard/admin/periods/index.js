@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'shards-react';
 
 import { usePeriods } from '../../../../store/context/PeriodsContext';
-import useLayoutContext from '../../../../hooks/useLayoutContext';
+import { useLayout } from '../../../../store/context/LayoutContext';
 
 import PeriodsTable from '../../../../components/Tables/PeriodsTable';
 import PeriodYearSelector from '../../../../components/Selector/PeriodYearSelector';
@@ -15,7 +15,7 @@ import StyledPage from './styles';
 
 const ManagePeriods = props => {
   const { t } = useTranslation();
-  const { isMobile } = useLayoutContext();
+  const { isMobile } = useLayout();
   const { allPeriodsSearched, periods, getAllPeriods, deletePeriod } = usePeriods();
 
   const [showCreatePeriodForm, setShowCreatePeriodForm] = useState(false);

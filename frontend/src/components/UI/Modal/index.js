@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
-import { createPortal } from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
+import { createPortal } from 'react-dom';
 import { PoseGroup } from 'react-pose';
-import { LayoutContext } from '../../../store/context/LayoutContext';
+
+import { useLayout } from '../../../store/context/LayoutContext';
 
 import { FadeInModalContent, SlideUpModal } from './animations';
 import { StyledModal, StyledCloseBtn } from './styles';
@@ -21,12 +21,12 @@ const Modal = props => {
     withCloseButton,
   } = props;
 
-  const { isMobile } = useContext(LayoutContext);
+  const { isMobile } = useLayout();
 
   const keyListenersMap = new Map([[27, onClose]]);
   const modalClassName = classnames('backdrop', className);
 
-  useEffect(() => {
+  React.useEffect(() => {
     function keyListener(e) {
       const listener = keyListenersMap.get(e.keyCode);
       return listener && listener(e);

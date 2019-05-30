@@ -5,6 +5,7 @@ import useFormal from '@kevinwolf/formal-web';
 
 import { useAuth } from '../../../store/context/AuthContext';
 
+import LoadingIcon from '../../../components/UI/LoadingIcon';
 import PersonalDataSection from './personalDataSection';
 import UserDataSection from './userDataSection';
 
@@ -26,7 +27,6 @@ const RegisterForm = ({ t }) => {
     <StyledRegisterForm className='register-form'>
       <p className='form-notice'>{Object.keys(errors).length ? t('CheckForErrors') : ''}</p>
 
-      {/* TODO: Remove SlideIn animation from sections and autofocus from national_id */}
       <PoseGroup>
         <FadeInContainer key='container'>
           {activeSection === 'personal' ? (
@@ -53,7 +53,7 @@ const RegisterForm = ({ t }) => {
               onClick={submit}
               type='button'
             >
-              {t('Register')}
+              {isRegistering ? <LoadingIcon size={18} style={{ color: '#FFF' }} /> : t('Register')}
             </FadeInButton>
           </StyledButtonArea>
         )}

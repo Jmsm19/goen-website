@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Container } from 'shards-react';
 
 import { useAuth } from '../../../store/context/AuthContext';
 import { useSettings } from '../../../store/context/SettingsContext';
@@ -7,7 +8,7 @@ import { useSettings } from '../../../store/context/SettingsContext';
 import Switch from '../../../components/UI/Switch';
 import LanguageSelector from '../../../components/LanguageSelector';
 
-import { StyledSection, StyledPage, StyledSetting } from './styles';
+import { StyledSection, StyledSetting } from './styles';
 
 const SettingsPage = props => {
   const { t } = useTranslation();
@@ -16,13 +17,11 @@ const SettingsPage = props => {
   const { userSignupActive } = settings;
 
   return (
-    <StyledPage className='dashboard-settings'>
-      <h1>{t('Settings')}</h1>
-
+    <Container className='dashboard-settings'>
       {authUser.isAdmin && (
-        <>
-          <StyledSection>
-            <h2>{t('Setting.GlobalSettings')}</h2>
+        <StyledSection>
+          <h3 className='section-title'>{t('Setting.GlobalSettings')}</h3>
+          <Container>
             <StyledSetting>
               <p>{t('Setting.RegistrationsEnabled')}: </p>
               <Switch
@@ -31,18 +30,20 @@ const SettingsPage = props => {
                 onChange={() => updateSetting('userSignupActive', !userSignupActive)}
               />
             </StyledSetting>
-          </StyledSection>
-        </>
+          </Container>
+        </StyledSection>
       )}
 
       <StyledSection>
-        <h2>{t('Setting.UserPreferences')}</h2>
-        <StyledSetting>
-          <p>{t('Setting.Language')}:</p>
-          <LanguageSelector />
-        </StyledSetting>
+        <h3 className='section-title'>{t('Setting.UserPreferences')}</h3>
+        <Container>
+          <StyledSetting>
+            <p>{t('Setting.Language')}:</p>
+            <LanguageSelector />
+          </StyledSetting>
+        </Container>
       </StyledSection>
-    </StyledPage>
+    </Container>
   );
 };
 

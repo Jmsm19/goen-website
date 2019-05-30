@@ -51,10 +51,6 @@ html, body {
   z-index: 1;
 }
 
-a {
-  text-decoration: none;
-}
-
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -86,8 +82,14 @@ a {
 
 
 /* Bootstrap/Shard Components overrides */
-html body #root * {
+html body #root *,
+html body #portal * {
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+html body #root a,
+html body #portal a {
+  text-decoration: none;
 }
 
 .btn {
@@ -95,6 +97,7 @@ html body #root * {
   letter-spacing: 0.15em;
 }
 
+/* Primary btn */
 .btn.btn-primary {
   border-color: var(--light-obscure-primary-color);
   background-color: var(--light-obscure-primary-color);
@@ -105,17 +108,43 @@ html body #root * {
               0 4px 10px rgba(191, 26, 33,  0.25);
 }
 
-.btn.btn-primary:focus {
-  box-shadow: 0 0 0 3px rgba(191, 26, 33,  0.15),
-              0 3px 15px rgba(191, 26, 33,  0.2),
-              0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.btn.btn-primary:active:not(:disabled) {
+.btn.btn-primary:active:not(:disabled),
+.btn.btn-primary.active:not(:disabled) {
   border-color: var(--primary-color);
   background-color: var(--primary-color);
 }
 
-.btn.btn-primary:disabled {
+/* Primary outline btn */
+
+.btn.btn-outline-primary {
+  color: var(--light-obscure-primary-color);
+  border-color: var(--light-obscure-primary-color);
+}
+
+.btn.btn-outline-primary:hover {
+  color: #FFF;
+  border-color: var(--light-obscure-primary-color);
+  background-color: var(--light-obscure-primary-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05),
+              0 4px 10px rgba(191, 26, 33,  0.25);
+}
+
+.btn.btn-outline-primary:active:not(:disabled),
+.btn.btn-outline-primary.active:not(:disabled) {
+  color: #FFF;
+  border-color: var(--light-obscure-primary-color);
+  background-color: var(--light-obscure-primary-color);
+}
+
+/* Primary btn and primary outline btn */
+.btn.btn-primary.focus, .btn.btn-primary:focus,
+.btn-outline-primary.focus, .btn-outline-primary:focus {
+  box-shadow: 0 0 0 3px rgba(191, 26, 33,  0.15),
+              0 3px 15px rgba(191, 26, 33,  0.2),
+              0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn.btn-primary:disabled,
+.btn.btn-outline-primary:disabled {
   opacity: 0.65;
 }
