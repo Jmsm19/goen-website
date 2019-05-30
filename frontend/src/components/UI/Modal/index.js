@@ -46,15 +46,15 @@ const Modal = props => {
         aria-modal='true'
         onClick={onClose}
       >
-        <SlideUpModal className='modal' onClick={e => e.stopPropagation()}>
+        <SlideUpModal className='portal-modal' onClick={e => e.stopPropagation()}>
           {/* Close Btn */}
           {withCloseButton && <StyledCloseBtn size={40} className='close-btn' onClick={onClose} />}
           {/* Header */}
-          <div className='modal-header'>{title || headerContent}</div>
+          <div className='portal-modal-header'>{title || headerContent}</div>
           {/* Content */}
-          <FadeInModalContent className='modal-content'>{children}</FadeInModalContent>
+          <FadeInModalContent className='portal-modal-content'>{children}</FadeInModalContent>
           {/* Footer */}
-          {footerContent && <div className='modal-footer'>{footerContent}</div>}
+          {footerContent && <div className='portal-modal-footer'>{footerContent}</div>}
         </SlideUpModal>
       </StyledModal>
     </PoseGroup>

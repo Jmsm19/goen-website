@@ -18,7 +18,7 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
     align-items: center;
     background-color: rgba(67, 67, 67, 0.7);
 
-    .modal {
+    .portal-modal {
       z-index: 1;
       position: relative;
       background: #fff;
@@ -38,17 +38,17 @@ export const StyledModal = styled(({ isMobile, ...props }) => <FadeInBackdrop {.
         'footer';
       grid-template-rows: 50px 1fr auto;
 
-      .modal-header {
+      .portal-modal-header {
         grid-area: 'header';
         padding: 1rem;
       }
-      .modal-content {
+      .portal-modal-content {
         grid-area: 'content';
         padding: ${({ isMobile }) => (isMobile ? '1rem' : '1.5rem')};
         padding-top: 0;
         overflow-y: auto;
       }
-      .modal-footer {
+      .portal-modal-footer {
         grid-area: 'footer';
         padding: 1rem;
       }
