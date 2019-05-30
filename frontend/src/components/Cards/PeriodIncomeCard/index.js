@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { Card, CardBody, CardTitle } from 'shards-react';
 
 import { useModules } from '../../../store/context/ModulesContext';
-
-import Card from '../../UI/Card';
 
 import { getActualIncome } from '../../Period/PeriodDetails/fns';
 import { formatPrice } from '../../../lib/utils';
@@ -19,8 +18,11 @@ const PeriodIncomeCard = ({ modules }) => {
   }, [modules, students]);
 
   return (
-    <Card title={t('Period.CurrentIncome')} fullWidth>
-      <p>{income}</p>
+    <Card>
+      <CardBody>
+        <CardTitle>{t('Period.CurrentIncome')}</CardTitle>
+        <p>{income}</p>
+      </CardBody>
     </Card>
   );
 };

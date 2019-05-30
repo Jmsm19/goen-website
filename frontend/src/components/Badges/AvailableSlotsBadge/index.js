@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-
-import Badge from '../../UI/Badge';
+import { Badge } from 'shards-react';
 
 const AvailableSlotsBadge = ({ module }) => {
   const { t } = useTranslation();
@@ -10,7 +9,7 @@ const AvailableSlotsBadge = ({ module }) => {
   const isFilled = availableSlots === 0;
 
   return (
-    <Badge type={isFilled ? 'primary' : 'info'}>
+    <Badge theme={isFilled ? 'danger' : 'dark'}>
       {isFilled ? t('Module.Filled') : t('Module.AvailableSlots', { count: availableSlots })}
     </Badge>
   );

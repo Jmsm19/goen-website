@@ -6,6 +6,7 @@ import { Button } from 'shards-react';
 
 const EditButton = ({ onClick, iconSize, className, ...props }) => (
   <Button
+    outline
     theme='secondary'
     className={classnames(['edit-btn', className])}
     onClick={onClick}

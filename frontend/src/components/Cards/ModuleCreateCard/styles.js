@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import Card from '../../UI/Card';
+import { Card } from 'shards-react';
 
 const StyledCard = styled(Card)`
   &.card {
@@ -25,6 +24,17 @@ const StyledCard = styled(Card)`
 
         color: var(--success-color);
         font-size: 1.4rem;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      border-color: #129857;
+      transition: border-color 300ms ease;
+
+      .create-message {
+        transition: color 300ms ease;
+        color: #129857;
       }
     }
   }

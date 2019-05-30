@@ -72,16 +72,6 @@ export const StyledHeaderSection = styled(PeriodDetailsHeader)`
         color: #fff;
         opacity: 0.85;
       }
-
-      &.period-open {
-        background-color: var(--info-color);
-        border-color: var(--info-color);
-      }
-
-      &.period-closed {
-        background-color: var(--danger-color);
-        border-color: var(--danger-color);
-      }
     }
   }
 `;
@@ -102,19 +92,10 @@ export const StyledModulesSection = styled(PeriodDetailsModules)`
 export const StyledSummarySection = styled(SummarySection)`
   &.summary-section {
     grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
-    grid-gap: 10px 0;
+    grid-gap: 10px;
 
     .card {
-      background-color: transparent;
-      border: none;
-
-      &:not(:last-child) {
-        /* margin-bottom: 10px; */
-      }
-
-      .card-body {
-        padding: 0;
-      }
+      box-shadow: var(--drop-shadow);
     }
   }
 `;

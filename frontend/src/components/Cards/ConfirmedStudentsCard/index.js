@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { Card, CardBody, CardTitle } from 'shards-react';
 
 import { useModules } from '../../../store/context/ModulesContext';
-
-import Card from '../../UI/Card';
 
 import { getTotalStudents, getTotalRegisteredStudents } from '../../Period/PeriodDetails/fns';
 
@@ -24,10 +23,13 @@ const ConfirmedStudentsCard = ({ modules }) => {
   ]);
 
   return (
-    <Card title={t('Student.ConfirmedStudents')} fullWidth>
-      <p>
-        {totalRegisteredStudents} / {totalStudents}
-      </p>
+    <Card>
+      <CardBody>
+        <CardTitle>{t('Student.ConfirmedStudents')}</CardTitle>
+        <p>
+          {totalRegisteredStudents} / {totalStudents}
+        </p>
+      </CardBody>
     </Card>
   );
 };

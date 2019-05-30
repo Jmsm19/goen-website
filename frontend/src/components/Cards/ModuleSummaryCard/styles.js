@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import Card from '../../UI/Card';
+import { Card } from 'shards-react';
 
 const StyledCard = styled(Card)`
   &.card {
     position: relative;
-    box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+    border: 1px solid transparent;
+    /* box-shadow: var(--drop-shadow); */
 
     &:hover {
-      border-color: var(--light-primary-color);
+      cursor: pointer;
+      border: 1px solid var(--light-primary-color);
       transition: all 150ms ease;
 
       .card-title {
@@ -17,8 +19,10 @@ const StyledCard = styled(Card)`
     }
 
     .badge {
+      font-size: 0.9rem;
+      padding: 8px;
       position: absolute;
-      top: -16px;
+      top: -18px;
       right: 8px;
     }
   }

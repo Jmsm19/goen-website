@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GetData, SendData } from '../../lib/utils/http';
+
+import useEffectOnce from '../useEffectOnce';
 
 /**
  * Hook to perform http requests using Axios
@@ -37,7 +39,7 @@ const useAxios = (url, config = { method: 'GET', body: {} }) => {
     }
   };
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (method.trim().toLocaleLowerCase() === 'get') {
       GetData(url)
         .then(handleResponse)
@@ -47,7 +49,7 @@ const useAxios = (url, config = { method: 'GET', body: {} }) => {
         .then(handleResponse)
         .catch(handleResponse);
     }
-  }, [body, method, url]);
+  });
 
   return [isRequesting, response];
 };

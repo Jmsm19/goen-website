@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { isWithinRange } from 'date-fns';
-import classnames from 'classnames';
+import { Card, CardBody, CardTitle } from 'shards-react';
 
 import { useAuth } from '../../../../store/context/AuthContext';
 
-import Card from '../../../UI/Card';
 import PeriodName from '../../PeriodName';
 import UpdatesButtonArea from '../../../Buttons/UpdatesButtonArea';
 
@@ -37,22 +37,20 @@ const PeriodDetailsHeader = ({ period, deletePeriod, updatePeriod, className, ..
       </div>
 
       {authUser.isAdmin && (
-        <Card
-          fullWidth
-          withShadow
-          title={t(isCurrentPeriod ? 'Period.Active' : 'Period.Over')}
-          className={isCurrentPeriod ? 'period-open' : 'period-closed'}
-        >
-          {isCurrentPeriod && (
-            <>
-              <p>
-                {isRegistrationOpen
-                  ? t('Period.RegistrationsOpenUntil')
-                  : t('Period.RegistrationsClosed')}
-              </p>
-              {isRegistrationOpen && <p>{localizeDate(period.signupUntil, i18n.language)}</p>}
-            </>
-          )}
+        <Card theme={isCurrentPeriod ? 'success' : 'danger'}>
+          <CardBody>
+            <CardTitle>{t(isCurrentPeriod ? 'Period.Active' : 'Period.Over')}</CardTitle>
+            {isCurrentPeriod && (
+              <>
+                <p>
+                  {isRegistrationOpen
+                    ? t('Period.RegistrationsOpenUntil')
+                    : t('Period.RegistrationsClosed')}
+                </p>
+                {isRegistrationOpen && <p>{localizeDate(period.signupUntil, i18n.language)}</p>}
+              </>
+            )}
+          </CardBody>
         </Card>
       )}
     </section>

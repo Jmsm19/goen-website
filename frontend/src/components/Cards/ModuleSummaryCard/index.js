@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { CardBody, CardTitle } from 'shards-react';
 
 import PendingPaymentsBadge from '../../Badges/PendingPaymentsBadge';
 
@@ -21,15 +22,18 @@ const ModuleSummaryCard = ({
   const handleClick = () => onClick(module);
 
   return (
-    <StyledCard title={module.fullName} hoverable fullWidth onClick={handleClick} {...props}>
+    <StyledCard onClick={handleClick} {...props}>
       {showPendingPayments && !showAvailableSlots && <PendingPaymentsBadge module={module} />}
 
       {showAvailableSlots && !showPendingPayments && <AvailableSlotsBadge module={module} />}
 
-      <p>{t(schedule.day)}</p>
-      <p>
-        {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
-      </p>
+      <CardBody>
+        <CardTitle>{module.fullName}</CardTitle>
+        <p>{t(schedule.day)}</p>
+        <p>
+          {formatHoursFromDB(schedule.from)} - {formatHoursFromDB(schedule.until)}
+        </p>
+      </CardBody>
     </StyledCard>
   );
 };
