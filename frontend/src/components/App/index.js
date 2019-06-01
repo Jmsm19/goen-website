@@ -1,7 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 
 import '../../i18n';
 
@@ -49,8 +47,6 @@ const App = () => {
             </Switch>
           </Suspense>
         </BrowserRouter>
-
-        <ToastContainer hideProgressBar />
       </LayoutContextProvider>
     </Suspense>
   );

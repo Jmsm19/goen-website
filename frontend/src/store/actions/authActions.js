@@ -1,10 +1,10 @@
 import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
 
 import actionTypes from '../types';
 import { SendData, GetData } from '../../lib/utils/http';
+import { generateSnackbarConfig } from '../../lib/utils';
 
-export const LoginUser = async (loginData, dispatch) => {
+export const LoginUser = async (loginData, { dispatch, enqueueSnackbar }) => {
   dispatch({ type: actionTypes.AUTH_LOGIN });
 
   try {
@@ -18,7 +18,7 @@ export const LoginUser = async (loginData, dispatch) => {
     dispatch({ type: actionTypes.AUTH_LOGIN_SUCCESS });
   } catch ({ response }) {
     if (response.status === 401) {
-      toast.error(response.statusText);
+      enqueueSnackbar(response.statusText, generateSnackbarConfig('error'));
     }
 
     dispatch({
@@ -28,7 +28,7 @@ export const LoginUser = async (loginData, dispatch) => {
   }
 };
 
-export const RegisterUser = async (userData, dispatch) => {
+export const RegisterUser = async (userData, { dispatch, enqueueSnackbar }) => {
   dispatch({ type: actionTypes.AUTH_REGISTER });
 
   try {
@@ -42,7 +42,7 @@ export const RegisterUser = async (userData, dispatch) => {
     });
   } catch ({ response }) {
     if (response.status === 401) {
-      toast.error(response.data.error);
+      enqueueSnackbar(response.data.error, generateSnackbarConfig('error'));
     }
 
     dispatch({
@@ -52,7 +52,7 @@ export const RegisterUser = async (userData, dispatch) => {
   }
 };
 
-export const GetAuthUser = async dispatch => {
+export const GetAuthUser = async ({ dispatch }) => {
   try {
     const { data } = await GetData('auth/user');
 
@@ -73,7 +73,7 @@ export const GetAuthUser = async dispatch => {
   }
 };
 
-export const LogoutUser = async dispatch => {
+export const LogoutUser = async ({ dispatch }) => {
   try {
     await SendData('POST', 'auth/logout');
     Cookies.remove('token');
@@ -84,17 +84,17 @@ export const LogoutUser = async dispatch => {
   }
 };
 
-export const RegisterInModule = async (moduleId, { dispatch }) => {
+export const RegisterInModule = async (moduleId, { dispatch, enqueueSnackbar }) => {
   dispatch({ type: actionTypes.REGISTER_IN_MODULE });
 
   try {
     const { data } = await SendData('POST', `/modules/${moduleId}/register`, { id: moduleId });
     dispatch({ type: actionTypes.REGISTER_IN_MODULE_SUCCESS });
-    toast.success(data.message);
+    enqueueSnackbar(data.message, generateSnackbarConfig('success'));
   } catch ({ response: { data } }) {
     dispatch({ type: actionTypes.REGISTER_IN_MODULE_FAILED });
     if (data.message) {
-      toast.error(data.message);
+      enqueueSnackbar(data.message, generateSnackbarConfig('error'));
     }
   }
 };

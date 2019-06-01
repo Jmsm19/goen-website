@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 
 import { useAuth } from './AuthContext';
 import PeriodReducer from '../reducers/periodReducer';
@@ -36,13 +37,14 @@ const PeriodsProvider = props => {
 const usePeriods = () => {
   const { t } = useTranslation();
   const context = React.useContext(PeriodsContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   if (!context) {
     throw new Error('useInstructor must be used within PeriodsProvider');
   }
 
   const { dispatch, state } = context;
-  const helpers = { t, dispatch };
+  const helpers = { t, dispatch, enqueueSnackbar };
 
   const actions = {
     getActivePeriod: () => PA.GetActivePeriod(dispatch),

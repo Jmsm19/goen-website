@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Switch } from '@material-ui/core';
 
 import { useAuth } from '../../../store/context/AuthContext';
 import { useSettings } from '../../../store/context/SettingsContext';
 
-import Switch from '../../../components/UI/Switch';
 import LanguageSelector from '../../../components/LanguageSelector';
 
 import { StyledSection, StyledPage, StyledSetting } from './styles';
@@ -26,7 +26,8 @@ const SettingsPage = props => {
             <StyledSetting>
               <p>{t('Setting.RegistrationsEnabled')}: </p>
               <Switch
-                enabled={userSignupActive}
+                checked={userSignupActive}
+                color='primary'
                 className='user-signup-switch'
                 onChange={() => updateSetting('userSignupActive', !userSignupActive)}
               />

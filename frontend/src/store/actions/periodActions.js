@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import actionTypes from '../types';
 import { GetData, SendData } from '../../lib/utils/http';
 import {
@@ -7,6 +5,7 @@ import {
   createMap,
   createDictionaryItem,
   callFunctions,
+  generateSnackbarConfig,
 } from '../../lib/utils';
 
 export const GetActivePeriod = async dispatch => {
@@ -58,10 +57,13 @@ export const GetAllPeriods = async ({ dispatch }) => {
   }
 };
 
-export const CreatePeriod = async (periodData, { dispatch, t }, cb) => {
+export const CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('POST', 'periods', periodData);
-    callFunctions([() => toast.success(t('Period.Created')), cb]);
+    callFunctions([
+      () => enqueueSnackbar(t('Period.Created'), generateSnackbarConfig('success')),
+      cb,
+    ]);
     dispatch({
       type: actionTypes.CREATE_PERIOD,
       payload: {
@@ -73,10 +75,13 @@ export const CreatePeriod = async (periodData, { dispatch, t }, cb) => {
   }
 };
 
-export const UpdatePeriod = async (id, periodData, { dispatch, t }, cb) => {
+export const UpdatePeriod = async (id, periodData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('PUT', `periods/${id}`, periodData);
-    callFunctions([() => toast.success(t('Period.Updated')), cb]);
+    callFunctions([
+      () => enqueueSnackbar(t('Period.Updated'), generateSnackbarConfig('success')),
+      cb,
+    ]);
     dispatch({
       type: actionTypes.UPDATE_PERIOD,
       payload: {
@@ -88,10 +93,10 @@ export const UpdatePeriod = async (id, periodData, { dispatch, t }, cb) => {
   }
 };
 
-export const DeletePeriod = async (id, { dispatch }) => {
+export const DeletePeriod = async (id, { dispatch, enqueueSnackbar }) => {
   try {
     const { data } = await SendData('DELETE', `periods/${id}`);
-    toast.success(data.message);
+    enqueueSnackbar(data.message, generateSnackbarConfig('success'));
     dispatch({
       type: actionTypes.DELETE_PERIOD,
       payload: {

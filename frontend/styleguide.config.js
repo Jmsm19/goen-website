@@ -23,7 +23,8 @@ module.exports = {
     <html>
       <head>
         <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
+
         <style>
         *, *::before, *::after {
           margin: 0;
@@ -58,7 +59,7 @@ module.exports = {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
-          font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+          font-family: font-family: 'Roboto', sans-serif;
         }
       </style>
       ${generateCSSReferences(css, publicPath)}

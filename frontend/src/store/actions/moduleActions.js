@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import actionTypes from '../types';
 import { GetData, SendData } from '../../lib/utils/http';
 import {
@@ -7,6 +5,7 @@ import {
   createMap,
   createDictionaryItem,
   callFunctions,
+  generateSnackbarConfig,
 } from '../../lib/utils';
 
 export const GetModule = async (id, dispatch) => {
@@ -43,10 +42,10 @@ export const GetAllModules = async dispatch => {
   }
 };
 
-export const CreateModule = async (moduleData, { t, dispatch }, cb) => {
+export const CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('POST', 'modules', moduleData);
-    toast.success(t('Module.Created'));
+    enqueueSnackbar(t('Module.Created'), generateSnackbarConfig('success'));
 
     callFunctions(cb);
 
@@ -75,10 +74,10 @@ export const GetAllSchedules = async ({ dispatch }) => {
   }
 };
 
-export const UpdateModule = async (id, moduleData, { dispatch, t }, cb) => {
+export const UpdateModule = async (id, moduleData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('PUT', `modules/${id}`, moduleData);
-    toast.success(t('Module.Updated'));
+    enqueueSnackbar(t('Module.Updated'), generateSnackbarConfig('success'));
     callFunctions(cb);
     dispatch({
       type: actionTypes.UPDATE_MODULE,
@@ -91,10 +90,10 @@ export const UpdateModule = async (id, moduleData, { dispatch, t }, cb) => {
   }
 };
 
-export const DeleteModule = async (id, { dispatch }, cb) => {
+export const DeleteModule = async (id, { dispatch, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('DELETE', `modules/${id}`);
-    toast.success(data.message);
+    enqueueSnackbar(data.message, generateSnackbarConfig('success'));
     callFunctions(cb);
 
     dispatch({

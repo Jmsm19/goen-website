@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookies from 'js-cookie';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 
 import AuthStateReducer from '../reducers/authReducer';
 import * as AA from '../actions/authActions';
@@ -23,19 +24,20 @@ const AuthProvider = props => {
 const useAuth = () => {
   const { t } = useTranslation();
   const context = React.useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   if (!context) {
     throw new Error('useAuth must be used within AuthProvider');
   }
 
   const { dispatch, state } = context;
-  const helpers = { t, dispatch };
+  const helpers = { t, dispatch, enqueueSnackbar };
 
   const actions = {
-    login: loginData => AA.LoginUser(loginData, dispatch),
-    register: userData => AA.RegisterUser(userData, dispatch),
-    logout: () => AA.LogoutUser(dispatch),
-    getAuthUser: () => AA.GetAuthUser(dispatch),
+    login: loginData => AA.LoginUser(loginData, helpers),
+    register: userData => AA.RegisterUser(userData, helpers),
+    logout: () => AA.LogoutUser(helpers),
+    getAuthUser: () => AA.GetAuthUser(helpers),
     registerInModule: id => AA.RegisterInModule(id, helpers),
   };
 

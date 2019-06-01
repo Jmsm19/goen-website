@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 
 import ModuleReducer from '../reducers/moduleReducer';
 import * as MA from '../actions/moduleActions';
@@ -30,13 +31,14 @@ const ModulesProvider = props => {
 const useModules = () => {
   const { t } = useTranslation();
   const context = React.useContext(ModulesContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   if (!context) {
     throw new Error('useModules must be used within ModulesProvider');
   }
 
   const { dispatch, state } = context;
-  const helpers = { t, dispatch };
+  const helpers = { t, dispatch, enqueueSnackbar };
 
   const actions = {
     getAllModules: () => MA.GetAllModules(dispatch),

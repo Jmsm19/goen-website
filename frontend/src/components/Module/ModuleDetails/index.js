@@ -61,7 +61,7 @@ const ModuleDetails = ({ module, deselectModule }) => {
         <FadeInSection className='students-section'>
           <h2>{t('Student._plural')}</h2>
 
-          <StudentsTable students={moduleStudents} withGradeForModule={module.id} />
+          <StudentsTable students={moduleStudents} withGrade moduleId={module.id} />
         </FadeInSection>
       </StyledContainer>
 

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Detector as ConnectivityDetector } from 'react-detect-offline';
 
@@ -8,30 +8,22 @@ import OfflineNotification from '../../components/OfflineNotification';
 const LayoutContext = React.createContext();
 
 const LayoutContextProvider = ({ children }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  useLayoutEffect(() => {
-    enquireScreen(isMob => {
-      setIsMobile(!!isMob);
-    });
+  React.useLayoutEffect(() => {
+    enquireScreen(isMob => setIsMobile(!!isMob));
 
     return () => StopEnquireScreen();
   });
 
-  const state = useMemo(
-    () => ({
-      isMobile,
-    }),
-    [isMobile],
-  );
+  const state = React.useMemo(() => ({ isMobile }), [isMobile]);
 
   return (
     <LayoutContext.Provider value={state}>
       <ConnectivityDetector
         render={({ online }) => (
           <>
-            <OfflineNotification isOnline={online} isMobile={isMobile} />
+            <OfflineNotification isOnline={online} />
             {children}
           </>
         )}

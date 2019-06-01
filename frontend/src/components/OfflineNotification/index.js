@@ -1,43 +1,50 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Alert as Warning } from 'styled-icons/octicons/Alert';
-import { toast, Flip } from 'react-toastify';
-import styled from 'styled-components';
+import { useSnackbar } from 'notistack';
 
-const StyledAlertIcon = styled(Warning)`
-  color: yellow;
-  opacity: 0.8;
-  vertical-align: middle;
-`;
+import usePreviousValue from '../../hooks/usePreviousValue';
+import { generateSnackbarConfig } from '../../lib/utils';
 
-const OfflineNotification = ({ isOnline, isMobile }) => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+const OfflineNotification = ({ isOnline }) => {
+  const { t, i18n } = useTranslation();
+  const [key, setKey] = React.useState(undefined);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const notificationId = 'NoInternetConnection';
+  const { language } = i18n;
+  const previousLanguage = usePreviousValue(language);
+  const isLanguageDifferent = previousLanguage !== language;
 
-  useEffect(() => {
-    if (!isOnline) {
-      toast.error(
-        <>
-          <StyledAlertIcon size={24} /> {t('CheckInternetConnection')}
-        </>,
-        {
-          autoClose: false,
-          toastId: notificationId,
-          closeButton: false,
-          closeOnClick: true,
-          position: isMobile ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-          transition: Flip,
-        },
-      );
-    } else if (toast.isActive(notificationId)) {
-      toast.dismiss(notificationId);
+  const handleSnackbarClose = React.useCallback(
+    snackbarKey => {
+      closeSnackbar(snackbarKey);
+      setKey(undefined);
+    },
+    [closeSnackbar],
+  );
+
+  const snackbarConfig = React.useMemo(
+    () =>
+      generateSnackbarConfig('warning', null, null, {
+        persist: true,
+        preventDuplicate: true,
+      }),
+    [],
+  );
+
+  React.useEffect(() => {
+    if (isOnline && !!key) {
+      handleSnackbarClose(key);
     }
-  }, [isMobile, isOnline, language, t]);
+
+    if ((!isOnline && !key) || (!isOnline && key && isLanguageDifferent)) {
+      if (isLanguageDifferent && key) {
+        handleSnackbarClose(key);
+      }
+
+      setKey(enqueueSnackbar(t('CheckInternetConnection'), snackbarConfig));
+    }
+  }, [enqueueSnackbar, handleSnackbarClose, isLanguageDifferent, isOnline, key, snackbarConfig, t]);
 
   return null;
 };

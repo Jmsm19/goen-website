@@ -157,3 +157,15 @@ export const filterModulesByNumber = (modules = [], min = 0, max = 0) => {
   }
   return filteredModules;
 };
+
+export const generateSnackbarConfig = (variant, horizontal, vertical, extraOptions = {}) => ({
+  variant,
+  anchorOrigin: {
+    horizontal: horizontal || 'center',
+    vertical: vertical || 'top',
+  },
+  ...extraOptions,
+});
+
+// persist: true,
+// preventDuplicate: true,
