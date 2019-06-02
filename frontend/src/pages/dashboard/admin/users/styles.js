@@ -1,39 +1,39 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledPage = styled.div`
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 93%;
-  grid-gap: 1rem;
+const StyledPage = styled('div')({
+  height: '100%',
+  display: 'grid',
+  gridTemplateRows: 'auto 93%',
+  gridGap: '1rem',
 
-  section {
-    display: grid;
-    align-items: flex-start;
-  }
+  '& section': {
+    display: 'grid',
+    alignItems: 'flex-start',
+  },
 
-  .table-wrapper {
-    height: 100%;
-    max-height: 73vh;
-  }
+  '& .table-wrapper': {
+    height: '100%',
+    maxHeight: '73vh',
+  },
 
-  .users-section {
-    grid-template-rows: auto 1fr;
-    grid-gap: 1rem;
+  '& .users-section': {
+    gridTemplateRows: 'auto 1fr',
+    gridGap: '1rem',
 
-    .users-search-area {
-      display: flex;
-      justify-items: space-between;
+    '& .users-search-area': {
+      display: 'flex',
+      justifyItems: 'space-between',
 
-      input {
-        margin-right: 10px;
+      '& input': {
+        marginRight: '10px',
 
-        & + .btn {
-          font-size: 0.8rem;
-          padding: 0.625rem;
-        }
-      }
-    }
-  }
-`;
+        '& + .btn': {
+          fontSize: '0.8rem',
+          padding: '0.625rem',
+        },
+      },
+    },
+  },
+});
 
 export default StyledPage;

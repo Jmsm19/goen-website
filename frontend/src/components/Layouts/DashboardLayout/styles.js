@@ -1,105 +1,105 @@
-import React from 'react';
-import styled from 'styled-components';
+import { styled, makeStyles } from '@material-ui/styles';
 import { Menu } from 'styled-icons/material/Menu';
 
-export const StyledLayout = styled(({ isMobile, ...props }) => <div {...props} />)`
-  &.dashboard-layout {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
+export const useLayoutStyles = makeStyles({
+  root: ({ isMobile }) => ({
+    '&.dashboard-layout': {
+      position: 'relative',
+      height: '100vh',
+      width: '100vw',
 
-    display: grid;
-    grid-template-rows: 70px 1fr;
+      display: 'grid',
+      gridTemplateRows: '70px 1fr',
 
-    .top-navigation {
-      width: 100%;
+      '& .top-navigation': {
+        width: '100%',
 
-      color: #fff;
-      background-color: var(--primary-color);
-      padding: 15px 10px;
+        color: '#fff',
+        backgroundColor: 'var(--primary-color)',
+        padding: '15px 10px',
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
 
-      h1 {
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+        '& h1': {
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        },
 
-      .right-nav {
-        display: flex;
-        flex-direction: row;
-        justify-items: flex-end;
-        align-items: center;
+        '& .right-nav': {
+          display: 'flex',
+          flexDirection: 'row',
+          justifyItems: 'flex-end',
+          alignItems: 'center',
 
-        .open-sidebar-btn,
-        .logout-btn {
-          letter-spacing: normal;
-        }
+          '& .open-sidebar-btn, & .logout-btn': {
+            letterSpacing: 'normal',
+          },
 
-        .open-sidebar-btn {
-          border: none;
-          padding: 10px;
+          '& .open-sidebar-btn': {
+            border: 'none',
+            padding: 10,
 
-          &:hover {
-            background-color: transparent;
-            transform: none;
-            box-shadow: none;
-          }
-        }
+            '&:hover': {
+              backgroundColor: 'transparent',
+              transform: 'none',
+              boxShadow: 'none',
+            },
+          },
 
-        .logout-btn {
-          font-weight: 400;
-          color: rgba(255, 255, 255, 0.7);
+          '& .logout-btn': {
+            fontWeight: 400,
+            color: 'rgba(255, 255, 255, 0.7)',
 
-          &:hover {
-            transform: none;
-            box-shadow: none;
-            color: #fff;
-          }
+            '&:hover': {
+              transform: 'none',
+              boxShadow: 'none',
+              color: '#fff',
+            },
 
-          &:not(:last-child) {
-            margin-right: 10px;
-          }
-        }
+            '&:not(:last-child)': {
+              marginRight: 10,
+            },
+          },
 
-        a {
-          color: rgba(255, 255, 255, 0.7);
-          padding: 15px;
+          '& a': {
+            color: 'rgba(255, 255, 255, 0.7)',
+            padding: 15,
 
-          &:not(:last-child) {
-            display: block;
-            margin-right: 10px;
-          }
+            '&:not(:last-child)': {
+              display: 'block',
+              marginRight: 10,
+            },
 
-          &.active {
-            color: #fff;
-            font-weight: 600;
-          }
+            '&.active': {
+              color: '#fff',
+              fontWeight: 600,
+            },
 
-          &:hover {
-            color: #fff;
-          }
-        }
-      }
-    }
+            '&:hover': {
+              color: '#fff',
+            },
+          },
+        },
+      },
 
-    .inner-layout {
-      display: grid;
-      grid-template-columns: ${({ isMobile }) => (isMobile ? '1fr' : '240px 1fr')};
-      overflow-y: auto;
-    }
+      '& .inner-layout': {
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '240px 1fr',
+        overflowY: 'auto',
+      },
 
-    .main-content {
-      padding: 15px;
-      overflow-y: auto;
-      width: 100%;
-    }
-  }
-`;
+      '& .main-content': {
+        padding: 15,
+        overflowY: 'auto',
+        width: '100%',
+      },
+    },
+  }),
+});
 
-export const MenuIcon = styled(Menu)`
-  color: #fff;
-  font-weight: bold;
-`;
+export const MenuIcon = styled(Menu)({
+  color: '#fff',
+  fontWeight: 'bold',
+});

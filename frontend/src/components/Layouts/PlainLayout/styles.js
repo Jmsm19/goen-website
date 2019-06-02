@@ -1,40 +1,41 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/core';
 
-const StyledLayout = styled.div`
-  &.layout {
-    position: relative;
-    z-index: 0;
-    height: 100%;
-    background-color: var(--primary-color);
+const StyledLayout = styled('div')({
+  '&.layout': {
+    position: 'relative',
+    zIndex: 0,
+    height: '100%',
+    backgroundColor: 'var(--primary-color)',
 
-    display: grid;
-    grid-template:
+    display: 'grid',
+    gridTemplate: `
       'main' 1fr
-      'footer' auto;
+      'footer' auto
+    `,
 
-    &:after {
-      content: ' ';
-      z-index: -1;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: #232323;
-      clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 60%);
-    }
+    '&::after': {
+      content: `' '`,
+      zIndex: -1,
+      height: '100%',
+      width: '100%',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      backgroundColor: '#232323',
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 30%, 0% 60%)',
+    },
 
-    main {
-      grid-area: 'main';
-    }
+    '& main:': {
+      gridArea: 'main',
+    },
 
-    footer {
-      color: #fff;
-      grid-area: 'footer';
-      text-align: center;
-      padding: 30px;
-    }
-  }
-`;
+    '& footer': {
+      color: '#fff',
+      gridArea: 'footer',
+      textAlign: 'center',
+      padding: 30,
+    },
+  },
+});
 
 export default StyledLayout;

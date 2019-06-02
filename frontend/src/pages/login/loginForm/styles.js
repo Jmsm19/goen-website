@@ -1,16 +1,16 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledForm = styled.form`
-  margin-top: 20px;
+const StyledForm = styled('form')({
+  marginTop: '20px',
 
-  .fields {
-    display: grid;
-    grid-gap: 10px;
-  }
+  '& .fields': {
+    display: 'grid',
+    gridGap: '10px',
+  },
 
-  .btn {
-    margin-top: 10px;
-  }
-`;
+  '& .btn': {
+    marginTop: '10px',
+  },
+});
 
 export default StyledForm;

@@ -9,6 +9,7 @@ import StyledButtonArea from './styles';
 
 const ConfirmationButtonArea = ({ onYes, onNo, className, ...props }) => {
   const { t } = useTranslation();
+
   return (
     <StyledButtonArea className={classnames(['btn-area', className])} {...props}>
       <Button type='primary' text={t('Yes')} onClick={onYes} fullWidth />

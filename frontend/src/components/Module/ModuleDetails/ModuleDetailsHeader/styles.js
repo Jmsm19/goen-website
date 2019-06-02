@@ -1,28 +1,28 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledContainer = styled.div`
-  &.module-summary {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
+const StyledContainer = styled('div')({
+  '&.module-summary': {
+    display: 'grid',
+    gridTemplateColumns: 'auto 1fr',
+    alignItems: 'center',
 
-    img {
-      width: 100px;
-      min-height: 100px;
-    }
+    '& img': {
+      width: 100,
+      minHeight: 100,
+    },
 
-    .module-info {
-      padding-left: 10px;
+    '& .module-info': {
+      paddingLeft: 10,
 
-      .module-name {
-        margin-bottom: 0.5rem;
-      }
+      '& .module-name': {
+        marginBottom: '0.5rem',
+      },
 
-      .module-schedule {
-        margin-bottom: 1rem;
-      }
-    }
-  }
-`;
+      '& .module-schedule': {
+        marginBottom: '1rem',
+      },
+    },
+  },
+});
 
 export default StyledContainer;

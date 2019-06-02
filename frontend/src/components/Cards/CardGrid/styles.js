@@ -1,17 +1,17 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-import media from '../../../lib/utils/styling';
+import mediaQ from '../../../lib/utils/styling';
 
-const StyledGrid = styled.div`
-  &.card-grid {
-    display: grid;
-    grid-gap: 30px 20px;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+const StyledGrid = styled('div')({
+  '&.card-grid': {
+    display: 'grid',
+    gridGap: '30px 20px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
 
-    ${media.tablet`
-    grid-template-columns: 1fr;
-    `}
-  }
-`;
+    [mediaQ.tablet]: {
+      gridTemplateColumns: '1fr',
+    },
+  },
+});
 
 export default StyledGrid;

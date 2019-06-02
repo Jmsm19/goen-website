@@ -1,51 +1,50 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledContainer = styled.div`
-  section {
-    display: grid;
+const StyledContainer = styled('div')({
+  '& section': {
+    display: 'grid',
 
-    &:not(:last-child) {
-      margin-bottom: 2rem;
-    }
+    '&:not(:last-child)': {
+      marginBottom: '2rem',
+    },
 
-    h2 {
-      font-size: 1rem;
-    }
+    '& h2': {
+      fontSize: '1rem',
+    },
 
-    &.module-summary-section {
-      grid-template-columns: auto 1fr;
-      align-items: center;
+    '&.module-summary-section': {
+      gridTemplateColumns: 'auto 1fr',
+      alignItems: 'center',
 
-      img {
-        width: 100px;
-        min-height: 100px;
-      }
+      '& img': {
+        width: 100,
+        minHeight: 100,
+      },
 
-      .module-info {
-        padding-left: 10px;
+      '& .module-info': {
+        paddingLeft: 10,
 
-        .module-name {
-          margin-bottom: 0.5rem;
-        }
+        '& .module-name': {
+          marginBottom: '0.5rem',
+        },
 
-        .module-schedule {
-          margin-bottom: 1rem;
-        }
-      }
-    }
+        '& .module-schedule': {
+          marginBottom: '1rem',
+        },
+      },
+    },
 
-    &.senpai-section {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      align-items: center;
+    '&.senpai-section': {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+      alignItems: 'center',
 
-      .senpai-section-title {
-        margin-bottom: 0.5rem;
-      }
-    }
+      '& .senpai-section-title': {
+        marginBottom: '0.5rem',
+      },
+    },
 
-    &.students-section {
-    }
-  }
-`;
+    '&.students-section': {},
+  },
+});
 
 export default StyledContainer;

@@ -1,44 +1,45 @@
-import React from 'react';
-import styled from 'styled-components';
+import { makeStyles } from '@material-ui/styles';
 
-const StyledPage = styled(({ isMobile, ...props }) => <div {...props} />)`
-  &.periods-page {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
+const usePeriodPageStyles = makeStyles({
+  root: ({ isMobile }) => ({
+    '&.periods-page': {
+      width: '100%',
+      display: 'grid',
+      gridTemplateColumns: '1fr',
 
-    h1 {
-      margin-bottom: 1.5rem;
-    }
+      '& h1': {
+        marginBottom: '1.5rem',
+      },
 
-    section {
-      display: grid;
+      '& section': {
+        display: 'grid',
 
-      .period-search-area {
-        margin-bottom: 1rem;
-        display: grid;
-        grid-gap: 1rem;
-        grid-template-columns: repeat(
-          auto-fit,
-          minmax(260px, ${({ isMobile }) => (isMobile ? '1fr' : 'max-content')})
-        );
-        grid-template-rows: 1fr;
-        justify-content: ${({ isMobile }) => (isMobile ? 'center' : 'space-between')};
-        align-items: center;
+        '& .period-search-area': {
+          marginBottom: '1rem',
+          display: 'grid',
+          gridGap: '1rem',
+          gridTemplateColumns: `repeat(
+            auto-fit,
+            minmax(260px, ${isMobile ? '1fr' : 'max-content'})
+          )`,
+          gridTemplateRows: '1fr',
+          justifyContent: isMobile ? 'center' : 'space-between',
+          alignItems: 'center',
 
-        .period-filter {
-          display: grid;
-          grid-gap: 1rem;
-          grid-template-columns: auto 1fr;
-          align-items: center;
+          '& .period-filter': {
+            display: 'grid',
+            gridGap: '1rem',
+            gridTemplateColumns: 'auto 1fr',
+            alignItems: 'center',
 
-          .selector {
-            max-width: ${({ isMobile }) => (isMobile ? '100%' : null)};
-          }
-        }
-      }
-    }
-  }
-`;
+            '& .selector': {
+              maxWidth: isMobile ? '100%' : null,
+            },
+          },
+        },
+      },
+    },
+  }),
+});
 
-export default StyledPage;
+export default usePeriodPageStyles;

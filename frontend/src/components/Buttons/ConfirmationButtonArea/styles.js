@@ -1,21 +1,22 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-import media from '../../../lib/utils/styling';
+import mediaQ from '../../../lib/utils/styling';
 
-const StyledButtonArea = styled.div`
-  &.btn-area {
-    width: 100%;
+const StyledButtonArea = styled('div')({
+  '&.btn-area': {
+    width: '100%',
 
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: 150px 150px;
-    justify-content: flex-end;
+    display: 'grid',
+    gridGap: '1rem',
+    gridTemplateColumns: '150px 150px',
+    justifyContent: 'flex-end',
 
-    ${media.tablet`
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    `}
-  }
-`;
+    [mediaQ.tablet]: {
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '1fr 1fr',
+      justifyContent: 'center',
+    },
+  },
+});
 
 export default StyledButtonArea;

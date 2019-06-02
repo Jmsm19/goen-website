@@ -12,7 +12,6 @@
     "dev:client": "yarn front start",
     "dev:server": "yarn back dev",
     "move:build": "mv ./frontend/build/* ./backend/public/ && rm -rf ./frontend/build",
-    "build": "yarn setup",
     "heroku-postbuild": "yarn front build && yarn back clear:public && yarn move:build"
   }
 }

@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledHelpText = styled.p`
-  &.help-text {
-    color: #8898aa;
-    padding-left: 3px;
-    font-size: 0.9375rem;
-  }
-`;
+const StyledHelpText = styled('p')({
+  '&.help-text': {
+    color: '#8898aa',
+    paddingLeft: 3,
+    fontSize: '0.9375rem',
+  },
+});
 
 export default StyledHelpText;

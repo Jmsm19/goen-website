@@ -6,8 +6,8 @@ import classnames from 'classnames';
 import { PoseGroup } from 'react-pose';
 import { LayoutContext } from '../../../store/context/LayoutContext';
 
-import { FadeInModalContent, SlideUpModal } from './animations';
-import { StyledModal, StyledCloseBtn } from './styles';
+import { FadeInModalContent, SlideUpModal, FadeInBackdrop } from './animations';
+import { StyledCloseBtn, useModalStyles } from './styles';
 
 const Modal = props => {
   const {
@@ -22,6 +22,7 @@ const Modal = props => {
   } = props;
 
   const { isMobile } = useContext(LayoutContext);
+  const classes = useModalStyles({ isMobile });
 
   const keyListenersMap = new Map([[27, onClose]]);
   const modalClassName = classnames('backdrop', className);
@@ -38,10 +39,10 @@ const Modal = props => {
 
   const ModalElement = (
     <PoseGroup animateOnMount>
-      <StyledModal
+      <FadeInBackdrop
         key='modal'
         isMobile={isMobile}
-        className={modalClassName}
+        className={`${modalClassName} ${classes.root}`}
         role='dialog'
         aria-modal='true'
         onClick={onClose}
@@ -56,7 +57,7 @@ const Modal = props => {
           {/* Footer */}
           {footerContent && <div className='modal-footer'>{footerContent}</div>}
         </SlideUpModal>
-      </StyledModal>
+      </FadeInBackdrop>
     </PoseGroup>
   );
 

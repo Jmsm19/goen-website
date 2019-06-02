@@ -1,25 +1,25 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledPage = styled.div`
-  height: 100%;
-  width: 100%;
+const StyledPage = styled('div')({
+  height: '100%',
+  width: '100%',
 
-  display: grid;
-  justify-content: center;
-  align-items: center;
+  display: 'grid',
+  justifyContent: 'center',
+  alignItems: 'center',
 
-  .activation-message-card {
-    width: 95vw;
-    max-width: 400px;
-  }
+  '& .activation-message-card': {
+    width: '95vw',
+    maxWidth: '400px',
+  },
 
-  .error {
-    color: var(--danger-color);
-  }
+  '& .error': {
+    color: 'var(--danger-color)',
+  },
 
-  .btn {
-    margin-top: 20px;
-  }
-`;
+  '& .btn': {
+    marginTop: '20px',
+  },
+});
 
 export default StyledPage;

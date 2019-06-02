@@ -1,66 +1,68 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledCard = styled.div`
-  &.card {
-    width: 18rem;
-    display: grid;
-    grid-template:
+const StyledCard = styled('div')({
+  '&.card': {
+    width: '18rem',
+    display: 'grid',
+    gridTemplate: `
       'card-img' auto
-      'card-body' 1fr;
-    min-width: 0px;
-    word-wrap: break-word;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 0.375rem;
-    background-color: #fff;
-    background-clip: border-box;
+      'card-body' 1fr
+    `,
 
-    &.card-full-width {
-      width: 100%;
-    }
+    minWidth: '0px',
+    wordWrap: 'break-word',
+    border: '1px solid rgba(0, 0, 0, 0.05)',
+    borderRadius: '0.375rem',
+    backgroundColor: '#fff',
+    backgroundClip: 'border-box',
 
-    &.card-hoverable {
-      will-change: transform;
-      transition: all 0.15s ease;
+    '&.card-full-width': {
+      width: '100%',
+    },
 
-      &:hover {
-        cursor: pointer;
-        transform: translateY(-1px);
-      }
-    }
+    '&.card-hoverable': {
+      willChange: 'transform',
+      transition: 'all 0.15s ease',
 
-    &.card-shadow {
-      box-shadow: 0px 0px 2rem 0px rgba(136, 152, 170, 0.15);
-    }
+      '&:hover': {
+        cursor: 'pointer',
+        transform: 'translateY(-1px)',
+      },
+    },
 
-    img {
-      grid-area: 'card-img';
-      vertical-align: middle;
-      border-style: none;
+    '&.card-shadow': {
+      boxShadow: '0px 0px 2rem 0px rgba(136, 152, 170, 0.15)',
+    },
 
-      &.card-img-top {
-        width: 100%;
-        border-top-left-radius: calc(-1px + 0.37rem);
-        border-top-right-radius: calc(-1px + 0.37rem);
-      }
-    }
+    '& img': {
+      gridArea: 'card-img',
+      verticalAlign: 'middle',
+      borderStyle: 'none',
 
-    .card-body {
-      grid-area: 'card-body';
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      text-align: left;
-      color: #535353;
+      '&.card-img-top': {
+        width: '100%',
+        borderTopLeftRadius: 'calc(-1px + 0.37rem)',
+        borderTopRightRadius: 'calc(-1px + 0.37rem)',
+      },
+    },
 
-      width: 100%;
-      padding: 1.5rem;
-    }
+    '& .card-body': {
+      gridArea: 'card-body',
+      fontSize: '1rem',
+      fontWeight: '400',
+      lineHeight: '1.5',
+      textAlign: 'left',
+      color: '#535353',
 
-    .card-title {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-  }
-`;
+      width: '100%',
+      padding: '1.5rem',
+    },
+
+    '& .card-title': {
+      fontSize: '1.2rem',
+      marginBottom: '1rem',
+    },
+  },
+});
 
 export default StyledCard;

@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/core';
 
-const StyledPage = styled.div`
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 93%;
-  grid-gap: 1rem;
+const StyledPage = styled('div')({
+  height: '100%',
+  display: 'grid',
+  gridTemplateRows: 'auto 93%',
+  gridGap: '1rem',
 
-  section {
-    display: grid;
-  }
+  '& section': {
+    display: 'grid',
+  },
 
-  .table-wrapper {
-    height: 60%;
-  }
-`;
+  '& .table-wrapper': {
+    height: '60%',
+  },
+});
 
 export default StyledPage;

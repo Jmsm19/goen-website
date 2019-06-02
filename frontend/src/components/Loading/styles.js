@@ -1,23 +1,23 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledPage = styled.div`
-  height: 100%;
+const StyledPage = styled('div')({
+  height: '100%',
 
-  display: grid;
-  align-items: center;
-  justify-content: center;
+  display: 'grid',
+  alignItems: 'center',
+  justifyContent: 'center',
 
-  font-size: 2rem;
+  fontSize: '2rem',
 
-  .loading-container {
-    display: grid;
-    grid-template-rows: auto 50px;
+  '& .loading-container': {
+    display: 'grid',
+    gridTemplateRows: 'auto 50px',
 
-    .text {
-      color: var(--light-black);
-      opacity: 0.7;
-    }
-  }
-`;
+    '& .text': {
+      color: 'var(--light-black)',
+      opacity: '0.7',
+    },
+  },
+});
 
 export default StyledPage;

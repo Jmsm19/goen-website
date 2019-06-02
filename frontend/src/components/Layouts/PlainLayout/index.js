@@ -20,7 +20,7 @@ const PlainLayout = props => {
 
   return (
     <StyledLayout className='layout'>
-      <main>
+      <main className='main-content'>
         <Switch>
           <Route exact path={routes.activate} component={AccountActivationPage} />
           <Route exact path={routes.register} component={RegisterPage} />

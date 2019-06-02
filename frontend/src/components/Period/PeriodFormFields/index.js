@@ -4,15 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 import FormField from '../../Form/Field';
 
-import StyledFormFields from './styles';
-
 const PeriodFormFields = ({ formalInstance, formType }) => {
   const { t } = useTranslation();
 
   const { getFieldProps } = formalInstance;
 
   return (
-    <StyledFormFields className='form-fields'>
+    <div className='form-fields'>
       {formType === 'update' && (
         <div className='name-year'>
           <FormField
@@ -51,7 +49,7 @@ const PeriodFormFields = ({ formalInstance, formType }) => {
           />
         </div>
       </div>
-    </StyledFormFields>
+    </div>
   );
 };
 

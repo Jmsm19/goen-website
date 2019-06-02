@@ -11,12 +11,13 @@ import CreatePeriodModal from '../../../../components/Modals/CreatePeriodModal';
 import ConfirmationModal from '../../../../components/Modals/ConfirmationModal';
 
 import { filterArrayBy } from '../../../../lib/utils';
-import StyledPage from './styles';
+import usePeriodPageStyles from './styles';
 
 const ManagePeriods = props => {
   const { t } = useTranslation();
   const { isMobile } = useLayoutContext();
   const { allPeriodsSearched, periods, getAllPeriods, deletePeriod } = usePeriods();
+  const classes = usePeriodPageStyles({ isMobile });
 
   const [showCreatePeriodForm, setShowCreatePeriodForm] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -41,7 +42,7 @@ const ManagePeriods = props => {
   }, [periods, periodsArray, yearToFilter]);
 
   return (
-    <StyledPage className='periods-page' isMobile={isMobile}>
+    <div className={`periods-page ${classes.root}`}>
       <h1>{t('Period.Manage')}</h1>
 
       <section>
@@ -91,7 +92,7 @@ const ManagePeriods = props => {
           setShowConfirmationModal(false);
         }}
       />
-    </StyledPage>
+    </div>
   );
 };
 

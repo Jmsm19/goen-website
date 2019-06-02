@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/core';
 
-const StyledSection = styled.div``;
+const StyledSection = styled('div')({});
 
 export default StyledSection;

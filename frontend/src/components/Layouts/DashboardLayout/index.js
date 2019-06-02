@@ -15,12 +15,13 @@ import DashboardMain from './DashboardMain';
 import DashboardSidebar from './DashboardSidebar';
 
 import routes from '../../../lib/config/routes';
-import { StyledLayout } from './styles';
+import { useLayoutStyles } from './styles';
 
 const DashboardLayout = ({ location }) => {
   const { t } = useTranslation();
   const { isAuth, authUser, logout } = useAuth();
   const { isMobile } = useLayoutContext();
+  const classes = useLayoutStyles({ isMobile });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -39,7 +40,7 @@ const DashboardLayout = ({ location }) => {
   }
 
   return (
-    <StyledLayout className='dashboard-layout' isMobile={isMobile}>
+    <div className={`dashboard-layout ${classes.root}`}>
       <TopNavigation
         t={t}
         routes={routes}
@@ -66,7 +67,7 @@ const DashboardLayout = ({ location }) => {
           </ModulesProvider>
         </PeriodsProvider>
       </div>
-    </StyledLayout>
+    </div>
   );
 };
 

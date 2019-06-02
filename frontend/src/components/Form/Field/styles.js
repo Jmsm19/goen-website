@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import { styled } from '@material-ui/styles';
 
-const StyledFormField = styled.div`
-  display: grid;
-  grid-gap: 3px;
-  grid-template-rows: auto 22px;
-  z-index: 0;
+const StyledFormField = styled('div')({
+  display: 'grid',
+  gridGap: 3,
+  gridTemplateRows: 'auto 22px',
+  zIndex: 0,
 
-  .error-text {
-    z-index: -1;
-  }
-`;
+  '& .error-text': {
+    zIndex: -1,
+  },
+});
 
 export default StyledFormField;

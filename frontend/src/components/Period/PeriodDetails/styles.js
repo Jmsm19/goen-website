@@ -1,120 +1,116 @@
-import styled from 'styled-components';
-import media from '../../../lib/utils/styling';
+import { styled } from '@material-ui/styles';
+
+import mediaQ from '../../../lib/utils/styling';
 
 import PeriodDetailsHeader from './PeriodDetailsHeader';
 import SummarySection from './SummarySection';
 import PeriodDetailsModules from './PeriodDetailsModules';
 
-export const StyledContainer = styled.div`
-  .section-title {
-    margin-bottom: 1rem;
+export const StyledContainer = styled('div')({
+  '& .section-title': {
+    marginBottom: '1rem',
 
-    &:not(:first-child) {
-      font-size: 1.2rem;
-      padding: 0 1rem;
-    }
-  }
+    '&:not(:first-child)': {
+      fontSize: '1.2rem',
+      padding: '0 1rem',
+    },
+  },
 
-  section {
-    &:not(:last-child) {
-      margin-bottom: 2rem;
-    }
+  '& section': {
+    '&:not(:last-child)': {
+      marginBottom: '2rem',
+    },
 
-    .card-body {
-      padding: 1rem;
-    }
+    '& .card-body': {
+      padding: '1rem',
+    },
 
-    &.summary-section,
-    &.modules-section {
-      display: grid;
-      padding: 0 1rem;
-    }
-  }
-`;
+    '&.summary-section, &.modules-section': {
+      display: 'grid',
+      padding: '0 1rem',
+    },
+  },
+});
 
-export const StyledHeaderSection = styled(PeriodDetailsHeader)`
-  &.details-header {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(320px, max-content));
-    justify-content: space-between;
-    align-items: center;
+export const StyledHeaderSection = styled(PeriodDetailsHeader)({
+  '&.details-header': {
+    display: 'grid',
+    gridGap: '1rem',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, max-content))',
+    justifyContent: 'space-between',
+    alignItems: 'center',
 
-    ${media.tablet`
-      grid-template-columns: 1fr;
-    `}
+    [mediaQ.tablet]: {
+      gridTemplateColumns: '1fr',
+    },
 
-    @media screen and (max-width: 950px) {
-      grid-template-columns: 1fr;
-    }
+    '@media screen and (max-width: 950px)': {
+      gridTemplateColumns: '1fr',
+    },
 
-    .period-name {
-      margin-bottom: 10px;
-    }
+    '& .period-name': {
+      marginBottom: 10,
+    },
 
-    .card {
-      ${media.tablet`
-      width: 100%;
-      `}
+    '& .card': {
+      [mediaQ.tablet]: {
+        width: '100%',
+      },
 
-      .card-body {
-        text-align: center;
-        padding: 0.725rem;
-        letter-spacing: 1px;
-      }
+      '& .card-body': {
+        textAlign: 'center',
+        padding: '0.725rem',
+        letterSpacing: 1,
+      },
 
-      .card-title {
-        color: #fff;
-        margin: 0;
-      }
+      '& .card-title': {
+        color: '#fff',
+        margin: 0,
+      },
 
-      p {
-        color: #fff;
-        opacity: 0.85;
-      }
+      '& p': {
+        color: '#fff',
+        opacity: '0.85',
+      },
 
-      &.period-open {
-        background-color: var(--info-color);
-        border-color: var(--info-color);
-      }
+      '&.period-open': {
+        backgroundColor: 'var(--success-color)',
+        borderColor: 'var(--success-color)',
+      },
 
-      &.period-closed {
-        background-color: var(--danger-color);
-        border-color: var(--danger-color);
-      }
-    }
-  }
-`;
+      '&.period-closed': {
+        backgroundColor: 'var(--danger-color)',
+        borderColor: 'var(--danger-color)',
+      },
+    },
+  },
+});
 
-export const StyledModulesSection = styled(PeriodDetailsModules)`
-  &.modules-section {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    grid-gap: 30px 20px;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+export const StyledSummarySection = styled(SummarySection)({
+  '&.summary-section': {
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, max-content))',
+    gridGap: '10px 0',
 
-    ${media.tablet`
-    grid-template-columns: 1fr;
-    `}
-  }
-`;
+    '& .card': {
+      backgroundColor: 'transparent',
+      border: 'none',
 
-export const StyledSummarySection = styled(SummarySection)`
-  &.summary-section {
-    grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
-    grid-gap: 10px 0;
+      '& .card-body': {
+        padding: 0,
+      },
+    },
+  },
+});
 
-    .card {
-      background-color: transparent;
-      border: none;
+export const StyledModulesSection = styled(PeriodDetailsModules)({
+  '&.modules-section': {
+    marginTop: 30,
+    marginBottom: 30,
+    gridGap: '30px 20px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
 
-      &:not(:last-child) {
-        /* margin-bottom: 10px; */
-      }
-
-      .card-body {
-        padding: 0;
-      }
-    }
-  }
-`;
+    [mediaQ.tablet]: {
+      gridTemplateColumns: '1fr',
+    },
+  },
+});
