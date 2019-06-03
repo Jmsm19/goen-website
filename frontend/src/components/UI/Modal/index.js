@@ -1,85 +1,103 @@
-import React, { useEffect, useContext } from 'react';
-import { createPortal } from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-
-import { PoseGroup } from 'react-pose';
-import { LayoutContext } from '../../../store/context/LayoutContext';
-
-import { FadeInModalContent, SlideUpModal, FadeInBackdrop } from './animations';
-import { StyledCloseBtn, useModalStyles } from './styles';
+import {
+  Zoom,
+  Slide,
+  Fade,
+  Dialog,
+  DialogContent,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  DialogTitle,
+} from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 
 const Modal = props => {
   const {
     isVisible,
     title,
-    headerContent,
-    footerContent,
+    animation,
     children,
     onClose,
     className,
-    withCloseButton,
+    withToolbar,
+    actionComponent,
+    ...rest
   } = props;
 
-  const { isMobile } = useContext(LayoutContext);
-  const classes = useModalStyles({ isMobile });
-
-  const keyListenersMap = new Map([[27, onClose]]);
-  const modalClassName = classnames('backdrop', className);
-
-  useEffect(() => {
-    function keyListener(e) {
-      const listener = keyListenersMap.get(e.keyCode);
-      return listener && listener(e);
+  const AnimatedComponent = React.useMemo(() => {
+    if (animation) {
+      return React.forwardRef((componentProps, ref) => {
+        const lowerCasedAnimation = animation.toLowerCase();
+        switch (lowerCasedAnimation) {
+          case 'zoom':
+            return <Zoom ref={ref} {...componentProps} />;
+          case 'fade':
+            return <Fade ref={ref} {...componentProps} />;
+          case 'slide':
+          default:
+            return <Slide direction='up' ref={ref} {...componentProps} />;
+        }
+      });
     }
-    document.addEventListener('keydown', keyListener);
+    return undefined;
+  }, [animation]);
 
-    return () => document.removeEventListener('keydown', keyListener);
-  });
+  return (
+    <Dialog
+      open={isVisible}
+      onClose={onClose}
+      className={className}
+      container={document.getElementById('portal')}
+      TransitionComponent={AnimatedComponent}
+      {...rest}
+    >
+      {withToolbar && (
+        <AppBar color='primary' position='static'>
+          <Toolbar>
+            {title && (
+              <Typography variant='h5' style={{ marginRight: 'auto' }}>
+                {title}
+              </Typography>
+            )}
 
-  const ModalElement = (
-    <PoseGroup animateOnMount>
-      <FadeInBackdrop
-        key='modal'
-        isMobile={isMobile}
-        className={`${modalClassName} ${classes.root}`}
-        role='dialog'
-        aria-modal='true'
-        onClick={onClose}
-      >
-        <SlideUpModal className='modal' onClick={e => e.stopPropagation()}>
-          {/* Close Btn */}
-          {withCloseButton && <StyledCloseBtn size={40} className='close-btn' onClick={onClose} />}
-          {/* Header */}
-          <div className='modal-header'>{title || headerContent}</div>
-          {/* Content */}
-          <FadeInModalContent className='modal-content'>{children}</FadeInModalContent>
-          {/* Footer */}
-          {footerContent && <div className='modal-footer'>{footerContent}</div>}
-        </SlideUpModal>
-      </FadeInBackdrop>
-    </PoseGroup>
+            <IconButton color='secondary' onClick={onClose} style={{ marginLeft: 'auto' }}>
+              <Close />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      )}
+
+      {title && !withToolbar && <DialogTitle>{title}</DialogTitle>}
+
+      <DialogContent scroll='paper'>{children}</DialogContent>
+
+      {actionComponent}
+    </Dialog>
   );
-
-  return !!isVisible && createPortal(ModalElement, document.getElementById('portal'));
 };
 
 Modal.defaultProps = {
-  footerContent: null,
-  headerContent: null,
+  animation: 'slide',
   isVisible: false,
-  title: null,
-  withCloseButton: true,
+  title: undefined,
+  withToolbar: false,
+  className: '',
+  actionComponent: undefined,
 };
 
 Modal.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  footerContent: PropTypes.node,
-  headerContent: PropTypes.node,
   isVisible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
-  withCloseButton: PropTypes.bool,
+  withToolbar: PropTypes.bool,
+  actionComponent: PropTypes.node,
+  animation: PropTypes.oneOf([true, 'fade', 'zoom', 'slide']),
+  ...Dialog.propTypes,
 };
 
 export default Modal;

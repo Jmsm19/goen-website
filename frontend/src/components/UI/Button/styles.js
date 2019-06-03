@@ -3,17 +3,21 @@ import { styled } from '@material-ui/styles';
 const StyledButton = styled('button')({
   '&.btn': {
     /* Font */
-    fontWeight: '600',
-    lineHeight: '1.5',
-    letterSpacing: '0.25em',
+    fontSize: '0.875rem',
+    textTransform: 'uppercase',
+    fontWeight: '500',
+    lineHeight: '1.75',
+    letterSpacing: '0.02857em',
     textAlign: 'center',
     whiteSpace: 'nowrap',
     verticalAlign: 'middle',
     /* Appearance */
+    minWidth: 64,
     width: 'max-content',
     display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: '0.625rem 1.25rem',
+    padding: '6px 8px',
     borderRadius: '0.375rem',
     border: '1px solid transparent',
     boxShadow: '0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08)',
@@ -104,7 +108,6 @@ const StyledButton = styled('button')({
         boxShadow: 'none',
 
         '&:hover:not(:disabled)': {
-          color: '#fff',
           transform: 'translateY(-1px)',
           boxShadow: '0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08)',
         },
@@ -119,6 +122,7 @@ const StyledButton = styled('button')({
         borderColor: 'var(--light-obscure-primary-color)',
 
         '&:hover:not(:disabled)': {
+          color: '#fff',
           backgroundColor: 'var(--light-obscure-primary-color)',
         },
       },
@@ -136,6 +140,7 @@ const StyledButton = styled('button')({
         borderColor: 'var(--danger-color)',
 
         '&:hover:not(:disabled)': {
+          color: '#fff',
           backgroundColor: 'var(--danger-color)',
         },
       },
@@ -145,6 +150,7 @@ const StyledButton = styled('button')({
         borderColor: 'var(--success-color)',
 
         '&:hover:not(:disabled)': {
+          color: '#fff',
           backgroundColor: 'var(--success-color)',
         },
       },

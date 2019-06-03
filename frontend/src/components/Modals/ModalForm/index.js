@@ -5,7 +5,7 @@ import useFormal from '@kevinwolf/formal-web';
 
 import Button from '../../UI/Button';
 
-import StyledForm from './styles';
+import { StyledForm, StyledDialogActions } from './styles';
 
 const ModalForm = ({
   initialValues,
@@ -23,10 +23,12 @@ const ModalForm = ({
   const { getSubmitButtonProps, submit, reset } = formal;
 
   return (
-    <StyledForm className='period-create-form'>
-      <FormFieldsComponent formalInstance={formal} formType={formType} />
+    <>
+      <StyledForm className='modal-form'>
+        <FormFieldsComponent formalInstance={formal} formType={formType} />
+      </StyledForm>
 
-      <div className='button-area'>
+      <StyledDialogActions className='button-area'>
         <Button
           {...getSubmitButtonProps()}
           type='primary'
@@ -43,8 +45,8 @@ const ModalForm = ({
             onCancel();
           }}
         />
-      </div>
-    </StyledForm>
+      </StyledDialogActions>
+    </>
   );
 };
 

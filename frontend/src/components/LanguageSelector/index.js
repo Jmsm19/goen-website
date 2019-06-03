@@ -27,7 +27,6 @@ const LanguageSelector = props => {
     <Select
       id='language'
       name='language'
-      flat
       className='language-selector'
       options={languages}
       onChange={changeLanguage}

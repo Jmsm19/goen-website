@@ -16,9 +16,20 @@ import './styles.css';
 
 const materialThemeOverrides = {
   palette: {
-    primary: { main: '#d9091a' },
-    secondary: { main: '#f0f0f0' },
-    error: { main: '#f5365c' },
+    primary: {
+      light: '#ff4050',
+      main: '#d9091a',
+      dark: '#bf1a21',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#f0f0f0',
+      contrastText: '#434343',
+    },
+    error: {
+      main: '#f5365c',
+      contrastText: '#ffffff',
+    },
   },
 };
 

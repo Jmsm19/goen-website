@@ -18,13 +18,7 @@ const CreateModuleModal = ({ isVisible, onClose, period, ...props }) => {
   const { initialValues, schema } = getModuleFormValidation(t);
 
   return (
-    <Modal
-      title={t('Module.Create')}
-      isVisible={isVisible}
-      onClose={onClose}
-      withCloseButton={false}
-      {...props}
-    >
+    <Modal title={t('Module.Create')} isVisible={isVisible} onClose={onClose} {...props}>
       <ModalForm
         initialValues={{
           ...initialValues,

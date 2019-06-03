@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { IconButton } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import { useSnackbar } from 'notistack';
 
 import usePreviousValue from '../../hooks/usePreviousValue';
@@ -28,8 +30,13 @@ const OfflineNotification = ({ isOnline }) => {
       generateSnackbarConfig('warning', null, null, {
         persist: true,
         preventDuplicate: true,
+        action: () => (
+          <IconButton color='secondary' onClick={() => handleSnackbarClose(key)}>
+            <Close />
+          </IconButton>
+        ),
       }),
-    [],
+    [handleSnackbarClose, key],
   );
 
   React.useEffect(() => {

@@ -15,7 +15,6 @@ const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...prop
   const { updateModule } = useModules();
   const handleSubmit = values => updateModule(module.id, values, [onClose, deselectModule]);
 
-  // eslint-disable-next-line camelcase
   const { name, section, clan, schedule, instructor, assistant } = module;
   const initialValues = React.useMemo(
     () => ({
@@ -32,13 +31,7 @@ const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...prop
   const { schema } = getModuleUpdateValidation(t);
 
   return (
-    <Modal
-      title={t('Period.Update')}
-      isVisible={isVisible}
-      onClose={onClose}
-      withCloseButton={false}
-      {...props}
-    >
+    <Modal title={t('Period.Update')} isVisible={isVisible} onClose={onClose} {...props}>
       <ModalForm
         initialValues={initialValues}
         validationSchema={schema}

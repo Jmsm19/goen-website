@@ -5,7 +5,14 @@ import Modal from '../../UI/Modal';
 import ModuleDetails from '../../Module/ModuleDetails';
 
 const ModuleDetailsModal = ({ module, isVisible, onClose }) => (
-  <Modal isVisible={isVisible} onClose={onClose}>
+  <Modal
+    title={module ? module.name : ''}
+    isVisible={isVisible}
+    onClose={onClose}
+    fullScreen
+    withToolbar
+    animation='zoom'
+  >
     {!!module && <ModuleDetails module={module} deselectModule={onClose} />}
   </Modal>
 );

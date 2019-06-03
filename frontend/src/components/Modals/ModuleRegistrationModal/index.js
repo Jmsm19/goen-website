@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Modal from '../../UI/Modal';
 
 import ModuleDetailsHeader from '../../Module/ModuleDetails/ModuleDetailsHeader';
-import ConfirmationButtonArea from '../../Buttons/ConfirmationButtonArea';
+import ModalConfirmationButtonArea from '../../Buttons/ModalConfirmationButtonArea';
 
 const ModuleRegistrationModal = ({ isVisible, onClose, onAccept, module }) => (
   // const { t } = useTranslation();
@@ -13,7 +13,7 @@ const ModuleRegistrationModal = ({ isVisible, onClose, onAccept, module }) => (
   <Modal
     isVisible={isVisible}
     onClose={onClose}
-    footerContent={<ConfirmationButtonArea onYes={onAccept} onNo={onClose} />}
+    actionComponent={<ModalConfirmationButtonArea onYes={onAccept} onNo={onClose} />}
   >
     {!!module && (
       <section style={{ maxWidth: 500 }}>

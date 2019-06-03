@@ -31,7 +31,7 @@ const ModuleDetails = ({ module, deselectModule }) => {
         <FadeInSection className='module-summary-section'>
           {!!clan && <img src={getClanImageAddress(clan.name)} alt={clan.name} />}
           <div className='module-info'>
-            <h1 className='module-name'>{module.fullName}</h1>
+            {/* <h1 className='module-name'>{module.fullName}</h1> */}
             <p className='module-schedule'>
               {t(schedule.day)} ({formatHoursFromDB(schedule.from)} -{' '}
               {formatHoursFromDB(schedule.until)})

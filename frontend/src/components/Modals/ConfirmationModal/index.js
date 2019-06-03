@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { DialogContent } from '@material-ui/core';
 
 import Modal from '../../UI/Modal';
-import ConfirmationButtonArea from '../../Buttons/ConfirmationButtonArea';
+import ModalConfirmationButtonArea from '../../Buttons/ModalConfirmationButtonArea';
 
 const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props }) => {
   const { t } = useTranslation();
@@ -11,14 +12,15 @@ const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props })
 
   return (
     <Modal
-      withCloseButton={false}
       className='confirmation-modal'
       isVisible={isVisible}
       onClose={onCancel}
-      footerContent={<ConfirmationButtonArea onYes={onAccept} onNo={onCancel} />}
+      actionComponent={<ModalConfirmationButtonArea onYes={onAccept} onNo={onCancel} />}
       {...props}
     >
-      <p className='warning'>{warningText}</p>
+      <DialogContent>
+        <p className='warning'>{warningText}</p>
+      </DialogContent>
     </Modal>
   );
 };
