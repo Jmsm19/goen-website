@@ -9,46 +9,16 @@ export const useLayoutStyles = makeStyles({
       width: '100vw',
 
       display: 'grid',
-      gridTemplateRows: '70px 1fr',
+      gridTemplateRows: 'auto 1fr',
 
       '& .top-navigation': {
         width: '100%',
-
         color: '#fff',
-        backgroundColor: 'var(--primary-color)',
-        padding: '15px 10px',
-
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-
-        '& h1': {
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-        },
 
         '& .right-nav': {
-          display: 'flex',
-          flexDirection: 'row',
-          justifyItems: 'flex-end',
-          alignItems: 'center',
-
-          '& .open-sidebar-btn, & .logout-btn': {
-            letterSpacing: 'normal',
-          },
-
-          '& .open-sidebar-btn': {
-            border: 'none',
-            padding: 10,
-
-            '&:hover': {
-              backgroundColor: 'transparent',
-              transform: 'none',
-              boxShadow: 'none',
-            },
-          },
-
           '& .logout-btn': {
+            textTransform: 'none',
+            letterSpacing: 'normal',
             fontWeight: 400,
             color: 'rgba(255, 255, 255, 0.7)',
 
@@ -86,14 +56,18 @@ export const useLayoutStyles = makeStyles({
 
       '& .inner-layout': {
         display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '240px 1fr',
+        gridTemplateColumns: '1fr',
         overflowY: 'auto',
+
+        '& main': {
+          marginLeft: !isMobile ? 240 : 'auto',
+        },
       },
 
       '& .main-content': {
         padding: 15,
         overflowY: 'auto',
-        width: '100%',
+        width: isMobile ? '100%' : 'auto',
       },
     },
   }),
