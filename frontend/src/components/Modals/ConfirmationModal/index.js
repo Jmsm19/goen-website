@@ -15,6 +15,7 @@ const ConfirmationModal = ({ isVisible, onCancel, onAccept, warning, ...props })
       className='confirmation-modal'
       isVisible={isVisible}
       onClose={onCancel}
+      animation='zoom'
       actionComponent={<ModalConfirmationButtonArea onYes={onAccept} onNo={onCancel} />}
       {...props}
     >

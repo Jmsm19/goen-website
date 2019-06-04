@@ -31,7 +31,13 @@ const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...prop
   const { schema } = getModuleUpdateValidation(t);
 
   return (
-    <Modal title={t('Period.Update')} isVisible={isVisible} onClose={onClose} {...props}>
+    <Modal
+      title={t('Period.Update')}
+      isVisible={isVisible}
+      onClose={onClose}
+      animation='slideDown'
+      {...props}
+    >
       <ModalForm
         initialValues={initialValues}
         validationSchema={schema}

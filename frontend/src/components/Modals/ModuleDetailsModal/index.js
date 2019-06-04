@@ -11,7 +11,7 @@ const ModuleDetailsModal = ({ module, isVisible, onClose }) => (
     onClose={onClose}
     fullScreen
     withToolbar
-    animation='zoom'
+    animation='fade'
   >
     {!!module && <ModuleDetails module={module} deselectModule={onClose} />}
   </Modal>

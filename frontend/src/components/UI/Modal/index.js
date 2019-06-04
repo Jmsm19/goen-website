@@ -30,13 +30,18 @@ const Modal = props => {
   const AnimatedComponent = React.useMemo(() => {
     if (animation) {
       return React.forwardRef((componentProps, ref) => {
-        const lowerCasedAnimation = animation.toLowerCase();
-        switch (lowerCasedAnimation) {
+        switch (animation) {
           case 'zoom':
             return <Zoom ref={ref} {...componentProps} />;
           case 'fade':
             return <Fade ref={ref} {...componentProps} />;
-          case 'slide':
+          case 'slideRight':
+            return <Slide direction='right' ref={ref} {...componentProps} />;
+          case 'slideLeft':
+            return <Slide direction='left' ref={ref} {...componentProps} />;
+          case 'slideDown':
+            return <Slide direction='down' ref={ref} {...componentProps} />;
+          case 'slideUp':
           default:
             return <Slide direction='up' ref={ref} {...componentProps} />;
         }
@@ -80,7 +85,7 @@ const Modal = props => {
 };
 
 Modal.defaultProps = {
-  animation: 'slide',
+  animation: 'slideUp',
   isVisible: false,
   title: undefined,
   withToolbar: false,
@@ -96,7 +101,15 @@ Modal.propTypes = {
   title: PropTypes.string,
   withToolbar: PropTypes.bool,
   actionComponent: PropTypes.node,
-  animation: PropTypes.oneOf([true, 'fade', 'zoom', 'slide']),
+  animation: PropTypes.oneOf([
+    true,
+    'fade',
+    'zoom',
+    'slideUp',
+    'slideDown',
+    'slideLeft',
+    'slideRight',
+  ]),
   ...Dialog.propTypes,
 };
 

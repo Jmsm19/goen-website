@@ -30,7 +30,13 @@ const UpdatePeriodModal = ({ isVisible, onClose, period, ...props }) => {
   const { schema } = getPeriodUpdateValidation(t);
 
   return (
-    <Modal title={t('Period.Update')} isVisible={isVisible} onClose={onClose} {...props}>
+    <Modal
+      title={t('Period.Update')}
+      isVisible={isVisible}
+      onClose={onClose}
+      animation='slideDown'
+      {...props}
+    >
       <ModalForm
         initialValues={initialValues}
         validationSchema={schema}

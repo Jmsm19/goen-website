@@ -17,7 +17,13 @@ const CreatePeriodModal = ({ isVisible, onClose, ...props }) => {
   const { initialValues, schema } = getPeriodFormValidation(t);
 
   return (
-    <Modal title={t('Period.Update')} isVisible={isVisible} onClose={onClose} {...props}>
+    <Modal
+      title={t('Period.Update')}
+      isVisible={isVisible}
+      onClose={onClose}
+      animation='zoom'
+      {...props}
+    >
       <ModalForm
         initialValues={initialValues}
         validationSchema={schema}

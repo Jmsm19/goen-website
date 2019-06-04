@@ -13,6 +13,7 @@ const ModuleRegistrationModal = ({ isVisible, onClose, onAccept, module }) => (
   <Modal
     isVisible={isVisible}
     onClose={onClose}
+    animation='zoom'
     actionComponent={<ModalConfirmationButtonArea onYes={onAccept} onNo={onClose} />}
   >
     {!!module && (
