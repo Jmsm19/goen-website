@@ -15,7 +15,7 @@ if (typeof window !== 'undefined') {
   enquire = require('enquire.js'); // eslint-disable-line global-require
 }
 
-const mediaQuery = 'only screen and (max-width: 768px)';
+const mediaQuery = 'only screen and (max-width: 960px)';
 const queryHandler = cb => ({
   match: () => {
     cb && cb(true);

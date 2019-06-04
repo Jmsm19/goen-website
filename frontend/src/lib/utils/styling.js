@@ -1,7 +1,7 @@
 const sizes = {
-  desktop: 992,
-  tablet: 768,
-  phone: 576,
+  desktop: 1280,
+  tablet: 960,
+  phone: 600,
 };
 
 const mediaQ = Object.keys(sizes).reduce((acc, label) => {
