@@ -22,10 +22,6 @@ export const StyledLoginCard = styled(SlideUpCard)({
       display: 'block',
     },
 
-    '& .card-body': {
-      paddingTop: '0',
-    },
-
     '& .to-register-btn': {
       display: 'block',
       width: 'max-content',

@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { Card as MaterialCard, CardContent, CardMedia, Typography } from '@material-ui/core';
 
 import StyledCard from './styles';
 
@@ -20,11 +21,16 @@ const Card = forwardRef((props, ref) => {
 
   return (
     <StyledCard ref={ref} className={localClassName} style={{ width }} onClick={onClick} {...rest}>
-      {image && <img className='card-img-top' src={image} alt={title} />}
-      <div className='card-body'>
-        {title && <h5 className='card-title'>{title}</h5>}
+      <CardContent className='card-body'>
+        {image && <CardMedia className='card-img-top' image={image} title={title || ''} />}
+
+        {title && (
+          <Typography className='card-title' gutterBottom variant='h5' component='h2'>
+            {title}
+          </Typography>
+        )}
         {children}
-      </div>
+      </CardContent>
     </StyledCard>
   );
 });
@@ -50,6 +56,7 @@ Card.propTypes = {
   title: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   withShadow: PropTypes.bool,
+  ...MaterialCard.propTypes,
 };
 
 export default Card;

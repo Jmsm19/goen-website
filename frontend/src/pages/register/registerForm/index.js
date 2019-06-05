@@ -8,8 +8,8 @@ import { useAuth } from '../../../store/context/AuthContext';
 import { getSignupValidationProps } from '../../../lib/validation/forms';
 
 import {
-  SlideRightPersonalSection,
-  SlideLeftUserSection,
+  FadeInPersonalSection,
+  FadeInUserSection,
   FadeInButton,
   FadeInContainer,
 } from './animations';
@@ -28,13 +28,12 @@ const RegisterForm = ({ t }) => {
     <StyledRegisterForm className='register-form'>
       <p className='form-notice'>{Object.keys(errors).length ? t('CheckForErrors') : ''}</p>
 
-      {/* TODO: Remove SlideIn animation from sections and autofocus from national_id */}
       <PoseGroup>
         <FadeInContainer key='container'>
           {activeSection === 'personal' ? (
-            <SlideRightPersonalSection key='personal' t={t} formal={formal} />
+            <FadeInPersonalSection key='personal' t={t} formal={formal} />
           ) : (
-            <SlideLeftUserSection key='user' t={t} formal={formal} />
+            <FadeInUserSection key='user' t={t} formal={formal} />
           )}
         </FadeInContainer>
 

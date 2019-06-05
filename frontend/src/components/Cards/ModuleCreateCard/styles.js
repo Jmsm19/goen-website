@@ -7,6 +7,7 @@ const StyledCard = styled(Card)({
     gridTemplate: `'card-body' 1fr`,
     borderColor: 'var(--success-color)',
     borderStyle: 'dashed',
+    boxShadow: 'none',
 
     '& .card-body': {
       padding: '1.5rem 0',

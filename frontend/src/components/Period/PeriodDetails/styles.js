@@ -53,6 +53,10 @@ export const StyledHeaderSection = styled(PeriodDetailsHeader)({
     },
 
     '& .card': {
+      boxShadow: `0px 1px 3px 0px rgba(0,0,0,0.2),
+                  0px 1px 1px 0px rgba(0,0,0,0.14),
+                  0px 2px 1px -1px rgba(0,0,0,0.12)`,
+
       [mediaQ.tablet]: {
         width: '100%',
       },
@@ -89,15 +93,12 @@ export const StyledHeaderSection = styled(PeriodDetailsHeader)({
 export const StyledSummarySection = styled(SummarySection)({
   '&.summary-section': {
     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, max-content))',
-    gridGap: '10px 0',
+    gridGap: '10px',
 
     '& .card': {
       backgroundColor: 'transparent',
       border: 'none',
-
-      '& .card-body': {
-        padding: 0,
-      },
+      boxShadow: 'none',
     },
   },
 });

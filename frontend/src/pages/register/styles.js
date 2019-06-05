@@ -19,8 +19,6 @@ export const StyledRegisterCard = styled(SlideUpCard)({
     width: '900px',
     maxWidth: '400px',
     minHeight: '615px',
-    justifyItems: 'center',
-    gridTemplateRows: '1fr',
 
     [mediaQ.phone]: {
       maxWidth: '95vw',
@@ -42,6 +40,10 @@ export const StyledRegisterCard = styled(SlideUpCard)({
       '& .btn': {
         display: 'inline-block',
       },
+    },
+
+    '& .btn': {
+      width: '100%',
     },
   },
 });

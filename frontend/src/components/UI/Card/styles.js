@@ -1,6 +1,7 @@
 import { styled } from '@material-ui/styles';
+import { Card } from '@material-ui/core';
 
-const StyledCard = styled('div')({
+const StyledCard = styled(Card)({
   '&.card': {
     width: '18rem',
     display: 'grid',
@@ -30,22 +31,6 @@ const StyledCard = styled('div')({
       },
     },
 
-    '&.card-shadow': {
-      boxShadow: '0px 0px 2rem 0px rgba(136, 152, 170, 0.15)',
-    },
-
-    '& img': {
-      gridArea: 'card-img',
-      verticalAlign: 'middle',
-      borderStyle: 'none',
-
-      '&.card-img-top': {
-        width: '100%',
-        borderTopLeftRadius: 'calc(-1px + 0.37rem)',
-        borderTopRightRadius: 'calc(-1px + 0.37rem)',
-      },
-    },
-
     '& .card-body': {
       gridArea: 'card-body',
       fontSize: '1rem',
@@ -56,11 +41,22 @@ const StyledCard = styled('div')({
 
       width: '100%',
       padding: '1.5rem',
-    },
 
-    '& .card-title': {
-      fontSize: '1.2rem',
-      marginBottom: '1rem',
+      '& .card-img-top': {
+        gridArea: 'card-img',
+        verticalAlign: 'middle',
+        borderStyle: 'none',
+        minHeight: 140,
+        width: '100%',
+        margin: '0 auto',
+        // borderTopLeftRadius: 'calc(-1px + 0.37rem)',
+        // borderTopRightRadius: 'calc(-1px + 0.37rem)',
+      },
+
+      '& .card-title': {
+        fontSize: '1.2rem',
+        marginBottom: '1rem',
+      },
     },
   },
 });
