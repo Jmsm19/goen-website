@@ -16,7 +16,7 @@ jobs:
     executor: default
     steps:
       - attach_workspace:
-          at: ~/backend
+          at: ~/
       - checkout
       - restore_cache:
           key: v1-node-modules-{{ checksum "yarn.lock" }}
