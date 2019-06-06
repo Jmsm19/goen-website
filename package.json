@@ -1,4 +1,14 @@
 {
+  "name": "goen_maracaibo",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=8 <12"
+  },
+  "homepage": "https://goen-website-test.herokuapp.com",
+  "main": "./backend/server.js",
+  "author": "Jorge Soto <Jorgemsm19@gmail.com>",
+  "license": "MIT",
+  "description": "GOEN Maracaibo's website",
   "private": true,
   "devDependencies": {
     "concurrently": "^4.1.0"

@@ -1,5 +1,5 @@
 {
-  "name": "goen_maracaibo_frontend",
+  "name": "goen_maracaibo_backend",
   "version": "1.0.0",
   "engines": {
     "node": ">=8 <12"
@@ -8,7 +8,7 @@
   "main": "server.js",
   "author": "Jorge Soto <Jorgemsm19@gmail.com>",
   "license": "MIT",
-  "description": "GOEN Maracaibo's website frontend",
+  "description": "GOEN Maracaibo's website backend",
   "adonis-version": "1.0.0",
   "private": true,
   "scripts": {
