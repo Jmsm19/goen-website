@@ -48,29 +48,29 @@ const DashboardLayout = ({ location }) => {
     <div className={`dashboard-layout ${classes.root}`}>
       <CssBaseline />
       <TopNavigation t={t} routes={routes} toggleSidebar={toggleSidebar} logoutUser={logout} />
+      <div className={drawerClasses.toolbar} />
 
-      <div className='inner-layout'>
-        <div className={drawerClasses.toolbar} />
-        <Hidden mdUp implementation='css'>
-          <MobileDrawer isOpen={isSidebarOpen} onClose={toggleSidebar}>
-            <DashboardSidebarMenu toggleOpen={toggleSidebar} />
-          </MobileDrawer>
-        </Hidden>
+      {/* <div className='inner-layout'> */}
+      <Hidden mdUp implementation='css'>
+        <MobileDrawer isOpen={isSidebarOpen} onClose={toggleSidebar}>
+          <DashboardSidebarMenu toggleOpen={toggleSidebar} />
+        </MobileDrawer>
+      </Hidden>
 
-        <Hidden smDown implementation='css'>
-          <DesktopDrawer>
-            <DashboardSidebarMenu toggleOpen={toggleSidebar} />
-          </DesktopDrawer>
-        </Hidden>
+      <Hidden smDown implementation='css'>
+        <DesktopDrawer>
+          <DashboardSidebarMenu toggleOpen={toggleSidebar} />
+        </DesktopDrawer>
+      </Hidden>
 
-        <PeriodsProvider>
-          <ModulesProvider>
-            <UsersProvider>
-              <DashboardMain location={location} authUser={authUser} />
-            </UsersProvider>
-          </ModulesProvider>
-        </PeriodsProvider>
-      </div>
+      <PeriodsProvider>
+        <ModulesProvider>
+          <UsersProvider>
+            <DashboardMain location={location} authUser={authUser} />
+          </UsersProvider>
+        </ModulesProvider>
+      </PeriodsProvider>
+      {/* </div> */}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const UpdateModuleModal = ({ isVisible, onClose, module, deselectModule, ...prop
 
   return (
     <Modal
-      title={t('Period.Update')}
+      title={t('Module.Update')}
       isVisible={isVisible}
       onClose={onClose}
       animation='slideDown'

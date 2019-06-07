@@ -14,6 +14,8 @@ import {
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
+import useLayoutContext from '../../../hooks/useLayoutContext';
+
 const Modal = props => {
   const {
     isVisible,
@@ -26,6 +28,7 @@ const Modal = props => {
     actionComponent,
     ...rest
   } = props;
+  const { isMobile } = useLayoutContext();
 
   const AnimatedComponent = React.useMemo(() => {
     if (animation) {
@@ -56,7 +59,11 @@ const Modal = props => {
       onClose={onClose}
       className={className}
       container={document.getElementById('portal')}
+      maxWidth='md'
       TransitionComponent={AnimatedComponent}
+      PaperProps={{
+        style: { margin: 0, minWidth: isMobile ? 300 : 400, width: isMobile ? '95vw' : null },
+      }}
       {...rest}
     >
       {withToolbar && (

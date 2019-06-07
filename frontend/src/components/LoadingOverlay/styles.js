@@ -6,7 +6,6 @@ const StyledContainer = styled('div')({
   width: 'max-content',
 
   '& .overlay': {
-    paddingTop: 10,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -16,11 +15,15 @@ const StyledContainer = styled('div')({
 
     display: 'grid',
     justifyContent: 'center',
-    alignContent: 'center',
 
     '& .loading': {
-      '& svg': {
-        height: 25,
+      paddingTop: 6,
+
+      '& .loading-container': {
+        gridTemplateRows: 'auto',
+        '& svg': {
+          height: 25,
+        },
       },
     },
   },

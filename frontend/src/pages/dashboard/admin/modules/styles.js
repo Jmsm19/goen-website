@@ -3,7 +3,7 @@ import { styled } from '@material-ui/core';
 const StyledPage = styled('div')({
   height: '100%',
   display: 'grid',
-  gridTemplateRows: 'auto 93%',
+  gridTemplateRows: 'auto 1fr',
   gridGap: '1rem',
 
   '& section': {

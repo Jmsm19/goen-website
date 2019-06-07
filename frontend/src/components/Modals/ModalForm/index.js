@@ -31,6 +31,7 @@ const ModalForm = ({
       <StyledDialogActions className='button-area'>
         <Button
           {...getSubmitButtonProps()}
+          fullWidth
           type='primary'
           text={formType === 'create' ? t('Create') : t('Update')}
           onClick={submit}
@@ -38,6 +39,7 @@ const ModalForm = ({
         />
         <Button
           outline
+          fullWidth
           type='secondary'
           text={t('Cancel')}
           onClick={() => {

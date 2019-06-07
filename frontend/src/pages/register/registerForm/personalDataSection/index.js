@@ -20,7 +20,6 @@ const PersonalDataSection = forwardRef((props, ref) => {
         inputMode='numeric'
         title={t('NationalId')}
         help={t('NationalIdFormat')}
-        autoFocus={!formal.values.nationalId}
       />
       <FormField
         {...getFieldProps('name')}

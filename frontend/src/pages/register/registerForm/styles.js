@@ -3,7 +3,6 @@ import { styled } from '@material-ui/styles';
 import { FadeInButtonArea } from './animations';
 
 export const StyledRegisterForm = styled('form')({
-  overflow: 'hidden',
   minHeight: '350px',
   width: '100%',
 

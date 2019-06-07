@@ -11,7 +11,7 @@ const StyledFormFields = styled('div')({
     '& .module-name': {
       display: 'grid',
       gridGap: '1rem',
-      gridTemplateColumns: 'max-content max-content',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
     },
 
     '& .instructors': {

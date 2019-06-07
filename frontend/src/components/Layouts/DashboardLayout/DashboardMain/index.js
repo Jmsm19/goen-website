@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { PoseGroup } from 'react-pose';
+import { Container } from '@material-ui/core';
 
 import RoleRestrictedRoute from '../../../RoleRestrictedRoute';
 import ModuleRegisterPage from '../../../../pages/dashboard/student/moduleRegister';
@@ -19,7 +20,7 @@ import ModulesPage from '../../../../pages/dashboard/admin/modules';
 import UsersListPage from '../../../../pages/dashboard/admin/users';
 
 const DashboardMain = ({ authUser, location }) => (
-  <main className='main-content'>
+  <Container className='main-content' component='main'>
     <PoseGroup>
       <FadeInRouteContainer key={location.pathname} className='route-container'>
         <Switch location={location}>
@@ -81,7 +82,7 @@ const DashboardMain = ({ authUser, location }) => (
         </Switch>
       </FadeInRouteContainer>
     </PoseGroup>
-  </main>
+  </Container>
 );
 
 DashboardMain.propTypes = {
