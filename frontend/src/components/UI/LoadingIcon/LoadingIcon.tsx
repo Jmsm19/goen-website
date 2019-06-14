@@ -1,16 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import StyledIcon from './styles';
 
-const LoadingIcon = ({ size, className, ...props }) => {
+type Props = {
+  size?: number,
+  className?: string,
+}
+
+const LoadingIcon: React.FC<Props> = ({ size, className, ...props }) => {
   const localClassName = classnames(['spinner', className]);
+
   return <StyledIcon size={size} className={localClassName} {...props} />;
 };
 
 LoadingIcon.defaultProps = {
-  className: null,
   size: 80,
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@material-ui/core';
@@ -8,9 +8,13 @@ import { useSnackbar } from 'notistack';
 import usePreviousValue from '../../hooks/usePreviousValue';
 import { generateSnackbarConfig } from '../../lib/utils';
 
-const OfflineNotification = ({ isOnline }) => {
+type Props = {
+  isOnline: boolean
+}
+
+const OfflineNotification: React.FC<Props> = ({ isOnline }) => {
   const { t, i18n } = useTranslation();
-  const [key, setKey] = React.useState(undefined);
+  const [key, setKey] = React.useState();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { language } = i18n;
@@ -48,8 +52,8 @@ const OfflineNotification = ({ isOnline }) => {
       if (isLanguageDifferent && key) {
         handleSnackbarClose(key);
       }
-
-      setKey(enqueueSnackbar(t('CheckInternetConnection'), snackbarConfig));
+      const newKey = enqueueSnackbar(t('CheckInternetConnection'), snackbarConfig);
+      setKey(newKey);
     }
   }, [enqueueSnackbar, handleSnackbarClose, isLanguageDifferent, isOnline, key, snackbarConfig, t]);
 

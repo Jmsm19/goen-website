@@ -16,7 +16,7 @@
     "front": "cd frontend && yarn",
     "setup": "yarn install && yarn front install",
     "test": "nyc --reporter=lcov node ace test --bail",
-    "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\" \"yarn front styleguide\"",
+    "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\"",
     "dev:client": "yarn front start",
     "dev:server": "adonis serve --dev --ignore frontend",
     "clear:public": "rm -rf public/*",

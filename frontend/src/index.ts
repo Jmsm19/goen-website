@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -34,17 +34,17 @@ const materialThemeOverrides = {
 };
 
 ReactDOM.render(
-  <Suspense fallback={<Loading />}>
-    <ThemeProvider theme={createMuiTheme(materialThemeOverrides)}>
-      <SnackbarProvider maxSnack={3}>
-        <AuthProvider>
-          <SettingsProvider>
-            <App />
-          </SettingsProvider>
-        </AuthProvider>
-      </SnackbarProvider>
-    </ThemeProvider>
-  </Suspense>,
+  <React.Suspense fallback={< Loading />}>
+  <ThemeProvider theme={ createMuiTheme(materialThemeOverrides) } >
+  <SnackbarProvider maxSnack={ 3} >
+  <AuthProvider>
+  <SettingsProvider>
+  <App />
+  < /SettingsProvider>
+  < /AuthProvider>
+  < /SnackbarProvider>
+  < /ThemeProvider>
+  < /React.Suspense>,
   document.getElementById('root'),
 );
 

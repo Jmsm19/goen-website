@@ -15,7 +15,7 @@ const StyledPage = styled('div')({
 
     '& .text': {
       color: 'var(--light-black)',
-      opacity: '0.7',
+      opacity: 0.7,
     },
   },
 });

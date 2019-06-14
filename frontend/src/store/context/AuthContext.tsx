@@ -6,9 +6,9 @@ import { useSnackbar } from 'notistack';
 import AuthStateReducer from '../reducers/authReducer';
 import * as AA from '../actions/authActions';
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext<undefined>(undefined);
 
-const AuthProvider = props => {
+const AuthProvider = (props: ProviderProps) => {
   const initialState = {
     isAuth: !!Cookies.get('token'),
     authUser: null,

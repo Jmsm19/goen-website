@@ -4,9 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-const options = {
+const options: i18n.InitOptions = {
   fallbackLng: 'es',
-  lngs: ['es', 'en', 'jpn'],
   load: 'languageOnly',
 
   saveMissing: false,

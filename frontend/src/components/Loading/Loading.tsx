@@ -1,10 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import StyledPage from './styles';
 import LoadingIcon from '../UI/LoadingIcon';
 
-const Loading = ({ text }) => (
+type Props = {
+  text?: string
+}
+
+const Loading: React.FC<Props> = ({ text }) => (
   <StyledPage className='loading'>
     <div className='loading-container'>
       <LoadingIcon />

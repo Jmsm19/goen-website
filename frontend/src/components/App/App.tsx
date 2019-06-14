@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import * as React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import '../../i18n';
@@ -9,10 +9,10 @@ import { LayoutContextProvider } from '../../store/context/LayoutContext';
 
 import Loading from '../Loading';
 
-import routes from '../../lib/config/routes';
+// import routes from '../../lib/config/routes';
 
-const DashboardLayout = lazy(() => import('../Layouts/DashboardLayout'));
-const PlainLayout = lazy(() => import('../Layouts/PlainLayout'));
+// const DashboardLayout = React.lazy(() => import('../Layouts/DashboardLayout'));
+// const PlainLayout = React.lazy(() => import('../Layouts/PlainLayout'));
 
 const App = () => {
   const { isAuth, authUser, getAuthUser } = useAuth();
@@ -31,24 +31,24 @@ const App = () => {
   }
 
   return (
-    <Suspense fallback={<Loading />}>
+    <React.Suspense fallback={<Loading />}>
       <LayoutContextProvider>
         <BrowserRouter>
-          <Suspense fallback={<Loading text='Loading Dashboard...' />}>
+          <React.Suspense fallback={<Loading text='Loading Dashboard...' />}>
             <Switch>
-              <Route
+              {/* <Route
                 path={routes.dashboard.prefix}
                 render={rProps => <DashboardLayout {...rProps} />}
-              />
+              /> */}
 
-              <Suspense fallback={<Loading />}>
-                <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} />
-              </Suspense>
+              <React.Suspense fallback={<Loading />}>
+                {/* <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} /> */}
+              </React.Suspense>
             </Switch>
-          </Suspense>
+          </React.Suspense>
         </BrowserRouter>
       </LayoutContextProvider>
-    </Suspense>
+    </React.Suspense>
   );
 };
 
