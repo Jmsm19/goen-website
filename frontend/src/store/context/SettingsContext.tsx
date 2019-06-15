@@ -3,15 +3,15 @@ import React from 'react';
 import { GetData, SendData } from '../../lib/utils/http';
 import { snakeCaseToCamelCase } from '../../lib/utils';
 
-const SettingsContext = React.createContext();
+const SettingsContext = React.createContext<undefined | SettingContextValue>(undefined);
 
-const SettingsProvider = props => {
+const SettingsProvider: React.FC<ProviderProps> = props => {
   const [settings, setSettings] = React.useState(null);
 
   const value = React.useMemo(
     () => ({
       settings,
-      setSettings,
+      setSettings
     }),
     [settings],
   );
@@ -33,7 +33,7 @@ const useSettings = () => {
       GetData('settings').then(({ data }) => {
         setSettings({ ...data });
       }),
-    updateSetting: (settingName, value) => {
+    updateSetting: (settingName: string, value: any) => {
       console.log('TCL: useSettings -> value', value);
       SendData('PUT', 'settings', { settingName, value }).then(() => {
         setSettings({

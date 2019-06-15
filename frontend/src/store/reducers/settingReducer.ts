@@ -1,27 +1,20 @@
-import actionTypes from '../types';
-
-const SettingStateReducer = (state, action) => {
+const SettingStateReducer: SettingContextReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case actionTypes.GET_SETTINGS:
+    case 'GET_SETTINGS':
       return {
         ...state,
-        settings: {
-          ...payload.settings,
-        },
+        ...payload.settings,
       };
-    case actionTypes.UPDATE_SETTINGS:
+    case 'UPDATE_SETTINGS':
       return {
         ...state,
-        settings: {
-          ...state.settings,
-          ...payload.settings,
-        },
+        ...payload.settings,
       };
     // Default responses
     default:
-      throw new Error(`Unsupported action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
 

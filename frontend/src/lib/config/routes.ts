@@ -1,4 +1,4 @@
-module.exports = {
+const routes = {
   // PLAIN LAYOUT
   home: '/',
   login: '/',
@@ -34,3 +34,5 @@ module.exports = {
     },
   },
 };
+
+export default routes;

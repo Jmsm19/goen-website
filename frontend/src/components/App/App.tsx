@@ -5,9 +5,10 @@ import '../../i18n';
 
 import { useSettings } from '../../store/context/SettingsContext';
 import { useAuth } from '../../store/context/AuthContext';
-import { LayoutContextProvider } from '../../store/context/LayoutContext';
+import { LayoutProvider } from '../../store/context/LayoutContext';
 
 import Loading from '../Loading';
+import LoginPage from '../../pages/login';
 
 // import routes from '../../lib/config/routes';
 
@@ -32,7 +33,7 @@ const App = () => {
 
   return (
     <React.Suspense fallback={<Loading />}>
-      <LayoutContextProvider>
+      <LayoutProvider>
         <BrowserRouter>
           <React.Suspense fallback={<Loading text='Loading Dashboard...' />}>
             <Switch>
@@ -41,13 +42,15 @@ const App = () => {
                 render={rProps => <DashboardLayout {...rProps} />}
               /> */}
 
+              <Route path='/' component={LoginPage} />
+
               <React.Suspense fallback={<Loading />}>
                 {/* <Route path={routes.home} render={rProps => <PlainLayout {...rProps} />} /> */}
               </React.Suspense>
             </Switch>
           </React.Suspense>
         </BrowserRouter>
-      </LayoutContextProvider>
+      </LayoutProvider>
     </React.Suspense>
   );
 };

@@ -9,7 +9,7 @@ import React from 'react';
 const useModal = (modalProps = {}) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const toggleModal = state => setIsVisible(state || !isVisible);
+  const toggleModal = (state: boolean) => setIsVisible(state || !isVisible);
 
   const onClose = () => setIsVisible(false);
 

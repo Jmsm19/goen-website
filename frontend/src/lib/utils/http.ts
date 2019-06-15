@@ -27,7 +27,7 @@ export const GetData = (endpoint = '') =>
     },
   });
 
-export const SendData = (method, endpoint = '', data = {}) =>
+export const SendData = (method: 'GET' | 'POST' | 'PUT' | 'DELETE', endpoint = '', data = {}) =>
   axiosInstance({
     method,
     url: endpoint,

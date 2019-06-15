@@ -1,23 +1,22 @@
-import actionTypes from '../types';
 import { createMap } from '../../lib/utils';
 
-const PeriodReducer = (state, action) => {
+const UserReducer: UserContextReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case actionTypes.GET_USER:
+    case 'GET_USER':
       return {
         ...state,
         users: new Map([...state.users, ...payload.user]),
         allUsersSearched: state.allUsersSearched || !!payload.allUsersSearched,
       };
-    case actionTypes.USER_NOT_FOUND:
+    case 'USER_NOT_FOUND':
       return {
         ...state,
         users: new Map([...state.users]),
         notFoundUsers: [...new Set([...state.notFoundUsers, payload.id])],
       };
-    case actionTypes.GET_SENPAI_MODULES:
+    case 'GET_SENPAI_MODULES':
       return {
         ...state,
         users: new Map([
@@ -32,8 +31,8 @@ const PeriodReducer = (state, action) => {
       };
     // Default responses
     default:
-      throw new Error(`Unsupported action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
 
-export default PeriodReducer;
+export default UserReducer;

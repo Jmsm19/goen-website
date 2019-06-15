@@ -1,4 +1,3 @@
-import actionTypes from '../types';
 import { GetData } from '../../lib/utils/http';
 import {
   capitalize,
@@ -7,11 +6,11 @@ import {
   createDictionaryOfIdsFromArray,
 } from '../../lib/utils';
 
-export const GetUser = async (id, dispatch) => {
+export const GetUser: GetUser = async (id, dispatch) => {
   try {
     const { data } = await GetData(`users/${id}`);
     dispatch({
-      type: actionTypes.GET_USER,
+      type: 'GET_USER',
       payload: {
         user: createMap(createDictionaryItem(data)),
       },
@@ -19,18 +18,18 @@ export const GetUser = async (id, dispatch) => {
   } catch ({ response }) {
     if (response.status === 404) {
       dispatch({
-        type: actionTypes.USER_NOT_FOUND,
+        type: 'USER_NOT_FOUND',
         payload: { id },
       });
     }
   }
 };
 
-export const GetAllUsers = async dispatch => {
+export const GetAllUsers: GetAllUsers = async dispatch => {
   try {
     const { data } = await GetData(`users`);
     dispatch({
-      type: actionTypes.GET_USER,
+      type: 'GET_USER',
       payload: {
         user: createMap(createDictionaryOfIdsFromArray(data)),
         allUsersSearched: true,
@@ -41,11 +40,11 @@ export const GetAllUsers = async dispatch => {
   }
 };
 
-export const GetSenpaiModules = async (role, id, dispatch) => {
+export const GetSenpaiModules: GetSenpaiModules = async (role, id, dispatch) => {
   try {
     const { data } = await GetData(`/${role}/${id}/modules`);
     dispatch({
-      type: actionTypes.GET_SENPAI_MODULES,
+      type: 'GET_SENPAI_MODULES',
       payload: {
         id,
         modules: {

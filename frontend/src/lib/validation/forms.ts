@@ -1,9 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import * as Yup from 'yup';
+import i18n from 'i18next';
 import { addDays, subYears, isDate, format } from 'date-fns';
 // import { days } from '../config/constants';
 
-export const getLoginValidationProps = t => ({
+export const getLoginValidationProps = (t: i18n.TFunction) => ({
   initialValues: {
     email: '',
     password: '',
@@ -16,7 +17,7 @@ export const getLoginValidationProps = t => ({
   }),
 });
 
-export const getSignupValidationProps = t => {
+export const getSignupValidationProps = (t: i18n.TFunction) => {
   const PASSWORD_MIN_LENGTH = 6;
   const MINIMUM_AGE = 14;
   const MINIMUM_DATE = format(subYears(new Date(), MINIMUM_AGE), 'YYYY-MM-DD');
@@ -59,13 +60,13 @@ export const getSignupValidationProps = t => {
   };
 };
 
-export const getPeriodFormValidation = t => ({
+export const getPeriodFormValidation = (t: i18n.TFunction) => ({
   initialValues: {},
   schema: Yup.object().shape({
     signup_from: Yup.string().required(t('Required')),
     signup_until: Yup.date()
       .required(t('Required'))
-      .when('signup_from', (value, schema, selfRef) => {
+      .when('signup_from', (value: string, schema: Yup.DateSchema, selfRef: any) => {
         // TODO: Recheck this validation once Formal updates -> validateOnChange, onBlur, etc.
         if (value && selfRef.parent && isDate(selfRef.parent.signup_until)) {
           const dayAfter = addDays(value, 1);
@@ -78,7 +79,7 @@ export const getPeriodFormValidation = t => ({
   }),
 });
 
-export const getPeriodUpdateValidation = t => ({
+export const getPeriodUpdateValidation = (t: i18n.TFunction) => ({
   initialValues: {},
   schema: Yup.object().shape({
     year: Yup.string()
@@ -89,7 +90,7 @@ export const getPeriodUpdateValidation = t => ({
     signup_from: Yup.string().required(t('Required')),
     signup_until: Yup.date()
       .required(t('Required'))
-      .when('signup_from', (value, schema, selfRef) => {
+      .when('signup_from', (value: string, schema: Yup.DateSchema, selfRef: any) => {
         // TODO: Recheck this validation once Formal updates -> validateOnChange, onBlur, etc.
         if (value && selfRef.parent && isDate(selfRef.parent.signup_until)) {
           const dayAfter = addDays(value, 1);
@@ -102,7 +103,7 @@ export const getPeriodUpdateValidation = t => ({
   }),
 });
 
-export const getModuleFormValidation = t => ({
+export const getModuleFormValidation = (t: i18n.TFunction) => ({
   initialValues: {},
   schema: Yup.object().shape({
     name: Yup.string().required(t('Required')),
@@ -112,7 +113,7 @@ export const getModuleFormValidation = t => ({
     schedule_id: Yup.string().required(t('Required')),
     instructor_id: Yup.string().required(t('Required')),
     assistant_id: Yup.string().required(t('Required')),
-    clan: Yup.number().when('name', (value, _) => {
+    clan: Yup.number().when('name', (value: string) => {
       if (value === 'M-0') {
         return Yup.string().required(t('Required'));
       }
@@ -121,14 +122,14 @@ export const getModuleFormValidation = t => ({
   }),
 });
 
-export const getModuleUpdateValidation = t => ({
+export const getModuleUpdateValidation = (t: i18n.TFunction) => ({
   initialValues: {},
   schema: Yup.object().shape({
     name: Yup.string().required(t('Required')),
     schedule_id: Yup.string().required(t('Required')),
     instructor_id: Yup.string().required(t('Required')),
     assistant_id: Yup.string().required(t('Required')),
-    clan: Yup.number().when('name', (value, _) => {
+    clan: Yup.number().when('name', (value: string) => {
       if (value === 'M-0') {
         return Yup.string().required(t('Required'));
       }

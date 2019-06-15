@@ -6,12 +6,17 @@ import { useSnackbar } from 'notistack';
 import AuthStateReducer from '../reducers/authReducer';
 import * as AA from '../actions/authActions';
 
-const AuthContext = React.createContext<undefined>(undefined);
+const AuthContext = React.createContext<undefined | AuthContextValue>(undefined);
 
-const AuthProvider = (props: ProviderProps) => {
-  const initialState = {
+const AuthProvider: React.FC<ProviderProps> = (props) => {
+  const initialState: AuthContextState = {
     isAuth: !!Cookies.get('token'),
     authUser: null,
+    isLoggingIn: false,
+    isRegistering: false,
+    signupSuccess: false,
+    isRegisteringInModule: false,
+    message: undefined,
   };
 
   const [state, dispatch] = React.useReducer(AuthStateReducer, initialState);
@@ -34,11 +39,11 @@ const useAuth = () => {
   const helpers = { t, dispatch, enqueueSnackbar };
 
   const actions = {
-    login: loginData => AA.LoginUser(loginData, helpers),
-    register: userData => AA.RegisterUser(userData, helpers),
+    login: (loginData: any) => AA.LoginUser(loginData, helpers),
+    register: (userData: any) => AA.RegisterUser(userData, helpers),
     logout: () => AA.LogoutUser(helpers),
     getAuthUser: () => AA.GetAuthUser(helpers),
-    registerInModule: id => AA.RegisterInModule(id, helpers),
+    registerInModule: (id: string) => AA.RegisterInModule(id, helpers),
   };
 
   return {

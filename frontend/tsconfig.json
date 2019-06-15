@@ -17,9 +17,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "downlevelIteration": true
   },
   "include": [
-    "src"
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./src/sw.js",
+    "./src/sw-build.js"
   ]
 }

@@ -1,4 +1,3 @@
-import actionTypes from '../types';
 import { GetData, SendData } from '../../lib/utils/http';
 import {
   createDictionaryOfIdsFromArray,
@@ -8,11 +7,11 @@ import {
   generateSnackbarConfig,
 } from '../../lib/utils';
 
-export const GetActivePeriod = async dispatch => {
+export const GetActivePeriod: GetActivePeriod = async dispatch => {
   try {
     const { data } = await GetData('periods/active');
     dispatch({
-      type: actionTypes.GET_ACTIVE_PERIOD,
+      type: 'GET_ACTIVE_PERIOD',
       payload: {
         activePeriod: data.id,
         periods: createMap(createDictionaryItem(data)),
@@ -21,18 +20,18 @@ export const GetActivePeriod = async dispatch => {
   } catch ({ response }) {
     if (response.status === 401) {
       dispatch({
-        type: actionTypes.AUTH_LOGIN_FAILED,
+        type: 'AUTH_LOGIN_FAILED',
         payload: { ...response },
       });
     }
   }
 };
 
-export const GetPeriod = async (id, { dispatch }) => {
+export const GetPeriod: GetPeriod = async (id, { dispatch }) => {
   try {
     const { data } = await GetData(`periods/${id}`);
     dispatch({
-      type: actionTypes.GET_PERIOD,
+      type: 'GET_PERIOD',
       payload: {
         period: createMap(createDictionaryItem(data)),
       },
@@ -42,11 +41,11 @@ export const GetPeriod = async (id, { dispatch }) => {
   }
 };
 
-export const GetAllPeriods = async ({ dispatch }) => {
+export const GetAllPeriods: GetAllPeriods = async ({ dispatch }) => {
   try {
     const { data } = await GetData('periods');
     dispatch({
-      type: actionTypes.GET_ALL_PERIODS,
+      type: 'GET_ALL_PERIODS',
       payload: {
         periods: createMap(createDictionaryOfIdsFromArray(data)),
         allPeriodsSearched: true,
@@ -57,7 +56,7 @@ export const GetAllPeriods = async ({ dispatch }) => {
   }
 };
 
-export const CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const CreatePeriod: CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('POST', 'periods', periodData);
     callFunctions([
@@ -65,7 +64,7 @@ export const CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar },
       cb,
     ]);
     dispatch({
-      type: actionTypes.CREATE_PERIOD,
+      type: 'CREATE_PERIOD',
       payload: {
         period: createMap(createDictionaryItem(data)),
       },
@@ -75,15 +74,15 @@ export const CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar },
   }
 };
 
-export const UpdatePeriod = async (id, periodData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const UpdatePeriod: UpdatePeriod = async (id, periodData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('PUT', `periods/${id}`, periodData);
     callFunctions([
-      () => enqueueSnackbar(t('Period.Updated'), generateSnackbarConfig('success')),
+      () => enqueueSnackbar(),
       cb,
     ]);
     dispatch({
-      type: actionTypes.UPDATE_PERIOD,
+      type: 'UPDATE_PERIOD',
       payload: {
         period: createMap(createDictionaryItem(data)),
       },
@@ -93,12 +92,12 @@ export const UpdatePeriod = async (id, periodData, { dispatch, t, enqueueSnackba
   }
 };
 
-export const DeletePeriod = async (id, { dispatch, enqueueSnackbar }) => {
+export const DeletePeriod: DeletePeriod = async (id, { dispatch, enqueueSnackbar }) => {
   try {
     const { data } = await SendData('DELETE', `periods/${id}`);
     enqueueSnackbar(data.message, generateSnackbarConfig('success'));
     dispatch({
-      type: actionTypes.DELETE_PERIOD,
+      type: 'DELETE_PERIOD',
       payload: {
         periodId: id,
       },

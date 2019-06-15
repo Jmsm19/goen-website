@@ -4,10 +4,10 @@ import UserReducer from '../reducers/userReducer';
 import * as UA from '../actions/userActions';
 import { createMap } from '../../lib/utils';
 
-const UsersContext = React.createContext();
+const UsersContext = React.createContext<undefined | UserContextValue>(undefined);
 
 // CONTEXT PROVIDER
-const UsersProvider = props => {
+const UsersProvider: React.FC<ProviderProps> = props => {
   const initialState = {
     allUsersSearched: false,
     users: createMap(),
@@ -32,7 +32,7 @@ const useUsers = () => {
   const { dispatch, state } = context;
 
   const actions = {
-    getUser: id => UA.GetUser(id, dispatch),
+    getUser: (id: string) => UA.GetUser(id, dispatch),
     getAllUsers: () => UA.GetAllUsers(dispatch),
   };
 
@@ -54,8 +54,8 @@ const useInstructors = () => {
   const { users, ...stateRest } = state;
 
   const { instructors, assistants } = React.useMemo(() => {
-    const instructorsMap = createMap();
-    const assistantsMap = createMap();
+    const instructorsMap: UserMap = createMap();
+    const assistantsMap: UserMap = createMap();
 
     if (users.size) {
       users.forEach(user => {
@@ -76,7 +76,7 @@ const useInstructors = () => {
 
   const actions = {
     getAllUsers: () => UA.GetAllUsers(dispatch),
-    getSenpaiModules: (role, id) => UA.GetSenpaiModules(role, id, dispatch),
+    getSenpaiModules: (role: string, id: string) => UA.GetSenpaiModules(role, id, dispatch),
   };
 
   return {

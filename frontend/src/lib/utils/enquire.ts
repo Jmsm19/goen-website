@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable import/prefer-default-export */
-let enquire;
+let enquire: any;
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
 if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = mediaQuery => ({
+  const matchMediaPolyfill = (mediaQuery: string) => ({
     media: mediaQuery,
     matches: false,
     addListener() {},
@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
 }
 
 const mediaQuery = 'only screen and (max-width: 960px)';
-const queryHandler = cb => ({
+const queryHandler = (cb: Function | undefined) => ({
   match: () => {
     cb && cb(true);
   },
@@ -25,7 +25,7 @@ const queryHandler = cb => ({
   },
 });
 
-export const enquireScreen = cb => {
+export const enquireScreen = (cb: Function) => {
   if (!enquire) {
     return;
   }

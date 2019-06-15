@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 import { useInstructors } from '../../store/context/UsersContext';
 
-import { capitalize } from '../../lib/utils';
+const useSenpaiModules = (senpai: User, role: 'instructor' | 'assistant') => {
+  const modules = role === 'instructor' ? senpai.modulesAsInstructor : senpai.modulesAsAssistant;
 
-const useSenpaiModules = (senpai, role) => {
-  const modules = senpai[`modulesAs${capitalize(role.toLowerCase())}`];
   const [isSearchingModules, setIsSearchingModules] = useState(false);
   const { getSenpaiModules } = useInstructors();
 
@@ -26,7 +25,7 @@ const useSenpaiModules = (senpai, role) => {
 
 useSenpaiModules.propTypes = {
   role: PropTypes.string.isRequired,
-  senpai: PropTypes.shape().isRequired,
+  senpai: PropTypes.shape({}).isRequired,
 };
 
 export default useSenpaiModules;

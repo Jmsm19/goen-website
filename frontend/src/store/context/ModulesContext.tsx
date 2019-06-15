@@ -7,11 +7,11 @@ import * as MA from '../actions/moduleActions';
 
 import { createMap } from '../../lib/utils';
 
-const ModulesContext = React.createContext();
+const ModulesContext = React.createContext<undefined | ModuleContextValue>(undefined);
 
 // CONTEXT PROVIDER
-const ModulesProvider = props => {
-  const initialState = {
+const ModulesProvider: React.FC<ProcessingInstruction> = props => {
+  const initialState: ModuleContextState = {
     allModulesSearched: false,
     modules: createMap(),
     notFoundModules: [],
@@ -42,13 +42,13 @@ const useModules = () => {
 
   const actions = {
     getAllModules: () => MA.GetAllModules(dispatch),
-    getModule: id => MA.GetModule(id, dispatch),
-    createModule: (moduleData, cb) => MA.CreateModule(moduleData, helpers, cb),
+    getModule: (id: string) => MA.GetModule(id, dispatch),
+    createModule: (moduleData: any, cb: Function) => MA.CreateModule(moduleData, helpers, cb),
     getAllSchedules: () => MA.GetAllSchedules(helpers),
-    updateModule: (id, moduleData, cb) => MA.UpdateModule(id, moduleData, helpers, cb),
-    deleteModule: (id, cb) => MA.DeleteModule(id, helpers, cb),
-    getModulesForPeriod: id => MA.GetModulesForPeriod(id, helpers),
-    getStudentsForModule: id => MA.GetStudentsForModule(id, helpers),
+    updateModule: (id: string, moduleData: any, cb: Function) => MA.UpdateModule(id, moduleData, helpers, cb),
+    deleteModule: (id: string, cb: Function) => MA.DeleteModule(id, helpers, cb),
+    getModulesForPeriod: (id: string) => MA.GetModulesForPeriod(id, helpers),
+    getStudentsForModule: (id: string) => MA.GetStudentsForModule(id, helpers),
   };
 
   return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 
@@ -8,12 +8,12 @@ import * as PA from '../actions/periodActions';
 
 import { createMap } from '../../lib/utils';
 
-const PeriodsContext = React.createContext();
+const PeriodsContext = React.createContext<PeriodContextValue | undefined>(undefined);
 
 // CONTEXT PROVIDER
-const PeriodsProvider = props => {
+const PeriodsProvider: React.FC<ProviderProps> = props => {
   const { isAuth } = useAuth();
-  const initialState = {
+  const initialState: PeriodContextState = {
     activePeriod: null,
     periods: createMap(),
     allPeriodsSearched: false,
@@ -48,11 +48,11 @@ const usePeriods = () => {
 
   const actions = {
     getActivePeriod: () => PA.GetActivePeriod(dispatch),
-    getPeriod: id => PA.GetPeriod(id, helpers),
+    getPeriod: (id: string) => PA.GetPeriod(id, helpers),
     getAllPeriods: () => PA.GetAllPeriods(helpers),
-    createPeriod: (periodData, cb) => PA.CreatePeriod(periodData, helpers, cb),
-    updatePeriod: (id, periodData, cb) => PA.UpdatePeriod(id, periodData, helpers, cb),
-    deletePeriod: id => PA.DeletePeriod(id, helpers),
+    createPeriod: (periodData: any, cb: Function) => PA.CreatePeriod(periodData, helpers, cb),
+    updatePeriod: (id: string, periodData: any, cb: Function) => PA.UpdatePeriod(id, periodData, helpers, cb),
+    deletePeriod: (id: string) => PA.DeletePeriod(id, helpers),
   };
 
   return {

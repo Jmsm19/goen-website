@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const usePreviousValue = value => {
+const usePreviousValue = (value: any) => {
   const ref = useRef();
 
   useEffect(() => {

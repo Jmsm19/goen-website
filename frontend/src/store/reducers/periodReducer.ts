@@ -1,38 +1,37 @@
-import actionTypes from '../types';
-
-const PeriodReducer = (state, action) => {
+const PeriodReducer: PeriodContextReducer = (state, action) => {
   const { type, payload } = action;
   const { periods } = state;
 
   switch (type) {
-    case actionTypes.GET_ACTIVE_PERIOD:
+    case 'GET_ACTIVE_PERIOD':
       return {
+        ...state,
         activePeriod: payload.activePeriod,
         periods: new Map([...periods, ...payload.periods]),
       };
-    case actionTypes.GET_ALL_PERIODS:
+    case 'GET_ALL_PERIODS':
       return {
         ...state,
         periods: new Map([...periods, ...payload.periods]),
         allPeriodsSearched: payload.allPeriodsSearched,
       };
-    case actionTypes.GET_PERIOD:
+    case 'GET_PERIOD':
       return {
         ...state,
         periods: new Map([...periods, ...payload.period]),
       };
-    case actionTypes.CREATE_PERIOD:
-    case actionTypes.UPDATE_PERIOD:
+    case 'CREATE_PERIOD':
+    case 'UPDATE_PERIOD':
       return {
         ...state,
         periods: new Map([...periods, ...payload.period]),
       };
-    case actionTypes.DELETE_PERIOD:
+    case 'DELETE_PERIOD':
       periods.delete(payload.periodId);
       return { ...state, periods: new Map([...periods]) };
     // Default responses
     default:
-      throw new Error(`Unsupported action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
 

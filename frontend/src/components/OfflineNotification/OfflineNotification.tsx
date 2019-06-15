@@ -8,8 +8,8 @@ import { useSnackbar } from 'notistack';
 import usePreviousValue from '../../hooks/usePreviousValue';
 import { generateSnackbarConfig } from '../../lib/utils';
 
-type Props = {
-  isOnline: boolean
+interface Props {
+  isOnline: boolean;
 }
 
 const OfflineNotification: React.FC<Props> = ({ isOnline }) => {
@@ -31,7 +31,7 @@ const OfflineNotification: React.FC<Props> = ({ isOnline }) => {
 
   const snackbarConfig = React.useMemo(
     () =>
-      generateSnackbarConfig('warning', null, null, {
+      generateSnackbarConfig('warning', undefined, undefined, {
         persist: true,
         preventDuplicate: true,
         action: () => (

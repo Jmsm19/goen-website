@@ -5,13 +5,13 @@ import { Detector as ConnectivityDetector } from 'react-detect-offline';
 import { enquireScreen, StopEnquireScreen } from '../../lib/utils/enquire';
 import OfflineNotification from '../../components/OfflineNotification';
 
-type State = {
-  isMobile: boolean
+interface State {
+  isMobile: boolean;
 }
 
 const LayoutContext = React.createContext<State | undefined>(undefined);
 
-const LayoutProvider = ({ children }: ProviderProps) => {
+const LayoutProvider: React.FC<ProviderProps> = ({ children }) => {
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useLayoutEffect(() => {
@@ -23,15 +23,14 @@ const LayoutProvider = ({ children }: ProviderProps) => {
   const state = React.useMemo(() => ({ isMobile }), [isMobile]);
 
   return (
-    <LayoutContext.Provider value={state} >
+    <LayoutContext.Provider value={state}>
       <ConnectivityDetector
-        render={
-          ({ online }: { online: boolean }) => (
-            <>
-              <OfflineNotification isOnline={online} />
-              {children}
-            </>
-          )}
+        render={({ online }: { online: boolean }) => (
+          <>
+            <OfflineNotification isOnline={online} />
+            {children}
+          </>
+        )}
       />
     </LayoutContext.Provider>
   );

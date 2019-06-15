@@ -1,16 +1,12 @@
-import * as React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react';
+// import PropTypes from 'prop-types';
 
-const LoginPage = (): React.ReactNode => {
-  return (
-    <div>
-      <h1>App</h1>
-    </div>
-  )
-}
+const LoginPage: React.FC = () => (
+  <div>
+    <h1>App</h1>
+  </div>
+);
 
-LoginPage.propTypes = {
+LoginPage.propTypes = {};
 
-}
-
-export default LoginPage
+export default LoginPage;

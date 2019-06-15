@@ -1,4 +1,3 @@
-import actionTypes from '../types';
 import { GetData, SendData } from '../../lib/utils/http';
 import {
   createDictionaryOfIdsFromArray,
@@ -8,11 +7,11 @@ import {
   generateSnackbarConfig,
 } from '../../lib/utils';
 
-export const GetModule = async (id, dispatch) => {
+export const GetModule: GetModule = async (id, dispatch) => {
   try {
     const { data } = await GetData(`modules/${id}`);
     dispatch({
-      type: actionTypes.GET_MODULE,
+      type: 'GET_MODULE',
       payload: {
         module: createMap(createDictionaryItem(data)),
       },
@@ -20,18 +19,18 @@ export const GetModule = async (id, dispatch) => {
   } catch ({ response }) {
     if (response.status === 404) {
       dispatch({
-        type: actionTypes.MODULE_NOT_FOUND,
+        type: 'MODULE_NOT_FOUND',
         payload: { ...response, id },
       });
     }
   }
 };
 
-export const GetAllModules = async dispatch => {
+export const GetAllModules: GetAllModules = async dispatch => {
   try {
     const { data } = await GetData('modules');
     dispatch({
-      type: actionTypes.GET_MODULE,
+      type: 'GET_MODULE',
       payload: {
         module: createMap(createDictionaryOfIdsFromArray(data)),
         allModulesSearched: true,
@@ -42,7 +41,7 @@ export const GetAllModules = async dispatch => {
   }
 };
 
-export const CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar }, cb) => {
+export const CreateModule: CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('POST', 'modules', moduleData);
     enqueueSnackbar(t('Module.Created'), generateSnackbarConfig('success'));
@@ -50,7 +49,7 @@ export const CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar },
     callFunctions(cb);
 
     dispatch({
-      type: actionTypes.CREATE_MODULE,
+      type: 'CREATE_MODULE',
       payload: {
         module: createMap(createDictionaryItem(data)),
       },
@@ -60,11 +59,11 @@ export const CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar },
   }
 };
 
-export const GetAllSchedules = async ({ dispatch }) => {
+export const GetAllSchedules: GetAllSchedules = async ({ dispatch }) => {
   try {
     const { data } = await GetData('schedules');
     dispatch({
-      type: actionTypes.GET_ALL_SCHEDULES,
+      type: 'GET_ALL_SCHEDULES',
       payload: {
         schedules: createMap(createDictionaryOfIdsFromArray(data)),
       },
@@ -74,13 +73,13 @@ export const GetAllSchedules = async ({ dispatch }) => {
   }
 };
 
-export const UpdateModule = async (id, moduleData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const UpdateModule: UpdateModule = async (id, moduleData, { dispatch, t, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('PUT', `modules/${id}`, moduleData);
     enqueueSnackbar(t('Module.Updated'), generateSnackbarConfig('success'));
     callFunctions(cb);
     dispatch({
-      type: actionTypes.UPDATE_MODULE,
+      type: 'UPDATE_MODULE',
       payload: {
         module: createMap(createDictionaryItem(data)),
       },
@@ -90,14 +89,14 @@ export const UpdateModule = async (id, moduleData, { dispatch, t, enqueueSnackba
   }
 };
 
-export const DeleteModule = async (id, { dispatch, enqueueSnackbar }, cb) => {
+export const DeleteModule: DeleteModule = async (id, { dispatch, enqueueSnackbar }, cb) => {
   try {
     const { data } = await SendData('DELETE', `modules/${id}`);
     enqueueSnackbar(data.message, generateSnackbarConfig('success'));
     callFunctions(cb);
 
     dispatch({
-      type: actionTypes.DELETE_MODULE,
+      type: 'DELETE_MODULE',
       payload: {
         moduleId: id,
       },
@@ -107,11 +106,11 @@ export const DeleteModule = async (id, { dispatch, enqueueSnackbar }, cb) => {
   }
 };
 
-export const GetModulesForPeriod = async (id, { dispatch }) => {
+export const GetModulesForPeriod: GetModulesForPeriod = async (id, { dispatch }) => {
   try {
     const { data } = await GetData(`periods/${id}/modules`);
     dispatch({
-      type: actionTypes.GET_MODULES_FOR_PERIOD,
+      type: 'GET_MODULES_FOR_PERIOD',
       payload: {
         periodId: id,
         modules: createMap(createDictionaryOfIdsFromArray(data)),
@@ -122,11 +121,11 @@ export const GetModulesForPeriod = async (id, { dispatch }) => {
   }
 };
 
-export const GetStudentsForModule = async (id, { dispatch }) => {
+export const GetStudentsForModule: GetStudentsForModule = async (id, { dispatch }) => {
   try {
     const { data } = await GetData(`/modules/${id}/students`);
     dispatch({
-      type: actionTypes.GET_STUDENTS_FOR_MODULE,
+      type: 'GET_STUDENTS_FOR_MODULE',
       payload: {
         moduleId: id,
         students: createMap({

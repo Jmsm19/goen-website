@@ -34,17 +34,17 @@ const materialThemeOverrides = {
 };
 
 ReactDOM.render(
-  <React.Suspense fallback={< Loading />}>
-  <ThemeProvider theme={ createMuiTheme(materialThemeOverrides) } >
-  <SnackbarProvider maxSnack={ 3} >
-  <AuthProvider>
-  <SettingsProvider>
-  <App />
-  < /SettingsProvider>
-  < /AuthProvider>
-  < /SnackbarProvider>
-  < /ThemeProvider>
-  < /React.Suspense>,
+  <React.Suspense fallback={<Loading />}>
+    <ThemeProvider theme={createMuiTheme(materialThemeOverrides)}>
+      <SnackbarProvider maxSnack={3}>
+        <AuthProvider>
+          <SettingsProvider>
+            <App />
+          </SettingsProvider>
+        </AuthProvider>
+      </SnackbarProvider>
+    </ThemeProvider>
+  </React.Suspense>,
   document.getElementById('root'),
 );
 
