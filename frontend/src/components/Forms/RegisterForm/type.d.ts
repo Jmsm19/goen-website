@@ -1,0 +1,3 @@
+interface RegisterFormSectionProps {
+  form: UseFormResult;
+}

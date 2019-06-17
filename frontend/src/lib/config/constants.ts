@@ -1,3 +1,5 @@
+export const SiteName = 'GOEN Maracaibo';
+
 export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 export const clans = ['Kani', 'Saru', 'Kotori', 'Buta', 'Usagi', 'Kame', 'Tanuki', 'Kitsune'];

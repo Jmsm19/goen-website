@@ -1,12 +1,28 @@
-import * as React from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 
-const LoginPage: React.FC = () => (
-  <div>
-    <h1>App</h1>
-  </div>
-);
+import LoginFormCard from '../../components/Cards/LoginFormCard';
 
-LoginPage.propTypes = {};
+import StyledPage from './styles';
+import SpringAnimation from '../../components/Animations/SpringAnimation';
+
+const LoginPage: React.FC = () => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      {/* Head */}
+      <Helmet title={`GOEN | ${t('Login')}`} />
+
+      {/* Body */}
+      <StyledPage className='login-page'>
+        <SpringAnimation animation='slideUp'>
+          <LoginFormCard />
+        </SpringAnimation>
+      </StyledPage>
+    </>
+  );
+};
 
 export default LoginPage;

@@ -10,7 +10,7 @@ import { createMap } from '../../lib/utils';
 const ModulesContext = React.createContext<undefined | ModuleContextValue>(undefined);
 
 // CONTEXT PROVIDER
-const ModulesProvider: React.FC<ProcessingInstruction> = props => {
+const ModulesProvider: React.FC<ProviderProps> = props => {
   const initialState: ModuleContextState = {
     allModulesSearched: false,
     modules: createMap(),

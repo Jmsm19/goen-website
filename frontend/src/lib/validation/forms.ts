@@ -1,64 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import * as Yup from 'yup';
 import i18n from 'i18next';
-import { addDays, subYears, isDate, format } from 'date-fns';
+import { addDays, isDate } from 'date-fns';
 // import { days } from '../config/constants';
-
-export const getLoginValidationProps = (t: i18n.TFunction) => ({
-  initialValues: {
-    email: '',
-    password: '',
-  },
-  schema: Yup.object().shape({
-    email: Yup.string()
-      .email(t('InvalidEmail'))
-      .required(t('Required')),
-    password: Yup.string().required(t('Required')),
-  }),
-});
-
-export const getSignupValidationProps = (t: i18n.TFunction) => {
-  const PASSWORD_MIN_LENGTH = 6;
-  const MINIMUM_AGE = 14;
-  const MINIMUM_DATE = format(subYears(new Date(), MINIMUM_AGE), 'YYYY-MM-DD');
-
-  const initialValues = {
-    name: '',
-    nationalId: '',
-    birthDate: undefined,
-    phoneNumber: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    roleName: 'student',
-  };
-
-  return {
-    initialValues,
-    schema: Yup.object().shape({
-      name: Yup.string().required(t('Required')),
-      nationalId: Yup.string()
-        .required(t('Required'))
-        .matches(/^[0-9]{7,}$/i, { message: t('WrongNationalIdFormat') }),
-      phoneNumber: Yup.string()
-        .required(t('Required'))
-        .matches(/^[0-9]{4}-[0-9]{7}$/i, { message: t('WrongPhoneFormat') }),
-      birthDate: Yup.date()
-        .required(t('Required'))
-        .max(MINIMUM_DATE, t('Underage', { age: MINIMUM_AGE })),
-      email: Yup.string()
-        .email(t('InvalidEmail'))
-        .required(t('Required')),
-      password: Yup.string()
-        .required(t('Required'))
-        .min(PASSWORD_MIN_LENGTH, t('TooShort', { minimum: PASSWORD_MIN_LENGTH })),
-      password_confirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], t('PasswordNotEqual'))
-        .required(t('Required')),
-      roleName: Yup.string().default(initialValues.roleName),
-    }),
-  };
-};
 
 export const getPeriodFormValidation = (t: i18n.TFunction) => ({
   initialValues: {},
