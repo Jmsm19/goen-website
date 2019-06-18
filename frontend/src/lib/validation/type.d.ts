@@ -11,7 +11,7 @@ interface RegisterFormValues {
   email: string;
   password: string;
   password_confirmation: string;
-  roleName: 'admin' | 'student' | 'instructor' | 'assistant';
+  roleName: RoleNames;
 }
 
 interface FormErrors {

@@ -1,5 +1,6 @@
 declare module 'react-detect-offline';
 declare module 'workbox-build';
+declare module 'uuid/v4';
 
 type Callbacks = Function | Function[];
 
@@ -7,6 +8,8 @@ interface ObjectWithId {
   id: string;
   [key: string]: any;
 }
+
+type RoleNames = 'admin' | 'instructor' | 'assistant' | 'student';
 
 interface Period {
   id: string;

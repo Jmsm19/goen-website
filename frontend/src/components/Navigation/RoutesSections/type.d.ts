@@ -1,0 +1,3 @@
+interface RouteSectionProps {
+  onLinkClick: () => void;
+}

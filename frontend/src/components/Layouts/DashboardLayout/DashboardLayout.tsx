@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-// import { CssBaseline, Hidden } from '@material-ui/core';
+import { CssBaseline, Hidden } from '@material-ui/core';
 
 import { useAuth } from '../../../store/context/AuthContext';
 import { useLayoutContext } from '../../../store/context/LayoutContext';
@@ -11,30 +9,29 @@ import { ModulesProvider } from '../../../store/context/ModulesContext';
 import { UsersProvider } from '../../../store/context/UsersContext';
 
 import Loading from '../../Loading';
-// import TopNavigation from './TopNavigation';
-// import DashboardMain from './DashboardMain';
+import TopNavigation from './TopNavigation';
+import DashboardMain from './DashboardMain';
 
 import routes from '../../../lib/config/routes';
 import { useLayoutStyles } from './styles';
-// import DashboardSidebarMenu from './DashboardSidebarMenu';
-// import DesktopDrawer from '../../Drawers/DesktopDrawer';
-// import MobileDrawer from '../../Drawers/MobileDrawer';
-// import useDrawerStyles from '../../Drawers/styles';
+import DashboardSidebarMenu from './DashboardSidebarMenu';
+import DesktopDrawer from '../../Drawers/DesktopDrawer';
+import MobileDrawer from '../../Drawers/MobileDrawer';
+import useDrawerStyles from '../../Drawers/styles';
 
-const DashboardLayout = () => {
-  const { t } = useTranslation();
+const DashboardLayout: React.FC = () => {
   const { isAuth, authUser, logout } = useAuth();
   const { isMobile } = useLayoutContext();
   const classes = useLayoutStyles({ isMobile });
-  // const drawerClasses = useDrawerStyles();
+  const drawerClasses = useDrawerStyles();
 
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  // const toggleSidebar = () => {
-  //   if (isMobile) {
-  //     setIsSidebarOpen(!isSidebarOpen);
-  //   }
-  // };
+  const toggleSidebar = () => {
+    if (isMobile) {
+      setIsSidebarOpen(!isSidebarOpen);
+    }
+  };
 
   if (!isAuth) {
     return <Redirect to={routes.login} />;
@@ -46,12 +43,11 @@ const DashboardLayout = () => {
 
   return (
     <div className={`dashboard-layout ${classes.root}`}>
-      {/* <CssBaseline />
-      <TopNavigation t={t} routes={routes} toggleSidebar={toggleSidebar} logoutUser={logout} />
-      <div className={drawerClasses.toolbar} /> */}
+      <CssBaseline />
+      <TopNavigation toggleSidebar={toggleSidebar} logoutUser={logout} />
+      <div className={drawerClasses.toolbar} />
 
-      {/* <div className='inner-layout'> */}
-      {/* <Hidden mdUp implementation='css'>
+      <Hidden mdUp implementation='css'>
         <MobileDrawer isOpen={isSidebarOpen} onClose={toggleSidebar}>
           <DashboardSidebarMenu toggleOpen={toggleSidebar} />
         </MobileDrawer>
@@ -61,24 +57,17 @@ const DashboardLayout = () => {
         <DesktopDrawer>
           <DashboardSidebarMenu toggleOpen={toggleSidebar} />
         </DesktopDrawer>
-      </Hidden> */}
+      </Hidden>
 
       <PeriodsProvider>
         <ModulesProvider>
           <UsersProvider>
-            {authUser ? <h1>{authUser.name}</h1> : <h1>Loading...</h1>}
-            {/* <DashboardMain location={location} authUser={authUser} /> */}
+            <DashboardMain />
           </UsersProvider>
         </ModulesProvider>
       </PeriodsProvider>
     </div>
   );
-};
-
-DashboardLayout.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default DashboardLayout;

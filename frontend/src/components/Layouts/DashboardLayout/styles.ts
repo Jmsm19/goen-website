@@ -55,17 +55,8 @@ export const useLayoutStyles = makeStyles({
         },
       },
 
-      '& .inner-layout': {
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        overflowY: 'auto',
-
-        '& main': {
-          marginLeft: !isMobile ? 240 : 'auto',
-        },
-      },
-
       '& .main-content': {
+        position: 'relative',
         paddingTop: isMobile ? 16 : 32,
         // width: isMobile ? '100%' : 'auto',
         width: 'auto',

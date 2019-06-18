@@ -36,10 +36,7 @@ const App = () => {
         <BrowserRouter>
           <React.Suspense fallback={<Loading text='Loading Dashboard...' />}>
             <Switch>
-              <Route
-                path={routes.dashboard.prefix}
-                render={rProps => <DashboardLayout {...rProps} />}
-              />
+              <Route path={routes.dashboard.prefix} render={() => <DashboardLayout />} />
 
               <React.Suspense fallback={<Loading />}>
                 <Route path={routes.home} render={() => <PlainLayout />} />
