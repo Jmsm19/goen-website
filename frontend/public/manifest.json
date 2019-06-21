@@ -2,7 +2,7 @@
   "name": "GOEN Maracaibo",
   "short_name": "GOEN",
   "start_url": "/",
-  "display": "standalone",
+  "display": "browser",
   "orientation": "portrait",
   "background_color": "#f0f0f0",
   "theme_color": "#bf1a21",
