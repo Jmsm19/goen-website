@@ -36,15 +36,15 @@ interface ModuleHelper {
 
 type GetModule = (id: string, dispatch: ModuleContextDispatch) => Promise<void>;
 type GetAllModules = (dispatch: ModuleContextDispatch) => Promise<void>;
-type CreateModule = (moduleData: any, helper: ModuleHelper, cb: Function) => Promise<void>;
+type CreateModule = (moduleData: any, helper: ModuleHelper, cb: Callbacks) => Promise<void>;
 type GetAllSchedules = (helper: ModuleHelper) => Promise<void>;
 type UpdateModule = (
   id: string,
   moduleData: any,
   helper: ModuleHelper,
-  cb: Function,
+  cb: Callbacks,
 ) => Promise<void>;
-type DeleteModule = (id: string, helper: ModuleHelper, cb: Function) => Promise<void>;
+type DeleteModule = (id: string, helper: ModuleHelper, cb: Callbacks) => Promise<void>;
 type GetModulesForPeriod = (id: string, helper: ModuleHelper) => Promise<void>;
 type GetStudentsForModule = (id: string, helper: ModuleHelper) => Promise<void>;
 

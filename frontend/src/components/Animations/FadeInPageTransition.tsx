@@ -5,9 +5,10 @@ import { withRouter, RouteComponentProps, Switch } from 'react-router';
 
 interface Props extends RouteComponentProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const FadeInPageTransition = ({ location, children }: Props) => {
+const FadeInPageTransition = ({ location, children, className }: Props) => {
   const transitions = useTransition(location, l => l.pathname, {
     from: { opacity: 0, position: 'absolute' },
     enter: { opacity: 1 },
@@ -17,7 +18,7 @@ const FadeInPageTransition = ({ location, children }: Props) => {
   return (
     <>
       {transitions.map(trans => (
-        <animated.div style={trans.props} key={trans.key}>
+        <animated.div style={trans.props} key={trans.key} className={className}>
           <Switch location={trans.item}>{children}</Switch>
         </animated.div>
       ))}
@@ -25,8 +26,13 @@ const FadeInPageTransition = ({ location, children }: Props) => {
   );
 };
 
+FadeInPageTransition.defaultProps = {
+  className: undefined,
+};
+
 FadeInPageTransition.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default withRouter(FadeInPageTransition);

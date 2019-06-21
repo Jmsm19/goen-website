@@ -21,7 +21,10 @@ const LanguageSelector = () => {
     },
   ];
 
-  const changeLanguage = (lng: 'es' | 'en' | 'jpn') => i18n.changeLanguage(lng);
+  const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { target } = event;
+    i18n.changeLanguage(target.value);
+  };
 
   return (
     <Select
@@ -30,7 +33,7 @@ const LanguageSelector = () => {
       className='language-selector'
       options={languages}
       onChange={changeLanguage}
-      defaultSelected={i18n.language}
+      value={i18n.language}
     />
   );
 };

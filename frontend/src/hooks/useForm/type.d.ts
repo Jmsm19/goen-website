@@ -1,5 +1,6 @@
 interface UseFormResult {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isSubmitting: boolean;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   values: FormValues;
   errors: FormErrors;

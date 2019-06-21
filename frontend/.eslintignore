@@ -2,5 +2,6 @@ __mocks__
 node_modules
 build
 public
-serviceWorker.js
+serviceWorker.ts
+react-app-env.d.ts
 OLD_UI

@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Input from '../../../UI/Input';
 import FormField from '../../FormField';
+
+import { UseFormPropType } from '../../../../lib/validation/propTypesValues';
 
 const PersonalDataSection: React.FC<RegisterFormSectionProps> = ({ form }) => {
   const { t } = useTranslation();
@@ -58,12 +59,7 @@ const PersonalDataSection: React.FC<RegisterFormSectionProps> = ({ form }) => {
 };
 
 PersonalDataSection.propTypes = {
-  form: PropTypes.shape({
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    values: PropTypes.shape({}).isRequired,
-    errors: PropTypes.shape({}).isRequired,
-  }).isRequired,
+  form: UseFormPropType.isRequired,
 };
 
 export default PersonalDataSection;

@@ -58,11 +58,17 @@ export const useLayoutStyles = makeStyles({
       '& .main-content': {
         position: 'relative',
         paddingTop: isMobile ? 16 : 32,
+        maxWidth: '100% !important',
         // width: isMobile ? '100%' : 'auto',
         width: 'auto',
         height: `calc(100% - ${isMobile ? '56px' : '64px'})`,
         marginLeft: !isMobile ? 240 : 'auto',
         overflowY: 'auto',
+
+        '& > .main-content-children-animation-wrapper': {
+          height: `calc(100% - ${isMobile ? '16px' : '32px'})`,
+          width: `calc(100% - ${isMobile ? '56px' : '64px'})`,
+        },
       },
     },
   }),

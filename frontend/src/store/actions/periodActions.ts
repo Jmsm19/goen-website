@@ -56,7 +56,11 @@ export const GetAllPeriods: GetAllPeriods = async ({ dispatch }) => {
   }
 };
 
-export const CreatePeriod: CreatePeriod = async (periodData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const CreatePeriod: CreatePeriod = async (
+  periodData,
+  { dispatch, t, enqueueSnackbar },
+  cb,
+) => {
   try {
     const { data } = await SendData('POST', 'periods', periodData);
     callFunctions([
@@ -74,11 +78,16 @@ export const CreatePeriod: CreatePeriod = async (periodData, { dispatch, t, enqu
   }
 };
 
-export const UpdatePeriod: UpdatePeriod = async (id, periodData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const UpdatePeriod: UpdatePeriod = async (
+  id,
+  periodData,
+  { dispatch, t, enqueueSnackbar },
+  cb,
+) => {
   try {
     const { data } = await SendData('PUT', `periods/${id}`, periodData);
     callFunctions([
-      () => enqueueSnackbar(),
+      () => enqueueSnackbar(t('Period.Updated'), generateSnackbarConfig('success')),
       cb,
     ]);
     dispatch({

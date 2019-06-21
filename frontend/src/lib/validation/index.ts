@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { subYears, format, isAfter } from 'date-fns';
+import { clans } from '../config/constants';
 
 const isEmail = (string: string) =>
   RegExp(
@@ -95,3 +96,101 @@ export const RegisterFormSetup = {
     return errors;
   },
 };
+
+export const ModuleFormSetup = {
+  initialValues: {},
+  validate: (values: ModuleFormValues, t: i18n.TFunction) => {
+    const errors: FormErrors = {};
+
+    if (!values.name || values.name === '--') {
+      errors.name = t('Required');
+    }
+
+    if (!values.section || values.section === '--') {
+      errors.section = t('Required');
+    } else if (!RegExp(/^[A-Z]{1}$/).test(values.section)) {
+      errors.section = t('Required');
+    }
+
+    if (!values.schedule_id || values.schedule_id === '--') {
+      errors.schedule_id = t('Required');
+    }
+
+    if (!values.instructor_id || values.instructor_id === '--') {
+      errors.instructor_id = t('Required');
+    }
+
+    if (!values.assistant_id || values.assistant_id === '--') {
+      errors.assistant_id = t('Required');
+    }
+
+    if (values.name === 'M-0' && (!values.clan || !clans.includes(values.clan))) {
+      errors.clan = t('Required');
+    }
+
+    return errors;
+  },
+};
+
+export const CreatePeriodFormSetup = {
+  initialValues: {},
+  validate: (values: CreatePeriodFormValues, t: i18n.TFunction) => {
+    const errors: FormErrors = {};
+
+    if (!values.signup_from) {
+      errors.signup_from = t('Required');
+    }
+
+    if (!values.signup_until) {
+      errors.signup_until = t('Required');
+    } else if (values.signup_from && !isAfter(values.signup_until, values.signup_from)) {
+      errors.signup_until = t('MustBeAfterSignupFrom');
+    }
+
+    return errors;
+  },
+};
+
+export const UpdatePeriodFormSetup = {
+  initialValues: {},
+  validate: (values: UpdatePeriodFormValues, t: i18n.TFunction) => {
+    const errors: FormErrors = {};
+
+    if (!values.year) {
+      errors.year = t('Required');
+    } else if (values.year.length !== 4) {
+      errors.year = t('InvalidYearFormat');
+    }
+
+    if (!values.name) {
+      errors.name = t('Required');
+    }
+
+    if (!values.signup_from) {
+      errors.signup_from = t('Required');
+    }
+
+    if (!values.signup_until) {
+      errors.signup_until = t('Required');
+    } else if (values.signup_from && !isAfter(values.signup_until, values.signup_from)) {
+      errors.signup_until = t('MustBeAfterSignupFrom');
+    }
+
+    return errors;
+  },
+};
+
+// export const scheduleFormValidation = t =>
+//   Yup.object().shape({
+//     day: Yup.string()
+//       .oneOf(days, t('InvalidDay'))
+//       .required(t('Required')),
+//     from: Yup.string().required(t('Required')),
+//     until: Yup.string()
+//       .when('from', (fromValue, _) =>
+//         Yup.string().test('is-after-start-time', t('MustBeAfterStartTime'), untilValue =>
+//           moment(untilValue, 'hh:mm').isAfter(moment(fromValue, 'hh:mm')),
+//         ),
+//       )
+//       .required(t('Required')),
+//   });

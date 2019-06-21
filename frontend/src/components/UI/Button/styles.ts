@@ -24,7 +24,6 @@ const StyledButton = styled('button')({
     /* Others */
     userSelect: 'none',
     transition: 'all 0.15s ease',
-    willChange: 'transform',
 
     '& svg': {
       margin: '0 5px',

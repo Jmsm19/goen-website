@@ -4,6 +4,8 @@ export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sa
 
 export const clans = ['Kani', 'Saru', 'Kotori', 'Buta', 'Usagi', 'Kame', 'Tanuki', 'Kitsune'];
 
+export const registrationStatuses = ['idle', 'paying', 'verifying payment', 'registered'];
+
 export const moduleOrder = [
   'M-0',
   'M-1',

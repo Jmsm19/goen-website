@@ -41,7 +41,11 @@ export const GetAllModules: GetAllModules = async dispatch => {
   }
 };
 
-export const CreateModule: CreateModule = async (moduleData, { t, dispatch, enqueueSnackbar }, cb) => {
+export const CreateModule: CreateModule = async (
+  moduleData,
+  { t, dispatch, enqueueSnackbar },
+  cb,
+) => {
   try {
     const { data } = await SendData('POST', 'modules', moduleData);
     enqueueSnackbar(t('Module.Created'), generateSnackbarConfig('success'));
@@ -73,7 +77,12 @@ export const GetAllSchedules: GetAllSchedules = async ({ dispatch }) => {
   }
 };
 
-export const UpdateModule: UpdateModule = async (id, moduleData, { dispatch, t, enqueueSnackbar }, cb) => {
+export const UpdateModule: UpdateModule = async (
+  id,
+  moduleData,
+  { dispatch, t, enqueueSnackbar },
+  cb,
+) => {
   try {
     const { data } = await SendData('PUT', `modules/${id}`, moduleData);
     enqueueSnackbar(t('Module.Updated'), generateSnackbarConfig('success'));

@@ -1,4 +1,4 @@
 interface ErrorTextProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  ref: React.Ref;
+  ref?: React.Ref;
   error: string;
 }

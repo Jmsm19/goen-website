@@ -9,8 +9,4 @@ const HelpText = forwardRef(({ text, ...rest }: HelpTextProps, ref) => (
   </StyledHelpText>
 ));
 
-// HelpText.propTypes = {
-//   text: PropTypes.string.isRequired,
-// };
-
 export default HelpText;

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import StyledPage from './styles';
 import LoadingIcon from '../UI/LoadingIcon';
 
-type Props = {
-  text?: string
+interface Props {
+  text?: string;
 }
 
 const Loading: React.FC<Props> = ({ text }) => (

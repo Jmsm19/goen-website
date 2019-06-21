@@ -8,7 +8,7 @@ import * as AA from '../actions/authActions';
 
 const AuthContext = React.createContext<undefined | AuthContextValue>(undefined);
 
-const AuthProvider: React.FC<ProviderProps> = (props) => {
+const AuthProvider: React.FC<ProviderProps> = props => {
   const initialState: AuthContextState = {
     isAuth: !!Cookies.get('token'),
     authUser: null,

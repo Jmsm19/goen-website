@@ -13,11 +13,8 @@ const useForm = (
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submittedOnce, setSubmittedOnce] = useState<boolean>(false);
 
-  console.log('TCL: Object.keys(errors).length === 0', Object.keys(errors).length === 0);
-  console.log('TCL: isSubmitting', isSubmitting);
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      console.log('TCL: values', values);
       callback(values);
       setIsSubmitting(false);
     }
@@ -29,6 +26,12 @@ const useForm = (
     }
   }, [submittedOnce, t, validate, values]);
 
+  useEffect(() => {
+    if (Object.keys(errors).length > 0 && isSubmitting) {
+      setIsSubmitting(false);
+    }
+  }, [errors, isSubmitting]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
     setErrors(validate(values, t));
@@ -36,7 +39,7 @@ const useForm = (
     setIsSubmitting(true);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     event.persist();
     const { target } = event;
 
@@ -46,6 +49,7 @@ const useForm = (
   };
 
   return {
+    isSubmitting,
     handleChange,
     handleSubmit,
     values,

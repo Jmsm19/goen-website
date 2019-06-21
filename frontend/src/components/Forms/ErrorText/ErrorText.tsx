@@ -9,8 +9,4 @@ const ErrorText = forwardRef(({ error, ...rest }: ErrorTextProps, ref) => (
   </StyledErrorText>
 ));
 
-// ErrorText.propTypes = {
-//   error: PropTypes.string.isRequired,
-// };
-
 export default ErrorText;

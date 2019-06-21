@@ -11,7 +11,7 @@ const SettingsProvider: React.FC<ProviderProps> = props => {
   const value = React.useMemo(
     () => ({
       settings,
-      setSettings
+      setSettings,
     }),
     [settings],
   );

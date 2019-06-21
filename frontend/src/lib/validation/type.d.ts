@@ -14,6 +14,25 @@ interface RegisterFormValues {
   roleName: RoleNames;
 }
 
+interface ModuleFormValues {
+  name: string;
+  section: string;
+  schedule_id: string;
+  assistant_id: string;
+  instructor_id: string;
+  clan?: ClanNames;
+}
+
+interface CreatePeriodFormValues {
+  signup_from: string;
+  signup_until: string;
+}
+
+interface UpdatePeriodFormValues extends CreatePeriodFormValues {
+  year: string;
+  name: string;
+}
+
 interface FormErrors {
   [fieldName: string]: string | undefined;
 }

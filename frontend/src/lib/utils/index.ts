@@ -62,7 +62,7 @@ export const localizeDate = (USDateString: string, locale = 'es', options = {}) 
  * @returns {String} /assets/images/clans/{name}.png
  */
 export const getClanImageAddress = (clanName: string) =>
-  clanName ? `/images/clans/${clanName.toLowerCase()}.png` : null;
+  `/images/clans/${clanName.toLowerCase()}.png`;
 
 /**
  * Filter a given array of objects by a property
@@ -72,7 +72,7 @@ export const getClanImageAddress = (clanName: string) =>
  * @param {Array} array
  * @returns {Array}
  */
-export const filterArrayBy = (key: string, value: string, array: []) => {
+export const filterArrayBy = (key: string, value: string, array: any[]) => {
   if (array.length && !!value) {
     return array.filter(item => RegExp(`${value}`, 'i').test(item[key]));
   }
@@ -132,8 +132,8 @@ export const createArrayFromMap = (map = new Map()) => {
   return array;
 };
 
-export const formatNationalId = (nationalId: number) =>
-  new Intl.NumberFormat('es').format(nationalId);
+export const formatNationalId = (nationalId: string) =>
+  new Intl.NumberFormat('es').format(+nationalId);
 
 export const snakeCaseToCamelCase = (string: string) => {
   const splitText = string.split('_');

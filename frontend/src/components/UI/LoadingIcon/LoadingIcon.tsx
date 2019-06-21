@@ -4,9 +4,9 @@ import classnames from 'classnames';
 
 import StyledIcon from './styles';
 
-type Props = {
-  size?: number,
-  className?: string,
+interface Props {
+  size?: number;
+  className?: string;
 }
 
 const LoadingIcon: React.FC<Props> = ({ size, className, ...props }) => {
@@ -17,6 +17,7 @@ const LoadingIcon: React.FC<Props> = ({ size, className, ...props }) => {
 
 LoadingIcon.defaultProps = {
   size: 80,
+  className: undefined,
 };
 
 LoadingIcon.propTypes = {

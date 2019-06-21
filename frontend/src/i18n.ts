@@ -1,10 +1,12 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import Cookies from 'js-cookie';
 
 import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const options: i18n.InitOptions = {
+  lng: Cookies.get('language') || 'es',
   fallbackLng: 'es',
   load: 'languageOnly',
 

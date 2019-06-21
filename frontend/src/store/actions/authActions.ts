@@ -72,13 +72,17 @@ export const GetAuthUser: GetAuthUser = async ({ dispatch }) => {
   }
 };
 
-export const LogoutUser: LogoutUser = async ({ dispatch }) => {
+export const LogoutUser: LogoutUser = async ({ dispatch, enqueueSnackbar }) => {
   try {
     await SendData('POST', 'auth/logout');
     Cookies.remove('token');
     dispatch({ type: 'AUTH_LOGOUT' });
   } catch ({ response }) {
-    Cookies.remove('token');
+    if (response.status === 401) {
+      Cookies.remove('token');
+      enqueueSnackbar(response.statusText, generateSnackbarConfig('error'));
+    }
+
     console.error('TCL: response', response);
   }
 };

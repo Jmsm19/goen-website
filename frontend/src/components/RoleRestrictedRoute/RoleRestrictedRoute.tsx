@@ -18,7 +18,7 @@ const RoleRestrictedRoute = ({
   component: Component,
   requiredRole,
 }: RoleRestrictedRouteProps) => {
-  const authUser = useAuth();
+  const { authUser } = useAuth();
 
   return (
     <Route
@@ -47,7 +47,7 @@ RoleRestrictedRoute.defaultProps = {
 
 RoleRestrictedRoute.propTypes = {
   path: PropTypes.string.isRequired,
-  component: PropTypes.oneOf([PropTypes.any]).isRequired,
+  component: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired,
   requiredRole: PropTypes.oneOf(['admin', 'instructor', 'assistant', 'student']),
 };
 

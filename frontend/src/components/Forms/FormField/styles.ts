@@ -6,8 +6,12 @@ const StyledFormField = styled('div')({
   gridTemplateRows: 'auto 22px',
   zIndex: 0,
 
+  '& .overlay-container, & input': {
+    zIndex: 1,
+  },
+
   '& .animation-wrapper': {
-    zIndex: -1,
+    zIndex: 0,
   },
 });
 

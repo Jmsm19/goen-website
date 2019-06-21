@@ -43,10 +43,11 @@ const useModules = () => {
   const actions = {
     getAllModules: () => MA.GetAllModules(dispatch),
     getModule: (id: string) => MA.GetModule(id, dispatch),
-    createModule: (moduleData: any, cb: Function) => MA.CreateModule(moduleData, helpers, cb),
+    createModule: (moduleData: any, cb: Callbacks) => MA.CreateModule(moduleData, helpers, cb),
     getAllSchedules: () => MA.GetAllSchedules(helpers),
-    updateModule: (id: string, moduleData: any, cb: Function) => MA.UpdateModule(id, moduleData, helpers, cb),
-    deleteModule: (id: string, cb: Function) => MA.DeleteModule(id, helpers, cb),
+    updateModule: (id: string, moduleData: any, cb: Callbacks) =>
+      MA.UpdateModule(id, moduleData, helpers, cb),
+    deleteModule: (id: string, cb: Callbacks) => MA.DeleteModule(id, helpers, cb),
     getModulesForPeriod: (id: string) => MA.GetModulesForPeriod(id, helpers),
     getStudentsForModule: (id: string) => MA.GetStudentsForModule(id, helpers),
   };

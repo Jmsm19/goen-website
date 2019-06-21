@@ -23,7 +23,6 @@ const RegisterFormCard = React.forwardRef((props, ref) => {
           to={routes.login}
           className='to-login-btn'
           btnProps={{
-            ref: null,
             text: t('Login'),
             variant: 'secondary',
             outline: true,

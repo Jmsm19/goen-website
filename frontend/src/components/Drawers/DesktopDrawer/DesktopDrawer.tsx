@@ -5,7 +5,7 @@ import useDrawerStyles from '../styles';
 
 interface Props {
   children: React.ReactNode;
-};
+}
 
 const DesktopDrawer: React.FC<Props> = ({ children }) => {
   const classes = useDrawerStyles();

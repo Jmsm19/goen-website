@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import classnames from 'classnames';
@@ -7,19 +7,11 @@ import StyledSelect from './styles';
 import LoadingOverlay from '../../LoadingOverlay';
 
 const Select: React.FC<SelectProps> = props => {
-  const { name, loading, options, onChange, defaultSelected, className, ...rest } = props;
+  const { name, loading, options, onChange, className, ...rest } = props;
   const selectorClassNames = classnames(['selector', className]);
 
-  const defaultValue = defaultSelected || undefined;
-
-  const [selected, setSelected] = useState(defaultValue);
-
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    const {
-      target: { value },
-    } = event;
-    setSelected(value);
-    onChange(value);
+    onChange(event);
   };
 
   const renderOptions = () => {
@@ -36,13 +28,7 @@ const Select: React.FC<SelectProps> = props => {
 
   return (
     <LoadingOverlay loading={!!loading}>
-      <StyledSelect
-        name={name}
-        className={selectorClassNames}
-        value={selected}
-        onChange={handleChange}
-        {...rest}
-      >
+      <StyledSelect name={name} className={selectorClassNames} onChange={handleChange} {...rest}>
         {renderOptions()}
       </StyledSelect>
     </LoadingOverlay>
@@ -51,14 +37,12 @@ const Select: React.FC<SelectProps> = props => {
 
 Select.defaultProps = {
   className: undefined,
-  defaultSelected: undefined,
   loading: false,
   options: [],
 };
 
 Select.propTypes = {
   className: PropTypes.string,
-  defaultSelected: PropTypes.string,
   loading: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

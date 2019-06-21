@@ -82,7 +82,7 @@ interface ModuleContextState {
   modules: ModuleMap;
   notFoundModules: string[];
   searchedPeriods: string[];
-  students: UserMap;
+  students: StudentMap;
   schedules: ScheduleMap;
 }
 

@@ -51,7 +51,8 @@ const usePeriods = () => {
     getPeriod: (id: string) => PA.GetPeriod(id, helpers),
     getAllPeriods: () => PA.GetAllPeriods(helpers),
     createPeriod: (periodData: any, cb: Function) => PA.CreatePeriod(periodData, helpers, cb),
-    updatePeriod: (id: string, periodData: any, cb: Function) => PA.UpdatePeriod(id, periodData, helpers, cb),
+    updatePeriod: (id: string, periodData: any, cb: Function) =>
+      PA.UpdatePeriod(id, periodData, helpers, cb),
     deletePeriod: (id: string) => PA.DeletePeriod(id, helpers),
   };
 

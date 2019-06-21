@@ -10,7 +10,7 @@ import { sortModules } from '../../lib/utils';
  * @param {String} periodId
  * @returns {[Array, Boolean]} [sortedModules, isLoadingModules]
  */
-const useSortedPeriodModules = (periodId: string) => {
+const useSortedPeriodModules = (periodId?: string): [Module[], boolean] => {
   const { modules, searchedPeriods, getModulesForPeriod } = useModules();
 
   const periodSearched = periodId ? searchedPeriods.includes(periodId) : false;

@@ -52,7 +52,7 @@ jobs:
           at: ~/
       - run: yarn setup
       - run: mkdir -p reports/eslint
-      - run: yarn front eslint ./src --format junit --output-file ../reports/eslint/eslint.xml
+      - run: yarn front eslint ./src/**/*.{ts,tsx} --format junit --output-file ../reports/eslint/eslint.xml
       - store_test_results:
           path: reports/eslint
       - store_artifacts:
