@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import classnames from 'classnames';
 
+import { Grid } from '@material-ui/core';
 import { useModules } from '../../../../store/context/ModulesContext';
 import useEffectOnce from '../../../../hooks/useEffectOnce';
 
@@ -47,11 +48,19 @@ const PeriodDetailsModules: React.FC<Props> = props => {
 
   return hasSearchedPeriod ? (
     <section className={sectionClassNames} {...rest}>
-      {showCreateCard && onCreateCardClick && <ModuleCreateCard onClick={onCreateCardClick} />}
+      <Grid container spacing={4}>
+        {showCreateCard && onCreateCardClick && (
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <ModuleCreateCard onClick={onCreateCardClick} />
+          </Grid>
+        )}
 
-      {sortedModules.map(module => (
-        <ModuleSummaryCard key={uuid()} module={module} onClick={onCardClick} showPendingPayments />
-      ))}
+        {sortedModules.map(module => (
+          <Grid key={uuid()} item xs={12} sm={6} md={4} lg={3}>
+            <ModuleSummaryCard module={module} onClick={onCardClick} showPendingPayments />
+          </Grid>
+        ))}
+      </Grid>
     </section>
   ) : (
     <Loading />

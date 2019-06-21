@@ -107,11 +107,15 @@ export const StyledModulesSection = styled(PeriodDetailsModules)({
   '&.modules-section': {
     marginTop: 30,
     marginBottom: 30,
-    gridGap: '30px 20px',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
+    // gridGap: '30px 20px',
+    // gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
 
-    [mediaQ.tablet]: {
-      gridTemplateColumns: '1fr',
+    '& .module-create-card': {
+      height: '100%',
     },
+
+    // [mediaQ.tablet]: {
+    //   gridTemplateColumns: '1fr',
+    // },
   },
 });

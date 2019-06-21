@@ -67,7 +67,7 @@ export const useLayoutStyles = makeStyles({
 
         '& > .main-content-children-animation-wrapper': {
           height: `calc(100% - ${isMobile ? '16px' : '32px'})`,
-          width: `calc(100% - ${isMobile ? '56px' : '64px'})`,
+          width: `calc(100% - ${isMobile ? '32px' : '64px'})`,
         },
       },
     },

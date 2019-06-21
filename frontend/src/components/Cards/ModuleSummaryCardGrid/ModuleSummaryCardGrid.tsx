@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Grid } from '@material-ui/core';
 
 import Loading from '../../Loading';
-import CardGrid from '../CardGrid';
 import ModuleSummaryCard from '../ModuleSummaryCard';
 
 import { ModulePropType } from '../../../lib/validation/propTypesValues';
@@ -19,17 +19,18 @@ const ModuleSummaryCardGrid: React.FC<Props> = ({ modules, onCardClick, isLoadin
   }
 
   return (
-    <CardGrid
-      cardArray={modules.map(module => (
-        <ModuleSummaryCard
-          key={module.id}
-          module={module}
-          onClick={onCardClick}
-          showPendingPayments={false}
-          showAvailableSlots
-        />
+    <Grid container spacing={4}>
+      {modules.map(module => (
+        <Grid key={module.id} item xs={12} sm={6} md={4} lg={3}>
+          <ModuleSummaryCard
+            module={module}
+            onClick={onCardClick}
+            showPendingPayments={false}
+            showAvailableSlots
+          />
+        </Grid>
       ))}
-    />
+    </Grid>
   );
 };
 
