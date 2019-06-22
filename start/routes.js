@@ -21,7 +21,7 @@ require('./api/byRoles')(Route);
  * @param {Response} ctx.response
  */
 const handleFrontendFiles = ({ response }) => {
-  response.setHeader('Content-Encoding', 'gzip');
+  response.header('Content-Encoding', 'gzip');
   response.send(Helpers.publicPath('index.html'));
 };
 
