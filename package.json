@@ -36,6 +36,7 @@
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
+    "@verdigris/adonis-compression": "^1.0.0",
     "adonis-bumblebee": "^2.0.0",
     "adonis-cache": "^0.3.4",
     "adonis-hashids": "^1.0.5",

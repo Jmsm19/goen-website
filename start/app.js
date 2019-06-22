@@ -22,6 +22,7 @@ const providers = [
   'adonis-throttle-requests/providers/ThrottleRequestsProvider',
   'adonis-hashids/providers/HashidsProvider',
   'adonis-bumblebee/providers/BumblebeeProvider',
+  '@verdigris/adonis-compression/providers/CompressionProvider',
 ];
 
 /*
