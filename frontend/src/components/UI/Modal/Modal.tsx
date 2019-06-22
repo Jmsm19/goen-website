@@ -33,6 +33,7 @@ const Modal: React.FC<Props> = props => {
     className,
     withToolbar,
     actionComponent,
+    fullScreen,
     ...rest
   } = props;
   const { isMobile } = useLayoutContext();
@@ -68,8 +69,13 @@ const Modal: React.FC<Props> = props => {
       container={document.getElementById('portal')}
       maxWidth='md'
       TransitionComponent={AnimatedComponent}
+      fullScreen={fullScreen}
       PaperProps={{
-        style: { margin: 0, minWidth: isMobile ? 300 : 400, width: isMobile ? '95vw' : undefined },
+        style: {
+          margin: 0,
+          minWidth: isMobile ? 300 : 400,
+          width: isMobile && !fullScreen ? '95vw' : undefined,
+        },
       }}
       {...rest}
     >

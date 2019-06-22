@@ -21,7 +21,7 @@ const ModuleSummaryCardGrid: React.FC<Props> = ({ modules, onCardClick, isLoadin
   return (
     <Grid container spacing={4}>
       {modules.map(module => (
-        <Grid key={module.id} item xs={12} sm={6} md={4} lg={3}>
+        <Grid key={module.id} item xs={12} sm={6} md={6} lg={3} xl={3}>
           <ModuleSummaryCard
             module={module}
             onClick={onCardClick}
