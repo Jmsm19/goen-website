@@ -11,10 +11,13 @@
   "description": "GOEN Maracaibo's website backend",
   "adonis-version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "goen_maracaibo_backend",
+    "frontend"
+  ],
   "scripts": {
     "start": "node server.js",
     "front": "cd frontend && yarn",
-    "setup": "yarn install && yarn front install",
     "test": "nyc --reporter=lcov node ace test --bail",
     "dev": "concurrently --kill-others --raw \"yarn dev:client\" \"yarn dev:server\"",
     "dev:client": "yarn front start",
@@ -42,6 +45,7 @@
     "adonis-hashids": "^1.0.5",
     "adonis-throttle-requests": "^1.0.5",
     "date-fns": "^1.30.1",
+    "frontend": "1.0.0",
     "mysql": "^2.16.0"
   },
   "devDependencies": {
@@ -49,7 +53,7 @@
     "concurrently": "^4.1.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.6.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^2.1.0",

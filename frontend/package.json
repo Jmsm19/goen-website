@@ -1,5 +1,5 @@
 {
-  "name": "goen_maracaibo_frontend",
+  "name": "frontend",
   "version": "1.0.0",
   "engines": {
     "node": ">=8 <12"

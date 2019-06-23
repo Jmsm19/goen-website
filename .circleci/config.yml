@@ -12,7 +12,7 @@ executors:
     - image: circleci/node:10
 
 jobs:
-  install_back:
+  install:
     executor: default
     steps:
       - attach_workspace:
@@ -28,31 +28,15 @@ jobs:
       - save_cache:
           key: v1-node-modules-{{ checksum "yarn.lock" }}
           paths:
-          - ~/project/backend/node_modules
-  install_front:
-    executor: default
-    steps:
-      - attach_workspace:
-          at: ~/frontend
-      - restore_cache:
-          key: v1-node-modules-{{ checksum "yarn.lock" }}
-      - run: yarn install
-      - persist_to_workspace:
-          paths:
-            - project
-          root: ~/
-      - save_cache:
-          key: v1-node-modules-{{ checksum "yarn.lock" }}
-          paths:
-          - ~/project/frontend/node_modules
+          - ~/project/node_modules
   lint:
     executor: default
     steps:
       - attach_workspace:
           at: ~/
-      - run: yarn setup
+      - run: yarn install
       - run: mkdir -p reports/eslint
-      - run: yarn front eslint ./src/**/*.{ts,tsx} --format junit --output-file ../reports/eslint/eslint.xml
+      - run: yarn eslint ./frontend/src/**/*.{ts,tsx} --config ./frontend/.eslintrc.json --ignore-path ./frontend/.eslintignore --format junit --output-file ../reports/eslint/eslint.xml
       - store_test_results:
           path: reports/eslint
       - store_artifacts:
@@ -68,13 +52,10 @@ jobs:
 workflows:
   push:
     jobs:
-      - install_back
-      - install_front:
-          requires:
-            - install_back
+      - install
       - lint:
           requires:
-            - install_front
+            - install
       - deploy:
           requires:
             - lint

@@ -1,3 +1,7 @@
 {
   "jest.rootPath": "./frontend/",
+  "eslint.workingDirectories": [
+    ".",
+    "./frontend"
+  ]
 }
