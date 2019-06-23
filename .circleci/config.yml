@@ -36,7 +36,7 @@ jobs:
           at: ~/
       - run: yarn install
       - run: mkdir -p reports/eslint
-      - run: yarn eslint ./frontend/src/**/*.{ts,tsx} --config ./frontend/.eslintrc.json --ignore-path ./frontend/.eslintignore --format junit --output-file ../reports/eslint/eslint.xml
+      - run: yarn eslint ./frontend/src/**/*.{ts,tsx} --config ./frontend/.eslintrc.json --ignore-path ./frontend/.eslintignore --format junit --output-file ./reports/eslint/eslint.xml
       - store_test_results:
           path: reports/eslint
       - store_artifacts:
